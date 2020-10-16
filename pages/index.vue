@@ -1,7 +1,7 @@
 <template>
   <div class="centered">
     <transition name="slide-fade" appear>
-      <octopus :size="`5em`" />
+      <octopus :size="`5em`" :color="`#8dc7cb`" />
     </transition>
   </div>
 </template>

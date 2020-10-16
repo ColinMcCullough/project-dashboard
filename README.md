@@ -1,56 +1,36 @@
-# opex-template
+# Onboarding Project Dashboard
 
-Configure Dockerfile and environment variables.
+Description
 
-## Build Setup
+## Setup
 
-This is a full stack application template. It contains a Node/Express server and a Nuxt/Vue frontend. Nuxt uses Server rendered pages (SSR) and we run it as a single page application (SPA). We found it a lot easier to develop the API using SPA mode.
+**For development**
 
-After cloning the repo, create a .env file from the .env.TEMPLATE file.
-
-- Authentication and Updatables are private npm packages and require an NPM_TOKEN to access.
-- Database connections can be direct with GCP Cloud SQL with installed SSL certs. Those will need to be present and the production server's IP whitelisted.
-
-# Development
-
-``` bash
+```bash
+git clone https://github.com/ColinMcCullough/project-dashboard.git
+cd project-dashboard
 npm i
+cp .env.TEMPLATE .env
+```
+
+Fill out the `.env` file.
+
+```bash
 npm run dev
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-Built Using [Cloud Native JS](https://www.cloudnativejs.io/)
-### Using Docker
+**For Production**
 
-``` bash
-docker build -t opex_template .
-docker run -p 5000:5000 opex_template
+Set **BROWSER_URL** env in `Dockerfile` to public domain. __Ex. fakedomain.com__
+Set **PORT** in `Dockerfile` and in `chart/nuxt/values.yaml`.
+Set **tag:** to the release version in `chart/nuxt/values.yaml`. Release versions are unique revisions, so increment the current value if you aren't publishing a specific new version.
+
+```bash
+npm run docker:build
+docker tag project-dashboard g5opex/project-dashboard:<tag>
+docker push g5opex/project-dashboard:<tag>
+npm run helm:upgrade
 ```
 
-Using Kubernetes and Helm (via Homebrew)
+If the service hasn't been established in Kubernetes, this won't work.
 
-``` bash
-brew install helm
-```
-
-# Deploying the app
-This assumes that you are connected to the correct kubernetes cluster
-
-## Build, Tag, Push the Docker Image 
-
-``` bash 
-docker build -t [buildName] .
-docker tag [buildName] [repo]:[version]
-docker push [repo]:[version]
-```
-
-## Deploy the app 
-Make sure that the repository and tag match the docker image before running this
-``` bash 
-helm install [NAME] [CHARTPATH]
-```
-
-## Update the app
-``` bash 
-helm upgrade [NAME] [CHARTPATH]
-```

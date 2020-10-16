@@ -1,14 +1,14 @@
 <template>
   <div>
     <top-nav>
-      <template v-slot:content>
-        <b-btn
-          style="align-items: center;"
-          @click="pauseAllQueues()"
-        >
-          {{ allQueuesPaused ? 'Resume all Queues' : 'Pause all Queues' }}
-        </b-btn>
-      </template>
+      <b-btn
+        style="align-items: center;"
+        size="sm"
+        variant="outline-success-0"
+        @click="pauseAllQueues()"
+      >
+        {{ allQueuesPaused ? 'Resume all Queues' : 'Pause all Queues' }}
+      </b-btn>
     </top-nav>
     <div class="main">
       <b-container fluid class="px-3 scroll-container">
@@ -75,15 +75,13 @@
 </template>
 
 <script>
-import Footer from '~/components/footer'
 import TopNav from '~/components/top-nav'
 import RedisMixin from '~/mixins/redis'
 import RedisTable from '~/components/redis-table'
 export default {
   components: {
     RedisTable,
-    TopNav,
-    Footer
+    TopNav
   },
   mixins: [RedisMixin],
   async fetch({ store }) {
@@ -98,17 +96,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    position: fixed;
-    top:5rem;
-    left: 0;
-    right: 0;
-    bottom: 30px;
-  }
-
-  .scroll-container {
-    overflow-y: scroll;
-    height: 100%;
-    scroll-behavior: smooth
-  }
+.main {
+  position: fixed;
+  top:5rem;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+}
+.scroll-container {
+  overflow-y: scroll;
+  height: 100%;
+  scroll-behavior: smooth
+}
 </style>

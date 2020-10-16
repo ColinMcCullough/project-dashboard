@@ -1,47 +1,72 @@
 <template>
   <b-navbar
-    variant="primary"
-    toggleable="lg"
+    variant="success-1"
+    toggleable="md"
     type="dark"
     fixed="top"
   >
     <b-navbar-brand to="/" class="d-flex align-items-center">
       <b-img
         src="/g5-logo.png"
-        width="40"
-        height="40"
+        width="30"
+        height="30"
         alt="g5-logo"
         title="G5 Marketing"
         class="mx-3"
       />
       <h1 class="h1-nav-brand">
-        Operational Excellence
-        <octopus :size="`0.75em`" :color="`#7898ad`" class="jello-vertical" />
+        Onboarding
       </h1>
     </b-navbar-brand>
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto pr-2">
-      <slot name="content" />
+      <b-btn
+        link
+        href="https://getg5.slack.com/archives/CR01N6NNQ"
+        target="_blank"
+        class="text-white bg-transparent border-0"
+        size="sm"
+      >
+        <slack-icon v-bind="icon" class="jello-vertical" />
+      </b-btn>
+      <b-btn
+        link
+        href="https://opex.g5marketingcloud.com"
+        target="_blank"
+        class="text-white bg-transparent border-0 mr-2"
+        size="sm"
+      >
+        <octopus v-bind="icon" class="jello-vertical" />
+      </b-btn>
+      <slot />
     </b-navbar-nav>
   </b-navbar>
 </template>
 
 <script>
 import Octopus from '~/components/icons/octopus'
+import SlackIcon from '~/components/icons/slack'
 export default {
   components: {
-    Octopus
+    Octopus,
+    SlackIcon
   },
   data() {
-    return {}
+    return {
+      icon: {
+        size: '1.5em',
+        color: '#8dc7cb'
+      }
+    }
   }
 }
 </script>
 
 <style>
 .h1-nav-brand {
-  font-size: 1.5em;
+  font-size: 0.9em;
   margin-bottom: 0;
+  font-weight: 700;
 }
 .jello-vertical {
   transform: scale3d(1, 1, 1);
