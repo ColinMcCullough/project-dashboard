@@ -35,6 +35,8 @@ spec:
         env:
           - name: GKE
             value: "true"
+          - name: BROWSER_URL
+            value: "stratypus.tk"
           - name: DATABASE_MAX_CONNECTIONS
             value: "10"
           - name: DATABASE_MIN_CONNECTIONS
