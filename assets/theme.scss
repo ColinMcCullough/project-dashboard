@@ -3,10 +3,12 @@ $theme-colors: (
   'primary': #0b233f,
   'secondary': #7898ad,
   'tertiary': #e8513e,
+  'tertiary-0': #e37f72,
   'quaternary': #eee23e,
   'success': #339698,
   'success-0': #8dc7cb,
   'success-1': #1d5774,
+  'success-2': #017a68,
   'muted': #e6e9ec
 );
 
@@ -23,3 +25,7 @@ $bv-enable-table-stacked: true;
 @import 'bootstrap-vue/src/index.scss';
 
 // OVERRIDES BELOW
+.form-control {
+  border-width: 2px;
+  border-color: #8dc7cb;
+}
