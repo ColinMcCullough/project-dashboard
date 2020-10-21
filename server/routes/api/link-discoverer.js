@@ -4,7 +4,6 @@ module.exports = (app) => {
   app.post('/link-dicoverer', (req, res) => {
     const request = require('request-promise')
     const { LINK_DISCOVERER_URL: receivingServiceURL, DISCOVER_URL } = process.env
-    console.log({ receivingServiceURL, DISCOVER_URL })
 
     // Set up metadata server request
     // See https://cloud.google.com/compute/docs/instances/verifying-instance-identity#request_signature
