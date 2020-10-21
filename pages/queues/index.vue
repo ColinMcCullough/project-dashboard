@@ -11,30 +11,41 @@
       </b-btn>
     </top-nav>
     <div class="main">
-      <b-container fluid class="px-3 scroll-container">
-        <b-row class="my-3">
+      <b-container fluid class="px-1 scroll-container">
+        <b-row class="my-1" no-gutters>
           <b-col
             v-for="(queue, i) in queues"
             :key="i"
-            cols="4"
+            cols="3"
+            md="4"
+            sm="6"
           >
             <b-card
-              header-class="d-flex justify-content-between align-items-center py-0 flex-wrap"
+              header-class="d-flex justify-content-between align-items-center p-0 flex-wrap"
+              bg-variant="success-0"
+              header-text-variant="success-1"
+              class="p-1"
               no-body
             >
               <template v-slot:header>
-                <h2 class="d-flex text-uppercase mb-0">
-                  {{ queue.name }}
-                </h2>
-                <b-btn-group size="sm">
+                <b-btn-group size="sm" class="d-flex w-100">
                   <b-btn
-                    variant="outline-primary"
+                    variant="success-1"
+                    class="flex-grow-1 text-uppercase mb-0 font-weight-bold"
+                  >
+                    <b-icon-caret-down />
+                    {{ queue.name }}
+                  </b-btn>
+                  <b-btn
+                    variant="outline-success-1"
+                    class="flex-grow-0"
                     @click="getAllJobs(queue.name)"
                   >
                     Get all Jobs
                   </b-btn>
                   <b-btn
-                    variant="outline-primary"
+                    variant="outline-success-1"
+                    class="flex-grow-0"
                     @click="pauseQueue(queue.name)"
                   >
                     <b-icon v-if="queue.isPaused" icon="play-fill" />
@@ -52,9 +63,8 @@
                 >
                   {{ key }}
                   <b-badge
-                    :variant="status === 0 ? 'muted' : 'primary'"
+                    :variant="status === 0 ? 'muted' : 'success-1'"
                     pill
-                    style="font-size: 1.2em;"
                   >
                     {{ status }}
                   </b-badge>
@@ -98,14 +108,13 @@ export default {
 <style lang="scss" scoped>
 .main {
   position: fixed;
-  top:5rem;
+  top: 55px;
   left: 0;
   right: 0;
-  bottom: 30px;
 }
 .scroll-container {
   overflow-y: scroll;
   height: 100%;
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 </style>

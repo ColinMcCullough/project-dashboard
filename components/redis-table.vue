@@ -1,92 +1,91 @@
 <template>
-  <b-card>
+  <b-card
+    header-class="d-flex flex-wrap justify-content-between align-items-center px-0 py-1 border-0"
+    no-body
+    border-variant="success-0"
+  >
     <template v-slot:header>
-      <b-container fluid>
-        <b-row>
-          <b-col cols="3">
-            <b-input-group size="sm">
-              <b-input-group-prepend class="d-flex align-items-center px-3">
-                <b-icon-search variant="secondary" />
-              </b-input-group-prepend>
-              <b-form-input
-                id="filterInput"
-                :value="queueData.filter"
-                type="search"
-                placeholder="Type to Search"
-                @input="setQueueData({ filter: $event })"
-              />
-              <b-input-group-append>
-                <b-button
-                  :disabled="!queueData.filter"
-                  @click="setQueueData({ filter: '' })"
-                >
-                  Clear
-                </b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-col>
-          <b-col cols="2">
-            <b-form-group
-              label="Per Page"
-              label-cols="4"
-              label-size="sm"
-              label-for="perPageSelect"
-              class="mb-0"
-            >
-              <b-form-select
-                id="perPageSelect"
-                :value="queueData.perPage"
-                :options="queueData.pageOptions"
-                size="sm"
-                @change="setQueueData({ perPage: $event })"
-              />
-            </b-form-group>
-          </b-col>
-          <b-col cols="3">
-            <b-pagination
-              id="pagination"
-              :value="queueData.currentPage"
-              :total-rows="queueData.totalRows"
-              :per-page="queueData.perPage"
-              pills
-              class="my-0"
-              @change="setQueueData({ currentPage: $event })"
-            />
-          </b-col>
-          <b-col cols="4" class="text-right">
-            <b-btn-group size="sm">
-              <b-button @click="selectAllRows">
-                Select All
-              </b-button>
-              <b-button @click="clearSelected">
-                Clear Selected
-              </b-button>
-              <span :id="!failedSelected ? 'failed-state' : 'retry-btn'">
-                <b-button
-                  :disabled="!failedSelected"
-                  size="sm"
-                  @click="retryFailed(queueData.queueName, queueData.selected)"
-                >
-                  Retry Selected Failed Jobs
-                </b-button>
-                <b-popover
-                  target="failed-state"
-                  triggers="hover"
-                  placement="top"
-                >
-                  Select failed jobs
-                  <br>
-                  <span class="font-weight-bold">
-                    Or
-                  </span>
-                  <br>
-                  Unselect jobs that are not failed.
-                </b-popover>
-              </span>
-            </b-btn-group>
-          </b-col>
-        </b-row>
-      </b-container>
+      <b-input-group
+        size="sm"
+        class="flex-grow-0"
+        style="width: unset;"
+      >
+        <b-input-group-prepend class="d-flex align-items-center px-3">
+          <b-icon-search variant="success-1" />
+        </b-input-group-prepend>
+        <b-form-input
+          id="filterInput"
+          :value="queueData.filter"
+          type="search"
+          placeholder="Type to Search"
+          @input="setQueueData({ filter: $event })"
+        />
+        <b-input-group-append>
+          <b-button
+            :disabled="!queueData.filter"
+            variant="outline-success-1"
+            @click="setQueueData({ filter: '' })"
+          >
+            <b-icon-x-circle />
+          </b-button>
+        </b-input-group-append>
+      </b-input-group>
+      <div class="d-flex align-items-center">
+        <b-form-select
+          id="perPageSelect"
+          :value="queueData.perPage"
+          :options="queueData.pageOptions"
+          size="sm"
+          class="mr-2"
+          style="width: unset; border: 2px solid #e8e8e8;"
+          @change="setQueueData({ perPage: $event })"
+        />
+        <b-pagination
+          id="pagination"
+          :value="queueData.currentPage"
+          :total-rows="queueData.totalRows"
+          :per-page="queueData.perPage"
+          pills
+          class="my-0"
+          @change="setQueueData({ currentPage: $event })"
+        />
+      </div>
+      <b-btn-group size="sm">
+        <b-btn
+          variant="outline-success-1"
+          @click="selectAllRows"
+        >
+          Select All
+        </b-btn>
+        <b-btn
+          variant="outline-success-1"
+          @click="clearSelected"
+        >
+          Clear Selected
+        </b-btn>
+        <span :id="!failedSelected ? 'failed-state' : 'retry-btn'">
+          <b-button
+            :disabled="!failedSelected"
+            size="sm"
+            @click="retryFailed(queueData.queueName, queueData.selected)"
+          >
+            Retry Selected Failed Jobs
+          </b-button>
+          <b-popover
+            target="failed-state"
+            triggers="hover"
+            placement="top"
+          >
+            Select failed jobs
+            <br>
+            <span class="font-weight-bold">
+              Or
+            </span>
+            <br>
+            Unselect jobs that are not failed.
+          </b-popover>
+        </span>
+      </b-btn-group>
     </template>
     <!-- MODAL COMPONENT START -->
     <edit-data />
