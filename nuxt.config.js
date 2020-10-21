@@ -17,6 +17,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  components: true,
   loading: {
     color: '#7898ad',
     failedColor: '#ff0033',
