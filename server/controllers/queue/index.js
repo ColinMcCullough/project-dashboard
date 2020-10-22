@@ -12,5 +12,5 @@ fs.readdirSync(__dirname)
   .forEach((file) => {
     const queue = require(path.join(__dirname, file))
     const fileName = file.replace('.js', '')
-    module.exports[fileName] = queue(Bull, REDIS_URL)
+    module.exports[fileName] = queue(fileName, Bull)
   })
