@@ -21,6 +21,7 @@ module.exports = (app) => {
           method: 'POST',
           uri: DISCOVER_URL,
           body: {
+            
             url: 'http://all-americanselfstorage.com/'
           },
           json: true
