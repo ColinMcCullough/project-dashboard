@@ -19,12 +19,12 @@ module.exports = {
   },
   components: true,
   loading: {
-    color: '#7898ad',
+    color: '#017a68',
     failedColor: '#ff0033',
     continuous: true,
     throttle: 300,
     duration: 2000,
-    height: '4px'
+    height: '20px'
   },
   loadingIndicator: {
     name: 'three-bounce',

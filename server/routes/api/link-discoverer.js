@@ -1,29 +1,21 @@
 const discoverLinks = require('../../controllers/google-auth')
+const axios = require('axios')
 
 module.exports = (app) => {
-  app.post('/link-dicoverer', (req, res) => {
-    const request = require('request-promise')
-    const { LINK_DISCOVERER_URL: receivingServiceURL, DISCOVER_URL } = process.env
-
-    // Set up metadata server request
-    // See https://cloud.google.com/compute/docs/instances/verifying-instance-identity#request_signature
+  app.post('/api/v1/discover', (req, res) => {
+    const { url } = req.body
+    const { LINK_DISCOVERER_URL } = process.env
     const metadataServerTokenURL = 'http://metadata/computeMetadata/v1/instance/service-accounts/default/identity?audience='
     const tokenRequestOptions = {
-      uri: metadataServerTokenURL + receivingServiceURL,
-      headers: {
-        'Metadata-Flavor': 'Google'
-      }
+      uri: metadataServerTokenURL + LINK_DISCOVERER_URL,
+      headers: { 'Metadata-Flavor': 'Google' }
     }
-    // Fetch the token, then provide the token in the request to the receiving service
-    request(tokenRequestOptions)
+    axios(tokenRequestOptions)
       .then((token) => {
-        return request({
+        return axios({
           method: 'POST',
-          uri: DISCOVER_URL,
-          body: {
-            
-            url: 'http://all-americanselfstorage.com/'
-          },
+          uri: `${LINK_DISCOVERER_URL}/discover`,
+          body: { url },
           json: true
         }).auth(null, null, true, token)
       })
