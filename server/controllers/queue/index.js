@@ -6,11 +6,25 @@ const Bull = require('bull')
 if (!REDIS_URL) {
   throw new Error('No Redis url set')
 }
-
-fs.readdirSync(__dirname)
-  .filter(file => file.indexOf('.') !== 0 && file !== 'index.js' && file !== 'README.md')
+getfilesInDir(__dirname)
   .forEach((file) => {
-    const queue = require(path.join(__dirname, file))
     const fileName = file.replace('.js', '')
-    module.exports[fileName] = queue(fileName, Bull)
+    module.exports[fileName] = newQueue(fileName, Bull)
   })
+
+function newQueue (name, Bull) {
+  const subDir = `${__dirname}/${name}`
+  const queue = new Bull(name, REDIS_URL)
+  getfilesInDir(subDir)
+    .forEach((file) => {
+      const { concurrency, processor } = require(path.join(subDir, file))
+      const fileName = file.replace('.js', '')
+      queue.process(fileName, concurrency, processor)
+    })
+  return queue
+}
+
+function getfilesInDir(dir) {
+  return fs.readdirSync(dir)
+    .filter(file => file.indexOf('.') !== 0 && file !== 'index.js' && file !== 'README.md' && file !== 'config.js')
+}
