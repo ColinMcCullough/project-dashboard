@@ -1,4 +1,11 @@
+const linkController = require('../../controllers/link-discoverer')
 module.exports = (app) => {
+  app.post('/test', async (req, res) => {
+    const { url } = req.body
+    const links = await linkController(url)
+    res.json(links)
+  })
+
   app.post('/link-discoverer', (req, res) => {
     const { url } = req.body
     const request = require('request-promise')

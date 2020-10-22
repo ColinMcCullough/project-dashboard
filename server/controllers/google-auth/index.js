@@ -1,23 +1,22 @@
 const axios = require('axios')
 
-module.exports = async (body) => {
-  if (!process.env.LINK_DISCOVERER_URL) throw Error('Service URL variable needs to be set.')
 
-  const { LINK_DISCOVERER_URL } = process.env
+module.exports = getBearerToken
+
+/**
+ * Fetches bearerToken
+ * @param {String} cloudRunUrl
+ * @returns {String} token
+ * @throws {Errror} Invalid arguement error / invalid response
+ */
+async function getBearerToken(cloudRunUrl) {
+  if (!cloudRunUrl) throw Error('No cloud run url passed into function')
   const metadataServerTokenURL = 'http://metadata/computeMetadata/v1/instance/service-accounts/default/identity?audience='
   const tokenRequestOptions = {
-    uri: metadataServerTokenURL + LINK_DISCOVERER_URL,
+    url: metadataServerTokenURL + cloudRunUrl,
     headers: { 'Metadata-Flavor': 'Google' }
   }
-  return await axios(tokenRequestOptions)
-    .then(async (token) => {
-      return await axios({
-        method: 'POST',
-        uri: `${LINK_DISCOVERER_URL}/discover`,
-        body: { url },
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-    })
+  const res = await axios(tokenRequestOptions)
+  if (res.status !== 200) throw Error(`Failed: Status ${res.status}`)
+  return res.data
 }
