@@ -1,3 +1,3 @@
-{
-  "opts": "testing"
+module.exports = {
+  opts: 'testing'
 }
