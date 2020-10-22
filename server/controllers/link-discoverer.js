@@ -1,5 +1,5 @@
 const axios = require('axios')
-const token = require('../controllers/google-auth/index')
+const getBearerToken = require('../controllers/google-auth/index')
 const linkDiscovererUrl = process.env.LINK_DISCOVERER_URL
 
 module.exports = linkDiscoverer
@@ -15,18 +15,14 @@ async function linkDiscoverer(url) {
     throw Error('Invalid arguement passed in')
   }
   try {
-    const token = process.env.TOKEN
-    console.log(token)
-    const bearerToken = token ? token : await token(linkDiscovererUrl)
-    const res = await axios({
-      method: 'POST',
-      url: `${LINK_DISCOVERER_URL}/discover`,
-      body: { url },
-      headers: {
-        'Authorization': `Bearer ${bearerToken}`
-      }
-    })
-    console.log(`Result:${res}`)
+    const devToken = process.env.TOKEN
+    const bearerToken = devToken ? devToken : await getBearerToken(linkDiscovererUrl)
+    const postUrl = `${linkDiscovererUrl}/discover`
+    const body = { url }
+    const config = {
+      headers: { Authorization: `Bearer ${bearerToken}` }
+    }
+    const res = await axios.post(postUrl, body, config)
     if (res.status !== 200) throw Error(`Link discoverer Failed: Status ${res.status}`)
     return res.data
   } catch(err) {
