@@ -8,7 +8,10 @@
       </status-btn>
     </b-card>
     <b-card v-bind="project.intake">
-      <status-btn :text="'Edit Locations'">
+      <status-btn
+        v-b-modal.modal-template
+        :text="'Edit Locations'"
+      >
         <template v-slot:btn-icon>
           <b-icon icon="pencil-fill" />
         </template>

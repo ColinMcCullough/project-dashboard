@@ -91,3 +91,4 @@ sw.*
 # Vim swap files
 *.swp
 crawler-service-account-creds.json
+dump.rdb

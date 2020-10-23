@@ -1,6 +1,11 @@
 <template>
   <b-container fluid>
     <top-nav />
+    <!-- MODAL COMPONENT START -->
+    <modal-template title="Test Title">
+      <intake-table />
+    </modal-template>
+    <!-- MODAL COMPONENT END -->
     <b-row>
       <b-col>
         <b-jumbotron v-bind="jumbotron" fluid>
