@@ -2,7 +2,7 @@
   <b-container fluid style="max-width: 1400px;">
     <top-nav />
     <!-- MODAL COMPONENT START -->
-    <modal-template title="Test Title">
+    <modal-template title="Intake">
       <intake-table />
     </modal-template>
     <!-- MODAL COMPONENT END -->

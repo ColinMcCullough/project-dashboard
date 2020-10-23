@@ -1,24 +1,27 @@
 <template>
   <b-card
-    header-class="d-flex flex-wrap justify-content-between align-items-center px-0 py-1 border-0"
+    header-class="d-flex flex-wrap justify-content-between align-items-center"
+    footer-tag="footer"
     no-body
-    border-variant="success-0"
+    border-variant="success-1"
   >
     <b-table
       id="intakeTbl"
       ref="intakeTbl"
       :items="intakeData"
       :fields="fields"
+      :sort-compare="sortCompare"
       primary-key="key"
       striped
       responsive
-      head-variant="light"
+      head-variant="dark"
+      class="mb-0"
     >
       <template v-slot:head(url)="data">
         {{ data.label.toUpperCase() }}
       </template>
       <template v-slot:cell(url)="data">
-        <b-form-group style="position: relative;">
+        <b-form-group class="mb-0" style="position: relative;">
           <b-form-input
             id="bulk-urls"
             :state="validUrl(data.value)"
@@ -43,6 +46,11 @@
         />
       </template>
     </b-table>
+    <template #footer>
+      <b-btn class="float-right" variant="success-1" @click="onSave">
+        Save Urls
+      </b-btn>
+    </template>
   </b-card>
 </template>
 
@@ -60,17 +68,18 @@ export default {
       ],
       fields: [
         {
+          key: 'valid',
+          label: 'Valid URL',
+          sortable: true
+        },
+        {
           key: 'locationName',
-          label: 'Location'
+          label: 'Location',
+          sortable: true
         },
         {
           key: 'url',
           label: 'URL',
-          sortable: true
-        },
-        {
-          key: 'valid',
-          label: 'Valid Url',
           sortable: true
         }
       ],
@@ -94,7 +103,6 @@ export default {
         '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
         '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
         '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
-      console.log(!!pattern.test(str))
       return !!pattern.test(str)
     },
     onInput(val, key) {
@@ -102,16 +110,31 @@ export default {
       if (index !== -1) {
         this.intakeData[index].url = val
       }
+    },
+    onSave() {
+      // need to save intakeData to the database
+    },
+    sortCompare(aRow, bRow, key, sortDesc) {
+      let a, b
+      if (key === 'url' || key === 'locationName') {
+        a = aRow[key] // or use Lodash `_.get()`
+        b = bRow[key]
+      } else if (key === 'valid') {
+        a = this.validUrl(aRow.url)
+        b = this.validUrl(bRow.url)
+      }
+      return a < b ? -1 : a > b ? 1 : 0
     }
   }
 }
 </script>
 
 <style lang="scss">
-#intakeTbl .table-active,
-.table.b-table > tbody > .table-active > th,
-.table.b-table > tbody > .table-active > td {
-  background-color: white;
+.table {
+  & td {
+    vertical-align: middle;
+    padding: .45rem .5rem !important;
+  }
 }
 .abs-feedback {
   position: absolute;
