@@ -1,4 +1,5 @@
 const linkController = require('../../controllers/link-discoverer')
+
 module.exports = (app) => {
   app.post('/link-discoverer', async (req, res) => {
     try {
