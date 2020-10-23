@@ -18,8 +18,8 @@
         {{ data.label.toUpperCase() }}
       </template>
       <template v-slot:cell(url)="data">
-        <b-form>
-          <b-input
+        <b-form-group style="position: relative;">
+          <b-form-input
             id="bulk-urls"
             :state="validUrl(data.value)"
             :value="data.value"
@@ -28,10 +28,13 @@
             required
             @input="onInput($event, data.item.key)"
           />
-          <b-form-invalid-feedback :state="validUrl(data.value)" class="pt-1">
+          <b-form-invalid-feedback
+            :state="validUrl(data.value)"
+            class="m-0 abs-feedback"
+          >
             Invalid Url
           </b-form-invalid-feedback>
-        </b-form>
+        </b-form-group>
       </template>
       <template v-slot:cell(valid)="data">
         <icons-swap
@@ -109,5 +112,15 @@ export default {
 .table.b-table > tbody > .table-active > th,
 .table.b-table > tbody > .table-active > td {
   background-color: white;
+}
+.abs-feedback {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  max-width: 25%;
+  text-align: center;
+  font-weight: 700;
+  // z-index: 9999;
 }
 </style>
