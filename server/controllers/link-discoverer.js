@@ -8,7 +8,7 @@ module.exports = linkDiscoverer
  * Calls cloud computed function link discoverer
  * @param {String} url
  * @returns {Array} data
- * @throws {Errror} Invalid arguement error / invalid response
+ * @throws {Error} Invalid arguement error / invalid response
  */
 async function linkDiscoverer(url) {
   if (!linkDiscovererUrl) {
