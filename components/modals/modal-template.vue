@@ -5,6 +5,7 @@
     :title="title"
     header-bg-variant="primary"
     size="xl"
+    class="better-modal"
   >
     <b-container fluid >
       <slot />
@@ -34,12 +35,22 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-  .modal-dialog {
-    & .modal-title {
-      color: white;
-    } & .modal-header .close {
-      color: white;
-    }
+<style lang="scss">
+.better-modal {
+  bottom: 0;
+  overflow-y: hidden;
+}
+.modal-dialog {
+  height: calc(100vh - 40px);
+  max-width: 98vw;
+  & .modal-content {
+    height: 100%;
   }
+  & .modal-title {
+    color: white;
+  }
+  & .modal-header .close {
+    color: white;
+  }
+}
 </style>
