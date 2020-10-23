@@ -4,11 +4,11 @@
       Project Details
       <b-icon-question-circle />
     </b-card>
-    <b-card v-bind="cardAttrs">
+    <b-card v-bind="cardAttrs" class="text-center">
       Location URLs
       <b-icon-question-circle />
     </b-card>
-    <b-card v-bind="cardAttrs">
+    <b-card v-bind="cardAttrs" class="text-center">
       Crawl & Scrape
       <b-icon-question-circle />
     </b-card>

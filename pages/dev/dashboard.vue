@@ -1,6 +1,14 @@
 <template>
   <b-container fluid style="max-width: 1400px;">
-    <top-nav />
+    <top-nav>
+      <b-btn
+        variant="outline-success-0"
+        pill
+        to="/queues"
+      >
+        Queues and Jobs
+      </b-btn>
+    </top-nav>
     <!-- MODAL COMPONENT START -->
     <modal-template title="Intake">
       <intake-table />
@@ -8,15 +16,7 @@
     <!-- MODAL COMPONENT END -->
     <b-row>
       <b-col>
-        <b-jumbotron v-bind="jumbotron" fluid class="mb-0">
-          <b-input-group>
-            <b-form-input />
-            <b-btn variant="outline-muted">
-              <b-icon-search />
-              Filter
-            </b-btn>
-          </b-input-group>
-        </b-jumbotron>
+        <b-jumbotron v-bind="jumbotron" fluid class="mb-0" />
       </b-col>
     </b-row>
     <b-card style="overflow-x: hidden;" class="my-5">
@@ -90,7 +90,7 @@ export default {
           details: {
             title: 'Client Name',
             'sub-title': 'From Project 9099909',
-            class: 'chevron-right w-25 is-disabled rounded-0'
+            class: 'chevron-right w-25 rounded-0'
           },
           intake: {
             class: 'chevron-right is-complete rounded-0',

@@ -1,9 +1,8 @@
 <template>
   <b-card
-    header-class="d-flex flex-wrap justify-content-between align-items-center"
-    footer-tag="footer"
+    footer-class="d-flex justify-content-end border-0"
     no-body
-    border-variant="success-1"
+    class="border-0"
   >
     <b-table
       id="intakeTbl"
@@ -13,9 +12,10 @@
       :sort-compare="sortCompare"
       primary-key="key"
       striped
+      outlined
       responsive
-      head-variant="dark"
-      class="mb-0"
+      head-variant="light"
+      class="mb-0 rounded-table"
     >
       <template v-slot:head(url)="data">
         {{ data.label.toUpperCase() }}
@@ -40,14 +40,12 @@
         </b-form-group>
       </template>
       <template v-slot:cell(valid)="data">
-        <icons-swap
-          :needsCheckIcon="validUrl(data.item.url)"
-          :iconConfig="iconConfig"
-        />
+        <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.url), iconConfig }" />
       </template>
     </b-table>
-    <template #footer>
-      <b-btn class="float-right" variant="success-1" @click="onSave">
+    <template v-slot:footer>
+      <b-btn variant="success-1" pill @click="onSave">
+        <b-icon-check2-circle />
         Save Urls
       </b-btn>
     </template>
@@ -130,6 +128,10 @@ export default {
 </script>
 
 <style lang="scss">
+.rounded-table {
+  border-radius: 15px;
+  overflow: hidden;
+}
 .table {
   & td {
     vertical-align: middle;

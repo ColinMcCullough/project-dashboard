@@ -2,12 +2,29 @@
   <b-modal
     id="modal-template"
     :hide-footer="true"
-    :title="title"
-    header-bg-variant="success-1"
     size="xl"
     class="better-modal"
+    header-class="d-flex justify-content-between border-0"
     no-close-on-backdrop
+    hide-backdrop
   >
+    <template v-slot:modal-header="{ cancel }">
+      <span>
+        <h2 class="text-muted text-uppercase">
+          {{ title }}
+        </h2>
+        <p class="small">
+          {{ description }}
+        </p>
+      </span>
+      <b-btn
+        variant="transparent"
+        pill
+        @click="cancel"
+      >
+        <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
+      </b-btn>
+    </template>
     <b-container fluid>
       <slot />
     </b-container>
@@ -20,6 +37,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    description: {
+      type: String,
+      default: 'An explanation about the state of things.'
     }
   },
   data () {
@@ -37,7 +58,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .better-modal {
   bottom: 0;
   overflow-y: hidden;
