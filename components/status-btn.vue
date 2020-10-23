@@ -1,8 +1,8 @@
 <template>
   <b-btn
-    class="w-100"
     size="sm"
     variant="outline-primary"
+    pill
     @click="isBusy = !isBusy"
   >
     <b-spinner v-if="isBusy" small />
