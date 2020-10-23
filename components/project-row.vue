@@ -8,7 +8,10 @@
       </status-btn>
     </b-card>
     <b-card v-bind="intake">
-      <status-btn :text="'Edit Locations'">
+      <status-btn
+        v-b-modal.modal-template
+        :text="'Edit Locations'"
+      >
         <template v-slot:btn-icon>
           <b-icon icon="pencil-fill" />
         </template>
@@ -29,11 +32,11 @@
     </b-card>
     <b-card class="flex-grow-1">
       Ready for Client?
-      <submit-btn :text="'Go'">
+      <!-- <submit-btn :text="'Go'">
         <template v-slot:btn-icon>
           <b-icon icon="arrow" />
         </template>
-      </submit-btn>
+      </submit-btn> -->
     </b-card>
   </div>
 </template>
