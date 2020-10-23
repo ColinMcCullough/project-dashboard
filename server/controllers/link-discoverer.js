@@ -17,7 +17,7 @@ async function linkDiscoverer(url) {
   try {
     const devToken = process.env.TOKEN
     const bearerToken = devToken ? devToken : await getBearerToken(linkDiscovererUrl)
-    const postUrl = `${linkDiscovererUrl}/discover`
+    const postUrl = linkDiscovererUrl
     const body = { url }
     const config = {
       headers: { Authorization: `Bearer ${bearerToken}` }
