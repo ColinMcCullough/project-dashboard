@@ -6,9 +6,10 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 app.use(bodyParser.json({ limit: '1000kb' }))
 const models = require('./models')
+const bullQueues = require('./controllers/queue')
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
-
+bullQueues.createQueues()
 require('./controllers/queue')
 require('./routes')(app)
 

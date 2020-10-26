@@ -1,4 +1,4 @@
-const queues = require('./queue')
+const { queues } = require('./queue')
 module.exports = {
   getQueueNames,
   getJobCounts,
@@ -47,6 +47,7 @@ async function retryJobs(jobs) {
 }
 
 function getQueueNames() {
+  console.log(queues)
   return Object.keys(queues)
     .map(qName => ({ name: qName }))
 }

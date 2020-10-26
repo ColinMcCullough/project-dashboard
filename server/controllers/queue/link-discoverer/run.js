@@ -1,8 +1,9 @@
+const linkDiscoverer = require('../../link-discoverer')
 module.exports = {
   processor,
   concurrency: 1
 }
 
-async function processor(job) {
-
+function processor(job) {
+  return linkDiscoverer(job.data.url)
 }
