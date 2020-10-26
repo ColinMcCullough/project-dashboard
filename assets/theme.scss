@@ -4,6 +4,8 @@ $theme-colors: (
   'secondary': #7898ad,
   'tertiary': #e8513e,
   'tertiary-0': #e37f72,
+  'tertiary-1': #e00033,
+  'tertiary-2': #8c0020,
   'quaternary': #eee23e,
   'success': #339698,
   'success-0': #8dc7cb,
@@ -13,7 +15,7 @@ $theme-colors: (
 );
 
 $font-family-base: 'Noto Sans', sans-serif;
-$enable-rounded: true;
+$enable-rounded: false;
 $enable-shadows: false;
 $enable-gradients: false;
 $enable-transitions: true;

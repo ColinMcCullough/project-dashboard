@@ -30,6 +30,7 @@
   "dependencies": {
     "@cloudnative/health-connect": "^2.1.0",
     "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/cloudinary": "^1.0.0",
     "@nuxtjs/google-analytics": "^2.4.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
