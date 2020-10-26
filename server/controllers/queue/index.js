@@ -1,17 +1,12 @@
-const { REDIS_URL } = process.env
+const { REDIS_URL: redisUrl } = process.env
 const path = require('path')
 const fs = require('fs')
 const Bull = require('bull')
 
 class BullQueues {
   constructor(params) {
-    if (!REDIS_URL) {
-      throw new Error('No Redis url set')
-    }
-    if (BullQueues._instance) {
-      throw new Error('BullQueues already has an instance!!!')
-    }
     this.queues = {}
+    this.redisUrl = params.redisUrl
     this.directory = __dirname
     this.subDirectory = null
     this.files = null
@@ -20,7 +15,6 @@ class BullQueues {
       'README.md',
       'config.js'
     ]
-    BullQueues._instance = this
   }
 
   getfileNames(dir) {
@@ -29,6 +23,9 @@ class BullQueues {
   }
 
   createQueues() {
+    if (!this.redisUrl) {
+      throw new Error('No Redis url set')
+    }
     this.getfileNames()
       .forEach((file) => {
         const fileName = this.getFileName(file)
@@ -38,7 +35,7 @@ class BullQueues {
 
   newQueue (name) {
     const subDir = `${__dirname}/${name}`
-    const queue = new Bull(name, REDIS_URL)
+    const queue = new Bull(name, this.redisUrl)
     this.getfileNames(subDir)
       .forEach((file) => {
         const { concurrency, processor } = require(path.join(subDir, file))
@@ -53,4 +50,4 @@ class BullQueues {
   }
 }
 
-module.exports = new BullQueues()
+module.exports = new BullQueues({ redisUrl })
