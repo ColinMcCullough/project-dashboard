@@ -49,6 +49,12 @@ module.exports = {
     bootstrapVueCSS: false,
     icons: true
   },
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_NAME,
+    apiKey: process.env.CLOUDINARY_SECRET,
+    apiSecret: process.env.CLOUDINARY_KEY,
+    useComponent: true
+  },
   axios: {
     browserBaseURL: `//${process.env.BROWSER_URL}`
   },
