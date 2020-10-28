@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="modal-template"
+    :id="id"
     :hide-footer="true"
     size="xl"
     class="better-modal"
@@ -41,6 +41,10 @@ export default {
     description: {
       type: String,
       default: 'An explanation about the state of things.'
+    },
+    id: {
+      type: String,
+      default: 'default-modal'
     }
   },
   data () {
@@ -51,7 +55,7 @@ export default {
     onSave() {
     },
     hide() {
-      this.$bvModal.hide('modal-template')
+      this.$bvModal.hide(this.id)
     }
   }
 }

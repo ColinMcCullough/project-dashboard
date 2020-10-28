@@ -21,8 +21,8 @@
           4 Locations require review.
         </b-badge>
         <status-btn
-          v-b-modal.modal-template
-          :text="''"
+          :text="'Edit Location URLs'"
+          @click="$bvModal.show('intake-modal')"
         >
           <template v-slot:btn-icon>
             <b-icon icon="pencil-fill" />
@@ -47,7 +47,7 @@
             <b-icon icon="minecart-loaded" />
           </template>
         </status-btn>
-        <status-btn :text="'Review'">
+        <status-btn :text="'Review'" @click="$bvModal.show('scrape-modal')">
           <template v-slot:btn-icon>
             <b-icon icon="hammer" />
           </template>

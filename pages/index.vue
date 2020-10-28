@@ -1,5 +1,22 @@
 <template>
   <div class="centered">
+    <top-nav>
+      <b-btn
+        variant="outline-success-0"
+        pill
+        to="/dev/dashboard"
+        class="mr-2"
+      >
+        Dev
+      </b-btn>
+      <b-btn
+        variant="outline-success-0"
+        pill
+        to="/queues"
+      >
+        Queues and Jobs
+      </b-btn>
+    </top-nav>
     <transition name="slide-fade" appear>
       <octopus :size="`5em`" :color="`#8dc7cb`" />
     </transition>

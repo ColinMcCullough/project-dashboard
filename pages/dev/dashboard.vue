@@ -4,16 +4,33 @@
       <b-btn
         variant="outline-success-0"
         pill
+        to="/dev/dashboard"
+        class="mr-2"
+      >
+        Dev
+      </b-btn>
+      <b-btn
+        variant="outline-success-0"
+        pill
         to="/queues"
       >
         Queues and Jobs
       </b-btn>
     </top-nav>
-    <!-- MODAL COMPONENT START -->
-    <modal-template title="Intake">
+    <!-- MODAL COMPONENTS START -->
+    <modal-template
+      :id="'intake-modal'"
+      title="Intake"
+    >
       <intake-table />
     </modal-template>
-    <!-- MODAL COMPONENT END -->
+    <modal-template
+      :id="'scrape-modal'"
+      title="Scraper"
+    >
+      <project-review />
+    </modal-template>
+    <!-- MODAL COMPONENTS END -->
     <b-row>
       <b-col>
         <b-jumbotron v-bind="jumbotron" fluid class="mb-0" />
@@ -42,7 +59,7 @@ export default {
   data() {
     return {
       jumbotron: {
-        header: 'Hi there',
+        header: 'Γειά σου',
         'bg-variant': 'muted'
       },
       rows: [

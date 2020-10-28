@@ -3,7 +3,7 @@
     size="sm"
     variant="outline-primary"
     pill
-    @click="isBusy = !isBusy"
+    @click="onClick"
   >
     <b-spinner v-if="isBusy" small />
     <slot v-else name="btn-icon">
@@ -24,6 +24,12 @@ export default {
   data() {
     return {
       isBusy: false
+    }
+  },
+  methods: {
+    onClick() {
+      // this.isBusy = !this.isBusy
+      this.$emit('click')
     }
   }
 }
