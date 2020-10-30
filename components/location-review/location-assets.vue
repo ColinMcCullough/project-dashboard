@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid style="border: 3px solid green;">
+  <b-container fluid class="my-3">
     <b-row>
       <b-col class="mb-2">
         <b-btn-group size="sm">

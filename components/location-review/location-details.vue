@@ -1,12 +1,12 @@
 <template>
-  <div style="border: 3px solid red;">
-    {{ form }}
+  <div class="my-3">
     <b-input-group
       v-for="(field, i) in fields"
       :key="`detail-${i}`"
-      :prepend="field"
+      :prepend="fieldFormatter(field)"
     >
       <b-form-input
+        v-if="inputs.includes(form[field])"
         :value="form[field]"
         @input="($event) => { form[field] = $event }"
       />
@@ -22,20 +22,32 @@ export default {
       default() {
         return {
           name: null,
-          address1: null,
-          address2: null,
+          street_address_1: null,
+          street_address_2: null,
           city: null,
-          stateProvince: null,
-          postalCode: null,
-          forwardingNumber: null,
-          country: null
+          state: null,
+          postal_code: null,
+          country: null,
+          local_phone_number: null,
+          display_phone_number: null
         }
       }
+    }
+  },
+  data () {
+    return {
+      inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
+      selects: ['state', 'country']
     }
   },
   computed: {
     fields() {
       return Object.keys(this.form)
+    }
+  },
+  methods: {
+    fieldFormatter(str) {
+      return str.replace(/_/g, ' ').toUpperCase()
     }
   }
 }
