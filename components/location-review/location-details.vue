@@ -1,45 +1,58 @@
 <template>
   <div class="my-3">
-    <b-input-group
-      v-for="(field, i) in fields"
-      :key="`detail-${i}`"
-      :prepend="titleCase(field)"
-      class="pb-1"
-    >
-      <b-form-input
-        v-if="inputs.includes(field)"
-        :placeholder="`Enter ${titleCase(field)}`"
-        :state="validate(field)"
-        :value="form[field]"
-        style="border-width: 1px"
-        @input="onInput($event, field)"
-      />
-      <b-form-invalid-feedback
-        :state="validate(field)"
-        class="m-0 abs-feedback"
+    <b-row class="mx-2">
+      <b-input-group
+        v-for="(field, i) in fields"
+        :key="`detail-${i}`"
+        :prepend="titleCase(field)"
+        class="pb-1"
       >
-        {{ getFeedback(field) }}
-      </b-form-invalid-feedback>
-      <b-form-select
-        v-if="field === 'state'"
-        :id="`${field}-${i}`"
-        :value="form[field]"
-        :state="form[field] !== null"
-        :options="getStates"
-        @change="onInput($event, field)"
-      />
-      <b-form-select
-        v-if="field === 'country'"
-        :id="`${field}-${i}`"
-        :value="form[field]"
-        :state="form[field] !== null"
-        :options="country.options"
-        @change="($event) => {
-          form.state = null
-          form[field] = $event
-        }"
-      />
-    </b-input-group>
+        <b-form-input
+          v-if="inputs.includes(field)"
+          :placeholder="`Enter ${titleCase(field)}`"
+          :state="validate(field)"
+          :value="form[field]"
+          style="border-width: 1px"
+          @input="onInput($event, field)"
+        />
+        <b-form-invalid-feedback
+          :state="validate(field)"
+          class="m-0 abs-feedback"
+        >
+          {{ getFeedback(field) }}
+        </b-form-invalid-feedback>
+        <b-form-select
+          v-if="field === 'state'"
+          :id="`${field}-${i}`"
+          :value="form[field]"
+          :state="form[field] !== null"
+          :options="getStates"
+          @change="onInput($event, field)"
+        />
+        <b-form-select
+          v-if="field === 'country'"
+          :id="`${field}-${i}`"
+          :value="form[field]"
+          :state="form[field] !== null"
+          :options="country.options"
+          @change="($event) => {
+            form.state = null
+            form[field] = $event
+          }"
+        />
+      </b-input-group>
+    </b-row>
+    <accordion-toggle
+      :id="accordionId"
+      :text="accordionTxt"
+      :visible="visible"
+      @visible-update="updateVisible"
+    />
+    <usps-validation
+      v-if="visible"
+      :res="uspsValidationResult"
+      :form="form"
+    />
   </div>
 </template>
 
@@ -67,6 +80,10 @@ export default {
   },
   data () {
     return {
+      visible: false,
+      accordionTxt: 'USPS Verification',
+      accordionId: 'usps-validation',
+      uspsValidationResult: null,
       phoneRegex: /^\d{3}-\d{3}-\d{4}$/,
       inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
       selects: ['state', 'country'],
@@ -92,6 +109,9 @@ export default {
     }
   },
   methods: {
+    updateVisible(val) {
+      this.visible = val
+    },
     onInput(evt, field) {
       if (field === 'local_phone_number' || field === 'display_phone_number') {
         this.form[field] = evt.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
@@ -109,8 +129,8 @@ export default {
       return valid
     },
     titleCase(str) {
-      return str.replace(/_/g, ' ').toLowerCase().split(' ').map(function(word) {
-        return (word.charAt(0).toUpperCase() + word.slice(1))
+      return str.replace(/_/g, ' ').toLowerCase().split(' ').map((word) => {
+        return (`${word.charAt(0).toUpperCase()}${word.slice(1)}`)
       }).join(' ')
     },
     getFeedback(field) {

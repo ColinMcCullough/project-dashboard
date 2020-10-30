@@ -3,7 +3,7 @@
     :id="id"
     :hide-footer="true"
     size="xl"
-    class="better-modal"
+    modal-class="better-modal"
     header-class="d-flex justify-content-between border-0"
     no-close-on-backdrop
     hide-backdrop
@@ -65,25 +65,26 @@ export default {
 .better-modal {
   bottom: 0;
   overflow-y: hidden;
+  & .modal-dialog {
+    height: calc(100vh - 60px);
+    max-width: 98vw;
+    & .modal-content {
+      height: 100%;
+    }
+    & .close {
+      padding: .25rem .5rem !important;
+      font-size: 3rem;
+      line-height: inherit;
+    }
+    & .modal-title {
+      color: white;
+      font-weight: 800;
+      font-size: 2.0rem;
+    }
+    & .modal-header .close {
+      color: white;
+    }
+  }
 }
-.modal-dialog {
-  height: calc(100vh - 60px);
-  max-width: 98vw;
-  & .modal-content {
-    height: 100%;
-  }
-  & .close {
-    padding: .25rem .5rem !important;
-    font-size: 3rem;
-    line-height: inherit;
-  }
-  & .modal-title {
-    color: white;
-    font-weight: 800;
-    font-size: 2.0rem;
-  }
-  & .modal-header .close {
-    color: white;
-  }
-}
+
 </style>
