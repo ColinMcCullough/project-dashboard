@@ -3,19 +3,50 @@
     <b-input-group
       v-for="(field, i) in fields"
       :key="`detail-${i}`"
-      :prepend="fieldFormatter(field)"
+      :prepend="titleCase(field)"
+      class="pb-1"
     >
       <b-form-input
-        v-if="inputs.includes(form[field])"
+        v-if="inputs.includes(field)"
+        :placeholder="`Enter ${titleCase(field)}`"
+        :state="validate(field)"
         :value="form[field]"
-        @input="($event) => { form[field] = $event }"
+        style="border-width: 1px"
+        @input="onInput($event, field)"
+      />
+      <b-form-invalid-feedback
+        :state="validate(field)"
+        class="m-0 abs-feedback"
+      >
+        {{ getFeedback(field) }}
+      </b-form-invalid-feedback>
+      <b-form-select
+        v-if="field === 'state'"
+        :id="`${field}-${i}`"
+        :value="form[field]"
+        :state="form[field] !== null"
+        :options="getStates"
+        @change="onInput($event, field)"
+      />
+      <b-form-select
+        v-if="field === 'country'"
+        :id="`${field}-${i}`"
+        :value="form[field]"
+        :state="form[field] !== null"
+        :options="country.options"
+        @change="($event) => {
+          form.state = null
+          form[field] = $event
+        }"
       />
     </b-input-group>
   </div>
 </template>
 
 <script>
+import States from '~/mixins/states'
 export default {
+  mixins: [States],
   props: {
     form: {
       type: Object,
@@ -36,23 +67,70 @@ export default {
   },
   data () {
     return {
+      phoneRegex: /^\d{3}-\d{3}-\d{4}$/,
       inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
-      selects: ['state', 'country']
+      selects: ['state', 'country'],
+      country: {
+        selected: null,
+        options: [
+          { value: null, text: 'Select Country' },
+          { value: 'US', text: 'United States' },
+          { value: 'CA', text: 'Canada' }
+        ]
+      }
     }
   },
   computed: {
     fields() {
       return Object.keys(this.form)
+    },
+    getStates() {
+      const country = this.form.country
+      return this.form.country === 'US' || this.form.country === 'CA'
+        ? this[country].options
+        : [{ value: null, text: 'Select Country for States' }]
     }
   },
   methods: {
-    fieldFormatter(str) {
-      return str.replace(/_/g, ' ').toUpperCase()
+    onInput(evt, field) {
+      if (field === 'local_phone_number' || field === 'display_phone_number') {
+        this.form[field] = evt.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
+      } else {
+        this.form[field] = evt
+      }
+    },
+    validate(field) {
+      let valid = false
+      if (field === 'local_phone_number' || field === 'display_phone_number') {
+        valid = this.phoneRegex.test(this.form[field])
+      } else if (this.form[field]) {
+        valid = true
+      }
+      return valid
+    },
+    titleCase(str) {
+      return str.replace(/_/g, ' ').toLowerCase().split(' ').map(function(word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1))
+      }).join(' ')
+    },
+    getFeedback(field) {
+      if (field === 'local_phone_number' || field === 'display_phone_number') {
+        return 'EX: 555-555-555'
+      }
     }
   }
 }
 </script>
 
 <style>
-
+  .abs-feedback {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    max-width: 25%;
+    text-align: center;
+    font-weight: 700;
+    z-index: 9999;
+  }
 </style>
