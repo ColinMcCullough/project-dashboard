@@ -2,6 +2,7 @@
   <b-card
     no-body
     border-variant="success-1"
+    style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
   >
     <b-tabs vertical pills card>
       <b-tab
@@ -62,7 +63,12 @@ export default {
         { name: 'Location 1', id: 1 },
         { name: 'Location 2', id: 2 },
         { name: 'Location 3', id: 3 },
-        { name: 'Location 4', id: 4 }
+        { name: 'Location 4', id: 4 },
+        { name: 'Location 5', id: 5 },
+        { name: 'Location 6', id: 6 },
+        { name: 'Location 7', id: 7 },
+        { name: 'Location 8', id: 8 },
+        { name: 'Location 9', id: 9 }
       ],
       tabs: [
         {

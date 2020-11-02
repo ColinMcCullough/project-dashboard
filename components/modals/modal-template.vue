@@ -3,7 +3,7 @@
     :id="id"
     :hide-footer="true"
     size="xl"
-    class="better-modal"
+    modal-class="better-modal"
     header-class="d-flex justify-content-between border-0"
     no-close-on-backdrop
     hide-backdrop
@@ -25,9 +25,7 @@
         <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
       </b-btn>
     </template>
-    <b-container fluid>
-      <slot />
-    </b-container>
+    <slot />
   </b-modal>
 </template>
 
@@ -64,13 +62,15 @@ export default {
 <style lang="scss">
 .better-modal {
   bottom: 0;
-  overflow-y: hidden;
 }
 .modal-dialog {
   height: calc(100vh - 60px);
   max-width: 98vw;
   & .modal-content {
     height: 100%;
+    & .modal-body {
+      overflow: hidden;
+    }
   }
   & .close {
     padding: .25rem .5rem !important;
