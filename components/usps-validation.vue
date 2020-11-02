@@ -12,6 +12,7 @@
               @click="verifyAddress"
             >
               Run USPS Validation
+              <!-- <b-spinner /> -->
             </b-button>
             <b-tooltip target="address-tip" variant="secondary" placement="topleft">
               complete address fields
@@ -31,7 +32,7 @@
         </b-col>
       </b-row>
       <hr>
-      <div v-if="res === null || getUSPSProps[0].name === 'Error' || res.data.elements[0].name === 'Error'">
+      <div v-if="res === null || getUSPSProps[0].name === 'Error' || res.elements[0].name === 'Error'">
         <b-row>
           <b-col
             v-for="(prop,index) in Object.keys(headers)"
@@ -64,12 +65,6 @@
 <script>
 export default {
   props: {
-    res: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
     form: {
       type: Object,
       default() {
@@ -79,6 +74,8 @@ export default {
   },
   data () {
     return {
+      res: null,
+      test: null,
       allowed: ['street_address_1', 'city', 'state', 'postal_code'],
       uspsprops: {
         Address2: 'street_address_1',
@@ -98,7 +95,7 @@ export default {
   computed: {
     getUSPSProps() {
       return this.res !== null
-        ? this.res.data.elements[0].elements[0].elements
+        ? this.res.elements[0].elements[0].elements
         : []
     },
     disabledAddress() {
@@ -119,17 +116,25 @@ export default {
     },
     updateData() {
       const data = {}
-      this.res.data.elements[0].elements[0].elements.forEach((prop) => {
+      this.res.elements[0].elements[0].elements.forEach((prop) => {
         if (Object.keys(this.uspsprops).includes(prop.name)) {
           const value = prop.name !== 'State' ? this.titleCase(prop.elements[0].text) : prop.elements[0].text
           data[this.uspsprops[prop.name]] = value
         }
       })
-      this.updateAddress(data)
-      this.hide()
+      for (const [key, value] of Object.entries(data)) {
+        this.form[key] = value
+      }
     },
-    verifyAddress() {
-      //
+    async verifyAddress() {
+      try {
+        const result = await this.$axios.$post('/routes/api/uspsapi/verify-address', { form: this.form })
+        this.res = result
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
+        // this.set({ 'res': null })
+      }
     },
     validateAddFields() {
       return this.form.street_address_1 &&

@@ -50,7 +50,6 @@
     />
     <usps-validation
       v-if="visible"
-      :res="uspsValidationResult"
       :form="form"
     />
   </div>
@@ -83,7 +82,6 @@ export default {
       visible: false,
       accordionTxt: 'USPS Verification',
       accordionId: 'usps-validation',
-      uspsValidationResult: null,
       phoneRegex: /^\d{3}-\d{3}-\d{4}$/,
       inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
       selects: ['state', 'country'],
