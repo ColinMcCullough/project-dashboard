@@ -1,6 +1,6 @@
 {
   "name": "project-dashboard",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "A full stack app template for the G5 OpEx team.",
   "author": "David Miller & Tyler Hasenoehrl & Colin McCullough",
   "private": true,
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@cloudnative/health-connect": "^2.1.0",
+    "@google-cloud/pubsub": "^2.6.0",
     "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/cloudinary": "^1.0.0",
     "@nuxtjs/google-analytics": "^2.4.0",
@@ -39,7 +40,9 @@
     "cross-env": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "i": "^0.3.6",
     "jquery": "^3.5.1",
+    "npm": "^6.14.8",
     "nuxt": "^2.13.3",
     "path": "^0.12.7",
     "pg": "^7.18.2",
