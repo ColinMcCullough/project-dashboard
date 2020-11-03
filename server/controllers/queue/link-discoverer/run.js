@@ -12,7 +12,7 @@ async function processor(job, done) {
   const subscriptionName = `${topicName}_projectDashboard`
   const subscription = await createAndSubscribe(GCP_PROJECT_ID, topicName, subscriptionName)
   subscription.on('message', (message) => {
-    console.log('Received message:', message.data)
+    console.log('Received message:', message)
     message.ack()
   })
   await linkDiscoverer(job.data.url, topicName)
