@@ -19,9 +19,9 @@ async function linkDiscoverer(url, topicName) {
     // const bearerToken = devToken || await getBearerToken(linkDiscovererUrl)
     const postUrl = linkDiscovererUrl
     const body = { url, topicName }
-    const config = {
-      headers: { Authorization: `Bearer ${bearerToken}` }
-    }
+    // const config = {
+    //   headers: { Authorization: `Bearer ${bearerToken}` }
+    // }
     const res = await axios.post(postUrl, body)
     if (res.status !== 200) { throw new Error(`Link discoverer Failed: Status ${res.status}`) }
     return res.data
