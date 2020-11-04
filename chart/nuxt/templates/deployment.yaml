@@ -35,6 +35,11 @@ spec:
             cpu: "{{ .Values.image.resources.requests.cpu }}"
             memory: "{{ .Values.image.resources.requests.memory }}"
         env:
+          - name: GCP_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: GCP_PROJECT_ID
           - name: DISCOVER_URL
             value: "https://link-discoverer-enwgt7akpq-uw.a.run.app/discover"
           - name: GKE
