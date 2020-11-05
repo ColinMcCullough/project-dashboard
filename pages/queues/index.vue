@@ -58,7 +58,7 @@
                   v-for="(status, key) in queue.statuses"
                   :key="key"
                   button
-                  class="d-flex justify-content-between align-items-center"
+                  class="d-flex justify-content-between align-items-center p-1"
                   @click="getJobsByState(queue.name, key)"
                 >
                   {{ key }}
