@@ -111,7 +111,7 @@
         <icons-swap v-bind="{ needsCheckIcon: rowSelected, iconConfig: queueData.iconConfig }" />
       </template>
       <template v-slot:cell(_progress)="data">
-        <b-progress class="mt-1" :max="100" variant="primary">
+        <b-progress class="mt-1" :max="1" variant="primary">
           <b-progress-bar :value="data.value" :label="`${data.value}%`" />
         </b-progress>
       </template>
