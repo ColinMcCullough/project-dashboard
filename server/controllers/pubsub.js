@@ -1,7 +1,7 @@
 const { PubSub } = require('@google-cloud/pubsub')
 module.exports = {
   createAndSubscribe,
-  deleteTopicAndSub
+  deleteTopic
 }
 
 /**
@@ -24,8 +24,7 @@ async function createAndSubscribe(projectId, topicName, subscriptionName) {
   return subscription
 }
 
-async function deleteTopicAndSub(topicName, subName, projectId) {
+function deleteTopic(topicName, subName, projectId) {
   const pubsub = new PubSub({ projectId })
-  await pubsub.subscription(subName).delete()
-  await pubsub.topic(topicName).delete()
+  return pubsub.topic(topicName).delete()
 }

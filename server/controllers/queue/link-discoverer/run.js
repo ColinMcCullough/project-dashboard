@@ -1,5 +1,5 @@
 const linkDiscoverer = require('../../link-discoverer')
-const { createAndSubscribe, deleteTopicAndSub } = require('../../pubsub')
+const { createAndSubscribe, deleteTopic } = require('../../pubsub')
 const { GCP_PROJECT_ID } = process.env
 module.exports = {
   processor,
@@ -24,7 +24,7 @@ async function processor(job, done) {
       if (log) { job.log(log) }
       if (error) { job.log(error) }
       if (complete) {
-        await deleteTopicAndSub(topicName, subscriptionName, GCP_PROJECT_ID)
+        await deleteTopic(topicName, subscriptionName, GCP_PROJECT_ID)
         // TODO save data to the database
         done(null, results)
       }
