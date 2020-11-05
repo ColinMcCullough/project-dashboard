@@ -22,10 +22,13 @@ async function linkDiscoverer(url, topicName) {
     // const config = {
     //   headers: { Authorization: `Bearer ${bearerToken}` }
     // }
+    console.log('postUrl', postUrl)
     const res = await axios.post(postUrl, body)
+    console.log(res)
     if (res.status !== 200) { throw new Error(`Link discoverer Failed: Status ${res.status}`) }
     return res.data
   } catch (err) {
+    console.log(err)
     return err
   }
 }
