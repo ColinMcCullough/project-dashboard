@@ -47,7 +47,6 @@ async function retryJobs(jobs) {
 }
 
 function getQueueNames() {
-  console.log(queues)
   return Object.keys(queues)
     .map(qName => ({ name: qName }))
 }
