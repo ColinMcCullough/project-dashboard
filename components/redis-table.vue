@@ -1,6 +1,6 @@
 <template>
   <b-card
-    header-class="d-flex flex-wrap justify-content-between align-items-center px-0 py-1 border-0"
+    header-class="d-flex flex-wrap justify-content-between align-items-center pl-0 pr-2 py-1 border-0"
     no-body
     border-variant="success-0"
   >
@@ -59,6 +59,7 @@
         </b-btn>
         <b-btn
           variant="outline-success-1"
+          class="mr-2"
           @click="clearSelected"
         >
           Clear Selected
@@ -112,7 +113,7 @@
       </template>
       <template v-slot:cell(_progress)="data">
         <b-progress class="mt-1" :max="1" variant="primary">
-          <b-progress-bar :value="data.value" :label="`${data.value}%`" />
+          <b-progress-bar :value="data.value" :label="`${data.value * 100}%`" />
         </b-progress>
       </template>
       <template v-slot:cell(processedOn)="data">
@@ -146,50 +147,58 @@
         <b-card>
           <b-row class="mb-2">
             <b-col cols="1">
-              <b>
-                Data:
+              <b class="text-muted small text-uppercase">
+                Data
               </b>
             </b-col>
-            <b-col cols="11" class="text-sm-left">
-              {{ row.item.data }}
+            <b-col cols="11" class="text-sm-left border border-success-0 rounded p-2">
+              <pre class="text-wrap mb-0">
+                {{ row.item.data }}
+              </pre>
             </b-col>
           </b-row>
           <b-row class="mb-2">
             <b-col cols="1">
-              <b>
-                Stacktrace:
+              <b class="text-muted small text-uppercase">
+                Stacktrace
               </b>
             </b-col>
-            <b-col cols="11" class="text-sm-left">
-              {{ row.item.stacktrace }}
+            <b-col cols="11" class="text-sm-left border border-success-0 rounded p-2">
+              <pre class="text-wrap mb-0">
+                {{ row.item.stacktrace }}
+              </pre>
             </b-col>
           </b-row>
           <b-row class="mb-2">
             <b-col cols="1">
-              <b>
-                Opts:
+              <b class="text-muted small text-uppercase">
+                Options
               </b>
             </b-col>
-            <b-col cols="11" class="text-sm-left">
-              {{ row.item.opts }}
+            <b-col cols="11" class="text-sm-left border border-success-0 rounded p-2">
+              <pre class="text-wrap mb-0">
+                {{ row.item.opts }}
+              </pre>
             </b-col>
           </b-row>
           <b-row class="mb-2">
             <b-col cols="1">
-              <b>
-                Delay:
+              <b class="text-muted small text-uppercase">
+                Delay
               </b>
             </b-col>
-            <b-col cols="5" class="text-sm-left">
+            <b-col cols="5" class="text-sm-left text-success-1 font-weight-bold">
               {{ row.item.delay }}
             </b-col>
             <b-col cols="1">
-              <b>
-                Return Val:
+              <b class="text-muted small text-uppercase">
+                Response
               </b>
             </b-col>
-            <b-col cols="5" class="text-sm-left">
-              {{ row.item.returnvalue }}
+            <b-col cols="5" class="text-sm-left border border-success-0 rounded p-2">
+              <pre class="text-wrap mb-0">
+                {{ row.item.returnvalue }}
+              </pre>
             </b-col>
           </b-row>
         </b-card>
@@ -266,7 +275,7 @@ export default {
   background-color: white;
 }
 .b-table-sticky-header {
-  max-height: 50vh;
+  max-height: 60vh;
   & > .table.b-table > thead > tr > th {
     top: -1px !important;
   }
