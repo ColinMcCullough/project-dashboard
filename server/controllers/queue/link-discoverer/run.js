@@ -19,6 +19,7 @@ async function processor(job, done) {
       console.log('Received message:', message)
       const data = JSON.parse(message.data.toString())
       const { progress, complete, log, results, error } = data
+      console.log('progress', progress)
       await job.progress(progress)
       if (log) { job.log(log) }
       if (error) { job.log(error) }
