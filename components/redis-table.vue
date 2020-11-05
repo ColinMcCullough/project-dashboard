@@ -102,6 +102,7 @@
       striped
       selectable
       responsive
+      sticky-header
       head-variant="light"
       @filtered="onFiltered"
       @row-selected="onRowSelected"
@@ -263,5 +264,11 @@ export default {
 .table.b-table > tbody > .table-active > th,
 .table.b-table > tbody > .table-active > td {
   background-color: white;
+}
+.b-table-sticky-header {
+  max-height: 50vh;
+  & > .table.b-table > thead > tr > th {
+    top: -1px !important;
+  }
 }
 </style>
