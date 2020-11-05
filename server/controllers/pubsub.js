@@ -25,8 +25,12 @@ async function createAndSubscribe(projectId, topicName, subscriptionName) {
 }
 
 async function deleteTopicAndSub(topicName, subName, projectId) {
-  const pubsub = new PubSub({ projectId })
-  await pubsub.detachSubscription(subName)
-  await pubsub.subscription(subName).delete()
-  return pubsub.topic(topicName).delete()
+  try {
+    const pubsub = new PubSub({ projectId })
+    await pubsub.detachSubscription(subName)
+    // await pubsub.subscription(subName).delete()
+    return pubsub.topic(topicName).delete()
+  } catch (error) {
+    console.error(error)
+  }
 }

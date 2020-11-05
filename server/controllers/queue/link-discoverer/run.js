@@ -1,5 +1,5 @@
 const linkDiscoverer = require('../../link-discoverer')
-const { createAndSubscribe, deleteTopic } = require('../../pubsub')
+const { createAndSubscribe, deleteTopicAndSub } = require('../../pubsub')
 const { GCP_PROJECT_ID } = process.env
 module.exports = {
   processor,
@@ -9,22 +9,24 @@ module.exports = {
 async function processor(job, done) {
   try {
     const { id } = job
-    console.log('id', id)
     const topicName = `linkDiscover_${id}`
-    console.log('topicName', topicName)
     const subscriptionName = `${topicName}_projectDashboard`
-    console.log('subscriptionName', subscriptionName)
     const subscription = await createAndSubscribe(GCP_PROJECT_ID, topicName, subscriptionName)
     subscription.on('message', async (message) => {
-      console.log('Received message:', message)
+      message.ack()
       const data = JSON.parse(message.data.toString())
       const { progress, complete, log, results, error } = data
-      console.log('progress', progress)
-      await job.progress(progress)
+      if (progress) {
+        await job.progress(progress)
+      }
       if (log) { job.log(log) }
       if (error) { job.log(error) }
       if (complete) {
-        await deleteTopic(topicName, subscriptionName, GCP_PROJECT_ID)
+        try {
+          await deleteTopicAndSub(topicName, subscriptionName, GCP_PROJECT_ID)
+        } catch (error) {
+          console.error(error)
+        }
         // TODO save data to the database
         done(null, results)
       }
