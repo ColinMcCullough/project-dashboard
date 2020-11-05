@@ -1,7 +1,7 @@
 const { PubSub } = require('@google-cloud/pubsub')
 module.exports = {
   createAndSubscribe,
-  deleteTopic
+  deleteTopicAndSub
 }
 
 /**
@@ -19,12 +19,14 @@ async function createAndSubscribe(projectId, topicName, subscriptionName) {
   const pubsub = new PubSub({ projectId })
   const [topic] = await pubsub.createTopic(topicName)
   console.log(`Topic ${topic.name} created.`)
-  const [subscription] = await topic.createSubscription(subscriptionName)
+  const [subscription] = await topic.createSubscription(subscriptionName, { enableMessageOrdering: true })
   console.log(`Subscription ${subscriptionName} created`)
   return subscription
 }
 
-function deleteTopic(topicName, subName, projectId) {
+async function deleteTopicAndSub(topicName, subName, projectId) {
   const pubsub = new PubSub({ projectId })
+  await pubsub.detachSubscription(subName)
+  await pubsub.subscription(subName).delete()
   return pubsub.topic(topicName).delete()
 }
