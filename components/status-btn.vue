@@ -1,5 +1,6 @@
 <template>
   <b-btn
+    :disabled="isDisabled"
     size="sm"
     variant="outline-primary"
     pill
@@ -19,6 +20,10 @@ export default {
     text: {
       type: String,
       default: 'Click'
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

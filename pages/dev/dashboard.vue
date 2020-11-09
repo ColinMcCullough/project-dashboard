@@ -3,7 +3,6 @@
     <top-nav>
       <b-btn
         variant="outline-success-0"
-        pill
         to="/dev/dashboard"
         class="mr-2"
       >
@@ -11,7 +10,6 @@
       </b-btn>
       <b-btn
         variant="outline-success-0"
-        pill
         to="/queues"
       >
         Queues and Jobs
@@ -31,11 +29,6 @@
       <project-review />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
-    <b-row>
-      <b-col>
-        <b-jumbotron v-bind="jumbotron" fluid class="mb-0" />
-      </b-col>
-    </b-row>
     <b-card style="overflow-x: hidden;" class="my-5">
       <b-row>
         <b-col>
@@ -58,69 +51,83 @@
 export default {
   data() {
     return {
-      jumbotron: {
-        header: 'Γειά σου',
-        'bg-variant': 'muted'
-      },
       rows: [
         {
           details: {
-            title: 'Client Name',
-            'sub-title': 'From Project 9099909',
-            class: 'chevron-right w-25 rounded-0'
+            client: 'Client Name',
+            projectId: 999909,
+            estGoLive: '2020-11-11'
           },
-          intake: {
-            class: 'chevron-right is-alert rounded-0',
-            props: {
-              isAlert: true
-            }
-          },
+          intake: { isComplete: true },
           assets: {
-            'sub-title': 'Where we get all the info and images',
-            class: 'chevron-right is-disabled rounded-0 text-light'
-          },
-          links: {
-            class: 'chevron-right is-disabled rounded-0'
+            isComplete: false,
+            isCrawled: true,
+            isScraped: true
           }
         },
         {
           details: {
-            title: 'Client Name',
-            'sub-title': 'From Project 9099909',
-            class: 'chevron-right w-25 rounded-0'
+            client: 'Client Name',
+            projectId: 999910,
+            estGoLive: '2020-11-11'
           },
-          intake: {
-            class: 'chevron-right is-complete rounded-0',
-            props: {
-              isAlert: false
-            }
-          },
+          intake: { isComplete: true },
           assets: {
-            'sub-title': 'Where we get all the info and images',
-            class: 'chevron-right is-alert rounded-0'
-          },
-          links: {
-            class: 'chevron-right is-disabled rounded-0'
+            isComplete: false,
+            isCrawled: true,
+            isScraped: false
           }
         },
         {
           details: {
-            title: 'Client Name',
-            'sub-title': 'From Project 9099909',
-            class: 'chevron-right w-25 rounded-0'
+            client: 'Client Name',
+            projectId: 999911,
+            estGoLive: '2020-11-11'
           },
-          intake: {
-            class: 'chevron-right is-complete rounded-0',
-            props: {
-              isAlert: false
-            }
-          },
+          intake: { isComplete: false },
           assets: {
-            'sub-title': 'Where we get all the info and images',
-            class: 'chevron-right is-alert rounded-0'
+            isComplete: false,
+            isCrawled: false,
+            isScraped: false
+          }
+        },
+        {
+          details: {
+            client: 'Client Name',
+            projectId: 999909,
+            estGoLive: '2020-11-11'
           },
-          links: {
-            class: 'chevron-right is-disabled rounded-0'
+          intake: { isComplete: true },
+          assets: {
+            isComplete: true,
+            isCrawled: true,
+            isScraped: true
+          }
+        },
+        {
+          details: {
+            client: 'Client Name',
+            projectId: 999910,
+            estGoLive: '2020-11-11'
+          },
+          intake: { isComplete: true },
+          assets: {
+            isComplete: false,
+            isCrawled: true,
+            isScraped: false
+          }
+        },
+        {
+          details: {
+            client: 'Client Name',
+            projectId: 999911,
+            estGoLive: '2020-11-11'
+          },
+          intake: { isComplete: false },
+          assets: {
+            isComplete: false,
+            isCrawled: false,
+            isScraped: false
           }
         }
       ]

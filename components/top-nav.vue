@@ -6,7 +6,7 @@
     fixed="top"
   >
     <b-navbar-brand to="/" class="d-flex align-items-center">
-      <narwhal :size="`1.5em`" />
+      <narwhal v-bind="icon" />
       <b-img
         src="/midnight-g5-logo.png"
         width="30"
@@ -15,7 +15,7 @@
         title="G5 Marketing"
         class="mx-3"
       />
-      <h1 class="h1-nav-brand">
+      <h1 class="h1-nav-brand text-success-0">
         Onboarding
       </h1>
     </b-navbar-brand>
@@ -28,7 +28,7 @@
         class="text-white bg-transparent border-0"
         size="sm"
       >
-        <slack-icon v-bind="icon" class="jello-vertical" />
+        <slack-icon v-bind="icon" />
       </b-btn>
       <b-btn
         link
@@ -37,7 +37,7 @@
         class="text-white bg-transparent border-0 mr-2"
         size="sm"
       >
-        <octopus v-bind="icon" class="jello-vertical" />
+        <octopus v-bind="icon" />
       </b-btn>
       <slot />
     </b-navbar-nav>

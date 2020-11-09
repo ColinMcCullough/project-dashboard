@@ -1,8 +1,6 @@
 <template>
   <div class="centered">
-    <transition name="tilt-in-right-1" appear>
-      <narwhal :size="`15em`" :color="`#8dc7cb`" />
-    </transition>
+    <narwhal :size="`15em`" :color="`#8dc7cb`" />
   </div>
 </template>
 
