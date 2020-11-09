@@ -26,11 +26,7 @@ module.exports = {
     duration: 2000,
     height: '20px'
   },
-  loadingIndicator: {
-    name: 'three-bounce',
-    color: '#21222e',
-    background: '#f2f2f2'
-  },
+  loadingIndicator: '@/static/loading.html',
   css: [
     '@/assets/theme.scss',
     '@/assets/transitions.scss'
