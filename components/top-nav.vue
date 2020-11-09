@@ -6,8 +6,9 @@
     fixed="top"
   >
     <b-navbar-brand to="/" class="d-flex align-items-center">
+      <narwhal :size="`1.5em`" />
       <b-img
-        src="/g5-logo.png"
+        src="/midnight-g5-logo.png"
         width="30"
         height="30"
         alt="g5-logo"

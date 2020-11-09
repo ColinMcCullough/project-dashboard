@@ -23,7 +23,7 @@ spec:
         version: "current"
     spec:
       nodeSelector:
-        cloud.google.com/gke-nodepool: "non-whitelisted-apps"
+        cloud.google.com/gke-nodepool: "pub-sub"
       containers:
       - name: "{{  .Chart.Name  }}"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -35,8 +35,14 @@ spec:
             cpu: "{{ .Values.image.resources.requests.cpu }}"
             memory: "{{ .Values.image.resources.requests.memory }}"
         env:
-          - name: DISCOVER_URL
-            value: "https://link-discoverer-enwgt7akpq-uw.a.run.app/discover"
+          - name: GCP_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: GCP_PROJECT_ID
+          - name: LINK_DISCOVERER_URL
+            # value: "https://link-discoverer-enwgt7akpq-uw.a.run.app/discover"
+            value: "https://link-discover-unauth-enwgt7akpq-uc.a.run.app/discover"
           - name: GKE
             value: "true"
           - name: BROWSER_URL
@@ -78,11 +84,6 @@ spec:
               secretKeyRef:
                 name: crs
                 key: REDIS_URL
-          - name: LINK_DISCOVERER_URL
-            valueFrom:
-              secretKeyRef:
-                name: project-dashboard
-                key: LINK_DISCOVERER_URL
           - name: ASSET_SCRAPER_URL
             valueFrom:
               secretKeyRef:

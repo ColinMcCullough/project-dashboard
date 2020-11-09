@@ -58,10 +58,13 @@
                   v-for="(status, key) in queue.statuses"
                   :key="key"
                   button
-                  class="d-flex justify-content-between align-items-center"
+                  class="d-flex justify-content-between align-items-center p-1"
                   @click="getJobsByState(queue.name, key)"
                 >
-                  {{ key }}
+                  <span>
+                    <b-icon :icon="getIconByStatus(key)" />
+                    {{ key }}
+                  </span>
                   <b-badge
                     :variant="status === 0 ? 'muted' : 'success-1'"
                     pill
@@ -94,12 +97,29 @@ export default {
     TopNav
   },
   mixins: [RedisMixin],
+  data() {
+    return {
+      statuses: {
+        waiting: 'clock',
+        active: 'hourglass-split',
+        completed: 'check',
+        failed: 'exclamation-triangle',
+        delayed: 'clock-history',
+        paused: 'pause-fill'
+      }
+    }
+  },
   async fetch({ store }) {
     try {
       await store.dispatch('queue/init')
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(e)
+    }
+  },
+  methods: {
+    getIconByStatus(status) {
+      return this.statuses[status]
     }
   }
 }

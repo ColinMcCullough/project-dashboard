@@ -1,12 +1,11 @@
 const linkController = require('../../controllers/link-discoverer')
-const cld = require('../../controllers/cld')
-
+const { queues } = require('../../controllers/queue')
+const { 'link-discoverer': linkDiscoverer } = queues
 module.exports = (app) => {
-  app.post('/link-discoverer', async (req, res) => {
+  app.post('/api/v1/link-discoverer', async (req, res) => {
     try {
-      const { url } = req.body
-      const links = await linkController(url)
-      res.json(links)
+      await linkDiscoverer.add('run', { ...req.body })
+      res.sendStatus(200)
     } catch(e) {
       res.status(500).send(e.message)
     }

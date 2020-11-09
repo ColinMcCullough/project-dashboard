@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="p-2" style="border: 3px solid pink;">
+  <b-container fluid class="p-2">
     <b-row
       v-for="amenity in amenities"
       :key="amenity.id"

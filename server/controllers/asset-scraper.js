@@ -1,8 +1,8 @@
 const axios = require('axios')
 const getBearerToken = require('../controllers/google-auth/index')
-const linkDiscovererUrl = process.env.LINK_DISCOVERER_URL
+const assetScraperUrl = process.env.ASSET_SCRAPER_URL
 
-module.exports = linkDiscoverer
+module.exports = assetScraper
 
 /**
  * Calls cloud computed function link discoverer
@@ -10,15 +10,15 @@ module.exports = linkDiscoverer
  * @returns {Array} data
  * @throws {Error} Invalid arguement error / invalid response
  */
-async function linkDiscoverer(url, topicName) {
-  if (!linkDiscovererUrl) {
+async function assetScraper(data, topicName) {
+  if (!assetScraperUrl) {
     throw new Error('Invalid arguement passed in')
   }
   try {
     const devToken = process.env.TOKEN
     // const bearerToken = devToken || await getBearerToken(linkDiscovererUrl)
-    const postUrl = linkDiscovererUrl
-    const body = { url, topicName }
+    const postUrl = assetScraperUrl
+    const body = { ...data, topicName }
     // const config = {
     //   headers: { Authorization: `Bearer ${bearerToken}` }
     // }
