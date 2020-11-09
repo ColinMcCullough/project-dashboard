@@ -8,36 +8,36 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
-    name: {
-      type: STRING,
-      allowNull: false
-    },
-    url: {
+    clientUrn: {
       type: STRING
     },
-    address_1: {
-      type: STRING
-    },
-    address_2: {
-      type: STRING
-    },
-    city: {
-      type: STRING
-    },
-    state_province: {
-      type: STRING
-    },
-    postal_code: {
+    locationUrn: {
       type: STRING
     },
     properties: {
       type: JSONB
     },
     crawled: {
-      type: BOOLEAN
+      type: BOOLEAN,
+      defaultValue: false
     },
     scraped: {
-      type: BOOLEAN
+      type: BOOLEAN,
+      defaultValue: false
+    },
+    g5Approved: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
+    g5ApprovedBy: {
+      type: STRING
+    },
+    clientApproved: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
+    clientApprovedBy: {
+      type: STRING
     }
   }, { paranoid: true })
   location.associate = (models) => {
