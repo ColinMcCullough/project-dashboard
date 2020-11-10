@@ -20,7 +20,7 @@
       <b-btn
         variant="outline-success-0"
         pill
-        to="/asset-scraper"
+        to="/dev/asset-scraper"
       >
         Asset Scraper
       </b-btn>

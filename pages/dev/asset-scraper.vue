@@ -20,7 +20,7 @@
       <b-btn
         variant="outline-success-0"
         pill
-        to="/asset-scraper"
+        to="/dev/asset-scraper"
       >
         Asset Scraper
       </b-btn>
@@ -36,7 +36,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-card bg-variant="dark" text-variant="white">
+            <b-card text-variant="white" class="location-card">
               <b-card-title class="font-weight-bold">
                 Location
               </b-card-title>
@@ -59,7 +59,7 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-card class="bg-primary" text-variant="white">
+            <b-card text-variant="white" bg-variant="primary">
               <b-card-title class="font-weight-bold">
                 Urls
               </b-card-title>
@@ -95,7 +95,7 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-card class="bg-secondary" text-variant="white">
+            <b-card text-variant="white" class="scrapers-card">
               <b-card-title class="font-weight-bold">
                 Scrapers
               </b-card-title>
@@ -113,7 +113,7 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-card class="bg-success-0" text-variant="white">
+            <b-card text-variant="white" class="selectors-card">
               <b-card-title class="font-weight-bold">
                 Selectors
               </b-card-title>
@@ -274,9 +274,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .is-invalid {
-//   border-width: 2px;
-// }
+.location-card {
+  background: linear-gradient(var(--dark), var(--primary))
+}
+.scrapers-card {
+  background: linear-gradient(var(--primary), var(--secondary))
+}
+.selectors-card {
+  background: linear-gradient(var(--secondary), var(--success-0))
+}
+.card {
+  border: none;
+}
 .main {
   position: fixed;
   top: 55px;
