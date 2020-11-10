@@ -36,7 +36,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-card text-variant="white" class="location-card">
+            <b-card text-variant="white" class="location-card px-5">
               <b-card-title class="font-weight-bold">
                 Location
               </b-card-title>
@@ -44,22 +44,22 @@
                 <b-col>
                   <b-input-group
                     prepend="Location Id"
-                    type="number"
                     class="mb-0"
                   >
                     <b-form-input
                       v-model="locationId"
+                      type="number"
                       :state="valid(!locationId)"
                       placeholder="Enter Location ID in Database"
                     />
-                    <b-form-invalid-feedback :state="valid(url)" class="abs-feedback" style="top: 14px;">
+                    <b-form-invalid-feedback :state="locationId !== null || locationId !== ''" class="abs-feedback" style="top: 14px;">
                       Missing Id
                     </b-form-invalid-feedback>
                   </b-input-group>
                 </b-col>
               </b-row>
             </b-card>
-            <b-card text-variant="white" bg-variant="primary">
+            <b-card text-variant="white" bg-variant="primary" class="px-5">
               <b-card-title class="font-weight-bold">
                 Urls
               </b-card-title>
@@ -95,7 +95,7 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-card text-variant="white" class="scrapers-card">
+            <b-card text-variant="white" class="scrapers-card px-5">
               <b-card-title class="font-weight-bold">
                 Scrapers
               </b-card-title>
@@ -113,7 +113,7 @@
                 </b-col>
               </b-row>
             </b-card>
-            <b-card text-variant="white" class="selectors-card">
+            <b-card text-variant="white" class="selectors-card px-5">
               <b-card-title class="font-weight-bold">
                 Selectors
               </b-card-title>
@@ -143,14 +143,25 @@
                   </b-form-group>
                 </b-col>
               </b-row>
+              <b-row>
+                <b-col class="text-right">
+                  <span :id="runTip" class="d-inline-block">
+                    <b-button size="lg" variant="primary" :disabled="disabledScraper" class="my-3" @click="runScraper">
+                      Enqueue Asset Scraper
+                    </b-button>
+                    <b-tooltip target="run-tip" placement="left" variant="quaternary">
+                      complete required fields to run
+                    </b-tooltip>
+                  </span>
+                </b-col>
+              </b-row>
+              <b-row v-if="alertTxt !== ''">
+                <b-col class="text-right h5">
+                  {{ alertTxt }}
+                  <b-icon-check variant="success" />
+                </b-col>
+              </b-row>
             </b-card>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col class="text-right">
-            <b-button size="lg" variant="outline-primary" :disabled="disabledScraper" class="my-3" @click="runScraper">
-              Enqueue Asset Scraper
-            </b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -162,6 +173,7 @@
 export default {
   data() {
     return {
+      alertTxt: '',
       locationId: null,
       enableAll: false,
       regex: /[ ,\n]+/,
@@ -198,6 +210,9 @@ export default {
     }
   },
   computed: {
+    runTip() {
+      return this.disabledScraper ? 'run-tip' : 'no-tip'
+    },
     enableDisableTxt() {
       return this.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
     },
@@ -213,14 +228,17 @@ export default {
   },
   methods: {
     async runScraper() {
+      this.alertTxt = 'Job Enqueued!'
       const body = this.getBody()
       await this.$axios.$post('/api/v1/jobs/asset-scraper', body)
+      setTimeout(() => { this.alertTxt = '' }, 10000)
     },
     getBody() {
       const url = new URL(this.url)
       const scrapers = this.scrapers.reduce(function (acc, curr) {
         return Object.assign(acc, { [curr.value]: curr.checked })
       }, {})
+      const template
       const body = {
         rootProtocol: url.protocol.replace(':', ''),
         rootdomain: url.host,
@@ -311,4 +329,7 @@ export default {
 .form-control {
   min-width: 250px
 }
+// .rounded-pill {
+//   border-radius: 50rem !important;
+// }
 </style>
