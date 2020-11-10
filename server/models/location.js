@@ -8,6 +8,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
+    locationId: {
+      type: STRING
+    },
     clientUrn: {
       type: STRING
     },
