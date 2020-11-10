@@ -1,9 +1,13 @@
+/* eslint-disable curly */
 const assetScraper = require('../../asset-scraper')
 const { createAndSubscribe, deleteTopicAndSub } = require('../../pubsub')
 const { GCP_PROJECT_ID } = process.env
+const models = require('../../../models')
+
 module.exports = {
   processor,
-  concurrency: 1
+  concurrency: 1,
+  hooks
 }
 
 async function processor(job, done) {
@@ -16,24 +20,36 @@ async function processor(job, done) {
       message.ack()
       const data = JSON.parse(message.data.toString())
       const { progress, complete, log, results, error } = data
-      if (progress) {
-        await job.progress(progress)
-      }
-      if (log) { job.log(log) }
-      if (error) { job.log(error) }
-      if (complete) {
-        try {
-          await deleteTopicAndSub(topicName, subscriptionName, GCP_PROJECT_ID)
-        } catch (error) {
-          console.error(error)
-        }
-        // TODO save data to the database
-        done(null, results)
-      }
+      if (progress) await job.progress(progress)
+      if (log) job.log(log)
+      if (error) job.log(error)
+      if (complete) done(null, results)
     })
     await assetScraper(job.data, topicName)
   } catch (error) {
     console.log(error)
     done(error)
   }
+}
+
+function hooks(queue) {
+  queue.on('completed', async (job, result) => {
+    const { name, data } = job
+    console.log(job)
+    console.log({ name })
+    if (name === 'run') {
+      try {
+        await models.assetScraper.create({
+          locationId: data.locationId,
+          results: result
+        })
+        const { id } = job
+        const topicName = `assetScraper_${id}`
+        const subscriptionName = `${topicName}_projectDashboard`
+        await deleteTopicAndSub(topicName, subscriptionName, GCP_PROJECT_ID)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  })
 }

@@ -31,6 +31,9 @@ module.exports = (sequelize) => {
     project_status: {
       type: STRING,
       allowNull: false
+    },
+    project_manager: {
+      type: STRING
     }
   }, { paranoid: true })
   // project.associate = (models) => {

@@ -38,8 +38,10 @@ class BullQueues {
     const queue = new Bull(name, this.redisUrl)
     this.getfileNames(subDir)
       .forEach((file) => {
-        const { concurrency, processor } = require(path.join(subDir, file))
+        const { concurrency, processor, hooks } = require(path.join(subDir, file))
         const fileName = this.getFileName(file)
+        hooks(queue)
+        console.log({ name: queue.name, events: queue._events })
         queue.process(fileName, concurrency, processor)
       })
     return queue
