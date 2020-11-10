@@ -13,8 +13,16 @@
         variant="outline-success-0"
         pill
         to="/queues"
+        class="mr-2"
       >
         Queues and Jobs
+      </b-btn>
+      <b-btn
+        variant="outline-success-0"
+        pill
+        to="/asset-scraper"
+      >
+        Asset Scraper
       </b-btn>
     </top-nav>
     <div class="main">
@@ -204,24 +212,21 @@ export default {
     }
   },
   methods: {
-    runScraper() {
+    async runScraper() {
       const body = this.getBody()
-      console.log(body)
+      await this.$axios.$post('/api/v1/jobs/asset-scraper', body)
     },
     getBody() {
       const url = new URL(this.url)
-      const scrapers = {}
-      const template = this.template
-      this.scrapers.forEach((scraper) => {
-        scrapers[scraper.value] = scraper.checked
-      })
-      const pages = this.getUrls()
+      const scrapers = this.scrapers.reduce(function (acc, curr) {
+        return Object.assign(acc, { [curr.value]: curr.checked })
+      }, {})
       const body = {
         rootProtocol: url.protocol.replace(':', ''),
         rootdomain: url.host,
-        pages,
+        pages: this.getUrls(),
         scrapers,
-        template
+        template: this.template
       }
       return body
     },
@@ -269,6 +274,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .is-invalid {
+//   border-width: 2px;
+// }
 .main {
   position: fixed;
   top: 55px;
