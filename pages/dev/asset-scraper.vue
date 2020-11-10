@@ -238,7 +238,6 @@ export default {
       const scrapers = this.scrapers.reduce(function (acc, curr) {
         return Object.assign(acc, { [curr.value]: curr.checked })
       }, {})
-      const template
       const body = {
         rootProtocol: url.protocol.replace(':', ''),
         rootdomain: url.host,
