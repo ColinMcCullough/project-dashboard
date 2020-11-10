@@ -11,8 +11,16 @@
       <b-btn
         variant="outline-success-0"
         to="/queues"
+        class="mr-2"
       >
         Queues and Jobs
+      </b-btn>
+      <b-btn
+        variant="outline-success-0"
+        pill
+        to="/dev/asset-scraper"
+      >
+        Asset Scraper
       </b-btn>
     </top-nav>
     <!-- MODAL COMPONENTS START -->
