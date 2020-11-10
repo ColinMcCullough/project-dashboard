@@ -9,7 +9,7 @@ export default {
   methods: {
     async discover(url, target) {
       try {
-        this[target] = await this.$axios.$post('api/v1/link-discoverer', { url })
+        this[target] = await this.$axios.$post('api/v1/jobs/link-discoverer', { url })
       } catch (err) {
         this.error = err
       }

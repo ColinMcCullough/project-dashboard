@@ -11,4 +11,14 @@ module.exports = (app) => {
     await assetScraper.add('run', body)
     res.sendStatus(200)
   })
+  app.post('/api/v1/jobs/link-discoverer', async (req, res) => {
+    const body = req.body
+    const { 'link-discoverer': linkDiscoverer } = queues
+    try {
+      await linkDiscoverer.add('run', body)
+      res.sendStatus(200)
+    } catch (e) {
+      res.status(500).send(e.message)
+    }
+  })
 }
