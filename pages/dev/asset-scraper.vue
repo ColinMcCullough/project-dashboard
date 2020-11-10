@@ -239,6 +239,7 @@ export default {
         return Object.assign(acc, { [curr.value]: curr.checked })
       }, {})
       const body = {
+        locationId: this.locationId,
         rootProtocol: url.protocol.replace(':', ''),
         rootdomain: url.host,
         pages: this.getUrls(),
