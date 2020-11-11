@@ -9,31 +9,39 @@ module.exports = (app) => {
     const project = await models.project.displayOne(projectId)
     res.json(project)
   })
+
+  // returns array of locations matching project id each location is object containng object
   app.get('/api/v1/projects/:projectId/locations', async (req, res) => {
-    const data = [
-      {
-        locationId,
-        crawled,
-        scraped,
-        g5Approved,
-        clientApproved,
-        url
-      }
-    ]
+    try {
+      const { projectId } = req.params
+      const locations = await models.project.locationsByProjectId(projectId)
+      const val = locations.map((location) => {
+        return {
+          locationId: location.locationId,
+          crawled: location.crawled,
+          scraped: location.scraped,
+          g5Approved: location.g5Approved,
+          clientApproved: location.clientApproved,
+          url: location.properties.url
+        }
+      })
+      res.json(val)
+    } catch (e) {
+      res.status(500).send(e.message)
+    }
   })
+
   app.get('/api/v1/projects/:projectId/locations/:locationId', async (req, res) => {
-    const data = {
-      locationId : '',
-      name: null,
-      street_address_1: null,
-      street_address_2: null,
-      city: null,
-      state: null,
-      postal_code: null,
-      country: null,
-      local_phone_number: null,
-      display_phone_number: null,
-      amenities : []
+    try {
+      const { locationId } = req.params
+      const location = await models.location.locationById(locationId)
+      const val = {
+        locationId,
+        ...location.dataValues.properties
+      }
+      res.json(val)
+    } catch (e) {
+      res.status(500).send(e.message)
     }
   })
 }

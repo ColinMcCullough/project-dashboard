@@ -21,6 +21,31 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+
+  models.location.locationById = async (locationId) => {
+    const location = await models.location.findOne({
+      where: {
+        locationId
+      }
+    })
+    return location
+  }
+
+  models.project.locationsByProjectId = async (projectId) => {
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      },
+      include: [
+        {
+          model: models.location
+        }
+      ]
+    })
+    const { locations } = project.toJSON()
+    return locations
+  }
+
   models.project.displayAll = async () => {
     const projects = await models.project.findAll({
       include: [
