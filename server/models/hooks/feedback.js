@@ -1,6 +1,6 @@
 const slackApi = require('../../controllers/slack')
 const { SLACK_FEEDBACK_URL: url } = process.env
-module.exports = (models) => {
+module.exports = (models, sequelize, Sequelize) => {
   models.feedback.addHook('afterCreate', (instance, options) => {
     const { name, comments, type } = instance.dataValues
     return slackApi.post(url, {
