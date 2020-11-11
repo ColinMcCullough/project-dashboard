@@ -2,15 +2,6 @@ const models = require('../../models')
 module.exports = (app) => {
   app.get('/api/v1/projects', async (req, res) => {
     const projects = await models.project.displayAll()
-    // const data = [
-    //   {
-    //     clientName,
-    //     clientId,
-    //     projectId,
-    //     locationCount,
-    //     discoverComplete
-    //   }
-    // ]
     res.json(projects)
   })
   app.get('/api/v1/projects/:projectId')
