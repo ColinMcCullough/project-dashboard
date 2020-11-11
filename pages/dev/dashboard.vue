@@ -1,6 +1,6 @@
 <template>
   <b-container fluid style="max-width: 1400px;">
-    <top-nav>
+    <top-nav :show="true">
       <b-btn
         variant="outline-success-0"
         to="/dev/dashboard"
@@ -17,11 +17,21 @@
       </b-btn>
       <b-btn
         variant="outline-success-0"
-        pill
         to="/dev/asset-scraper"
       >
         Asset Scraper
       </b-btn>
+      <template v-slot:secondary-nav>
+        <div class="align-self-center d-flex mb-0 align-items-center">
+          <b-input-group>
+            <b-form-input />
+            <b-btn variant="outline-success-1" size="sm">
+              <b-icon-x-circle />
+            </b-btn>
+          </b-input-group>
+          <b-form-radio-group />
+        </div>
+      </template>
     </top-nav>
     <!-- MODAL COMPONENTS START -->
     <modal-template
@@ -38,11 +48,6 @@
     </modal-template>
     <!-- MODAL COMPONENTS END -->
     <b-card style="overflow-x: hidden;" class="my-5">
-      <b-row>
-        <b-col>
-          <project-header />
-        </b-col>
-      </b-row>
       <b-table
         :fields="fields"
         :items="rows"
@@ -53,6 +58,11 @@
         <!-- <project-row v-bind="data.item.data.details" /> -->
         <!-- </template> -->
       </b-table>
+      <b-row>
+        <b-col>
+          <project-header />
+        </b-col>
+      </b-row>
       <!-- <b-row
         v-for="(project, i) in rows"
         :key="`project-${i}`"

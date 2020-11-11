@@ -28,7 +28,7 @@
         class="text-white bg-transparent border-0"
         size="sm"
       >
-        <slack-icon v-bind="icon" />
+        <slack v-bind="icon" />
       </b-btn>
       <b-btn
         link
@@ -41,16 +41,19 @@
       </b-btn>
       <slot />
     </b-navbar-nav>
+    <div v-if="show" class="secondary-nav bg-success-0 d-flex px-3">
+      <slot name="secondary-nav" />
+    </div>
   </b-navbar>
 </template>
 
 <script>
-import Octopus from '~/components/icons/octopus'
-import SlackIcon from '~/components/icons/slack'
 export default {
-  components: {
-    Octopus,
-    SlackIcon
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -64,6 +67,14 @@ export default {
 </script>
 
 <style>
+.secondary-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  bottom: 0;
+  transform: translateY(100%);
+}
 .h1-nav-brand {
   font-size: 0.9em;
   margin-bottom: 0;
@@ -83,11 +94,6 @@ export default {
  * See http://animista.net/license for more info.
  * w: http://animista.net, t: @cssanimista
  * ---------------------------------------------- */
-/**
- * ----------------------------------------
- * animation jello-vertical
- * ----------------------------------------
- */
 @keyframes jello-vertical {
   0% {
     transform: scale3d(1, 1, 1);
