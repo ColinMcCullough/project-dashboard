@@ -87,15 +87,6 @@
           <project-row v-bind="{ project: data.item }" />
         </template>
       </b-table>
-      <b-row
-        v-for="(project, i) in projects"
-        :key="`project-${i}`"
-      >
-        <b-col>
-          <project-row v-bind="{ project }" />
-        </b-col>
-      </b-row>
-      {{ projects }}
     </b-card>
   </b-container>
 </template>
