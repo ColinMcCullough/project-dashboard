@@ -36,9 +36,8 @@ module.exports = (sequelize) => {
       type: STRING
     }
   }, { paranoid: true })
-  // project.associate = (models) => {
-  //   // models.project.belongsTo(models.client)
-  //   // models.project.belongsToMany(models.location, { through: 'project_id' })
-  // }
+  project.associate = (models) => {
+    models.project.hasMany(models.location)
+  }
   return project
 }

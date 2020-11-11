@@ -1,20 +1,14 @@
 const { INTEGER, JSONB } = require('sequelize')
 
-module.exports = (sequelize) => {
-  const linkDiscoverer = sequelize.define('linkDiscoverer', {
-    id: {
-      type: INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
-    },
-    pages: {
-      type: JSONB,
-      allowNull: false
-    }
-  })
-  linkDiscoverer.associate = (models) => {
-    models.linkDiscoverer.belongsTo(models.location)
+module.exports = sequelize => sequelize.define('linkDiscoverer', {
+  id: {
+    type: INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  },
+  pages: {
+    type: JSONB,
+    allowNull: false
   }
-  return linkDiscoverer
-}
+})

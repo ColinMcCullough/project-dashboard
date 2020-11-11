@@ -44,7 +44,8 @@ module.exports = (sequelize) => {
     }
   }, { paranoid: true })
   location.associate = (models) => {
-    models.location.belongsTo(models.project)
+    models.location.hasMany(models.linkDiscoverer)
+    models.location.hasMany(models.assetScraper)
   }
   return location
 }
