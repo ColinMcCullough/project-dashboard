@@ -4,7 +4,11 @@ module.exports = (app) => {
     const projects = await models.project.displayAll()
     res.json(projects)
   })
-  app.get('/api/v1/projects/:projectId')
+  app.get('/api/v1/projects/:projectId', async (req, res) => {
+    const { projectId } = req.params
+    const project = await models.project.displayOne(projectId)
+    res.json(project)
+  })
   app.get('/api/v1/projects/:projectId/locations', async (req, res) => {
     const data = [
       {

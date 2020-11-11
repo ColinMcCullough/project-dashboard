@@ -45,4 +45,27 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     })
   }
+  models.project.displayOne = async (projectId) => {
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      },
+      include: [
+        {
+          model: models.location
+        }
+      ]
+    })
+    project.areAllCrawled()
+    project.areAllScraped()
+    const { discoverComplete, scrapeComplete, locations } = project.toJSON()
+    return {
+      clientName: null,
+      clientId: null,
+      projectId,
+      locationCount: locations.length,
+      discoverComplete,
+      scrapeComplete
+    }
+  }
 }
