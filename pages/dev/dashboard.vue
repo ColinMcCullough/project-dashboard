@@ -43,14 +43,24 @@
           <project-header />
         </b-col>
       </b-row>
-      <b-row
+      <b-table
+        :fields="fields"
+        :items="rows"
+      >
+        <!-- <template v-slot:cell(data)="data"> -->
+        <!-- {{ data.item.data }} -->
+        <!-- <project-row :project="data.item.data" /> -->
+        <!-- <project-row v-bind="data.item.data.details" /> -->
+        <!-- </template> -->
+      </b-table>
+      <!-- <b-row
         v-for="(project, i) in rows"
         :key="`project-${i}`"
       >
         <b-col>
           <project-row v-bind="{ project }" />
         </b-col>
-      </b-row>
+      </b-row> -->
     </b-card>
   </b-container>
 </template>
@@ -59,19 +69,26 @@
 export default {
   data() {
     return {
+      fields: [
+        { key: 'client', sortable: true },
+        { key: 'projectId', sortable: true },
+        { key: 'age', sortable: true },
+        { key: 'estGoLive', sortable: true },
+        { key: 'intakeIsComplete', sortable: true },
+        { key: 'assetsIsComplete', sortable: true },
+        { key: 'assetsIsCrawled', sortable: true },
+        { key: 'assetsIsScraped', sortable: true },
+        { key: 'view' }
+      ],
       rows: [
         {
-          details: {
-            client: 'Client Name',
-            projectId: 999909,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: true },
-          assets: {
-            isComplete: false,
-            isCrawled: true,
-            isScraped: true
-          }
+          client: 'Client Name',
+          projectId: 999909,
+          estGoLive: '2020-11-11',
+          intakeIsComplete: true,
+          assetsIsComplete: false,
+          assetsIsCrawled: true,
+          assetsIsScraped: true
         },
         {
           details: {
@@ -144,6 +161,17 @@ export default {
 }
 </script>
 
+// details: {
+//   client: 'Client Name',
+//   projectId: 999909,
+//   estGoLive: '2020-11-11'
+// },
+// intake: { isComplete: true },
+// assets: {
+//   isComplete: false,
+//   isCrawled: true,
+//   isScraped: true
+// }
 <style>
 
 </style>
