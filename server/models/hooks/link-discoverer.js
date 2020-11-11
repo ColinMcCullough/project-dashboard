@@ -2,7 +2,7 @@ const { EXCESSIVE_PAGE_LIMIT } = process.env
 module.exports = (models, sequelize, Sequelize) => {
   models.linkDiscoverer.addHook('beforeCreate', async (instance, options) => {
     const { pages } = instance.toJSON()
-    if (pages.length > EXCESSIVE_PAGE_LIMIT) {
+    if (pages.length > parseInt(EXCESSIVE_PAGE_LIMIT)) {
       await instance.update({ excessivePages: true })
     }
   })

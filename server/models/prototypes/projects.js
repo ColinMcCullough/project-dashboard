@@ -22,7 +22,7 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
-  
+
   models.project.locationsByProjectId = async (projectId) => {
     const project = await models.project.findOne({
       where: {

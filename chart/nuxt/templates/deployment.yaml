@@ -45,6 +45,8 @@ spec:
             value: "https://link-discover-unauth-enwgt7akpq-uc.a.run.app/discover"
           - name: GKE
             value: "true"
+          - name : "EXCESSIVE_PAGE_LIMIT"
+            value: "25"
           - name: BROWSER_URL
             value: "stratypus.tk"
           - name: DATABASE_MAX_CONNECTIONS
