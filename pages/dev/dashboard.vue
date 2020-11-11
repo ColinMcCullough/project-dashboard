@@ -26,14 +26,30 @@
       </b-btn>
       <template v-slot:secondary-nav>
         <div class="d-flex mb-0 align-items-center justify-content-between w-100">
-          <b-input-group size="sm" prepend="Sort By" class="mr-2">
-            <b-form-select v-model="sortBy" :options="fields" />
-            <b-form-select v-model="sortDir" :options="['asc', 'desc', 'last']" />
+          <b-input-group size="sm" class="mr-2">
+            <b-input-group-prepend class="d-flex px-2 align-items-center">
+              Sort By
+            </b-input-group-prepend>
+            <b-form-select v-model="sortBy" :options="sortBys" />
+            <b-form-select v-model="sortDir" :options="sortDirs" />
           </b-input-group>
-          <b-input-group size="sm" prepend="Search">
-            <b-form-input v-model="filter" placeholder="Search" />
-            <b-btn variant="outline-success-1" size="sm">
+          <b-input-group size="sm">
+            <b-input-group-prepend class="d-flex px-2 align-items-center">
+              <b-icon-search />
+            </b-input-group-prepend>
+            <b-form-input
+              v-model.trim="filter"
+              debounce="500"
+              placeholder="Search"
+            />
+            <b-btn
+              v-if="filter"
+              variant="outline-success-1"
+              size="sm"
+              @click="filter = ''"
+            >
               <b-icon-x-circle />
+              Clear
             </b-btn>
           </b-input-group>
         </div>
@@ -57,26 +73,27 @@
       <b-table
         :fields="fields"
         :items="projects"
+        :sort-by.sync="sortBy"
+        :sort-direction.sync="sortDir"
+        :filter="filter"
       >
-        <!-- <template v-slot:cell(data)="data"> -->
-        <!-- {{ data.item.data }} -->
-        <!-- <project-row :project="data.item.data" /> -->
-        <!-- <project-row v-bind="data.item.data.details" /> -->
-        <!-- </template> -->
+        <template v-slot:cell(toDisplay)="data">
+          <project-row v-bind="{ project: data.item }" />
+        </template>
       </b-table>
       <b-row>
         <b-col>
           <project-header />
         </b-col>
       </b-row>
-      <!-- <b-row
-        v-for="(project, i) in rows"
+      <b-row
+        v-for="(project, i) in projects"
         :key="`project-${i}`"
       >
         <b-col>
           <project-row v-bind="{ project }" />
         </b-col>
-      </b-row> -->
+      </b-row>
       {{ projects }}
     </b-card>
   </b-container>
@@ -90,97 +107,41 @@ export default {
   },
   data() {
     return {
-      sortBy: null,
+      sortBy: 'estGoLive',
+      sortBys: [
+        { text: 'Client Name', value: 'client' },
+        { text: 'Est. Go-Live Date', value: 'estGoLive' },
+        { text: 'Project ID', value: 'projectId' }
+      ],
       sortDir: 'asc',
+      sortDirs: [
+        { text: 'Ascending', value: 'asc' },
+        { text: 'Descending', value: 'desc' }
+      ],
       filter: '',
       fields: [
         { key: 'client', sortable: true },
         { key: 'projectId', sortable: true },
-        { key: 'age', sortable: true },
         { key: 'estGoLive', sortable: true },
-        { key: 'intakeIsComplete', sortable: true },
-        { key: 'assetsIsComplete', sortable: true },
-        { key: 'assetsIsCrawled', sortable: true },
-        { key: 'assetsIsScraped', sortable: true },
-        { key: 'view' }
-      ],
-      rows: [
-        {
-          client: 'Client Name',
-          projectId: 999909,
-          estGoLive: '2020-11-11',
-          intakeIsComplete: true,
-          assetsIsComplete: false,
-          assetsIsCrawled: true,
-          assetsIsScraped: true
-        },
-        {
-          details: {
-            client: 'Client Name',
-            projectId: 999910,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: true },
-          assets: {
-            isComplete: false,
-            isCrawled: true,
-            isScraped: false
-          }
-        },
-        {
-          details: {
-            client: 'Client Name',
-            projectId: 999911,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: false },
-          assets: {
-            isComplete: false,
-            isCrawled: false,
-            isScraped: false
-          }
-        },
-        {
-          details: {
-            client: 'Client Name',
-            projectId: 999909,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: true },
-          assets: {
-            isComplete: true,
-            isCrawled: true,
-            isScraped: true
-          }
-        },
-        {
-          details: {
-            client: 'Client Name',
-            projectId: 999910,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: true },
-          assets: {
-            isComplete: false,
-            isCrawled: true,
-            isScraped: false
-          }
-        },
-        {
-          details: {
-            client: 'Client Name',
-            projectId: 999911,
-            estGoLive: '2020-11-11'
-          },
-          intake: { isComplete: false },
-          assets: {
-            isComplete: false,
-            isCrawled: false,
-            isScraped: false
-          }
-        }
+        { key: 'toDisplay' }
       ]
+    }
+  },
+  methods: {
+    sortCompare(aRow, bRow) {
+      let a, b
+      if (this.sortBy) {
+        a = aRow[this.sortBy]
+        b = bRow[this.sortBy]
+      }
+      return a < b ? -1 : a > b ? 1 : 0
     }
   }
 }
 </script>
+
+<style lang="scss">
+thead[role=rowgroup] {
+  display: none;
+}
+</style>
