@@ -1,4 +1,4 @@
-const { INTEGER, JSONB } = require('sequelize')
+const { INTEGER, JSONB, BOOLEAN } = require('sequelize')
 
 module.exports = sequelize => sequelize.define('linkDiscoverer', {
   id: {
@@ -10,5 +10,9 @@ module.exports = sequelize => sequelize.define('linkDiscoverer', {
   pages: {
     type: JSONB,
     allowNull: false
+  },
+  excessivePages: {
+    type: BOOLEAN,
+    defaultValue: false
   }
 })

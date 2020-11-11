@@ -22,6 +22,21 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+  
+  models.project.locationsByProjectId = async (projectId) => {
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      },
+      include: [
+        {
+          model: models.location
+        }
+      ]
+    })
+    const { locations } = project.toJSON()
+    return locations
+  }
 
   models.project.displayAll = async () => {
     const projects = await models.project.findAll({
@@ -53,5 +68,28 @@ module.exports = (models, sequelize, Sequelize) => {
         scrapeComplete
       }
     })
+  }
+  models.project.displayOne = async (projectId) => {
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      },
+      include: [
+        {
+          model: models.location
+        }
+      ]
+    })
+    project.areAllCrawled()
+    project.areAllScraped()
+    const { discoverComplete, scrapeComplete, locations } = project.toJSON()
+    return {
+      clientName: null,
+      clientId: null,
+      projectId,
+      locationCount: locations.length,
+      discoverComplete,
+      scrapeComplete
+    }
   }
 }
