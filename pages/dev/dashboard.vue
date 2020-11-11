@@ -70,22 +70,23 @@
     </modal-template>
     <!-- MODAL COMPONENTS END -->
     <b-card style="overflow-x: hidden;" class="my-5">
+      <b-row>
+        <b-col>
+          <project-header />
+        </b-col>
+      </b-row>
       <b-table
         :fields="fields"
         :items="projects"
         :sort-by.sync="sortBy"
         :sort-direction.sync="sortDir"
         :filter="filter"
+        class="p-0 m-0 border-0"
       >
         <template v-slot:cell(toDisplay)="data">
           <project-row v-bind="{ project: data.item }" />
         </template>
       </b-table>
-      <b-row>
-        <b-col>
-          <project-header />
-        </b-col>
-      </b-row>
       <b-row
         v-for="(project, i) in projects"
         :key="`project-${i}`"
@@ -120,9 +121,9 @@ export default {
       ],
       filter: '',
       fields: [
-        { key: 'client', sortable: true },
-        { key: 'projectId', sortable: true },
-        { key: 'estGoLive', sortable: true },
+        { key: 'client', sortable: true, tdClass: 'd-none' },
+        { key: 'projectId', sortable: true, tdClass: 'd-none' },
+        { key: 'estGoLive', sortable: true, tdClass: 'd-none' },
         { key: 'toDisplay' }
       ]
     }
