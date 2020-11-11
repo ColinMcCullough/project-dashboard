@@ -115,7 +115,7 @@ export default {
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
       if (key === 'url' || key === 'locationName') {
-        a = aRow[key] // or use Lodash `_.get()`
+        a = aRow[key]
         b = bRow[key]
       } else if (key === 'valid') {
         a = this.validUrl(aRow.url)

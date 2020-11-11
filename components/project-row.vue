@@ -5,27 +5,30 @@
       style="flex: 0 1 25%;"
     >
       <p class="h4 mb-0">
-        {{ project.details.client }}
+        {{ project.clientName === null ? 'Client Name' : project.clientName }}
         <b-btn
           size="sm"
           variant="transparent"
-          @click="onRefetch(project.details.projectId)"
+          pill
+          @click="onRefetch(project.projectId)"
         >
-          <b-icon-arrow-counterclockwise variant="primary-0" />
+          <b-icon-arrow-counterclockwise
+            :animation="isBusy ? 'spin-reverse' : ''"
+            variant="primary-0" />
         </b-btn>
       </p>
-      Project ID: {{ project.details.projectId }}
+      Project ID: {{ project.projectId }}
       <b-badge variant="primary-0" class="px-3 rounded">
-        est. Go-live: {{ project.details.estGoLive }}
+        est. Go-live: {{ project.estGoLive }}
       </b-badge>
     </b-card>
     <b-card
-      :class="[{ 'is-complete': project.intake.isComplete }, ...cardClass]"
+      :class="[{ 'is-complete': !project.discoverComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 25%;"
     >
       <div
-        v-if="!project.intake.isComplete"
+        v-if="project.discoverComplete"
         class="d-flex flex-column justify-content-center"
       >
         <b-badge variant="tertiary-2" class="px-3 rounded mb-2">
@@ -35,7 +38,8 @@
             shift-h="-8"
             shift-v="8"
           />
-          4 Locations require review.
+          {{ project.locationCount }}
+          Locations require review.
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
@@ -55,21 +59,21 @@
       />
     </b-card>
     <b-card
-      :class="[{ 'is-complete': project.assets.isComplete }, ...cardClass]"
+      :class="[{ 'is-complete': !project.scrapeComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 25%;"
     >
       <b-btn-group
-        v-if="!project.assets.isComplete"
+        v-if="!project.scrapeComplete"
         size="sm"
         class="w-100"
       >
-        <status-btn :text="'Crawl'" :is-disabled="!project.intake.isComplete">
+        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete">
           <template v-slot:btn-icon>
             <b-iconstack>
               <b-icon icon="minecart" stacked />
               <b-icon
-                v-if="project.assets.isCrawled"
+                v-if="project.discoverComplete"
                 icon="check-circle-fill"
                 shift-h="-12"
                 shift-v="12"
@@ -81,14 +85,14 @@
         </status-btn>
         <status-btn
           :text="'Scrape'"
-          :is-disabled="!project.intake.isComplete"
+          :is-disabled="!project.scrapeComplete"
           class="ml-1"
         >
           <template v-slot:btn-icon>
             <b-iconstack>
               <b-icon icon="minecart-loaded" stacked />
               <b-icon
-                v-if="project.assets.isScraped"
+                v-if="project.scrapeComplete"
                 icon="check-circle-fill"
                 shift-h="-12"
                 shift-v="12"
@@ -100,7 +104,7 @@
         </status-btn>
         <status-btn
           :text="'Review'"
-          :is-disabled="!project.intake.isComplete"
+          :is-disabled="!project.scrapeComplete"
           class="ml-1"
           @click="$bvModal.show('scrape-modal')"
         >
@@ -119,7 +123,7 @@
     </b-card>
     <div class="d-flex flex-grow-1 align-items-center">
       <b-btn
-        :disabled="project.assets.isComplete === false"
+        :disabled="project.scrapeComplete === false"
         variant="primary"
         block
         pill
@@ -138,23 +142,29 @@ export default {
       type: Object,
       default() {
         return {
-          details: {
-            title: 'Client Name',
-            'sub-title': 'From Project 9099909'
-          },
-          intake: { isComplete: true },
-          assets: { isComplete: true }
+          clientName: null,
+          clientId: null,
+          projectId: null,
+          locationCount: null,
+          discoverComplete: false,
+          scrapeComplete: false
         }
       }
     }
   },
   data() {
     return {
+      isBusy: false,
       cardClass: [
         'chevron-right',
         'w-25',
         'rounded-0'
       ]
+    }
+  },
+  methods: {
+    onRefetch(id) {
+      this.isBusy = !this.isBusy
     }
   }
 }

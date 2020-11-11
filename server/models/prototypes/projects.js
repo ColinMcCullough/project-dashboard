@@ -10,6 +10,7 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+
   models.project.prototype.areAllScraped = function () {
     const data = this.toJSON()
     this.dataValues.scrapeComplete = true
@@ -39,22 +40,29 @@ module.exports = (models, sequelize, Sequelize) => {
 
   models.project.displayAll = async () => {
     const projects = await models.project.findAll({
-      include: [
-        {
-          model: models.location
-        }
-      ]
+      include: [{
+        model: models.location
+      }]
     })
     projects.forEach((project) => {
       project.areAllCrawled()
       project.areAllScraped()
     })
     return projects.map((project) => {
-      const { discoverComplete, scrapeComplete, locations, salesforce_project_id: projectId } = project.toJSON()
+      const {
+        discoverComplete,
+        scrapeComplete,
+        locations,
+        project_status: status,
+        estimated_go_live: estGoLive,
+        salesforce_project_id: projectId
+      } = project.toJSON()
       return {
         clientName: null,
         clientId: null,
         projectId,
+        status,
+        estGoLive,
         locationCount: locations.length,
         discoverComplete,
         scrapeComplete
