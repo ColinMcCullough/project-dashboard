@@ -1,9 +1,10 @@
 <template>
-  <b-container fluid style="max-width: 1400px;">
+  <b-container fluid style="max-width: 1400px; margin-top: 130px;">
     <top-nav :show="true">
       <b-btn
         variant="outline-success-0"
         to="/dev/dashboard"
+        size="sm"
         class="mr-2"
       >
         Dev
@@ -11,25 +12,30 @@
       <b-btn
         variant="outline-success-0"
         to="/queues"
+        size="sm"
         class="mr-2"
       >
         Queues and Jobs
       </b-btn>
       <b-btn
         variant="outline-success-0"
+        size="sm"
         to="/dev/asset-scraper"
       >
         Asset Scraper
       </b-btn>
       <template v-slot:secondary-nav>
-        <div class="align-self-center d-flex mb-0 align-items-center">
-          <b-input-group>
-            <b-form-input />
+        <div class="d-flex mb-0 align-items-center justify-content-between w-100">
+          <b-input-group size="sm" prepend="Sort By" class="mr-2">
+            <b-form-select v-model="sortBy" :options="fields" />
+            <b-form-select v-model="sortDir" :options="['asc', 'desc', 'last']" />
+          </b-input-group>
+          <b-input-group size="sm" prepend="Search">
+            <b-form-input v-model="filter" placeholder="Search" />
             <b-btn variant="outline-success-1" size="sm">
               <b-icon-x-circle />
             </b-btn>
           </b-input-group>
-          <b-form-radio-group />
         </div>
       </template>
     </top-nav>
@@ -50,7 +56,7 @@
     <b-card style="overflow-x: hidden;" class="my-5">
       <b-table
         :fields="fields"
-        :items="rows"
+        :items="projects"
       >
         <!-- <template v-slot:cell(data)="data"> -->
         <!-- {{ data.item.data }} -->
@@ -71,14 +77,22 @@
           <project-row v-bind="{ project }" />
         </b-col>
       </b-row> -->
+      {{ projects }}
     </b-card>
   </b-container>
 </template>
 
 <script>
 export default {
+  async asyncData({ $axios }) {
+    const projects = await $axios.$get('api/v1/projects')
+    return { projects }
+  },
   data() {
     return {
+      sortBy: null,
+      sortDir: 'asc',
+      filter: '',
       fields: [
         { key: 'client', sortable: true },
         { key: 'projectId', sortable: true },
@@ -170,18 +184,3 @@ export default {
   }
 }
 </script>
-
-// details: {
-//   client: 'Client Name',
-//   projectId: 999909,
-//   estGoLive: '2020-11-11'
-// },
-// intake: { isComplete: true },
-// assets: {
-//   isComplete: false,
-//   isCrawled: true,
-//   isScraped: true
-// }
-<style>
-
-</style>
