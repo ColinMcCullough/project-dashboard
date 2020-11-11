@@ -8,6 +8,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
+    locationId: {
+      type: STRING
+    },
     clientUrn: {
       type: STRING
     },
@@ -41,7 +44,8 @@ module.exports = (sequelize) => {
     }
   }, { paranoid: true })
   location.associate = (models) => {
-    models.location.belongsTo(models.project)
+    models.location.hasMany(models.linkDiscoverer)
+    models.location.hasMany(models.assetScraper)
   }
   return location
 }

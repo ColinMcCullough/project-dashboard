@@ -31,11 +31,13 @@ module.exports = (sequelize) => {
     project_status: {
       type: STRING,
       allowNull: false
+    },
+    project_manager: {
+      type: STRING
     }
   }, { paranoid: true })
-  // project.associate = (models) => {
-  //   // models.project.belongsTo(models.client)
-  //   // models.project.belongsToMany(models.location, { through: 'project_id' })
-  // }
+  project.associate = (models) => {
+    models.project.hasMany(models.location)
+  }
   return project
 }

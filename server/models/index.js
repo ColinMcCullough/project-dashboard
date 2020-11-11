@@ -57,7 +57,7 @@ fs.readdirSync(__dirname)
                   file !== 'README.md'
   )
   .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file))
+    const model = require(path.join(__dirname, file))(sequelize)
     const { name } = model
     db[name] = model
   })
@@ -69,7 +69,7 @@ Object.keys(db)
     }
   })
 
-require('./prototypes')(db)
+require('./prototypes')(db, sequelize, Sequelize)
 require('./hooks')(db)
 
 module.exports = {
