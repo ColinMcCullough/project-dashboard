@@ -67,7 +67,7 @@
       :id="'scrape-modal'"
       title="Scraper"
     >
-      <project-review />
+      <project-review :id="projectId" />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
     <b-card style="overflow-x: hidden;" class="my-5">
@@ -87,7 +87,7 @@
         <template v-slot:cell(toDisplay)="data">
           <project-row
             v-bind="{ project: data.item }"
-            @show-intake-modal="showModal"
+            @show-modal="showModal"
           />
         </template>
       </b-table>
@@ -133,9 +133,9 @@ export default {
       }
       return a < b ? -1 : a > b ? 1 : 0
     },
-    showModal(id) {
+    showModal(id, modalName) {
       this.projectId = id
-      this.$bvModal.show('intake-modal')
+      this.$bvModal.show(modalName)
     }
   }
 }
