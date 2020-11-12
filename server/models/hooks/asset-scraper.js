@@ -1,7 +1,8 @@
 module.exports = (models, sequelize, Sequelize) => {
-  models.linkDiscoverer.addHook('afterCreate', async (instance, options) => {
+  models.assetScraper.addHook('afterCreate', async (instance, options) => {
     // update the location to say the linkdiscoverer is complete
     const { locationId } = instance.toJSON()
+
     const location = await models.location.findOne({
       where: {
         id: locationId
