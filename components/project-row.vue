@@ -29,7 +29,7 @@
       style="flex: 0 1 25%;"
     >
       <div
-        v-if="project.discoverComplete"
+        v-if="!project.discoverComplete"
         class="d-flex flex-column justify-content-center"
       >
         <b-badge variant="tertiary-2" class="px-3 rounded mb-2">
@@ -44,8 +44,9 @@
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
-          @click="$emit('show-modal', project.projectId, 'intake-modal')"
+          @click="launchModal('intake-modal', project.projectId)"
         >
+          <!-- @click="$emit('show-modal', project.projectId, 'intake-modal')" -->
           <!-- @click="$bvModal.show('intake-modal')" -->
           <template v-slot:btn-icon>
             <b-icon icon="pencil-fill" />
@@ -108,7 +109,7 @@
           :text="'Review'"
           :is-disabled="!project.scrapeComplete"
           class="ml-1"
-          @click="$emit('show-modal', project.projectId, 'scrape-modal')"
+          @click="launchModal('scrape-modal', project.projectId)"
         >
           <template v-slot:btn-icon>
             <b-icon icon="hammer" />
@@ -138,7 +139,9 @@
 </template>
 
 <script>
+import Locations from '~/mixins/locations'
 export default {
+  mixins: [Locations],
   props: {
     project: {
       type: Object,
@@ -165,6 +168,10 @@ export default {
     }
   },
   methods: {
+    async launchModal(modalName, projectId) {
+      await this.setLocations(projectId)
+      this.$bvModal.show(modalName)
+    },
     onRefetch(id) {
       this.isBusy = !this.isBusy
     }
