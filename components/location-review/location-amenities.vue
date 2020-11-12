@@ -43,15 +43,17 @@
 <script>
 export default {
   props: {
-    amenities: {
-      type: Array,
+    form: {
+      type: Object,
       default() {
-        return [
-          { id: '', value: '' },
-          { id: '', value: '' },
-          { id: '', value: '' },
-          { id: '', value: '' }
-        ]
+        return {
+          amenities: [
+            { id: '', value: '' },
+            { id: '', value: '' },
+            { id: '', value: '' },
+            { id: '', value: '' }
+          ]
+        }
       }
     }
   }

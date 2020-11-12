@@ -79,6 +79,17 @@ export default {
   },
   data () {
     return {
+      fields: [
+        'name',
+        'street_address_1',
+        'street_address_2',
+        'city',
+        'state',
+        'postal_code',
+        'country',
+        'local_phone_number',
+        'display_phone_number'
+      ],
       visible: false,
       accordionTxt: 'USPS Verification',
       accordionId: 'usps-validation',
@@ -96,9 +107,6 @@ export default {
     }
   },
   computed: {
-    fields() {
-      return Object.keys(this.form)
-    },
     getStates() {
       const country = this.form.country
       return this.form.country === 'US' || this.form.country === 'CA'
@@ -111,6 +119,8 @@ export default {
       this.visible = val
     },
     onInput(evt, field) {
+      // eslint-disable-next-line no-console
+      console.log(evt, field)
       if (field === 'local_phone_number' || field === 'display_phone_number') {
         this.form[field] = evt.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
       } else {
@@ -119,7 +129,9 @@ export default {
     },
     validate(field) {
       let valid = false
-      if (field === 'local_phone_number' || field === 'display_phone_number') {
+      if (field === 'street_address_2') {
+        valid = true
+      } else if (field === 'local_phone_number' || field === 'display_phone_number') {
         valid = this.phoneRegex.test(this.form[field])
       } else if (this.form[field]) {
         valid = true

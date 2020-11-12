@@ -38,7 +38,7 @@
       </b-card-group>
     </div>
     <h4>
-      Section Title
+      {{ title }}
     </h4>
     Status stuff
   </div>
@@ -46,7 +46,14 @@
 
 <script>
 export default {
-
+  props: {
+    title: {
+      type: String,
+      default() {
+        return ''
+      }
+    }
+  }
 }
 </script>
 

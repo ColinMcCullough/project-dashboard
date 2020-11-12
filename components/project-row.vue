@@ -44,7 +44,7 @@
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
-          @click="$emit('show-intake-modal', project.projectId)"
+          @click="$emit('show-modal', project.projectId, 'intake-modal')"
         >
           <!-- @click="$bvModal.show('intake-modal')" -->
           <template v-slot:btn-icon>
@@ -108,7 +108,7 @@
           :text="'Review'"
           :is-disabled="!project.scrapeComplete"
           class="ml-1"
-          @click="$bvModal.show('scrape-modal')"
+          @click="$emit('show-modal', project.projectId, 'scrape-modal')"
         >
           <template v-slot:btn-icon>
             <b-icon icon="hammer" />
