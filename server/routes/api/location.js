@@ -23,7 +23,8 @@ module.exports = (app) => {
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
           url: location.properties.url,
-          name: location.properties.name
+          name: location.properties.name,
+          properties: location.properties
         }
       })
       res.json(val)
