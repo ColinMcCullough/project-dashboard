@@ -9,7 +9,6 @@ module.exports = (app) => {
     const project = await models.project.displayOne(projectId)
     res.json(project)
   })
-
   // returns array of locations matching project id each location is object containng object
   app.get('/api/v1/projects/:projectId/locations', async (req, res) => {
     try {
