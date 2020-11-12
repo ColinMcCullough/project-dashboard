@@ -5,9 +5,9 @@ module.exports = {
 }
 
 async function processor(job) {
-
+  const { data } = job
+  throw new Error('Hold for Later')
 }
 
 function hooks (queue) {
-  
 }

@@ -9,7 +9,6 @@ module.exports = (app) => {
     const project = await models.project.displayOne(projectId)
     res.json(project)
   })
-
   // returns array of locations matching project id each location is object containng object
   app.get('/api/v1/projects/:projectId/locations', async (req, res) => {
     try {
@@ -43,5 +42,13 @@ module.exports = (app) => {
     } catch (e) {
       res.status(500).send(e.message)
     }
+  })
+
+  app.put('/api/v1/projects/:projectId/locations/:locationId', async (req, res) => {
+    const { body, params } = req
+    const { locationId } = params
+    const location = await models.location.findOne({ where: { locationId } })
+    await location.update(body)
+    res.json(200)
   })
 }

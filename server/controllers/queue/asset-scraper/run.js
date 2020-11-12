@@ -10,38 +10,35 @@ module.exports = {
   hooks
 }
 
-// async function processor(job, done) {
-//   try {
-//     const { id } = job
-//     const topicName = `assetScraper_${id}`
-//     const subscriptionName = `${topicName}_projectDashboard`
-//     const subscription = await createAndSubscribe(GCP_PROJECT_ID, topicName, subscriptionName)
-//     subscription.on('message', async (message) => {
-//       message.ack()
-//       const data = JSON.parse(message.data.toString())
-//       const { progress, complete, log, results, error } = data
-//       if (progress) await job.progress(progress)
-//       if (log) job.log(log)
-//       if (error) job.log(error)
-//       if (complete) done(null, results)
-//     })
-//     await assetScraper(job.data, topicName)
-//   } catch (error) {
-//     console.log(error)
-//     done(error)
-//   }
-// }
-
-function processor (job, done) {
-  done(null, { errors: { 'https://solaire8250.com': {} }, amenities: {}, address: null, emails: {}, phoneNumbers: {} })
+async function processor(job, done) {
+  try {
+    const { id } = job
+    const topicName = `assetScraper_${id}`
+    const subscriptionName = `${topicName}_projectDashboard`
+    const subscription = await createAndSubscribe(GCP_PROJECT_ID, topicName, subscriptionName)
+    subscription.on('message', async (message) => {
+      message.ack()
+      const data = JSON.parse(message.data.toString())
+      const { progress, complete, log, results, error } = data
+      if (progress) await job.progress(progress)
+      if (log) job.log(log)
+      if (error) job.log(error)
+      if (complete) done(null, results)
+    })
+    await assetScraper(job.data, topicName)
+  } catch (error) {
+    console.log(error)
+    done(error)
+  }
 }
+
+// function processor (job, done) {
+//   done(null, { errors: { 'https://solaire8250.com': {} }, amenities: {}, address: null, emails: {}, phoneNumbers: {} })
+// }
 
 function hooks(queue) {
   queue.on('completed', async (job, result) => {
     const { name, data } = job
-    console.log(job)
-    console.log({ name })
-    console.log(data.locationId)
     if (name === 'run') {
       try {
         await models.assetScraper.create({
