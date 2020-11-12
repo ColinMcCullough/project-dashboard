@@ -33,8 +33,6 @@ async function processor(job, done) {
 function hooks(queue) {
   queue.on('completed', async (job, result) => {
     const { name, data } = job
-    console.log(job)
-    console.log({ name })
     if (name === 'run') {
       try {
         await models.linkDiscoverer.create({
