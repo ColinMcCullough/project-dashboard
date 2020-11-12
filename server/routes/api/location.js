@@ -22,7 +22,8 @@ module.exports = (app) => {
           scraped: location.scraped,
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
-          url: location.properties.url
+          url: location.properties.url,
+          name: location.properties.name
         }
       })
       res.json(val)
