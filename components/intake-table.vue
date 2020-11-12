@@ -1,6 +1,7 @@
 <template>
   <b-card
     footer-class="d-flex justify-content-end border-0"
+    footer-bg-variant="white"
     no-body
     class="border-0"
   >
@@ -44,7 +45,7 @@
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-btn variant="success-1" pill @click="onSave">
+      <b-btn variant="success-1" :disabled="disabledBtn" pill @click="onSave">
         <b-icon-check2-circle />
         Save Urls
       </b-btn>
@@ -56,14 +57,23 @@
 export default {
   components: {
   },
+  props: {
+    id: {
+      type: String,
+      default() {
+        return ''
+      }
+    }
+  },
   data () {
     return {
-      intakeData: [
-        { locationName: 'Complex 1', url: 'http://www.getg5.com', key: 1 },
-        { locationName: 'Complex 2', url: 'http://www.getg5.com', key: 2 },
-        { locationName: 'Complex 3', url: 'http://www.getg5.com', key: 3 },
-        { locationName: 'Complex 4', url: 'http://www.getg5.com', key: 4 }
-      ],
+      intakeData: [],
+      // intakeData: [
+      //   { locationName: 'Complex 1', url: 'http://www.getg5.com', key: 1 },
+      //   { locationName: 'Complex 2', url: 'http://www.getg5.com', key: 2 },
+      //   { locationName: 'Complex 3', url: 'http://www.getg5.com', key: 3 },
+      //   { locationName: 'Complex 4', url: 'http://www.getg5.com', key: 4 }
+      // ],
       fields: [
         {
           key: 'valid',
@@ -90,8 +100,23 @@ export default {
     }
   },
   computed: {
+    disabledBtn() {
+      return this.intakeData.some(location => !this.validUrl(location.url))
+    }
   },
   watch: {
+  },
+  async mounted() {
+    // need to update project id
+    const locations = await this.$axios
+      .$get('/api/v1/projects/1234567890/locations')
+    this.intakeData = locations.map((location) => {
+      return {
+        key: location.locationId,
+        url: location.url,
+        locationName: location.name
+      }
+    })
   },
   methods: {
     validUrl(str) {
@@ -111,6 +136,7 @@ export default {
     },
     onSave() {
       // need to save intakeData to the database
+      // waiting on route to be written
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
@@ -148,4 +174,5 @@ export default {
   font-weight: 700;
   // z-index: 9999;
 }
+
 </style>

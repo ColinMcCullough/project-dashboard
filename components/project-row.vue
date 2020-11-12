@@ -14,7 +14,8 @@
         >
           <b-icon-arrow-counterclockwise
             :animation="isBusy ? 'spin-reverse' : ''"
-            variant="primary-0" />
+            variant="primary-0"
+          />
         </b-btn>
       </p>
       Project ID: {{ project.projectId }}
@@ -23,7 +24,7 @@
       </b-badge>
     </b-card>
     <b-card
-      :class="[{ 'is-complete': !project.discoverComplete }, ...cardClass]"
+      :class="[{ 'is-complete': project.discoverComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 25%;"
     >
@@ -43,8 +44,9 @@
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
-          @click="$bvModal.show('intake-modal')"
+          @click="$emit('show-intake-modal', project.projectId)"
         >
+          <!-- @click="$bvModal.show('intake-modal')" -->
           <template v-slot:btn-icon>
             <b-icon icon="pencil-fill" />
           </template>
@@ -59,12 +61,12 @@
       />
     </b-card>
     <b-card
-      :class="[{ 'is-complete': !project.scrapeComplete }, ...cardClass]"
+      :class="[{ 'is-complete': project.scrapeComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 25%;"
     >
       <b-btn-group
-        v-if="!project.scrapeComplete"
+        v-if="project.scrapeComplete"
         size="sm"
         class="w-100"
       >
@@ -146,7 +148,7 @@ export default {
           clientId: null,
           projectId: null,
           locationCount: null,
-          discoverComplete: false,
+          discoverComplete: true,
           scrapeComplete: false
         }
       }

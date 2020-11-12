@@ -60,7 +60,8 @@
       :id="'intake-modal'"
       title="Intake"
     >
-      <intake-table />
+      <!-- <intake-table /> -->
+      <intake-table :id="projectId" />
     </modal-template>
     <modal-template
       :id="'scrape-modal'"
@@ -81,10 +82,13 @@
         :sort-by.sync="sortBy"
         :sort-direction.sync="sortDir"
         :filter="filter"
-        class="p-0 m-0 border-0"
+        class="p-0 m-0 border-0 hide"
       >
         <template v-slot:cell(toDisplay)="data">
-          <project-row v-bind="{ project: data.item }" />
+          <project-row
+            v-bind="{ project: data.item }"
+            @show-intake-modal="showModal"
+          />
         </template>
       </b-table>
     </b-card>
@@ -99,6 +103,7 @@ export default {
   },
   data() {
     return {
+      projectId: null,
       sortBy: 'estGoLive',
       sortBys: [
         { text: 'Client Name', value: 'client' },
@@ -127,13 +132,17 @@ export default {
         b = bRow[this.sortBy]
       }
       return a < b ? -1 : a > b ? 1 : 0
+    },
+    showModal(id) {
+      this.projectId = id
+      this.$bvModal.show('intake-modal')
     }
   }
 }
 </script>
 
 <style lang="scss">
-thead[role=rowgroup] {
+.hide thead[role=rowgroup] {
   display: none;
 }
 </style>
