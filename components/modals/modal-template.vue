@@ -17,13 +17,24 @@
           {{ description }}
         </p>
       </span>
-      <b-btn
-        variant="transparent"
-        pill
-        @click="cancel"
-      >
-        <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
-      </b-btn>
+      <b-button-group>
+        <b-btn
+          v-if="id === 'scrape-modal'"
+          variant="success-1"
+          pill
+          class="mr-3"
+          @click="onSave"
+        >
+          <save :size="'2em'" />
+        </b-btn>
+        <b-btn
+          variant="transparent"
+          pill
+          @click="cancel"
+        >
+          <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
+        </b-btn>
+      </b-button-group>
     </template>
     <slot />
   </b-modal>
@@ -48,12 +59,18 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      saving: false
+    }
   },
   computed: {},
   methods: {
     hide() {
       this.$bvModal.hide(this.id)
+    },
+    onSave() {
+      this.saving = true
+      setTimeout(() => { this.saving = false }, 3000)
     }
   }
 }
