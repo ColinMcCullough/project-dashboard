@@ -30,7 +30,9 @@
 </template>
 
 <script>
+import Locations from '~/mixins/locations'
 export default {
+  mixins: [Locations],
   props: {
     title: {
       type: String,
@@ -50,8 +52,6 @@ export default {
   },
   computed: {},
   methods: {
-    onSave() {
-    },
     hide() {
       this.$bvModal.hide(this.id)
     }

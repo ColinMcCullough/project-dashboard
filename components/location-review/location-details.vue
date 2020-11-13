@@ -117,9 +117,9 @@ export default {
       const locIdx = this.getLocationIndex(this.id)
       if (key === 'local_phone_number' || key === 'display_phone_number') {
         const formatted = val.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
-        this.updateLocationProp({ locIdx, key, val: formatted })
+        this.onUpdate({ locIdx, key, val: formatted })
       } else {
-        this.updateLocationProp({ locIdx, key, val })
+        this.onUpdate({ locIdx, key, val })
       }
     },
     validate(field) {
