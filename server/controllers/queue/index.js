@@ -35,7 +35,7 @@ class BullQueues {
 
   newQueue (name) {
     const subDir = `${__dirname}/${name}`
-    const queue = new Bull(name, this.redisUrl)
+    const queue = new Bull(name, this.redisUrl, { prefix: 'projectDashboard' })
     this.getfileNames(subDir)
       .forEach((file) => {
         const { concurrency, processor, hooks } = require(path.join(subDir, file))
