@@ -125,7 +125,7 @@ export default {
         }
       })
       for (const [key, val] of Object.entries(data)) {
-        this.updateLocationProp({ locIdx, key, val })
+        this.onUpdate({ locIdx, key, val })
         // this.form[key] = value
       }
     },

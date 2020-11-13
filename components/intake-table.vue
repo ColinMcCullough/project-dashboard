@@ -107,7 +107,7 @@ export default {
     },
     onInput(val, locationId, key) {
       const locIdx = this.getLocationIndex(locationId)
-      this.updateLocationProp({ locIdx, key, val })
+      this.onUpdate({ locIdx, key, val })
     },
     onSave() {
       // need to save intakeData to the database
