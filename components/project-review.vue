@@ -10,7 +10,7 @@
         :key="`${location.locationId}-${i}`"
       >
         <template v-slot:title>
-          <tab-title :title="location.name" />
+          <tab-title :title="location.properties.name" />
         </template>
         <!-- horizontal tabs start -->
         <b-tabs
@@ -34,7 +34,7 @@
               </template>
               <b-row>
                 <b-col style="border: 3px solid #cbd8e1">
-                  <component :is="tab.id" :form="locations[i].properties" />
+                  <component :is="tab.id" :id="locations[i].locationId" />
                 </b-col>
               </b-row>
             </b-tab>
@@ -50,35 +50,17 @@
 import LocationDetails from '~/components/location-review/location-details'
 import LocationAmenities from '~/components/location-review/location-amenities'
 import LocationAssets from '~/components/location-review/location-assets'
+import Locations from '~/mixins/locations'
 export default {
   components: {
     LocationDetails,
     LocationAmenities,
     LocationAssets
   },
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
+  mixins: [Locations],
+  props: {},
   data() {
     return {
-      // dummy data will need to be moved to store in passed in through props
-      locations: [],
-      // locations: [
-      //   { name: 'Location 1', id: 1 },
-      //   { name: 'Location 2', id: 2 },
-      //   { name: 'Location 3', id: 3 },
-      //   { name: 'Location 4', id: 4 },
-      //   { name: 'Location 5', id: 5 },
-      //   { name: 'Location 6', id: 6 },
-      //   { name: 'Location 7', id: 7 },
-      //   { name: 'Location 8', id: 8 },
-      //   { name: 'Location 9', id: 9 }
-      // ],
       tabs: [
         {
           id: 'location-details',
@@ -94,11 +76,6 @@ export default {
         }
       ]
     }
-  },
-  async mounted() {
-    // need to update project id
-    this.locations = await this.$axios
-      .$get('/api/v1/projects/1234567890/locations')
   }
 }
 </script>

@@ -61,13 +61,13 @@
       title="Intake"
     >
       <!-- <intake-table /> -->
-      <intake-table :id="projectId" />
+      <intake-table />
     </modal-template>
     <modal-template
       :id="'scrape-modal'"
       title="Scraper"
     >
-      <project-review :id="projectId" />
+      <project-review />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
     <b-card style="overflow-x: hidden;" class="my-5">
@@ -87,7 +87,6 @@
         <template v-slot:cell(toDisplay)="data">
           <project-row
             v-bind="{ project: data.item }"
-            @show-modal="showModal"
           />
         </template>
       </b-table>
@@ -96,10 +95,11 @@
 </template>
 
 <script>
+import Projects from '~/mixins/projects'
 export default {
-  async asyncData({ $axios }) {
-    const projects = await $axios.$get('api/v1/projects')
-    return { projects }
+  mixins: [Projects],
+  async fetch({ store }) {
+    await store.dispatch('projects/init')
   },
   data() {
     return {
@@ -132,10 +132,6 @@ export default {
         b = bRow[this.sortBy]
       }
       return a < b ? -1 : a > b ? 1 : 0
-    },
-    showModal(id, modalName) {
-      this.projectId = id
-      this.$bvModal.show(modalName)
     }
   }
 }

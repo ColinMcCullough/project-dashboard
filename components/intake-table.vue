@@ -8,7 +8,7 @@
     <b-table
       id="intakeTbl"
       ref="intakeTbl"
-      :items="intakeData"
+      :items="locations"
       :fields="fields"
       :sort-compare="sortCompare"
       primary-key="key"
@@ -21,19 +21,21 @@
       <template v-slot:head(url)="data">
         {{ data.label.toUpperCase() }}
       </template>
+      <template v-slot:cell(name)="data">
+        {{ data.item.properties.name }}
+      </template>
       <template v-slot:cell(url)="data">
         <b-form-group class="mb-0" style="position: relative;">
           <b-form-input
-            id="bulk-urls"
-            :state="validUrl(data.value)"
-            :value="data.value"
+            :state="validUrl(data.item.properties.url)"
+            :value="data.item.properties.url"
             placeholder="Paste your url"
             class="text-left"
             required
-            @input="onInput($event, data.item.key)"
+            @input="onInput($event, data.item.locationId, data.field.key)"
           />
           <b-form-invalid-feedback
-            :state="validUrl(data.value)"
+            :state="validUrl(data.item.properties.url)"
             class="m-0 abs-feedback"
           >
             Invalid Url
@@ -41,7 +43,7 @@
         </b-form-group>
       </template>
       <template v-slot:cell(valid)="data">
-        <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.url), iconConfig }" />
+        <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
       </template>
     </b-table>
     <template v-slot:footer>
@@ -54,26 +56,12 @@
 </template>
 
 <script>
+import Locations from '~/mixins/locations'
 export default {
-  components: {
-  },
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
+  components: {},
+  mixins: [Locations],
   data () {
     return {
-      intakeData: [],
-      // intakeData: [
-      //   { locationName: 'Complex 1', url: 'http://www.getg5.com', key: 1 },
-      //   { locationName: 'Complex 2', url: 'http://www.getg5.com', key: 2 },
-      //   { locationName: 'Complex 3', url: 'http://www.getg5.com', key: 3 },
-      //   { locationName: 'Complex 4', url: 'http://www.getg5.com', key: 4 }
-      // ],
       fields: [
         {
           key: 'valid',
@@ -81,7 +69,7 @@ export default {
           sortable: true
         },
         {
-          key: 'locationName',
+          key: 'name',
           label: 'Location',
           sortable: true
         },
@@ -101,22 +89,11 @@ export default {
   },
   computed: {
     disabledBtn() {
-      return this.intakeData.some(location => !this.validUrl(location.url))
+      return this.locations
+        .some(location => !this.validUrl(location.properties.url))
     }
   },
   watch: {
-  },
-  async mounted() {
-    // need to update project id
-    const locations = await this.$axios
-      .$get('/api/v1/projects/1234567890/locations')
-    this.intakeData = locations.map((location) => {
-      return {
-        key: location.locationId,
-        url: location.url,
-        locationName: location.name
-      }
-    })
   },
   methods: {
     validUrl(str) {
@@ -128,11 +105,9 @@ export default {
         '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
       return !!pattern.test(str)
     },
-    onInput(val, key) {
-      const index = this.intakeData.findIndex(data => data.key === key)
-      if (index !== -1) {
-        this.intakeData[index].url = val
-      }
+    onInput(val, locationId, key) {
+      const locIdx = this.getLocationIndex(locationId)
+      this.updateLocationProp({ locIdx, key, val })
     },
     onSave() {
       // need to save intakeData to the database
@@ -140,12 +115,12 @@ export default {
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
-      if (key === 'url' || key === 'locationName') {
-        a = aRow[key]
-        b = bRow[key]
+      if (key === 'url' || key === 'name') {
+        a = aRow.properties[key]
+        b = bRow.properties[key]
       } else if (key === 'valid') {
-        a = this.validUrl(aRow.url)
-        b = this.validUrl(bRow.url)
+        a = this.validUrl(aRow.properties.url)
+        b = this.validUrl(bRow.properties.url)
       }
       return a < b ? -1 : a > b ? 1 : 0
     }
