@@ -50,7 +50,7 @@
     />
     <usps-validation
       v-if="visible"
-      :form="form"
+      :id="id"
     />
   </div>
 </template>

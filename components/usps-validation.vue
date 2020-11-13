@@ -63,14 +63,15 @@
 </template>
 
 <script>
+import Locations from '~/mixins/locations'
 import GlobalFunctions from '~/mixins/global-functions'
 export default {
-  mixins: [GlobalFunctions],
+  mixins: [GlobalFunctions, Locations],
   props: {
-    form: {
-      type: Object,
+    id: {
+      type: String,
       default() {
-        return {}
+        return ''
       }
     }
   },
@@ -95,6 +96,9 @@ export default {
     }
   },
   computed: {
+    form() {
+      return this.locationById(this.id).properties
+    },
     getUSPSProps() {
       return this.res !== null
         ? this.res.elements[0].elements[0].elements
@@ -113,19 +117,23 @@ export default {
     },
     updateData() {
       const data = {}
+      const locIdx = this.getLocationIndex(this.id)
       this.res.elements[0].elements[0].elements.forEach((prop) => {
         if (Object.keys(this.uspsprops).includes(prop.name)) {
           const value = prop.name !== 'State' ? this.titleCase(prop.elements[0].text) : prop.elements[0].text
           data[this.uspsprops[prop.name]] = value
         }
       })
-      for (const [key, value] of Object.entries(data)) {
-        this.form[key] = value
+      for (const [key, val] of Object.entries(data)) {
+        this.updateLocationProp({ locIdx, key, val })
+        // this.form[key] = value
       }
     },
     async verifyAddress() {
       try {
         const result = await this.$axios.$post('/routes/api/uspsapi/verify-address', { form: this.form })
+        // eslint-disable-next-line no-console
+        console.log(result)
         this.res = result
       } catch (e) {
         // eslint-disable-next-line no-console
