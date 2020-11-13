@@ -20,19 +20,19 @@
       <b-button-group>
         <b-btn
           v-if="id === 'scrape-modal'"
-          variant="success-1"
-          pill
-          class="mr-3"
+          variant="success"
+          class="mr-1"
+          style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
           @click="onSave"
         >
-          <save :size="'2em'" />
+          <save-icon v-bind="{ size: '2em' }" />
         </b-btn>
         <b-btn
           variant="transparent"
-          pill
+          style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
           @click="cancel"
         >
-          <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
+          <b-icon-x-circle-fill scale="3em" variant="tertiary-1" />
         </b-btn>
       </b-button-group>
     </template>
