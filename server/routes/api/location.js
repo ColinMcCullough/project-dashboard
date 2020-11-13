@@ -57,7 +57,7 @@ module.exports = (app) => {
     if (Array.isArray(body)) {
       for (let i = 0; i < body.length; i++) {
         const { properties: updateProps, locationId } = body[i]
-        const location = await models.findOne({ where: { locationId } })
+        const location = await models.location.locationById(locationId)
         const { properties } = location.toJSON()
         const keys = Object.keys(updateProps)
         keys.forEach((key) => {

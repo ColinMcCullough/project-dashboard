@@ -2,7 +2,7 @@ replicaCount: 1
 revisionHistoryLimit: 1
 image:
   repository: g5opex/project-dashboard
-  tag: 1.2.38
+  tag: 1.2.40
   pullPolicy: IfNotPresent
   resources:
     requests:
