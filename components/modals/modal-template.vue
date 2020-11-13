@@ -17,13 +17,24 @@
           {{ description }}
         </p>
       </span>
-      <b-btn
-        variant="transparent"
-        pill
-        @click="cancel"
-      >
-        <b-icon-x-circle-fill scale="3em" shift-v="16" variant="tertiary-1" />
-      </b-btn>
+      <b-button-group>
+        <b-btn
+          v-if="id === 'scrape-modal'"
+          variant="success"
+          class="mr-1"
+          style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
+          @click="onSave"
+        >
+          <save-icon v-bind="{ size: '2em' }" />
+        </b-btn>
+        <b-btn
+          variant="transparent"
+          style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
+          @click="cancel"
+        >
+          <b-icon-x-circle-fill scale="3em" variant="tertiary-1" />
+        </b-btn>
+      </b-button-group>
     </template>
     <slot />
   </b-modal>
@@ -48,12 +59,26 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      saving: false
+    }
   },
   computed: {},
   methods: {
     hide() {
       this.$bvModal.hide(this.id)
+    },
+    async onSave() {
+      this.saving = true
+      await this.locations.forEach(async (location) => {
+        if (location.edited === true) {
+          const { locationId, properties } = location
+          const locIdx = this.getLocationIndex(locationId)
+          await this.saveLocation(this.projectId, locationId, { properties })
+          this.updateLocation({ locIdx, key: 'edited', val: false })
+        }
+      })
+      this.saving = false
     }
   }
 }

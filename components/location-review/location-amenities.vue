@@ -41,20 +41,20 @@
 </template>
 
 <script>
+import Locations from '~/mixins/locations'
 export default {
+  mixins: [Locations],
   props: {
-    form: {
-      type: Object,
+    id: {
+      type: String,
       default() {
-        return {
-          amenities: [
-            { id: '', value: '' },
-            { id: '', value: '' },
-            { id: '', value: '' },
-            { id: '', value: '' }
-          ]
-        }
+        return ''
       }
+    }
+  },
+  computed: {
+    amenities() {
+      return this.locationById(this.id).properties.amenities
     }
   }
 }

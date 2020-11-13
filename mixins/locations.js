@@ -20,25 +20,21 @@ export default {
         ? this.locations.filter(location => location.locationId === locationId)[0]
         : {}
     },
+    getLocationIndex(id) {
+      return this.locations
+        .findIndex(location => location.locationId === id)
+    },
     onUpdate({ locIdx, key, val }) {
       this.updateLocationProp({ locIdx, key, val })
       if (key !== 'url') {
         this.updateLocation({ locIdx, key: 'edited', val: true })
       }
     },
-    getLocationIndex(id) {
-      return this.locations
-        .findIndex(location => location.locationId === id)
-    },
     async saveLocation(projectId, locationId, body) {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations/${locationId}`, body)
     },
     async saveLocations(projectId, locations) {
-      // eslint-disable-next-line no-console
-      console.log(projectId)
-      // eslint-disable-next-line no-console
-      console.log(locations)
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations`, locations)
     }

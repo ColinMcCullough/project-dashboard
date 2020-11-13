@@ -210,6 +210,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import RedisMixin from '~/mixins/redis'
+import GlobalFunctions from '~/mixins/global-functions'
 import IconsSwap from '~/components/icons-swap'
 import EditData from '~/components/modals/edit-data'
 export default {
@@ -217,7 +218,7 @@ export default {
     EditData,
     IconsSwap
   },
-  mixins: [RedisMixin],
+  mixins: [RedisMixin, GlobalFunctions],
   computed: {
     ...mapState({
       queueData: state => state.queue
@@ -247,9 +248,6 @@ export default {
     }),
     getIndexById(id) {
       return this.jobs.findIndex(job => job.id === id)
-    },
-    processTime(val) {
-      return new Date(val).toLocaleString()
     },
     onFiltered(filteredItems) {
       this.totalRows = filteredItems.length

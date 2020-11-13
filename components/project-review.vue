@@ -4,7 +4,7 @@
     border-variant="success-1"
     style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
   >
-    <b-tabs vertical pills card @activate-tab="onActivated">
+    <b-tabs vertical pills card>
       <b-tab
         v-for="(location, i) in locations"
         :key="`${location.locationId}-${i}`"
@@ -77,17 +77,7 @@ export default {
       ]
     }
   },
-  methods: {
-    async onActivated(newTabIndex, oldTabIndex, event) {
-      const location = this.locations[oldTabIndex]
-      const { properties, locationId, edited } = location
-      if (edited === true) {
-        await this.saveLocation(this.projectId, locationId, { properties })
-        const locIdx = this.getLocationIndex(locationId)
-        this.updateLocation({ locIdx, key: 'edited', val: false })
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 
