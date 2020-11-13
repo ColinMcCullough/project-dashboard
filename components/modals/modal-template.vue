@@ -71,6 +71,15 @@ export default {
     onSave() {
       this.saving = true
       setTimeout(() => { this.saving = false }, 3000)
+      // write edited locations to db and updated edited fields to false
+      this.locations.forEach(async (location) => {
+        if (location.edited === true) {
+          const { locationId, properties } = location
+          const locIdx = this.getLocationIndex(locationId)
+          await this.saveLocation(this.projectId, locationId, { properties })
+          this.updateLocation({ locIdx, key: 'edited', val: false })
+        }
+      })
     }
   }
 }
