@@ -132,8 +132,6 @@ export default {
     async verifyAddress() {
       try {
         const result = await this.$axios.$post('/routes/api/uspsapi/verify-address', { form: this.form })
-        // eslint-disable-next-line no-console
-        console.log(result)
         this.res = result
       } catch (e) {
         // eslint-disable-next-line no-console

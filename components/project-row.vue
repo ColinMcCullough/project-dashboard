@@ -20,7 +20,7 @@
       </p>
       Project ID: {{ project.projectId }}
       <b-badge variant="primary-0" class="px-3 rounded">
-        est. Go-live: {{ project.estGoLive }}
+        est. Go-live: {{ processTime(project.estGoLive) }}
       </b-badge>
     </b-card>
     <b-card
@@ -138,8 +138,9 @@
 
 <script>
 import Locations from '~/mixins/locations'
+import GlobalFunctions from '~/mixins/global-functions'
 export default {
-  mixins: [Locations],
+  mixins: [Locations, GlobalFunctions],
   props: {
     project: {
       type: Object,

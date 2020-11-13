@@ -31,8 +31,6 @@ export default {
       }
     },
     async saveLocation(projectId, locationId, body) {
-      // eslint-disable-next-line no-console
-      console.log(projectId, locationId, body)
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations/${locationId}`, body)
     },
