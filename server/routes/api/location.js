@@ -53,4 +53,22 @@ module.exports = (app) => {
     await location.update(body)
     res.json(200)
   })
+
+  app.put('/api/v1/projects/:projectId/locations', async (req, res) => {
+    const { body } = req
+    if (Array.isArray(body)) {
+      for (let i = 0; i < body.length; i++) {
+        const { properties: updateProps, locationId } = body[i]
+        const location = await models.findOne({ where: { locationId } })
+        const { properties } = location.toJSON()
+        const keys = Object.keys(updateProps)
+        keys.forEach((key) => {
+          const value = updateProps[key]
+          properties[key] = value
+        })
+        await location.update({ properties })
+      }
+    }
+    res.json(200)
+  })
 }
