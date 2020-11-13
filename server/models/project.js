@@ -9,30 +9,27 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     salesforce_project_id: {
-      type: STRING,
-      allowNull: false
+      type: STRING
     },
     project_name: {
-      type: STRING,
-      allowNull: false
+      type: STRING
     },
     project_type: {
-      type: STRING,
-      allowNull: false
+      type: STRING
     },
     contract_date: {
-      type: DATE,
-      allowNull: false
+      type: DATE
     },
     estimated_go_live: {
-      type: DATE,
-      allowNull: false
+      type: DATE
     },
     project_status: {
-      type: STRING,
-      allowNull: false
+      type: STRING
     },
     project_manager: {
+      type: STRING
+    },
+    masterProjectId: {
       type: STRING
     }
   }, { paranoid: true })
