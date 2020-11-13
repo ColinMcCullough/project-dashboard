@@ -57,23 +57,15 @@
 
 <script>
 import States from '~/mixins/states'
+import Locations from '~/mixins/locations'
+import GlobalFunctions from '~/mixins/global-functions'
 export default {
-  mixins: [States],
+  mixins: [States, Locations, GlobalFunctions],
   props: {
-    form: {
-      type: Object,
+    id: {
+      type: String,
       default() {
-        return {
-          name: null,
-          street_address_1: null,
-          street_address_2: null,
-          city: null,
-          state: null,
-          postal_code: null,
-          country: null,
-          local_phone_number: null,
-          display_phone_number: null
-        }
+        return ''
       }
     }
   },
@@ -107,6 +99,9 @@ export default {
     }
   },
   computed: {
+    form() {
+      return this.locationById(this.id).properties
+    },
     getStates() {
       const country = this.form.country
       return this.form.country === 'US' || this.form.country === 'CA'
@@ -118,13 +113,13 @@ export default {
     updateVisible(val) {
       this.visible = val
     },
-    onInput(evt, field) {
-      // eslint-disable-next-line no-console
-      console.log(evt, field)
-      if (field === 'local_phone_number' || field === 'display_phone_number') {
-        this.form[field] = evt.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
+    onInput(val, key) {
+      const locIdx = this.getLocationIndex(this.id)
+      if (key === 'local_phone_number' || key === 'display_phone_number') {
+        const formatted = val.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
+        this.updateLocationProp({ locIdx, key, val: formatted })
       } else {
-        this.form[field] = evt
+        this.updateLocationProp({ locIdx, key, val })
       }
     },
     validate(field) {
@@ -137,11 +132,6 @@ export default {
         valid = true
       }
       return valid
-    },
-    titleCase(str) {
-      return str.replace(/_/g, ' ').toLowerCase().split(' ').map((word) => {
-        return (`${word.charAt(0).toUpperCase()}${word.slice(1)}`)
-      }).join(' ')
     },
     getFeedback(field) {
       if (field === 'local_phone_number' || field === 'display_phone_number') {

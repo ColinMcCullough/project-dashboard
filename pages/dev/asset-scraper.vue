@@ -170,7 +170,9 @@
 </template>
 
 <script>
+import GlobalFunctions from '~/mixins/global-functions'
 export default {
+  mixins: [GlobalFunctions],
   data() {
     return {
       alertTxt: '',
@@ -235,7 +237,7 @@ export default {
     },
     getBody() {
       const url = new URL(this.url)
-      const scrapers = this.scrapers.reduce(function (acc, curr) {
+      const scrapers = this.scrapers.reduce((acc, curr) => {
         return Object.assign(acc, { [curr.value]: curr.checked })
       }, {})
       const body = {
@@ -254,11 +256,6 @@ export default {
     },
     valid(val) {
       return !val
-    },
-    titleCase(str) {
-      return str.replace(/_/g, ' ').toLowerCase().split(' ').map((word) => {
-        return (`${word.charAt(0).toUpperCase()}${word.slice(1)}`)
-      }).join(' ')
     },
     getUrls() {
       return this.urls.split(this.regex).filter(val => val)

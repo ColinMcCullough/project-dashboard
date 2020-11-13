@@ -63,7 +63,9 @@
 </template>
 
 <script>
+import GlobalFunctions from '~/mixins/global-functions'
 export default {
+  mixins: [GlobalFunctions],
   props: {
     form: {
       type: Object,
@@ -106,11 +108,6 @@ export default {
     }
   },
   methods: {
-    titleCase(str) {
-      return str.replace(/_/g, ' ').toLowerCase().split(' ').map((word) => {
-        return (`${word.charAt(0).toUpperCase()}${word.slice(1)}`)
-      }).join(' ')
-    },
     hide() {
       this.$bvModal.hide('usps-modal')
     },

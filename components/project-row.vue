@@ -46,8 +46,6 @@
           :text="'Edit Location URLs'"
           @click="launchModal('intake-modal', project.projectId)"
         >
-          <!-- @click="$emit('show-modal', project.projectId, 'intake-modal')" -->
-          <!-- @click="$bvModal.show('intake-modal')" -->
           <template v-slot:btn-icon>
             <b-icon icon="pencil-fill" />
           </template>

@@ -90,7 +90,7 @@ export default {
   computed: {
     disabledBtn() {
       return this.locations
-        .some(location => !this.validUrl(location.url))
+        .some(location => !this.validUrl(location.properties.url))
     }
   },
   watch: {
@@ -106,8 +106,7 @@ export default {
       return !!pattern.test(str)
     },
     onInput(val, locationId, key) {
-      const locIdx = this.locations
-        .findIndex(location => location.locationId === locationId)
+      const locIdx = this.getLocationIndex(locationId)
       this.updateLocationProp({ locIdx, key, val })
     },
     onSave() {
@@ -115,15 +114,13 @@ export default {
       // waiting on route to be written
     },
     sortCompare(aRow, bRow, key, sortDesc) {
-      // eslint-disable-next-line no-console
-      // console.log(`RowA: ${aRow}`, `RowA: ${bRow}`, `Key: ${key}`)
       let a, b
-      if (key === 'url' || key === 'locationName') {
-        a = aRow[key]
-        b = bRow[key]
+      if (key === 'url' || key === 'name') {
+        a = aRow.properties[key]
+        b = bRow.properties[key]
       } else if (key === 'valid') {
-        a = this.validUrl(aRow.url)
-        b = this.validUrl(bRow.url)
+        a = this.validUrl(aRow.properties.url)
+        b = this.validUrl(bRow.properties.url)
       }
       return a < b ? -1 : a > b ? 1 : 0
     }
