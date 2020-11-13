@@ -34,11 +34,13 @@ export default {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations/${locationId}`, body)
     },
-    saveUpdatedLocations() {
-      // update edited to not chenged
-      // needs implemenetation
-      // loops through locations and updates each locations properties that
-      // has location prop edited set to true
+    async saveLocations(projectId, locations) {
+      // eslint-disable-next-line no-console
+      console.log(projectId)
+      // eslint-disable-next-line no-console
+      console.log(locations)
+      await this.$axios
+        .$put(`/api/v1/projects/${projectId}/locations`, locations)
     }
   }
 }

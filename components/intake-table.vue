@@ -110,8 +110,13 @@ export default {
       this.onUpdate({ locIdx, key, val })
     },
     onSave() {
-      // need to save intakeData to the database
-      // waiting on route to be written
+      const locations = this.locations.map((location) => {
+        return {
+          locationId: location.locationId,
+          properties: { url: location.properties.url }
+        }
+      })
+      this.saveLocations(this.projectId, locations)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
