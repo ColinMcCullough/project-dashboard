@@ -32,14 +32,10 @@ class PlacesApi {
    * @memberof PlacesApi
    */
   validateParams(params) {
-    if (!params ||
-      !params.address ||
-      !params.city ||
-      !params.state ||
-      !params.zip ||
-      !params.types ||
-      !Array.isArray(params.types) ||
-      !params.vertical) {
+    if (!params || !params.address || !params.city || !params.state || !params.zip) {
+      throw new Error('invalid address')
+    }
+    if (!params.types || !Array.isArray(params.types) || !params.vertical) {
       throw new Error('missing constructor param')
     }
   }
