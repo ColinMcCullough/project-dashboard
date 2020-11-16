@@ -1,7 +1,6 @@
 const queue = require('../../controllers/queue')
 const { queues } = require('../../controllers/queue')
 const models = require('../../models')
-const project = require('../../models/project')
 module.exports = (app) => {
   app.get('/api/v1/jobs', (req, res) => {
     res.json(Object.keys(queue))
@@ -53,7 +52,8 @@ module.exports = (app) => {
       const { 'asset-scraper': assetScraper } = queues
       const { body } = req
       for (let i = 0; i < body.length; i++) {
-        await assetScraper.add('run', body[i])
+        const config = { photos: { folder: `testClient/${body[i].locationId}` } }
+        await assetScraper.add('run', { ...body[i], config })
       }
       res.sendStatus(200)
     } catch (e) {
