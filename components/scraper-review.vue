@@ -22,7 +22,7 @@
             Enqueue Asset Scraper
           </b-button>
           <b-tooltip target="run-tip" placement="left" variant="quaternary">
-            complete required fields to run
+            all locations must have a valid url and pages
           </b-tooltip>
         </span>
       </b-col>
@@ -54,11 +54,7 @@ export default {
       return this.disabledScraper ? 'run-tip' : 'no-tip'
     },
     disabledScraper() {
-      const disabled = this.locations.some((location) => {
-        return !this.validURL(location.properties.url) ||
-          this.validUrls(location.properties.urls)
-      })
-      return disabled
+      return this.locations.some(location => !location.validUrls)
     }
   },
   methods: {

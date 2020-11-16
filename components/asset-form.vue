@@ -24,15 +24,15 @@
         <b-col>
           <b-form-textarea
             id="bulk-urls"
-            :value="urlsToString"
-            :state="validateUrls()"
+            :value="pagesToString"
+            :state="validatePages()"
             placeholder="Paste a list of all urls to be scraped"
             rows="4"
             class="text-left better-input py-2"
             required
-            @input="updateUrls($event, 'urls')"
+            @input="updatePages($event, 'pages')"
           />
-          <b-form-invalid-feedback :state="validateUrls()" class="pt-1 abs-feedback" style="top: 14px;">
+          <b-form-invalid-feedback :state="validatePages()" class="pt-1 abs-feedback" style="top: 14px;">
             Invalid Url/s
           </b-form-invalid-feedback>
         </b-col>
@@ -139,9 +139,9 @@ export default {
     }
   },
   computed: {
-    urlsToString() {
-      return Array.isArray(this.urls)
-        ? this.urls.join('\n')
+    pagesToString() {
+      return Array.isArray(this.pages)
+        ? this.pages.join('\n')
         : ''
     },
     location() {
@@ -150,14 +150,24 @@ export default {
     enableDisableTxt() {
       return this.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
     },
-    urls() {
-      return this.location.urls
+    pages() {
+      return this.location.pages
+    },
+    stepComplete() {
+      return this.validatePages() && this.validURL(this.location.properties.url)
+    }
+  },
+  watch: {
+    stepComplete(val) {
+      const locIdx = this.getLocationIndex(this.id)
+      this.updateLocation({ locIdx, key: 'validUrls', val })
     }
   },
   methods: {
-    updateUrls(val, key) {
+    updatePages(val, key) {
       const arr = val.split(this.regex).filter(val => val)
-      this.onInput(arr, key)
+      const locIdx = this.getLocationIndex(this.id)
+      this.updateLocation({ locIdx, key: 'pages', val: arr })
     },
     onInput(val, key) {
       const locIdx = this.getLocationIndex(this.id)
@@ -170,9 +180,9 @@ export default {
     valid(val) {
       return !val
     },
-    validateUrls() {
-      return this.urls.length > 0
-        ? this.urls.every(url => this.validURL(url))
+    validatePages() {
+      return this.pages.length > 0
+        ? this.pages.every(url => this.validURL(url))
         : false
     },
     validProtocol() {
