@@ -50,30 +50,15 @@ module.exports = (app) => {
   })
   app.post('/api/v1/jobs/asset-scraper/:projectId', async (req, res) => {
     try {
-      const { 'link-discoverer': linkDiscoverer } = queues
-      const { projectId } = req.params
-      const projectLocations = await models.project.findOne({
-        where: {
-          salesforce_project_id: projectId
-        },
-        include: [
-          {
-            model: models.location
-          }
-        ]
-      })
-      const { locations } = projectLocations.toJSON()
-      for (let i = 0; i < locations.length; i++) {
-        const { url } = locations[i].properties
-        await linkDiscoverer.add('run', { url })
+      const { 'asset-scraper': assetScraper } = queues
+      const { body } = req
+      for (let i = 0; i < body.length; i++) {
+        await assetScraper.add('run', body[i])
       }
       res.sendStatus(200)
     } catch (e) {
       res.status(500).send(e.message)
     }
-    const { projectId } = req.params
-    const { 'asset-scraper': assetScraper } = queues
-    await assetScraper.add('run', body)
     res.sendStatus(200)
   })
 }
