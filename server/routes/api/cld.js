@@ -1,7 +1,7 @@
 const cld = require('../../controllers/cld')
 
 module.exports = (app) => {
-  app.get('/api/v1/images/:prefix', async (req, res) => {
+  app.get('/api/v1/cloudinary/:prefix', async (req, res) => {
     try {
       const { prefix } = req.params
       const images = await cld.getImages(prefix)
@@ -12,14 +12,14 @@ module.exports = (app) => {
     }
   })
   // TODO switch this to DELETE
-  app.post('/api/v1/image', async (req, res) => {
+  app.post('/api/v1/cloudinary', async (req, res) => {
     console.log(req.body)
     const { id } = req.body
     const result = await cld.deleteImage(id)
     res.status(202).json(result)
   })
 
-  app.delete('/api/v1/delete-all', async (req, res) => {
+  app.delete('/api/v1/cloudinary', async (req, res) => {
     try {
       const result = await cld.deleteAllImagesInFolder(req.body)
       console.log(result)

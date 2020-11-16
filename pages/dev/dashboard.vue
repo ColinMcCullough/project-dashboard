@@ -64,7 +64,13 @@
       <intake-table />
     </modal-template>
     <modal-template
-      :id="'scrape-modal'"
+      :id="'scraper-modal'"
+      title="Scraper"
+    >
+      <scraper-review />
+    </modal-template>
+    <modal-template
+      :id="'review-modal'"
       title="Scraper"
     >
       <project-review />
