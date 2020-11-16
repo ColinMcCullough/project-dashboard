@@ -50,12 +50,14 @@
 import LocationDetails from '~/components/location-review/location-details'
 import LocationAmenities from '~/components/location-review/location-amenities'
 import LocationAssets from '~/components/location-review/location-assets'
+import GooglePlaces from '~/components/location-review/google-places'
 import Locations from '~/mixins/locations'
 export default {
   components: {
     LocationDetails,
     LocationAmenities,
-    LocationAssets
+    LocationAssets,
+    GooglePlaces
   },
   mixins: [Locations],
   props: {},
@@ -73,6 +75,10 @@ export default {
         {
           id: 'location-assets',
           title: 'Location Assets'
+        },
+        {
+          id: 'google-places',
+          title: 'Google Places'
         }
       ]
     }
