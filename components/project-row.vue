@@ -65,11 +65,11 @@
       style="flex: 0 1 25%;"
     >
       <b-btn-group
-        v-if="project.scrapeComplete"
+        v-if="!project.scrapeComplete"
         size="sm"
         class="w-100"
       >
-        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete">
+        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="crawl(project.projectId)">
           <template v-slot:btn-icon>
             <b-iconstack>
               <b-icon icon="minecart" stacked />
@@ -86,8 +86,9 @@
         </status-btn>
         <status-btn
           :text="'Scrape'"
-          :is-disabled="!project.scrapeComplete"
+          :is-disabled="project.scrapeComplete"
           class="ml-1"
+          @click="launchModal('scraper-modal', project.projectId)"
         >
           <template v-slot:btn-icon>
             <b-iconstack>
@@ -105,9 +106,9 @@
         </status-btn>
         <status-btn
           :text="'Review'"
-          :is-disabled="!project.scrapeComplete"
+          :is-disabled="project.scrapeComplete"
           class="ml-1"
-          @click="launchModal('scrape-modal', project.projectId)"
+          @click="launchModal('review-modal', project.projectId)"
         >
           <template v-slot:btn-icon>
             <b-icon icon="hammer" />
@@ -173,6 +174,9 @@ export default {
     },
     onRefetch(id) {
       this.isBusy = !this.isBusy
+    },
+    crawl(id) {
+      console.log(id)
     }
   }
 }

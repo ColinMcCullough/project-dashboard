@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     async deleteImg(id) {
-      const msg = await this.$axios.$post('api/v1/image', { id })
+      const msg = await this.$axios.$post('api/v1/cloudinary', { id })
       this.$emit('delete-response', msg)
     },
     getUrl(path) {
@@ -29,7 +29,7 @@ export default {
       )
     },
     async getImagesByFolder(prefix) {
-      const images = await this.$axios.$get(`api/v1/images/${prefix}`)
+      const images = await this.$axios.$get(`api/v1/cloudinary/${prefix}`)
       this.images = images.resources
     }
   }

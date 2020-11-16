@@ -19,7 +19,7 @@
       </span>
       <b-button-group>
         <b-btn
-          v-if="id === 'scrape-modal'"
+          v-if="id === 'review-modal'"
           variant="success"
           class="mr-1"
           style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
