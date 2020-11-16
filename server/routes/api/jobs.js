@@ -1,7 +1,6 @@
 const queue = require('../../controllers/queue')
 const { queues } = require('../../controllers/queue')
 const models = require('../../models')
-const project = require('../../models/project')
 module.exports = (app) => {
   app.get('/api/v1/jobs', (req, res) => {
     res.json(Object.keys(queue))
