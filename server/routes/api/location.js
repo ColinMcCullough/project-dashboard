@@ -21,7 +21,8 @@ module.exports = (app) => {
           scraped: location.scraped,
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
-          properties: location.properties
+          properties: location.properties,
+          pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length + 1].pages : []
         }
       })
       res.json(val)
