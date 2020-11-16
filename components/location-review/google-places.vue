@@ -15,11 +15,18 @@
       </b-input-group>
     </b-row>
     <b-row class="mx-2">
-      <b-btn variant="primary" @click="getPlaces()">
-        Get Places
-        <b-icon icon="arrow-clockwise" :animation="loading" font-scale="1" />
-      </b-btn>
-      {{ err }}
+      <b-col class="pl-0">
+        <!-- disable button with tooltip telling user to check address if incomplete -->
+        <b-btn variant="primary" :disabled="disabledAddress" @click="getPlaces()">
+          Get Places
+          <b-icon icon="arrow-clockwise" :animation="loading" font-scale="1" />
+        </b-btn>
+        <p v-if="disabledAddress" class="text-danger">
+          Complete address fields to run
+        </p>
+        {{ err }}
+        <b-col />
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -45,19 +52,40 @@ export default {
       types: {
         restaurant: '',
         clothing_store: '',
-        primary_school: ''
+        primary_school: '',
+        administrative_area_level_2: '',
+        colloquial_area: '',
+        intersection: '',
+        locality: '',
+        neighborhood: '',
+        political: '',
+        route: '',
+        sublocality: '',
+        sublocality_level_1: ''
       }
     }
   },
   computed: {
+    location() {
+      return this.locationById(this.id)
+    },
+    disabledAddress() {
+      return !this.validateAddFields()
+    }
   },
   methods: {
     onInput(val, key) {
       // eslint-disable-next-line no-console
       console.log(key, val)
     },
+    validateAddFields() {
+      const properties = this.location.properties
+      return properties.street_address_1 &&
+        properties.city && properties.state &&
+        properties.postal_code
+    },
     getPlacesBody() {
-      const { properties } = this.locationById(this.id)
+      const { properties } = this.location
       // eslint-disable-next-line camelcase
       const { street_address_1, city, state, postal_code } = properties
       return {
@@ -75,10 +103,9 @@ export default {
       try {
         const data = await this.$axios.$post('/api/places-api', body)
         Object.keys(data).forEach((type) => {
-          this.types[type] = data[type].join()
+          this.types[type] = data[type].filter(val => val !== body.city).join()
         })
       } catch (e) {
-        // not logging message send back from the server
         this.err = e.message
       } finally {
         this.loading = ''
