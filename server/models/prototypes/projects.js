@@ -30,7 +30,12 @@ module.exports = (models, sequelize, Sequelize) => {
       },
       include: [
         {
-          model: models.location
+          model: models.location,
+          include: [
+            {
+              model: models.linkDiscoverer
+            }
+          ]
         }
       ]
     })
