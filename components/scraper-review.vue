@@ -82,6 +82,7 @@ export default {
       this.locations.forEach((location) => {
         const url = new URL(location.properties.url)
         payload.push({
+          topicName: this.topicName,
           locationId: location.locationId,
           rootProtocol: url.protocol.replace(':', ''),
           rootdomain: url.host,
