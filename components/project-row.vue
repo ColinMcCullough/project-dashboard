@@ -138,10 +138,11 @@
 </template>
 
 <script>
+import LinkDiscoverer from '~/mixins/link-discoverer'
 import Locations from '~/mixins/locations'
 import GlobalFunctions from '~/mixins/global-functions'
 export default {
-  mixins: [Locations, GlobalFunctions],
+  mixins: [Locations, GlobalFunctions, LinkDiscoverer],
   props: {
     project: {
       type: Object,
