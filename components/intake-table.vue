@@ -47,9 +47,9 @@
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-btn variant="success-1" :disabled="disabledBtn" pill @click="onSave">
-        <b-icon-check2-circle />
-        Save Urls
+      <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
+        <b-icon-check2-circle :animation="saving ? 'throb' : ''" />
+        {{ saving ? 'Saved!' : 'Saving Urls' }}
       </b-btn>
     </template>
   </b-card>
@@ -62,6 +62,7 @@ export default {
   mixins: [Locations],
   data () {
     return {
+      saving: false,
       fields: [
         {
           key: 'valid',
@@ -110,6 +111,7 @@ export default {
       this.onUpdate({ locIdx, key, val })
     },
     onSave() {
+      this.saving = true
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
@@ -117,6 +119,7 @@ export default {
         }
       })
       this.saveLocations(this.projectId, locations)
+      setTimeout(() => { this.saving = false }, 3500)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b

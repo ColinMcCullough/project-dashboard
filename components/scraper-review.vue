@@ -19,18 +19,13 @@
       <b-col class="text-right mr-4">
         <span :id="runTip" class="d-inline-block">
           <b-button size="lg" variant="primary" :disabled="disabledScraper" class="mx-3" @click="runScraper">
-            Enqueue Asset Scraper
+            <b-icon-arrow-clockwise v-if="enqueing" animation="spin" />
+            {{ enqueing ? 'Job Enqueued!' : 'Enqueue Scraper' }}
           </b-button>
           <b-tooltip target="run-tip" placement="left" variant="quaternary">
             all locations must have a valid url and pages
           </b-tooltip>
         </span>
-      </b-col>
-    </b-row>
-    <b-row v-if="alertTxt !== ''">
-      <b-col class="text-right h5">
-        {{ alertTxt }}
-        <b-icon-check variant="success" />
       </b-col>
     </b-row>
   </b-card>
@@ -46,7 +41,7 @@ export default {
   props: {},
   data() {
     return {
-      alertTxt: ''
+      enqueing: false
     }
   },
   computed: {
@@ -62,10 +57,12 @@ export default {
       return urls.some(url => !this.validURL(url))
     },
     async runScraper() {
-      this.alertTxt = 'Job Enqueued!'
+      this.enqueing = true
       const body = this.getBody()
       await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
-      setTimeout(() => { this.alertTxt = '' }, 10000)
+      setTimeout(() => {
+        this.enqueing = false
+      }, 5000)
     },
     formatTemplate(template) {
       return {
@@ -75,8 +72,6 @@ export default {
         amenities: { selector: template.amenities, slug: template.slug }
       }
     },
-    // need to ask Tyler if we should use blank values for unused
-    // template values or filter them
     getBody() {
       const payload = []
       this.locations.forEach((location) => {

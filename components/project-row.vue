@@ -69,10 +69,14 @@
         size="sm"
         class="w-100"
       >
-        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="discover(project.projectId)">
+        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="runDiscover(project.projectId)">
           <template v-slot:btn-icon>
             <b-iconstack>
-              <b-icon icon="minecart" stacked />
+              <b-icon
+                :icon="crawling ? 'arrow-clockwise' : 'minecart'"
+                :animation="crawling ? 'spin' : ''"
+                stacked
+              />
               <b-icon
                 v-if="project.discoverComplete"
                 icon="check-circle-fill"
@@ -160,6 +164,7 @@ export default {
   },
   data() {
     return {
+      crawling: false,
       isBusy: false,
       cardClass: [
         'chevron-right',
@@ -169,15 +174,17 @@ export default {
     }
   },
   methods: {
+    async runDiscover(projectId) {
+      this.crawling = true
+      await this.discover(projectId)
+      setTimeout(() => { this.crawling = false }, 3000)
+    },
     async launchModal(modalName, projectId) {
       await this.setLocations(projectId)
       this.$bvModal.show(modalName)
     },
     onRefetch(id) {
       this.isBusy = !this.isBusy
-    },
-    crawl(id) {
-      console.log(id)
     }
   }
 }
