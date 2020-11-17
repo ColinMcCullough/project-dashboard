@@ -46,8 +46,7 @@ export default {
   props: {},
   data() {
     return {
-      alertTxt: '',
-      topicName: 'assetScraper_1'
+      alertTxt: ''
     }
   },
   computed: {
@@ -76,13 +75,13 @@ export default {
         amenities: { selector: template.amenities, slug: template.slug }
       }
     },
-    // need to ask Tyler if we should use blank values for templates
+    // need to ask Tyler if we should use blank values for unused
+    // template values or filter them
     getBody() {
       const payload = []
       this.locations.forEach((location) => {
         const url = new URL(location.properties.url)
         payload.push({
-          topicName: this.topicName,
           locationId: location.locationId,
           rootProtocol: url.protocol.replace(':', ''),
           rootdomain: url.host,

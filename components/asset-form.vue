@@ -42,7 +42,7 @@
       <b-card-title class="font-weight-bold">
         Scrapers
       </b-card-title>
-      <b-form-checkbox :checked="enableAll" name="check-button" switch @input="updateScrapers($event)">
+      <b-form-checkbox :checked="location.enableAll" name="check-button" switch @input="updateScrapers($event)">
         {{ scraperLabel }}
       </b-form-checkbox>
       <b-row class="mt-2">
@@ -123,7 +123,7 @@ export default {
       return this.locationById(this.id)
     },
     scraperLabel() {
-      return this.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
+      return this.location.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
     },
     pages() {
       return this.location.pages
@@ -149,10 +149,14 @@ export default {
       this.updateLocationProp({ locIdx, key, val })
     },
     updateScrapers(evt) {
-      this.enableAll = !this.enableAll
       const locIdx = this.getLocationIndex(this.id)
+      this.updateLocation({
+        locIdx,
+        key: 'enableAll',
+        val: !this.location.enableAll
+      })
       Object.keys(this.location.scrapers).forEach((key) => {
-        this.updateScraper({ locIdx, key, val: this.enableAll })
+        this.updateScraper({ locIdx, key, val: this.location.enableAll })
       })
     },
     validatePages() {

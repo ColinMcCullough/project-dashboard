@@ -1,4 +1,5 @@
 module.exports = {
+  enableAll: false,
   scrapers: {
     photos: false,
     amenities: false,
