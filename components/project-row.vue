@@ -69,7 +69,7 @@
         size="sm"
         class="w-100"
       >
-        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="crawl(project.projectId)">
+        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="discover(project.projectId)">
           <template v-slot:btn-icon>
             <b-iconstack>
               <b-icon icon="minecart" stacked />
