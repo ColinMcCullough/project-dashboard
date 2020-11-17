@@ -7,10 +7,15 @@ export const getters = {}
 
 export const actions = {
   async set({ commit }, projectId) {
-    const locations = await this.$axios
-      .$get(`/api/v1/projects/${projectId}/locations`)
-    const updatedLoc = locations.map(obj => ({ ...obj, edited: 'false', validUrls: false, ...scrapeDetails }))
-    commit('SET', { locations: updatedLoc, projectId })
+    try {
+      const locations = await this.$axios
+        .$get(`/api/v1/projects/${projectId}/locations`)
+      const updatedLoc = locations.map(obj => ({ ...obj, edited: 'false', validUrls: false, ...scrapeDetails }))
+      commit('SET', { locations: updatedLoc, projectId })
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log()
+    }
   },
   updateScraper({ commit }, data) {
     commit('UPDATE_SCRAPER_PROP', data)
