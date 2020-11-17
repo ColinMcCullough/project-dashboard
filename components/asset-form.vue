@@ -55,7 +55,7 @@
             :name="`check-button-${index}`"
             switch
             @change="updateScraper({
-              locIdx: getLocationIndex(id),
+              locIdx,
               key,
               val: !val
             })"
@@ -82,7 +82,7 @@
               :value="val"
               :placeholder="`Enter Html Selector`"
               @input="updateTemplate({
-                locIdx: getLocationIndex(id),
+                locIdx,
                 key,
                 val: $event
               })"
@@ -119,44 +119,50 @@ export default {
         ? this.pages.join('\n')
         : ''
     },
+    locIdx() {
+      return this.getLocationIndex(this.id)
+    },
     location() {
       return this.locationById(this.id)
     },
     scraperLabel() {
-      return this.location.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
+      return this.location.enableAll
+        ? 'Disable All Scrapers' : 'Enable All Scrapers'
     },
     pages() {
       return this.location.pages
     },
     stepComplete() {
-      return this.validatePages() && this.validURL(this.location.properties.url)
+      return this.validatePages() &&
+        this.validURL(this.location.properties.url)
     }
   },
   watch: {
     stepComplete(val) {
-      const locIdx = this.getLocationIndex(this.id)
-      this.updateLocation({ locIdx, key: 'validUrls', val })
+      this.updateLocation({ locIdx: this.locIdx, key: 'validUrls', val })
     }
+  },
+  created() {
+    const val = this.validatePages() &&
+      this.validURL(this.location.properties.url)
+    this.updateLocation({ locIdx: this.locIdx, key: 'validUrls', val })
   },
   methods: {
     updatePages(val, key) {
       const arr = val.split(this.regex).filter(val => val)
-      const locIdx = this.getLocationIndex(this.id)
-      this.updateLocation({ locIdx, key: 'pages', val: arr })
+      this.updateLocation({ locIdx: this.locIdx, key: 'pages', val: arr })
     },
     onInput(val, key) {
-      const locIdx = this.getLocationIndex(this.id)
-      this.updateLocationProp({ locIdx, key, val })
+      this.updateLocationProp({ locIdx: this.locIdx, key, val })
     },
     updateScrapers(evt) {
-      const locIdx = this.getLocationIndex(this.id)
       this.updateLocation({
-        locIdx,
+        locIdx: this.locIdx,
         key: 'enableAll',
         val: !this.location.enableAll
       })
       Object.keys(this.location.scrapers).forEach((key) => {
-        this.updateScraper({ locIdx, key, val: this.location.enableAll })
+        this.updateScraper({ locIdx: this.locIdx, key, val: this.location.enableAll })
       })
     },
     validatePages() {
