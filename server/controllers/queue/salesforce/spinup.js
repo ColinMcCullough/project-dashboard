@@ -28,7 +28,7 @@ async function processor(job) {
     if (project['sf:Master_Project__c']) {
       projectCreate.masterProjectId = project['sf:Master_Project__c']
     }
-    const project = await models.project.create({
+    const dbProject = await models.project.create({
       salesforce_project_id,
       ...projectCreate
     })
