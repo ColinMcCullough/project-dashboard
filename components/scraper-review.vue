@@ -19,18 +19,13 @@
       <b-col class="text-right mr-4">
         <span :id="runTip" class="d-inline-block">
           <b-button size="lg" variant="primary" :disabled="disabledScraper" class="mx-3" @click="runScraper">
-            Enqueue Asset Scraper
+            <b-icon-arrow-clockwise v-if="enqueing" animation="spin" />
+            {{ enqueueTxt }}
           </b-button>
           <b-tooltip target="run-tip" placement="left" variant="quaternary">
             all locations must have a valid url and pages
           </b-tooltip>
         </span>
-      </b-col>
-    </b-row>
-    <b-row v-if="alertTxt !== ''">
-      <b-col class="text-right h5">
-        {{ alertTxt }}
-        <b-icon-check variant="success" />
       </b-col>
     </b-row>
   </b-card>
@@ -46,7 +41,8 @@ export default {
   props: {},
   data() {
     return {
-      alertTxt: ''
+      enqueing: false,
+      enqueueTxt: 'Enqueue Scraper'
     }
   },
   computed: {
@@ -61,11 +57,15 @@ export default {
     validUrls(urls) {
       return urls.some(url => !this.validURL(url))
     },
-    async runScraper() {
-      this.alertTxt = 'Job Enqueued!'
-      const body = this.getBody()
-      await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
-      setTimeout(() => { this.alertTxt = '' }, 10000)
+    runScraper() {
+      this.enqueueTxt = 'Job Enqueued!'
+      this.enqueing = true
+      // const body = this.getBody()
+      // await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
+      setTimeout(() => {
+        this.enqueueTxt = 'Enqueue Scraper'
+        this.enqueing = false
+      }, 5000)
     },
     formatTemplate(template) {
       return {
