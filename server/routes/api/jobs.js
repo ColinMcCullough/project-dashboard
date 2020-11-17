@@ -40,7 +40,8 @@ module.exports = (app) => {
       const { locations } = projectLocations.toJSON()
       for (let i = 0; i < locations.length; i++) {
         const { url } = locations[i].properties
-        await linkDiscoverer.add('run', { url })
+        const { id } = locations[i]
+        await linkDiscoverer.add('run', { url, locationId: id })
       }
       res.sendStatus(200)
     } catch (e) {
@@ -59,6 +60,5 @@ module.exports = (app) => {
     } catch (e) {
       res.status(500).send(e.message)
     }
-    res.sendStatus(200)
   })
 }
