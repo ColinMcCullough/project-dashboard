@@ -72,7 +72,11 @@
         <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="runDiscover(project.projectId)">
           <template v-slot:btn-icon>
             <b-iconstack>
-              <b-icon :icon="crawlIcon" :animation="crawlAnimation" stacked />
+              <b-icon
+                :icon="crawling ? 'arrow-clockwise' : 'minecart'"
+                :animation="crawling ? 'spin' : ''"
+                stacked
+              />
               <b-icon
                 v-if="project.discoverComplete"
                 icon="check-circle-fill"
@@ -160,8 +164,7 @@ export default {
   },
   data() {
     return {
-      crawlAnimation: 'none',
-      crawlIcon: 'minecart',
+      crawling: false,
       isBusy: false,
       cardClass: [
         'chevron-right',
@@ -171,17 +174,10 @@ export default {
     }
   },
   methods: {
-    updateDataProp(obj) {
-      const keys = Object.keys(obj)
-      // eslint-disable-next-line no-return-assign
-      keys.forEach(key => this[key] = obj[key])
-    },
     async runDiscover(projectId) {
-      this.updateDataProp({ crawlIcon: 'arrow-clockwise', crawlAnimation: 'spin' })
+      this.crawling = true
       await this.discover(projectId)
-      setTimeout(() => {
-        this.updateDataProp({ crawlIcon: 'minecart', crawlAnimation: 'none' })
-      }, 3000)
+      setTimeout(() => { this.crawling = false }, 3000)
     },
     async launchModal(modalName, projectId) {
       await this.setLocations(projectId)

@@ -20,7 +20,7 @@
         <span :id="runTip" class="d-inline-block">
           <b-button size="lg" variant="primary" :disabled="disabledScraper" class="mx-3" @click="runScraper">
             <b-icon-arrow-clockwise v-if="enqueing" animation="spin" />
-            {{ enqueueTxt }}
+            {{ enqueing ? 'Job Enqueued!' : 'Enqueue Scraper' }}
           </b-button>
           <b-tooltip target="run-tip" placement="left" variant="quaternary">
             all locations must have a valid url and pages
@@ -41,8 +41,7 @@ export default {
   props: {},
   data() {
     return {
-      enqueing: false,
-      enqueueTxt: 'Enqueue Scraper'
+      enqueing: false
     }
   },
   computed: {
@@ -58,12 +57,10 @@ export default {
       return urls.some(url => !this.validURL(url))
     },
     async runScraper() {
-      this.enqueueTxt = 'Job Enqueued!'
       this.enqueing = true
       const body = this.getBody()
       await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
       setTimeout(() => {
-        this.enqueueTxt = 'Enqueue Scraper'
         this.enqueing = false
       }, 5000)
     },
