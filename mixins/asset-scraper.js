@@ -8,10 +8,10 @@ module.exports = {
     phoneNumber: false
   },
   template: {
-    address: '',
-    phone: '',
-    email: '',
-    amenities: '',
-    slug: ''
+    address: null,
+    phone: null,
+    email: null,
+    amenities: null,
+    slug: null
   }
 }
