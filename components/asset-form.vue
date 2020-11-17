@@ -42,16 +42,25 @@
       <b-card-title class="font-weight-bold">
         Scrapers
       </b-card-title>
-      <b-form-checkbox v-model="enableAll" name="check-button" switch @input="updateScrapers($event)">
-        {{ enableDisableTxt }}
+      <b-form-checkbox :checked="enableAll" name="check-button" switch @input="updateScrapers($event)">
+        {{ scraperLabel }}
       </b-form-checkbox>
       <b-row class="mt-2">
         <b-col
-          v-for="(scraper, index) in scrapers"
-          :key="`${scraper}-${index}`"
+          v-for="(val, key, index) in location.scrapers"
+          :key="`${key}-${index}`"
         >
-          <b-form-checkbox v-model="scraper.checked" name="check-button" switch>
-            {{ scraper.text }}
+          <b-form-checkbox
+            :checked="val"
+            name="check-button"
+            switch
+            @change="updateScraper({
+              locIdx: getLocationIndex(id),
+              key,
+              val: !val
+            })"
+          >
+            {{ titleCase(key) }}
           </b-form-checkbox>
         </b-col>
       </b-row>
@@ -63,25 +72,20 @@
       <b-row class="mt-2">
         <b-col class="d-flex justify-content-between">
           <b-form-group
-            v-for="(type, index) in Object.keys(template)"
-            :key="`${type}-${index}`"
-            :description="`Ex: ${template[type].example}`"
-            :label="titleCase(type)"
+            v-for="(val, key, index) in location.template"
+            :key="`${key}-${index}`"
+            :description="`Ex: #${key}-block`"
+            :label="key === 'slug' ? `Amenities ${titleCase(key)}` : titleCase(key)"
             class="mb-2 mr-3"
           >
             <b-form-input
-              v-model="template[type].selector"
+              :value="val"
               :placeholder="`Enter Html Selector`"
-            />
-          </b-form-group>
-          <b-form-group
-            label="Amenities Slug"
-            class="mb-2"
-            description="Ex: features-amenities"
-          >
-            <b-form-input
-              v-model="template.amenities.slug"
-              placeholder="Enter Amenities Page Slug"
+              @change="updateTemplate({
+                locIdx: getLocationIndex(id),
+                key,
+                val: $event
+              })"
             />
           </b-form-group>
         </b-col>
@@ -105,37 +109,8 @@ export default {
   },
   data() {
     return {
-      locationId: null,
       enableAll: false,
-      regex: /[ ,\n]+/,
-      topicName: 'assetScraper_1',
-      selected: [],
-      scrapers: [
-        { text: 'Photos', value: 'photos', checked: false },
-        { text: 'Amenities', value: 'amenities', checked: false },
-        { text: 'Address', value: 'address', checked: false },
-        { text: 'Emails', value: 'emails', checked: false },
-        { text: 'Phone Number', value: 'phoneNumber', checked: false }
-      ],
-      template: {
-        address: {
-          selector: '',
-          example: '#address-block'
-        },
-        phone: {
-          selector: '',
-          example: '#phone-block'
-        },
-        email: {
-          selector: '',
-          example: '#address-block'
-        },
-        amenities: {
-          selector: '',
-          example: '.row .wp-block-columns',
-          slug: ''
-        }
-      }
+      regex: /[ ,\n]+/
     }
   },
   computed: {
@@ -147,7 +122,7 @@ export default {
     location() {
       return this.locationById(this.id)
     },
-    enableDisableTxt() {
+    scraperLabel() {
       return this.enableAll ? 'Disable All Scrapers' : 'Enable All Scrapers'
     },
     pages() {
@@ -174,11 +149,11 @@ export default {
       this.updateLocationProp({ locIdx, key, val })
     },
     updateScrapers(evt) {
-      // eslint-disable-next-line no-return-assign
-      this.scrapers.forEach(scraper => scraper.checked = evt)
-    },
-    valid(val) {
-      return !val
+      this.enableAll = !this.enableAll
+      const locIdx = this.getLocationIndex(this.id)
+      Object.keys(this.location.scrapers).forEach((key) => {
+        this.updateScraper({ locIdx, key, val: this.enableAll })
+      })
     },
     validatePages() {
       return this.pages.length > 0

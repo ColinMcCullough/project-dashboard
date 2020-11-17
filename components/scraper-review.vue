@@ -2,7 +2,7 @@
   <b-card
     no-body
     border-variant="success-1"
-    style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
+    style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px;"
   >
     <b-tabs pills card>
       <b-tab
@@ -16,7 +16,7 @@
       </b-tab>
     </b-tabs>
     <b-row>
-      <b-col class="text-right">
+      <b-col class="text-right mr-4">
         <span :id="runTip" class="d-inline-block">
           <b-button size="lg" variant="primary" :disabled="disabledScraper" class="mx-3" @click="runScraper">
             Enqueue Asset Scraper
@@ -46,7 +46,8 @@ export default {
   props: {},
   data() {
     return {
-      alertTxt: ''
+      alertTxt: '',
+      topicName: 'assetScraper_1'
     }
   },
   computed: {
@@ -67,20 +68,29 @@ export default {
       await this.$axios.$post(`/api/v1/jobs/asset-scraper:${this.projectId}`, body)
       setTimeout(() => { this.alertTxt = '' }, 10000)
     },
-    getBody() {
-      const url = new URL(this.url)
-      const scrapers = this.scrapers.reduce((acc, curr) => {
-        return Object.assign(acc, { [curr.value]: curr.checked })
-      }, {})
-      const body = {
-        locationId: this.locationId,
-        rootProtocol: url.protocol.replace(':', ''),
-        rootdomain: url.host,
-        pages: this.getUrls(),
-        scrapers,
-        template: this.template
+    formatTemplate(template) {
+      return {
+        address: { selector: template.address },
+        phone: { selector: template.phone },
+        email: { selector: template.email },
+        amenities: { selector: template.amenities, slug: template.slug }
       }
-      return body
+    },
+    // need to ask Tyler if we should use blank values for templates
+    getBody() {
+      const payload = []
+      this.locations.forEach((location) => {
+        const url = new URL(location.properties.url)
+        payload.push({
+          locationId: location.locationId,
+          rootProtocol: url.protocol.replace(':', ''),
+          rootdomain: url.host,
+          pages: location.pages,
+          scrapers: location.scrapers,
+          template: this.formatTemplate(location.template)
+        })
+      })
+      return payload
     }
   }
 }

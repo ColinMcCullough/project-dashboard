@@ -13,6 +13,8 @@ export default {
     ...mapActions({
       setLocations: 'locations/set',
       updateLocationProp: 'locations/updateLocationProp',
+      updateScraper: 'locations/updateScraper',
+      updateTemplate: 'locations/updateTemplate',
       updateLocation: 'locations/updateLocation'
     }),
     locationById(locationId) {
