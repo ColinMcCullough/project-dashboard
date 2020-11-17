@@ -7,9 +7,9 @@ export default {
     }
   },
   methods: {
-    discover(projectId) {
+    async discover(projectId) {
       try {
-        // await this.$axios.$post(`api/v1/jobs/link-discoverer/${projectId}`)
+        await this.$axios.$post(`api/v1/jobs/link-discoverer/${projectId}`)
       } catch (err) {
         this.error = err
       }

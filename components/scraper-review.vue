@@ -57,11 +57,11 @@ export default {
     validUrls(urls) {
       return urls.some(url => !this.validURL(url))
     },
-    runScraper() {
+    async runScraper() {
       this.enqueueTxt = 'Job Enqueued!'
       this.enqueing = true
-      // const body = this.getBody()
-      // await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
+      const body = this.getBody()
+      await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
       setTimeout(() => {
         this.enqueueTxt = 'Enqueue Scraper'
         this.enqueing = false
@@ -75,8 +75,6 @@ export default {
         amenities: { selector: template.amenities, slug: template.slug }
       }
     },
-    // need to ask Tyler if we should use blank values for unused
-    // template values or filter them
     getBody() {
       const payload = []
       this.locations.forEach((location) => {
