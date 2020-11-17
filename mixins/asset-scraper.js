@@ -1,4 +1,4 @@
-module.exports = {
+export const scrapeDetails = {
   enableAll: false,
   scrapers: {
     photos: false,

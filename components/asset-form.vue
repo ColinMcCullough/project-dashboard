@@ -52,7 +52,7 @@
         >
           <b-form-checkbox
             :checked="val"
-            name="check-button"
+            :name="`check-button-${index}`"
             switch
             @change="updateScraper({
               locIdx: getLocationIndex(id),
@@ -81,7 +81,7 @@
             <b-form-input
               :value="val"
               :placeholder="`Enter Html Selector`"
-              @change="updateTemplate({
+              @input="updateTemplate({
                 locIdx: getLocationIndex(id),
                 key,
                 val: $event
