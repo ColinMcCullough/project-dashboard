@@ -64,7 +64,7 @@ export default {
     async runScraper() {
       this.alertTxt = 'Job Enqueued!'
       const body = this.getBody()
-      await this.$axios.$post(`/api/v1/jobs/asset-scraper:${this.projectId}`, body)
+      await this.$axios.$post(`/api/v1/jobs/asset-scraper/${this.projectId}`, body)
       setTimeout(() => { this.alertTxt = '' }, 10000)
     },
     formatTemplate(template) {
