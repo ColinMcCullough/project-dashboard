@@ -18,7 +18,7 @@ module.exports = (app) => {
               <Ack>true</Ack>
             </notificationsResponse>
           </soap:Body>
-        </soap:Envelope>
+        </soap:Envelope>  
       `)
       await salesforce.add('spinup', body)
     } catch (error) {
