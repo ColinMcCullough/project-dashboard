@@ -1,5 +1,5 @@
 const jsforce = require('jsforce')
-const util = require('../utilities/util')
+const util = require('../utilities/object')
 const {
   SF_USERNAME: username,
   SF_PASSWORD: password,
@@ -106,7 +106,8 @@ class SfApi extends jsforce.Connection {
    * @memberof SfApi
    */
   findProject(where, attributes) {
-
+    return this.sobject('Project__c').find(where, attributes)
+      .then(accounts => util.pick(accounts[0], attributes))
   }
 
   /**
@@ -117,7 +118,8 @@ class SfApi extends jsforce.Connection {
    * @memberof SfApi
    */
   findInspireProject(where, attributes) {
-
+    return this.sobject('inspire1__Project__c').find(where, attributes)
+      .then(accounts => util.pick(accounts[0], attributes))
   }
 
   /**
@@ -128,7 +130,8 @@ class SfApi extends jsforce.Connection {
    * @memberof SfApi
    */
   findLocation(where, attributes) {
-
+    return this.sobject('Location__c').find(where, attributes)
+      .then(accounts => util.pick(accounts[0], attributes))
   }
 }
 
