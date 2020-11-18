@@ -10,7 +10,7 @@ module.exports = {
   jobClassToObject,
   updateJobData,
   getQueueState,
-  getQueueNameAndState
+  getQueueNameAndState,
   deleteJobs
 }
 
