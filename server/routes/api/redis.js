@@ -85,7 +85,7 @@ module.exports = (app) => {
     res.sendStatus(200)
   })
 
-  app.delete('/api/v1/redis/:queueName/jobs', async (req, res) => {
+  app.put('/api/v1/redis/:queueName/delete', async (req, res) => {
     const { queueName } = req.params
     const { ids } = req.body
     const jobs = await redis.getJobsById(queueName, ids)

@@ -49,7 +49,7 @@ async function retryJobs(jobs) {
 
 async function deleteJobs(jobs) {
   for (let i = 0; i < jobs.length; i++) {
-    await jobs[i].discard()
+    await jobs[i].remove()
   }
 }
 
