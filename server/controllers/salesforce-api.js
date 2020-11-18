@@ -97,6 +97,39 @@ class SfApi extends jsforce.Connection {
     return this.sobject('Account').find(where, attributes)
       .then(accounts => util.pick(accounts[0], attributes))
   }
+
+  /**
+   * find Project__c object
+   *
+   * @param {*} where
+   * @param {*} attributes
+   * @memberof SfApi
+   */
+  findProject(where, attributes) {
+
+  }
+
+  /**
+   * find inspire1__Project__c
+   *
+   * @param {*} where
+   * @param {*} attributes
+   * @memberof SfApi
+   */
+  findInspireProject(where, attributes) {
+
+  }
+
+  /**
+   * find Location__c
+   *
+   * @param {*} where
+   * @param {*} attributes
+   * @memberof SfApi
+   */
+  findLocation(where, attributes) {
+
+  }
 }
 
 module.exports = new SfApi({ username, password, token })
