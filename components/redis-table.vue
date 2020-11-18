@@ -64,14 +64,23 @@
         >
           Clear Selected
         </b-btn>
-        <b-btn
-          :disabled="queueData.selected.length === 0"
-          variant="danger"
-          class="mr-2"
-          @click="deleteSelected(queueData.queueName, queueData.selected)"
-        >
-          Delete Selected
-        </b-btn>
+        <span :id="queueData.selected.length === 0 ? 'disabled-state' : 'enabled-state'">
+          <b-btn
+            :disabled="queueData.selected.length === 0"
+            variant="danger"
+            class="mr-2"
+            @click="deleteSelected(queueData.queueName, queueData.selected)"
+          >
+            Delete Selected
+          </b-btn>
+          <b-popover
+            target="disabled-state"
+            triggers="hover"
+            placement="top"
+          >
+            Select jobs to delete
+          </b-popover>
+        </span>
         <span :id="!failedSelected ? 'failed-state' : 'retry-btn'">
           <b-button
             :disabled="!failedSelected"
