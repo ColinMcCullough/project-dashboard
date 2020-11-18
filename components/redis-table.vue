@@ -64,6 +64,14 @@
         >
           Clear Selected
         </b-btn>
+        <b-btn
+          :disabled="queueData.selected.length === 0"
+          variant="danger"
+          class="mr-2"
+          @click="deleteSelected(queueData.queueName, queueData.selected)"
+        >
+          Delete Selected
+        </b-btn>
         <span :id="!failedSelected ? 'failed-state' : 'retry-btn'">
           <b-button
             :disabled="!failedSelected"
