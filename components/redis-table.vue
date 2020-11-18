@@ -17,7 +17,7 @@
           id="filterInput"
           :value="queueData.filter"
           type="search"
-          placeholder="Type to Search"
+          placeholder="Type to Search by Id"
           @input="setQueueData({ filter: $event })"
         />
         <b-input-group-append>
@@ -97,6 +97,7 @@
       :items="jobs"
       :fields="queueData.fields"
       :filter="queueData.filter"
+      :filterIncludedFields="queueData.filterOn"
       :per-page="queueData.perPage"
       :current-page="queueData.currentPage"
       :select-mode="queueData.selectMode"
