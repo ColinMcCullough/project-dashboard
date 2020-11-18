@@ -53,6 +53,7 @@ module.exports = (app) => {
     const { queueName, state } = req.params
     const jobs = await redis.getJobsByState(queueName, state)
       .then(jobs => jobs.map((job) => {
+        console.log(job.id)
         job.state = state
         return redis.jobClassToObject(job)
       }))
@@ -84,5 +85,12 @@ module.exports = (app) => {
     res.sendStatus(200)
   })
 
+  app.delete('/api/v1/redis/:queueName/jobs', async (req, res) => {
+    const { queueName } = req.params
+    const { ids } = req.body
+    const jobs = await redis.getJobsById(queueName, ids)
+    await redis.deleteJobs(jobs)
+    res.sendStatus(200)
+  })
   // END STANDARD ROUTES
 }
