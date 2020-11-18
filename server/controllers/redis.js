@@ -10,7 +10,8 @@ module.exports = {
   jobClassToObject,
   updateJobData,
   getQueueState,
-  getQueueNameAndState
+  getQueueNameAndState,
+  deleteJobs
 }
 
 function getQueueState(queueName) {
@@ -43,6 +44,12 @@ async function getJobsById(queueName, ids) {
 async function retryJobs(jobs) {
   for (let i = 0; i < jobs.length; i++) {
     await jobs[i].retry()
+  }
+}
+
+async function deleteJobs(jobs) {
+  for (let i = 0; i < jobs.length; i++) {
+    await jobs[i].discard()
   }
 }
 
