@@ -66,10 +66,11 @@
         </b-btn>
         <span :id="queueData.selected.length === 0 ? 'disabled-state' : 'enabled-state'">
           <b-btn
+            v-b-modal.modal-1
             :disabled="queueData.selected.length === 0"
             variant="danger"
+            size="sm"
             class="mr-2"
-            @click="deleteSelected(queueData.queueName, queueData.selected)"
           >
             Delete Selected
           </b-btn>
@@ -83,8 +84,8 @@
         </span>
         <span :id="!failedSelected ? 'failed-state' : 'retry-btn'">
           <b-button
-            :disabled="!failedSelected"
             size="sm"
+            :disabled="!failedSelected"
             @click="retryFailed(queueData.queueName, queueData.selected)"
           >
             Retry Selected Failed Jobs
@@ -104,6 +105,16 @@
           </b-popover>
         </span>
       </b-btn-group>
+      <b-modal
+        id="modal-1"
+        header-bg-variant="secondary"
+        title="Delete Jobs"
+        @ok="deleteSelected(queueData.queueName, queueData.selected)"
+      >
+        <p class="my-4">
+          Are you sure you want to delete these jobs?
+        </p>
+      </b-modal>
     </template>
     <!-- MODAL COMPONENT START -->
     <edit-data />
@@ -114,7 +125,7 @@
       :items="jobs"
       :fields="queueData.fields"
       :filter="queueData.filter"
-      :filterIncludedFields="queueData.filterOn"
+      :filter-included-fields="queueData.filterOn"
       :per-page="queueData.perPage"
       :current-page="queueData.currentPage"
       :select-mode="queueData.selectMode"

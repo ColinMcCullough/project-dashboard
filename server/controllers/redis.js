@@ -51,9 +51,11 @@ async function retryJobs(jobs) {
 async function deleteJobs(jobs) {
   for (let i = 0; i < jobs.length; i++) {
     const state = await jobs[i].getState()
-    state === 'active'
-      ? await jobs[i].moveToFailed()
-      : await jobs[i].remove()
+    if (state === 'active') {
+      await jobs[i].moveToFailed(new Error('job has been stuck for too long'))
+    }
+    console.log(jobs[i])
+    await jobs[i].remove()
   }
 }
 
