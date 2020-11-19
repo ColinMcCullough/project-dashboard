@@ -107,6 +107,7 @@
       </b-btn-group>
       <b-modal
         id="modal-1"
+        size="sm"
         header-bg-variant="secondary"
         title="Delete Jobs"
         @ok="deleteSelected(queueData.queueName, queueData.selected)"
