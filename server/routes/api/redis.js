@@ -53,7 +53,6 @@ module.exports = (app) => {
     const { queueName, state } = req.params
     const jobs = await redis.getJobsByState(queueName, state)
       .then(jobs => jobs.map((job) => {
-        console.log(job.id)
         job.state = state
         return redis.jobClassToObject(job)
       }))
