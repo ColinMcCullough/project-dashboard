@@ -5,13 +5,15 @@ export const scrapeDetails = {
     amenities: false,
     address: false,
     emails: false,
-    phoneNumber: false
+    phoneNumber: false,
+    social: false
   },
   template: {
     address: null,
     phone: null,
     email: null,
     amenities: null,
+    social: null,
     slug: null
   }
 }
