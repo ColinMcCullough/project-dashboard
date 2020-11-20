@@ -1,4 +1,4 @@
-const queues = require('../../controllers/queue')
+const { queues } = require('../../controllers/queue')
 const redis = require('../../controllers/redis')
 module.exports = (app) => {
   // Update data in Job

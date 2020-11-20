@@ -9,8 +9,9 @@ module.exports = {
   hooks
 }
 
-function processor(job, done) {
-  return linkDiscoverer(job.data.url, null)
+async function processor(job) {
+  const { data } = await linkDiscoverer(job.data.url, null)
+  return data
 }
 
 // async function processor(job, done) {
