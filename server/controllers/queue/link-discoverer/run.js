@@ -9,9 +9,8 @@ module.exports = {
   hooks
 }
 
-async function processor(job) {
-  const { data } = await linkDiscoverer(job.data.url, null)
-  return data
+function processor(job) {
+  return linkDiscoverer(job.data.url, null)
 }
 
 // async function processor(job, done) {
@@ -39,6 +38,7 @@ function hooks(queue) {
   queue.on('completed', async (job, result) => {
     const { name, data } = job
     if (name === 'run') {
+      console.log({ result })
       try {
         await models.linkDiscoverer.create({
           locationId: data.locationId,

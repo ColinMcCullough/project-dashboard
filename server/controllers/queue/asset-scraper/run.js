@@ -9,9 +9,8 @@ module.exports = {
   concurrency: 1,
   hooks
 }
-async function processor(job) {
-  const { data } = await assetScraper(job.data, null)
-  return data
+function processor(job) {
+  return assetScraper(job.data, null)
 }
 // async function processor(job, done) {
 //   try {
