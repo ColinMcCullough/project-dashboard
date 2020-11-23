@@ -24,7 +24,6 @@ async function linkDiscoverer(url, topicName) {
     // }
     console.log('postUrl', postUrl)
     const res = await axios.post(postUrl, body)
-    console.log(res)
     if (res.status !== 200) { throw new Error(`Link discoverer Failed: Status ${res.status}`) }
     return res.data
   } catch (err) {

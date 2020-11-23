@@ -49,7 +49,7 @@
     <template v-slot:footer>
       <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
         <b-icon-check2-circle :animation="saving ? 'throb' : ''" />
-        {{ saving ? 'Saved!' : 'Saving Urls' }}
+        {{ saving ? 'Saving Urls' : 'Save Urls' }}
       </b-btn>
     </template>
   </b-card>

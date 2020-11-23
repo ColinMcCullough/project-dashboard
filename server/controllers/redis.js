@@ -10,7 +10,8 @@ module.exports = {
   jobClassToObject,
   updateJobData,
   getQueueState,
-  getQueueNameAndState
+  getQueueNameAndState,
+  deleteJobs
 }
 
 function getQueueState(queueName) {
@@ -42,7 +43,19 @@ async function getJobsById(queueName, ids) {
 
 async function retryJobs(jobs) {
   for (let i = 0; i < jobs.length; i++) {
+    await jobs[i].progress(0)
     await jobs[i].retry()
+  }
+}
+
+async function deleteJobs(jobs) {
+  for (let i = 0; i < jobs.length; i++) {
+    const state = await jobs[i].getState()
+    if (state === 'active') {
+      await jobs[i].moveToFailed(new Error('job has been stuck for too long'))
+    }
+    console.log(jobs[i])
+    await jobs[i].remove()
   }
 }
 

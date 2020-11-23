@@ -1,4 +1,4 @@
-const queues = require('../../controllers/queue')
+const { queues } = require('../../controllers/queue')
 const redis = require('../../controllers/redis')
 module.exports = (app) => {
   // Update data in Job
@@ -84,5 +84,12 @@ module.exports = (app) => {
     res.sendStatus(200)
   })
 
+  app.put('/api/v1/redis/:queueName/delete', async (req, res) => {
+    const { queueName } = req.params
+    const { ids } = req.body
+    const jobs = await redis.getJobsById(queueName, ids)
+    await redis.deleteJobs(jobs)
+    res.sendStatus(200)
+  })
   // END STANDARD ROUTES
 }

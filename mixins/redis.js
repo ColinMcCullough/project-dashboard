@@ -54,6 +54,10 @@ export default {
       const ids = jobs.map(job => job.id)
       this.$axios.$put(`api/v1/redis/${queueName}/retry`, { ids })
     },
+    deleteSelected(queueName, jobs) {
+      const ids = jobs.map(job => job.id)
+      this.$axios.$put(`api/v1/redis/${queueName}/delete`, { ids })
+    },
     updateJobData(queueName, id, data) {
       this.$axios.$put(`api/v1/redis/${queueName}/update`, { id, data })
     }
