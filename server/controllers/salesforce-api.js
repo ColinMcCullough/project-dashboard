@@ -107,7 +107,7 @@ class SfApi extends jsforce.Connection {
    */
   findProject(where, attributes) {
     return this.sobject('Project__c').find(where, attributes)
-      // .then(accounts => util.pick(accounts[0], attributes))
+      .then(accounts => (accounts.length > 0) ? util.pick(accounts[0], attributes) : [])
   }
 
   /**
@@ -118,8 +118,8 @@ class SfApi extends jsforce.Connection {
    * @memberof SfApi
    */
   findInspireProject(where, attributes) {
-    return this.sobject('inspire1__Project__c').find(where, ['id'])
-      // .then(accounts => util.pick(accounts[0], attributes))
+    return this.sobject('inspire1__Project__c').find(where, attributes)
+      .then(accounts => (accounts.length > 0) ? util.pick(accounts[0], attributes) : [])
   }
 
   /**
@@ -131,7 +131,7 @@ class SfApi extends jsforce.Connection {
    */
   findLocation(where, attributes) {
     return this.sobject('Location__c').find(where, attributes)
-      .then(accounts => util.pick(accounts[0], attributes))
+      .then(accounts => (accounts.length > 0) ? util.pick(accounts[0], attributes) : [])
   }
 }
 
