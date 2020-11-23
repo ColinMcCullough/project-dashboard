@@ -7,7 +7,8 @@ const models = require('../../../models')
 module.exports = {
   processor,
   concurrency: 1,
-  hooks
+  hooks,
+  takesSfApi: false
 }
 
 async function processor(job, done) {

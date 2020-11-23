@@ -2,7 +2,7 @@ const { REDIS_URL: redisUrl } = process.env
 const path = require('path')
 const fs = require('fs')
 const Bull = require('bull')
-
+const sfApi = require('../salesforce-api')
 class BullQueues {
   constructor(params) {
     this.queues = {}
@@ -38,10 +38,16 @@ class BullQueues {
     const queue = new Bull(name, this.redisUrl, { prefix: 'projectDashboard' })
     this.getfileNames(subDir)
       .forEach((file) => {
-        const { concurrency, processor, hooks } = require(path.join(subDir, file))
+        const { concurrency, processor, hooks, takesSfApi } = require(path.join(subDir, file))
         const fileName = this.getFileName(file)
-        hooks(queue)
-        queue.process(fileName, concurrency, processor)
+
+        if (takesSfApi) {
+          hooks(queue, sfApi)
+          queue.process(fileName, concurrency, (job, done) => processor(job, sfApi))
+        } else {
+          hooks(queue)
+          queue.process(fileName, concurrency, processor)
+        }
       })
     return queue
   }

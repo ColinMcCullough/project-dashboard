@@ -2,7 +2,8 @@ module.exports = {
   pick,
   reject,
   split,
-  group
+  group,
+  removeNestedArrays
 }
 
 /**
@@ -86,4 +87,27 @@ function pickAndRename(obj, keys) {
     }
     return k in obj ? { [k]: obj[k] } : {}
   }).reduce((res, o) => Object.assign(res, o), {})
+}
+
+/**
+ * Function will mutate any array nested in an object
+ * with its 0th index unless the property name is 'notifications'
+ * @param {*} obj Object
+ */
+function removeNestedArrays(obj) {
+  // loops through object
+  for (const k in obj) {
+    // calls itself with next depth of object
+    if (typeof obj[k] === 'object' && obj[k] !== null) {
+      // removes array
+      if (Array.isArray(obj[k]) && k !== 'notifications') {
+        obj[k] = obj[k][0]
+      }
+      removeNestedArrays(obj[k])
+    // eslint-disable-next-line no-prototype-builtins
+    } else if (obj.hasOwnProperty(k)) {
+      return
+    }
+  }
+  return obj
 }
