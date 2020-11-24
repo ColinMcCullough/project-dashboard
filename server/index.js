@@ -10,6 +10,34 @@ const bullQueues = require('./controllers/queue')
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 bullQueues.createQueues()
+const g5Auth = require('../../g5-auth-js')
+const {
+  G5_AUTH_ENDPOINT: authorizationURL,
+  G5_TOKEN_ENDPOINT: tokenURL,
+  G5_AUTH_CLIENT_ID: clientID,
+  G5_AUTH_CLIENT_SECRET: clientSecret,
+  G5_AUTH_REDIRECT_URI: callbackURL,
+  G5_AUTH_ME_ENDPOINT: authMeEndpoint,
+  SESSION_SECRET: secret
+} = process.env
+
+const authConfig = {
+  passport: {
+    authorizationURL,
+    tokenURL,
+    clientID,
+    clientSecret,
+    callbackURL
+  },
+  authMeEndpoint,
+  session: {
+    secret
+  },
+  sucessRedirectPath: '/'
+}
+
+g5Auth.init(app, authConfig)
+app.use(g5Auth.isAuthenticated)
 require('./controllers/queue')
 require('./routes')(app)
 

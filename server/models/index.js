@@ -37,11 +37,11 @@ const sequelize = new Sequelize(dbUrl, {
   },
   logging: (logging === 'true')
 })
-
+const authModels = require('../../../g5-auth-js').models(sequelize)
 // NOT SURE THIS WILL WORK, BUT IT SEEMS LIKE WE WOULD WANT TO OPTIONALIZE THESE
 const db = {
-  ...includeAuth ? require('@getg5/g5-auth').models(sequelize) : {},
-  ...includeUpdatables ? require('@getg5/g5-updatable').models(sequelize) : {}
+  ...authModels
+  // ...includeUpdatables ? require('@getg5/g5-updatable').models(sequelize) : {}
 }
 
 // db.user.associate = (models) => {
