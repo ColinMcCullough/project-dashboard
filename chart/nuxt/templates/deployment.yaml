@@ -63,6 +63,21 @@ spec:
             value: "1000"
           - name: DATABASE_SSL
             value: "true"
+          - name: SF_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_USERNAME
+          - name: SF_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_PASSWORD
+          - name: SF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_TOKEN
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:

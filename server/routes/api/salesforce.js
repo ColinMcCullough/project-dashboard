@@ -4,7 +4,7 @@ const { removeNestedArrays } = require('../../utilities/object')
 const { salesforce } = queues
 module.exports = (app) => {
   // app.use('/api/v1/new-project', xmlParse())
-  // app.use('/api/v1/xml/project', xmlParse())
+  app.use('/api/v1/xml/project', xmlParse())
   app.post('/api/v1/xml/project', async (req, res) => {
     try {
       const { body } = req
