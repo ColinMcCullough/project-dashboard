@@ -1,10 +1,10 @@
 <template>
   <b-card
     no-body
-    border-variant="success-1"
+    border-variant="gray-60"
     style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
   >
-    <b-tabs vertical pills card>
+    <b-tabs vertical pills card class="tab-padding">
       <b-tab
         v-for="(location, i) in locations"
         :key="`${location.locationId}-${i}`"
@@ -16,7 +16,6 @@
         <b-tabs
           active-nav-item-class="text-light bg-secondary"
         >
-          <b-container fluid>
             <b-tab
               v-for="(tab, index) in tabs"
               :key="`${tab.id}-${index}`"
@@ -38,7 +37,6 @@
                 </b-col>
               </b-row>
             </b-tab>
-          </b-container>
         </b-tabs>
         <!-- horizontal tabs end -->
       </b-tab>

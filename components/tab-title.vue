@@ -1,46 +1,21 @@
 <template>
   <div>
-    <div class="d-flex">
-      <b-card-group deck>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-      </b-card-group>
+    <div class="d-flex mb-2">
+      <b-badge
+        v-for="(status, i) in fields"
+        :key="`location-status-group-${i}`"
+        :variant="`${status.variant}-20`"
+        class="pr-3"
+      >
+        <span :class="`bg-${status.variant}-60`" class="text-center font-weight-bold mr-2 px-2 rounded text-light">
+          {{ status.count }}
+        </span>
+        {{ status.label }}
+      </b-badge>
     </div>
-    <h4>
+    <h4 class="w-100 text-truncate">
       {{ title }}
     </h4>
-    Status stuff
   </div>
 </template>
 
@@ -51,6 +26,28 @@ export default {
       type: String,
       default() {
         return ''
+      }
+    },
+    fields: {
+      type: Array,
+      default () {
+        return [
+          {
+            label: 'Completed',
+            count: 14,
+            variant: 'success'
+          },
+          {
+            label: 'Suggested',
+            count: 35,
+            variant: 'warning'
+          },
+          {
+            label: 'Required',
+            count: 4,
+            variant: 'error'
+          }
+        ]
       }
     }
   }
