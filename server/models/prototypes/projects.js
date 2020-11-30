@@ -60,12 +60,14 @@ module.exports = (models, sequelize, Sequelize) => {
         locations,
         project_status: status,
         estimated_go_live: estGoLive,
-        salesforce_project_id: projectId
+        salesforce_project_id: projectId,
+        project_name: projectName
       } = project.toJSON()
       return {
         clientName: null,
         clientId: null,
         projectId,
+        projectName,
         status,
         estGoLive,
         locationCount: locations.length,
