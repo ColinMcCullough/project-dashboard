@@ -1,8 +1,8 @@
 <template>
-  <b-container fluid style="max-width: 1400px; margin-top: 130px;">
+  <b-container fluid style="max-width: 1400px; margin-top: 160px;">
     <top-nav :show="true">
       <b-btn
-        variant="outline-success-0"
+        variant="outline-secondary-20"
         to="/dev/dashboard"
         size="sm"
         class="mr-2"
@@ -10,7 +10,7 @@
         Dev
       </b-btn>
       <b-btn
-        variant="outline-success-0"
+        variant="outline-secondary-20"
         to="/queues"
         size="sm"
         class="mr-2"
@@ -18,7 +18,7 @@
         Queues and Jobs
       </b-btn>
       <b-btn
-        variant="outline-success-0"
+        variant="outline-secondary-20"
         size="sm"
         to="/dev/asset-scraper"
       >
@@ -26,14 +26,28 @@
       </b-btn>
       <template v-slot:secondary-nav>
         <div class="d-flex mb-0 align-items-center justify-content-between w-100">
-          <b-input-group size="sm" class="mr-2">
-            <b-input-group-prepend class="d-flex px-2 align-items-center">
+          <b-input-group class="mr-2">
+            <b-input-group-prepend class="d-flex px-2 align-items-center text-uppercase font-weight-bold">
               Sort By
             </b-input-group-prepend>
-            <b-form-select v-model="sortBy" :options="sortBys" />
-            <b-form-select v-model="sortDir" :options="sortDirs" />
+            <b-form-select v-model="sortBy" :options="sortBys" class="mr-2" />
+              <b-btn
+                :variant="sortDir === 'asc' ? 'secondary-70' : 'secondary'"
+                class="mr-2"
+                pill
+                @click="sortDir = 'asc'"
+              >
+                <b-icon-sort-up />
+              </b-btn>
+              <b-btn
+                :variant="sortDir === 'desc' ? 'secondary-70' : 'secondary'"
+                pill
+                @click="sortDir = 'desc'"
+              >
+                <b-icon-sort-down-alt />
+              </b-btn>
           </b-input-group>
-          <b-input-group size="sm">
+          <b-input-group>
             <b-input-group-prepend class="d-flex px-2 align-items-center">
               <b-icon-search />
             </b-input-group-prepend>
@@ -44,8 +58,8 @@
             />
             <b-btn
               v-if="filter"
-              variant="outline-success-1"
-              size="sm"
+              variant="error"
+              pill
               @click="filter = ''"
             >
               <b-icon-x-circle />
@@ -76,18 +90,14 @@
       <project-review />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
-    <b-card style="overflow-x: hidden;" class="my-5">
-      <b-row>
-        <b-col>
-          <project-header />
-        </b-col>
-      </b-row>
+    <b-card style="overflow-x: hidden;" class="my-5" no-body>
       <b-table
         :fields="fields"
         :items="projects"
         :sort-by.sync="sortBy"
         :sort-direction.sync="sortDir"
         :filter="filter"
+        responsive
         class="p-0 m-0 border-0 hide"
       >
         <template v-slot:cell(toDisplay)="data">
@@ -117,16 +127,12 @@ export default {
         { text: 'Project ID', value: 'projectId' }
       ],
       sortDir: 'asc',
-      sortDirs: [
-        { text: 'Ascending', value: 'asc' },
-        { text: 'Descending', value: 'desc' }
-      ],
       filter: '',
       fields: [
         { key: 'client', sortable: true, tdClass: 'd-none' },
         { key: 'projectId', sortable: true, tdClass: 'd-none' },
         { key: 'estGoLive', sortable: true, tdClass: 'd-none' },
-        { key: 'toDisplay' }
+        { key: 'toDisplay', tdClass: 'border-0' }
       ]
     }
   },
