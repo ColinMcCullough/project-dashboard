@@ -38,6 +38,19 @@ const authConfig = {
 
 g5Auth.init(app, authConfig)
 app.use(g5Auth.isAuthenticated)
+app.use(async function (req, res, next) {
+  const { id } = req.user
+  const user = await models.user.findOne({
+    where: { id },
+    include: [{ model: models.role }]
+  })
+  const userJson = user.toJSON()
+  req.userRoles = userJson.roles.map((role) => {
+    const { name, type, urn } = role
+    return { name, type, urn }
+  })
+  next()
+})
 require('./controllers/queue')
 require('./routes')(app)
 
