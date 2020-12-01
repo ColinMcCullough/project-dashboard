@@ -45,6 +45,14 @@
       <template v-slot:cell(valid)="data">
         <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
       </template>
+      <template v-slot:cell(corporate)="data">
+        <b-form-checkbox
+          :checked="data.item.properties.corporate"
+          name="check-button"
+          switch
+          @input="onInput($event, data.item.locationId, data.field.key)"
+        />
+      </template>
     </b-table>
     <template v-slot:footer>
       <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
@@ -78,6 +86,11 @@ export default {
           key: 'url',
           label: 'URL',
           sortable: true
+        },
+        {
+          key: 'corporate',
+          label: 'Corporate',
+          sortable: false
         }
       ],
       iconConfig: {
@@ -115,7 +128,7 @@ export default {
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
-          properties: { url: location.properties.url }
+          properties: { url: location.properties.url, corporate: location.properties.corporate }
         }
       })
       this.saveLocations(this.projectId, locations)

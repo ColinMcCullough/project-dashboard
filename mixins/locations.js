@@ -28,7 +28,7 @@ export default {
     },
     onUpdate({ locIdx, key, val }) {
       this.updateLocationProp({ locIdx, key, val })
-      if (key !== 'url') {
+      if (key !== 'url' || key !== 'corporate') {
         this.updateLocation({ locIdx, key: 'edited', val: true })
       }
     },
