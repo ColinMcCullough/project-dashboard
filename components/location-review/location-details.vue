@@ -1,23 +1,28 @@
 <template>
   <div class="my-3">
-    <b-row class="mx-2">
-      <b-input-group
-        v-for="(field, i) in fields"
+    <div
+      v-for="(fieldRow, i) in fields"
+      :key="`field-row-${i}`"
+      class="d-flex justify-content-between w-100 mb-0 flex-wrap"
+    >
+      <b-form-group
+        v-for="(field, i) in fieldRow"
         :key="`detail-${i}`"
-        :prepend="titleCase(field)"
-        class="pb-1"
+        :label="titleCase(field)"
+        label-class="text-uppercase text-gray font-weight-bold"
+        class="mr-2"
+        style="flex: 1 1 auto;"
       >
         <b-form-input
           v-if="inputs.includes(field)"
           :placeholder="`Enter ${titleCase(field)}`"
           :state="validate(field)"
           :value="form[field]"
-          style="border-width: 1px"
           @input="onInput($event, field)"
         />
         <b-form-invalid-feedback
           :state="validate(field)"
-          class="m-0 abs-feedback"
+          class="m-0"
         >
           {{ getFeedback(field) }}
         </b-form-invalid-feedback>
@@ -28,6 +33,13 @@
           :state="form[field] !== null"
           :options="getStates"
           @change="onInput($event, field)"
+        />
+        <accordion-toggle
+          v-if="field === 'usps-validation'"
+          :id="accordionId"
+          :text="accordionTxt"
+          :visible="visible"
+          @visible-update="updateVisible"
         />
         <b-form-select
           v-if="field === 'country'"
@@ -40,14 +52,8 @@
             form[field] = $event
           }"
         />
-      </b-input-group>
-    </b-row>
-    <accordion-toggle
-      :id="accordionId"
-      :text="accordionTxt"
-      :visible="visible"
-      @visible-update="updateVisible"
-    />
+      </b-form-group>
+    </div>
     <usps-validation
       v-if="visible"
       :id="id"
@@ -72,18 +78,14 @@ export default {
   data () {
     return {
       fields: [
-        'name',
-        'street_address_1',
-        'street_address_2',
-        'city',
-        'state',
-        'postal_code',
-        'country',
-        'local_phone_number',
-        'display_phone_number'
+        ['name'],
+        ['street_address_1', 'usps-validation'],
+        ['street_address_2'],
+        ['city', 'state', 'postal_code', 'country'],
+        ['local_phone_number', 'display_phone_number']
       ],
       visible: false,
-      accordionTxt: 'USPS Verification',
+      accordionTxt: 'Verify',
       accordionId: 'usps-validation',
       phoneRegex: /^\d{3}-\d{3}-\d{4}$/,
       inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
@@ -135,15 +137,17 @@ export default {
     },
     getFeedback(field) {
       if (field === 'local_phone_number' || field === 'display_phone_number') {
-        return 'EX: 555-555-555'
+        return 'ex. 123-456-7890'
       }
     }
   }
 }
 </script>
 
-<style>
-  .abs-feedback {
+<style lang="scss">
+.abs-feedback {
+  position: relative;
+  &__feedback {
     position: absolute;
     top: 50%;
     right: 0;
@@ -153,4 +157,5 @@ export default {
     font-weight: 700;
     z-index: 9999;
   }
+}
 </style>

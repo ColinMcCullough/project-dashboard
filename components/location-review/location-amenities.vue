@@ -43,6 +43,7 @@
 <script>
 import Locations from '~/mixins/locations'
 export default {
+  name: 'location-amenities',
   mixins: [Locations],
   props: {
     id: {

@@ -66,6 +66,13 @@
               Clear
             </b-btn>
           </b-input-group>
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="totalRows"
+            :per-page="perPage"
+            pills
+            class="mb-0 ml-2"
+          />
         </div>
       </template>
     </top-nav>
@@ -97,6 +104,8 @@
         :sort-by.sync="sortBy"
         :sort-direction.sync="sortDir"
         :filter="filter"
+        :per-page="perPage"
+        :current-page="currentPage"
         responsive
         class="p-0 m-0 border-0 hide"
       >
@@ -119,8 +128,11 @@ export default {
   },
   data() {
     return {
-      projectId: null,
+      // projectId: null,
       sortBy: 'estGoLive',
+      perPage: 10,
+      perPages: [10, 25, 50, 100],
+      currentPage: 1,
       sortBys: [
         { text: 'Client Name', value: 'client' },
         { text: 'Est. Go-Live Date', value: 'estGoLive' },
@@ -136,8 +148,13 @@ export default {
       ]
     }
   },
+  computed: {
+    totalRows () {
+      return this.projects.length
+    }
+  },
   methods: {
-    sortCompare(aRow, bRow) {
+    sortCompare (aRow, bRow) {
       let a, b
       if (this.sortBy) {
         a = aRow[this.sortBy]
@@ -152,5 +169,19 @@ export default {
 <style lang="scss">
 .hide thead[role=rowgroup] {
   display: none;
+}
+.page-link {
+  border: 2px solid #82c9c9;
+  color: #82c9c9;
+  background-color: transparent;
+}
+.page-item.disabled .page-link {
+  border: 2px solid #2c8181;
+  color: #2c8181;
+  background-color: transparent;
+}
+.page-item.active .page-link {
+  border: 2px solid #82c9c9;
+  background-color: #82c9c9;
 }
 </style>

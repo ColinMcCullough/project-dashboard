@@ -4,7 +4,7 @@
       <b-btn
         style="align-items: center;"
         size="sm"
-        variant="outline-success-0"
+        variant="outline-secondary-20"
         @click="pauseAllQueues()"
       >
         {{ allQueuesPaused ? 'Resume all Queues' : 'Pause all Queues' }}
@@ -22,29 +22,29 @@
           >
             <b-card
               header-class="d-flex justify-content-between align-items-center p-0 flex-wrap"
-              bg-variant="success-0"
-              header-text-variant="success-1"
+              bg-variant="primary-20"
+              header-text-variant="primary"
               class="p-1"
               no-body
             >
               <template v-slot:header>
                 <b-btn-group size="sm" class="d-flex w-100">
                   <b-btn
-                    variant="success-1"
+                    variant="primary-70"
                     class="flex-grow-1 text-uppercase mb-0 font-weight-bold"
                   >
                     <b-icon-caret-down />
                     {{ queue.name }}
                   </b-btn>
                   <b-btn
-                    variant="outline-success-1"
+                    variant="outline-primary-70"
                     class="flex-grow-0"
                     @click="getAllJobs(queue.name)"
                   >
                     Get all Jobs
                   </b-btn>
                   <b-btn
-                    variant="outline-success-1"
+                    variant="outline-primary-70"
                     class="flex-grow-0"
                     @click="pauseQueue(queue.name)"
                   >
@@ -66,7 +66,7 @@
                     {{ key }}
                   </span>
                   <b-badge
-                    :variant="status === 0 ? 'muted' : 'success-1'"
+                    :variant="status === 0 ? 'muted' : 'success'"
                     pill
                   >
                     {{ status }}

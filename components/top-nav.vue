@@ -15,7 +15,7 @@
         title="G5 Marketing"
         class="mx-3"
       />
-      <h1 class="h1-nav-brand text-primary-70">
+      <h1 class="h1-nav-brand text-primary-70 text-uppercase">
         Project Onboarding
       </h1>
     </b-navbar-brand>
@@ -43,7 +43,7 @@
     </b-navbar-nav>
     <div v-if="show" class="secondary-nav bg-primary-60 text-secondary-20 d-flex">
       <slot name="secondary-nav" />
-      <div class="tertiary-nav bg-primary-70">
+      <div class="tertiary-nav bg-primary-70 px-5">
         <project-header />
       </div>
     </div>
@@ -75,7 +75,7 @@ export default {
 }
 .secondary-nav {
   position: absolute;
-  box-shadow: 0 5px 20px rgba(10, 10, 10, 0.3);
+  box-shadow: inset 0 5px 20px rgba(10, 10, 10, 0.3);
   left: 0;
   right: 0;
   height: 100%;
@@ -94,8 +94,9 @@ export default {
     border-radius: 20px;
     border: 2px solid #82c9c9;
     background: transparent;
+    color: white;
     &::placeholder {
-      color: #c1c1c1;
+      color: #2c8181;
     }
   }
 }
