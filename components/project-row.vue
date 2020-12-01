@@ -7,21 +7,30 @@
       <p class="font-weight-bold mb-0">
         {{ project.clientName === null ? 'Client Name' : project.clientName }}
       </p>
-      {{ project.projectName }}
-      <!-- <b-badge variant="primary" class="px-3 rounded">
+      <p
+        v-b-popover.hover.top="project.projectName"
+        class="text-gray-60 text-truncate mb-0"
+      >
+        {{ project.projectName }}
+      </p>
+      <b-badge variant="primary" class="px-3 rounded">
         est. Go-live: {{ processTime(project.estGoLive) }}
-      </b-badge> -->
+      </b-badge>
     </b-card>
+    <!-- START INTAKE CARD -->
     <b-card
       :class="[{ 'is-complete': project.discoverComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
-      style="flex: 0 1 40%;"
+      style="flex: 0 1 35%;"
     >
       <div
-        v-if="!project.discoverComplete"
         class="d-flex flex-column justify-content-center"
       >
-        <b-badge variant="error" class="px-3 rounded mb-2">
+        <b-badge
+          v-if="!project.discoverComplete"
+          variant="error"
+          class="px-3 rounded mb-2"
+        >
           <b-icon-exclamation-triangle-fill
             scale="2em"
             variant="light"
@@ -30,6 +39,19 @@
           />
           {{ project.locationCount }}
           Locations require review.
+        </b-badge>
+        <b-badge
+          v-else
+          variant="secondary-60"
+          class="px-3 rounded mb-2"
+        >
+          <b-icon-check-circle-fill
+            scale="2em"
+            variant="light"
+            shift-h="-8"
+            shift-v="8"
+          />
+          Locations have URLs set.
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
@@ -40,18 +62,11 @@
           </template>
         </status-btn>
       </div>
-      <b-icon-check-circle-fill
-        v-else
-        scale="5em"
-        variant="light"
-        shift-h="4"
-        class="mx-0"
-      />
     </b-card>
     <b-card
       :class="[{ 'is-complete': project.scrapeComplete }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
-      style="flex: 0 1 40%;"
+      style="flex: 0 1 35%;"
     >
       <b-btn-group
         v-if="!project.scrapeComplete"
@@ -69,10 +84,8 @@
               <b-icon
                 v-if="project.discoverComplete"
                 icon="check-circle-fill"
-                shift-h="-12"
-                shift-v="12"
                 stacked
-                variant="success-0"
+                variant="light"
               />
             </b-iconstack>
           </template>
@@ -182,7 +195,7 @@ export default {
 <style lang="scss">
 $complete: #82c9c9;
 $alert: #db7f8f;
-$disabled: #c1c1c1;
+$disabled: #e3e3e3;
 $blue: #314a69;
 $dk_blue: #102340;
 $green: #1e5354;
@@ -206,7 +219,8 @@ $height: 115px;
   clip-path: polygon(calc(100% - 35px) 0%, 100% 50%, calc(100% - 35px) 100%, 0% 100%, 35px 50%, 0% 0%);
   height: $height;
   &.is-alert {
-    background: $alert;
+    background-color: $alert;
+    background: linear-gradient(35deg, #cc4d6a, $alert);
   }
   &.is-neutral {
     background: $disabled;
