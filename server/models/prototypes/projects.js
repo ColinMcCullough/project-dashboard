@@ -74,7 +74,9 @@ module.exports = (models, sequelize, Sequelize) => {
         discoverComplete,
         scrapeComplete,
         excessivePages: false,
-        g5Approved: false
+        g5Approved: false,
+        urlsSet: false,
+        urlsMissing: 2
       }
     })
   }
