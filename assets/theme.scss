@@ -58,39 +58,10 @@ $bv-enable-table-stacked: true;
 // BOOTSTRAP VARIABLES DECLARED ABOVE
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-vue/src/index.scss';
-@import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 // OVERRIDES BELOW
 .form-control,
 .custom-select {
   border-width: 2px !important;
   border-radius: 10px;
-}
-.multiselect__spinner:after,
-.multiselect__spinner:before {
-  border-top-color: #2f4a6a;
-}
-.multiselect__tag,
-.multiselect__option--highlight,
-.multiselect__option--highlight:after {
-  background: #2f4a6a;
-}
-.multiselect__input,
-.multiselect__single {
-  margin-bottom: 0;
-}
-.multiselect__tags {
-  border: 2px solid #c1c1c1;
-}
-.multiselect__tag-icon:hover {
-  background:#2f4a6a;
-}
-.multiselect__tag-icon:after {
-  color:#ababab;
-}
-.multiselect__option--selected.multiselect__option--highlight,
-.multiselect__option--selected.multiselect__option--highlight:after,
-.multiselect__option--group-selected.multiselect__option--highlight,
-.multiselect__option--group-selected.multiselect__option--highlight:after {
-  background:#be2350;
 }

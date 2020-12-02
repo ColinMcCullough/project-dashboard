@@ -67,14 +67,6 @@ import Locations from '~/mixins/locations'
 import GlobalFunctions from '~/mixins/global-functions'
 export default {
   mixins: [States, Locations, GlobalFunctions],
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
   data () {
     return {
       fields: [
@@ -101,6 +93,9 @@ export default {
     }
   },
   computed: {
+    id() {
+      return this.selectedLocation.locationId
+    },
     form() {
       return this.locationById(this.id).properties
     },
@@ -119,9 +114,9 @@ export default {
       const locIdx = this.getLocationIndex(this.id)
       if (key === 'local_phone_number' || key === 'display_phone_number') {
         const formatted = val.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
-        this.onUpdate({ locIdx, key, val: formatted })
+        this.onUpdate({ locIdx, key, val: formatted }, true)
       } else {
-        this.onUpdate({ locIdx, key, val })
+        this.onUpdate({ locIdx, key, val }, true)
       }
     },
     validate(field) {

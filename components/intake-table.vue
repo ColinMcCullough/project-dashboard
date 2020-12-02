@@ -42,19 +42,45 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </template>
+      <template v-slot:cell(vendor)="data">
+        <b-form-group class="mb-0" style="position: relative;">
+          <b-form-input
+            :value="data.item.properties.vendor"
+            placeholder="Location Vendor"
+            class="text-left"
+            required
+            @input="onInput($event, data.item.locationId, data.field.key)"
+          />
+        </b-form-group>
+      </template>
       <template v-slot:cell(valid)="data">
         <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
       </template>
       <template v-slot:cell(corporate)="data">
         <b-form-checkbox
           :checked="data.item.properties.corporate"
-          name="check-button"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
+          switch
+          @input="onInput($event, data.item.locationId, data.field.key)"
+        />
+      </template>
+      <template v-slot:cell(singleDomain)="data">
+        <b-form-checkbox
+          :checked="data.item.properties.singleDomain"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
           switch
           @input="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
     </b-table>
     <template v-slot:footer>
+      <p v-if="multipleCorpSelected" class="text-danger">
+        Warning: Multiple Corporate Locations Selected
+      </p>
       <b-btn
         :disabled="disabledBtn"
         variant="outline-secondary"
@@ -94,9 +120,19 @@ export default {
           sortable: true
         },
         {
+          key: 'vendor',
+          label: 'Vendor',
+          sortable: true
+        },
+        {
           key: 'corporate',
-          label: 'Corporate',
-          sortable: false
+          label: 'Corporate?',
+          sortable: true
+        },
+        {
+          key: 'singleDomain',
+          label: 'Single Domain?',
+          sortable: true
         }
       ],
       iconConfig: {
@@ -108,12 +144,25 @@ export default {
     }
   },
   computed: {
+    multipleCorpSelected() {
+      let count = 0
+      let val = false
+      for (let i = 0; i < this.locations.length; i++) {
+        if (count > 1) {
+          val = true
+          break
+        } else if (this.locations[i].properties.corporate === true) {
+          count++
+        }
+      }
+      console.log(count)
+      console.log(val)
+      return val
+    },
     disabledBtn() {
       return this.locations
         .some(location => !this.validUrl(location.properties.url))
     }
-  },
-  watch: {
   },
   methods: {
     validUrl(str) {
@@ -136,7 +185,9 @@ export default {
           locationId: location.locationId,
           properties: {
             url: location.properties.url,
-            corporate: location.properties.corporate
+            corporate: location.properties.corporate,
+            vendor: location.properties.vendor,
+            singleDomain: location.properties.singleDomain
           }
         }
       })
