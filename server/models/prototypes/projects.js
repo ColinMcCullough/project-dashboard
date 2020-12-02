@@ -35,6 +35,19 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+
+  models.project.prototype.allApproved = function () {
+    const data = this.toJSON()
+    this.dataValues.g5Approved = true
+    this.dataValues.urlsMissing = 0
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      if (!location.g5Approved) {
+        this.dataValues.g5Approved = false
+        break
+      }
+    }
+  }
   models.project.locationsByProjectId = async (projectId) => {
     const project = await models.project.findOne({
       where: {
@@ -65,6 +78,7 @@ module.exports = (models, sequelize, Sequelize) => {
       project.areAllCrawled()
       project.areAllScraped()
       project.allUrlsSet()
+      project.allApproved()
     })
     return projects.map((project) => {
       const {
@@ -76,7 +90,8 @@ module.exports = (models, sequelize, Sequelize) => {
         salesforce_project_id: projectId,
         project_name: projectName,
         urlsSet,
-        urlsMissing
+        urlsMissing,
+        g5Approved
       } = project.toJSON()
       return {
         clientName: null,
@@ -89,7 +104,7 @@ module.exports = (models, sequelize, Sequelize) => {
         discoverComplete,
         scrapeComplete,
         excessivePages: false,
-        g5Approved: false,
+        g5Approved,
         urlsSet,
         urlsMissing
       }
