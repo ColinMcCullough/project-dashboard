@@ -88,7 +88,7 @@
         style="min-width: 120px;"
         @click="onSave"
       >
-        <b-icon-check-circle :animation="{ 'throb': isSaving }" />
+        <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
         {{ isSaving ? 'Saving...' : 'Save URLs' }}
       </b-btn>
     </template>
