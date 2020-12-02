@@ -19,6 +19,14 @@
         Project Onboarding
       </h1>
     </b-navbar-brand>
+    <b-navbar-nav>
+      <b-badge variant="error-30" class="px-2 align-self-center mr-2 rounded">
+        BETA
+      </b-badge>
+      <span class="text-primary-70 align-self-center">
+        v.{{ version }}
+      </span>
+    </b-navbar-nav>
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto pr-2">
       <b-btn
@@ -51,6 +59,7 @@
 </template>
 
 <script>
+import { version } from '~/package.json'
 export default {
   props: {
     show: {
@@ -60,6 +69,7 @@ export default {
   },
   data() {
     return {
+      version,
       icon: {
         size: '1.5em',
         color: '#8dc7cb'
