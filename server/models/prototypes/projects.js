@@ -22,7 +22,32 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+  models.project.prototype.allUrlsSet = function () {
+    const data = this.toJSON()
+    this.dataValues.urlsSet = true
+    this.dataValues.urlsMissing = 0
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      console.log(location.properties.url)
+      if (!location.properties.url) {
+        this.dataValues.urlsSet = false
+        this.dataValues.urlsMissing++
+      }
+    }
+  }
 
+  models.project.prototype.allApproved = function () {
+    const data = this.toJSON()
+    this.dataValues.g5Approved = true
+    this.dataValues.urlsMissing = 0
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      if (!location.g5Approved) {
+        this.dataValues.g5Approved = false
+        break
+      }
+    }
+  }
   models.project.locationsByProjectId = async (projectId) => {
     const project = await models.project.findOne({
       where: {
@@ -52,6 +77,8 @@ module.exports = (models, sequelize, Sequelize) => {
     projects.forEach((project) => {
       project.areAllCrawled()
       project.areAllScraped()
+      project.allUrlsSet()
+      project.allApproved()
     })
     return projects.map((project) => {
       const {
@@ -61,7 +88,10 @@ module.exports = (models, sequelize, Sequelize) => {
         project_status: status,
         estimated_go_live: estGoLive,
         salesforce_project_id: projectId,
-        project_name: projectName
+        project_name: projectName,
+        urlsSet,
+        urlsMissing,
+        g5Approved
       } = project.toJSON()
       return {
         clientName: null,
@@ -74,9 +104,9 @@ module.exports = (models, sequelize, Sequelize) => {
         discoverComplete,
         scrapeComplete,
         excessivePages: false,
-        g5Approved: false,
-        urlsSet: false,
-        urlsMissing: 2
+        g5Approved,
+        urlsSet,
+        urlsMissing
       }
     })
   }

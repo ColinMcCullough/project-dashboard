@@ -56,7 +56,6 @@ export default {
 .table.b-table > tbody > .table-active,
 .table.b-table > tbody > .table-active > th,
 .table.b-table > tbody > .table-active > td {
-  background-color: #4e6f96 !important;
-  box-shadow: inset 10px 0 0 0 #6889b0 !important;
+  background-color: #6989b0 !important;
 }
 </style>

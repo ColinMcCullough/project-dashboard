@@ -35,10 +35,7 @@
 import Locations from '~/mixins/locations'
 import GlobalFunctions from '~/mixins/global-functions'
 export default {
-  components: {
-  },
   mixins: [Locations, GlobalFunctions],
-  props: {},
   data() {
     return {
       enqueing: false
