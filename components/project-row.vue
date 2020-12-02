@@ -17,7 +17,7 @@
         </b-btn>
         <b-badge variant="primary-20" class="px-2 rounded align-self-center ml-2">
           <b-icon-building />
-          {{ project.locationCount }} Locations
+          {{ project.locationCount }} {{ project.locationCount > 1 ? 'Locations' : 'Location' }}
         </b-badge>
       </p>
       {{ project.clientName === null ? 'Client Name' : project.clientName }}
@@ -27,7 +27,7 @@
       >
         {{ project.projectName }}
       </p>
-      <b-badge variant="gray" class="px-1 rounded d-flex">
+      <b-badge variant="gray" class="px-1 rounded align-self-start">
         est. Go-live: {{ processTime(project.estGoLive) }}
       </b-badge>
     </b-card>
@@ -75,8 +75,9 @@
         </status-btn>
       </div>
     </b-card>
+    <!-- START RESULTS COLUMN -->
     <b-card
-      :class="[{ 'is-disabled': !project.discoverComplete }, { 'is-complete': project.g5Approved }, ...cardClass]"
+      :class="[{ 'is-disabled': !project.urlsSet }, { 'is-complete': project.g5Approved }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 35%;"
     >
@@ -89,15 +90,19 @@
             @click="runDiscover(project.projectId)"
           >
             <b-icon
-              v-if="!project.discoverComplete"
-              :icon="crawling ? 'arrow-clockwise' : 'minecart'"
-              :animation="crawling ? 'spin' : ''"
-              variant="light"
-            />
-            <b-icon
-              v-else
+              v-if="project.discoverComplete"
               icon="check-circle-fill"
+              scale="1.8em"
               variant="light"
+              shift-h="-8"
+              shift-v="8"
+            />
+            <b-icon-exclamation-triangle-fill
+              v-else
+              scale="1.8em"
+              variant="light"
+              shift-h="-8"
+              shift-v="8"
             />
             Crawl
           </b-badge>
@@ -108,14 +113,19 @@
             @click="launchModal('scraper-modal', project.projectId)"
           >
             <b-icon
-              v-if="!project.scrapeComplete"
-              icon="minecart-loaded"
-              variant="light"
-            />
-            <b-icon
-              v-else
+              v-if="project.scrapeComplete"
               icon="check-circle-fill"
+              scale="1.8em"
               variant="light"
+              shift-h="-8"
+              shift-v="8"
+            />
+            <b-icon-exclamation-triangle-fill
+              v-else
+              scale="1.8em"
+              variant="light"
+              shift-h="-8"
+              shift-v="8"
             />
             Scrape
           </b-badge>
