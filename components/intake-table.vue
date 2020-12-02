@@ -156,8 +156,6 @@ export default {
           count++
         }
       }
-      console.log(count)
-      console.log(val)
       return val
     },
     disabledBtn() {

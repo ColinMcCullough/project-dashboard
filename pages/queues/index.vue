@@ -97,7 +97,7 @@ export default {
     TopNav
   },
   mixins: [RedisMixin],
-  async fetch ({ store }) {
+  async fetch({ store }) {
     try {
       await store.dispatch('queue/init')
     } catch (e) {

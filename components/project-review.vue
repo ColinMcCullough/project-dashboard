@@ -41,7 +41,7 @@
           </b-tabs>
           <!-- horizontal tabs end -->
           <b-row v-if="selectedLocation !== null">
-            <b-col class="text-right mr-4">
+            <b-col class="text-right mr-2 mt-2">
               <b-button
                 size="md"
                 :disabled="isDisabled"
@@ -97,7 +97,6 @@ export default {
   },
   computed: {
     isDisabled() {
-      console.log(this.selectedLocation.edited)
       return !this.selectedLocation.edited
     }
   },

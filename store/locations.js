@@ -15,7 +15,7 @@ export const actions = {
         const details = JSON.parse(JSON.stringify(scrapeDetails))
         return {
           ...obj,
-          edited: 'false',
+          edited: false,
           validUrls: false,
           ...details
         }
