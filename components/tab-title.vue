@@ -13,7 +13,7 @@
         {{ status.label }}
       </b-badge>
     </div>
-    <h5 class="w-100 text-truncate text-light">
+    <h5 class="w-100 text-truncate">
       {{ title }}
     </h5>
   </div>
