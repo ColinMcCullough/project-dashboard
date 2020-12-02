@@ -193,7 +193,8 @@ export default {
       })
       await this.saveLocations(this.projectId, locations)
       this.$store.dispatch('projects/update', this.projectId)
-      setTimeout(() => { this.isSaving = false }, 3500)
+      this.isSaving = false
+      // setTimeout(() => { this.isSaving = false }, 3500)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b

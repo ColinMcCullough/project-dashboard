@@ -25,7 +25,8 @@
           style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
           @click="onSave"
         >
-          <save-icon v-bind="{ size: '2em' }" />
+          <b-icon-arrow-clockwise v-if="isSaving" animation="spin" font-scale="2" />
+          <save-icon v-else v-bind="{ size: '2em' }" />
         </b-btn>
         <b-btn
           variant="transparent"
@@ -60,7 +61,7 @@ export default {
   },
   data () {
     return {
-      saving: false
+      isSaving: false
     }
   },
   computed: {},
@@ -69,16 +70,18 @@ export default {
       this.$bvModal.hide(this.id)
     },
     async onSave() {
-      this.saving = true
-      await this.locations.forEach(async (location) => {
+      this.isSaving = true
+      for (let i = 0; i < this.locations.length; i++) {
+        const location = this.locations[i]
         if (location.edited === true) {
           const { locationId, properties } = location
           const locIdx = this.getLocationIndex(locationId)
           await this.saveLocation(this.projectId, locationId, { properties })
           this.updateLocation({ locIdx, key: 'edited', val: false })
         }
-      })
-      this.saving = false
+      }
+      this.isSaving = false
+      this.hide()
     }
   }
 }

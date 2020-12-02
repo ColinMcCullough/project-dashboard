@@ -38,10 +38,12 @@ export default {
     this.$refs.locationListTbl.selectRow(selectedLocationTableIndex)
   },
   methods: {
-    onLocationSelect (selectedLocation) {
-      console.log(selectedLocation)
-      const location = selectedLocation[0]
-      this.updateSelectedLocations({ selectedLocation: location })
+    onLocationSelect (selected) {
+      let selectedLocation = null
+      if (selected.length > 0) {
+        selectedLocation = selected[0]
+      }
+      this.updateSelectedLocations({ selectedLocation })
     }
   }
 }
