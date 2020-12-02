@@ -46,14 +46,12 @@
 </template>
 
 <script>
-import VueMultiselect from 'vue-multiselect'
 import LocationAmenities from '~/components/location-review/location-amenities'
 import LocationAssets from '~/components/location-review/location-assets'
 import LocationDetails from '~/components/location-review/location-details'
 import Locations from '~/mixins/locations'
 export default {
   components: {
-    VueMultiselect,
     LocationAmenities,
     LocationAssets,
     LocationDetails
