@@ -72,7 +72,9 @@ module.exports = (models, sequelize, Sequelize) => {
         estGoLive,
         locationCount: locations.length,
         discoverComplete,
-        scrapeComplete
+        scrapeComplete,
+        excessivePages: false,
+        g5Approved: false
       }
     })
   }
