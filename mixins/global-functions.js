@@ -12,7 +12,8 @@ export default {
       }).join(' ')
     },
     processTime(val) {
-      return new Date(val).toLocaleString()
+      const date = new Date(val)
+      return new Intl.DateTimeFormat('en-US').format(date)
     },
     validURL(string) {
       let url

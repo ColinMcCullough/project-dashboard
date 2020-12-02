@@ -5,9 +5,9 @@
         v-for="(status, i) in fields"
         :key="`location-status-group-${i}`"
         :variant="`${status.variant}-20`"
-        class="pr-3"
+        class="pl-0 rounded pr-3 mr-2"
       >
-        <span :class="`bg-${status.variant}-60`" class="text-center font-weight-bold mr-2 px-2 rounded text-light">
+        <span :class="`bg-${status.variant}-60`" class="font-weight-bold rounded text-light pl-1 mr-1">
           {{ status.count }}
         </span>
         {{ status.label }}

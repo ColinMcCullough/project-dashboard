@@ -22,7 +22,8 @@ module.exports = (app) => {
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
           properties: location.properties,
-          pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : []
+          pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : [],
+          cloudinaryFolder: `onboarding/${location.locationId}`
         }
       })
       res.json(val)

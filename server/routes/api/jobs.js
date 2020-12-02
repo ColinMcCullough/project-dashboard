@@ -53,7 +53,7 @@ module.exports = (app) => {
       const { 'asset-scraper': assetScraper } = queues
       const { body } = req
       for (let i = 0; i < body.length; i++) {
-        const config = { photos: { folder: `testClient/${body[i].locationId}` } }
+        const config = { photos: { folder: `onboarding/${body[i].locationId}` } }
         await assetScraper.add('run', { ...body[i], config })
       }
       res.sendStatus(200)

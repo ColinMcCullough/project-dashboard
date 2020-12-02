@@ -35,7 +35,6 @@ export default {
         'text-gray-10',
         'small',
         'text-uppercase',
-        'text-center',
         'd-flex',
         'border-0',
         'custom-padding',

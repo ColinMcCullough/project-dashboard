@@ -46,22 +46,23 @@
 </template>
 
 <script>
-import LocationDetails from '~/components/location-review/location-details'
+import VueMultiselect from 'vue-multiselect'
 import LocationAmenities from '~/components/location-review/location-amenities'
 import LocationAssets from '~/components/location-review/location-assets'
-import GooglePlaces from '~/components/location-review/google-places'
+import LocationDetails from '~/components/location-review/location-details'
 import Locations from '~/mixins/locations'
 export default {
   components: {
-    LocationDetails,
+    VueMultiselect,
     LocationAmenities,
     LocationAssets,
-    GooglePlaces
+    LocationDetails
   },
   mixins: [Locations],
   props: {},
   data() {
     return {
+      location: null,
       tabs: [
         {
           id: 'location-details',
@@ -74,10 +75,6 @@ export default {
         {
           id: 'location-assets',
           title: 'Location Assets'
-        },
-        {
-          id: 'google-places',
-          title: 'Google Places'
         }
       ]
     }
@@ -108,18 +105,21 @@ export default {
 .ov-x-hidden {
   overflow-x: hidden;
 }
+.tab-padding ul {
+  padding: 0;
+  // overflow-x: scroll;
+  max-width: 400px;
+}
 .nav-tabs {
   overflow: hidden;
-  border-bottom: none !important;
   border-radius: 0 0 10px 0;
 }
-.nav-tabs .nav-link {
-  color: inherit;
-  background-color: #cbd8e1;
-  border-radius: 10px 10px 0 0!important;
-  border-bottom: none;
-}
-
+// .nav-tabs .nav-link {
+//   color: inherit;
+//   background-color: #cbd8e1;
+//   border-radius: 10px 10px 0 0!important;
+//   border-bottom: none;
+// }
 .nav-tabs .nav-item {
   margin-right: 5px;
 }
