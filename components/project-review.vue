@@ -10,35 +10,52 @@
           <location-list />
         </aside>
         <section class="main-content py-1">
-          <transition mode="out-in" name="fade">
-            <!-- horizontal tabs start -->
-            <b-tabs
-              active-nav-item-class="text-light bg-secondary"
+          <!-- horizontal tabs start -->
+          <b-tabs
+            active-nav-item-class="text-light bg-secondary"
+          >
+            <b-tab
+              v-for="(tab, index) in tabs"
+              :key="`${tab.id}-${index}`"
+              :title="tab.title"
             >
-              <b-tab
-                v-for="(tab, index) in tabs"
-                :key="`${tab.id}-${index}`"
-                :title="tab.title"
-              >
-                <template v-slot:title>
-                  <div class="d-flex justify-content-start align-items-center m-0">
-                    <warning :color="`#ffbd00`" class="mr-2" />
-                    <!-- need to swap above line for code below when we have a value to check if data is complete -->
-                    <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
+              <template v-slot:title>
+                <div class="d-flex justify-content-start align-items-center m-0">
+                  <warning :color="`#ffbd00`" class="mr-2" />
+                  <!-- need to swap above line for code below when we have a value to check if data is complete -->
+                  <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
                   <check v-else :color="`#52be99`" class="mr-2" /> -->
-                    <!-- need icon swap -->
-                    {{ tab.title }}
-                  </div>
-                </template>
-                <b-row>
-                  <b-col style="border: 3px solid #cbd8e1">
-                    <component :is="tab.id" />
-                  </b-col>
-                </b-row>
-              </b-tab>
-            </b-tabs>
-            <!-- horizontal tabs end -->
-          </transition>
+                  <!-- need icon swap -->
+                  {{ tab.title }}
+                </div>
+              </template>
+              <b-row>
+                <b-col style="border: 3px solid #cbd8e1">
+                  <component :is="tab.id" v-if="selectedLocation" />
+                  <p v-else>
+                    Select a Location
+                  </p>
+                </b-col>
+              </b-row>
+            </b-tab>
+          </b-tabs>
+          <!-- horizontal tabs end -->
+          <b-row v-if="selectedLocation !== null">
+            <b-col class="text-right mr-4">
+              <b-button
+                size="md"
+                :disabled="isDisabled"
+                variant="primary"
+                class="mx-3"
+                style="min-width: 152px"
+                @click="onSave"
+              >
+                <b-icon-arrow-clockwise v-if="isSaving" animation="spin" font-scale="1" />
+                <save-icon v-else v-bind="{ size: '1.2em' }" />
+                {{ isSaving ? 'Saving...' : 'Save Location' }}
+              </b-button>
+            </b-col>
+          </b-row>
         </section>
       </article>
     </div>
@@ -60,6 +77,7 @@ export default {
   props: {},
   data() {
     return {
+      isSaving: false,
       location: null,
       tabs: [
         {
@@ -77,7 +95,22 @@ export default {
       ]
     }
   },
-  methods: {}
+  computed: {
+    isDisabled() {
+      console.log(this.selectedLocation.edited)
+      return !this.selectedLocation.edited
+    }
+  },
+  methods: {
+    async onSave() {
+      this.isSaving = true
+      const { locationId, properties } = this.selectedLocation
+      const locIdx = this.getLocationIndex(locationId)
+      await this.saveLocation(this.projectId, locationId, { properties })
+      this.updateLocation({ locIdx, key: 'edited', val: false })
+      this.isSaving = false
+    }
+  }
 }
 </script>
 
