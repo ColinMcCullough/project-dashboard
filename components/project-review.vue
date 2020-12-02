@@ -2,45 +2,46 @@
   <b-card
     no-body
     border-variant="gray-60"
-    style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
+    style="background-color: #304a69; position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
   >
-    <b-tabs vertical pills card class="tab-padding">
-      <b-tab
-        v-for="(location, i) in locations"
-        :key="`${location.locationId}-${i}`"
-      >
-        <template v-slot:title>
-          <tab-title :title="location.properties.name" />
-        </template>
-        <!-- horizontal tabs start -->
-        <b-tabs
-          active-nav-item-class="text-light bg-secondary"
-        >
-            <b-tab
-              v-for="(tab, index) in tabs"
-              :key="`${tab.id}-${index}`"
-              :title="tab.title"
+    <div class="content">
+      <article class="content__grid">
+        <aside class="py-1">
+          <location-list />
+        </aside>
+        <section class="main-content py-1">
+          <transition mode="out-in" name="fade">
+            <!-- horizontal tabs start -->
+            <b-tabs
+              active-nav-item-class="text-light bg-secondary"
             >
-              <template v-slot:title>
-                <div class="d-flex justify-content-start align-items-center m-0">
-                  <warning :color="`#ffbd00`" class="mr-2" />
-                  <!-- need to swap above line for code below when we have a value to check if data is complete -->
-                  <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
+              <b-tab
+                v-for="(tab, index) in tabs"
+                :key="`${tab.id}-${index}`"
+                :title="tab.title"
+              >
+                <template v-slot:title>
+                  <div class="d-flex justify-content-start align-items-center m-0">
+                    <warning :color="`#ffbd00`" class="mr-2" />
+                    <!-- need to swap above line for code below when we have a value to check if data is complete -->
+                    <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
                   <check v-else :color="`#52be99`" class="mr-2" /> -->
-                  <!-- need icon swap -->
-                  {{ tab.title }}
-                </div>
-              </template>
-              <b-row>
-                <b-col style="border: 3px solid #cbd8e1">
-                  <component :is="tab.id" :id="locations[i].locationId" />
-                </b-col>
-              </b-row>
-            </b-tab>
-        </b-tabs>
-        <!-- horizontal tabs end -->
-      </b-tab>
-    </b-tabs>
+                    <!-- need icon swap -->
+                    {{ tab.title }}
+                  </div>
+                </template>
+                <b-row>
+                  <b-col style="border: 3px solid #cbd8e1">
+                    <component :is="tab.id" />
+                  </b-col>
+                </b-row>
+              </b-tab>
+            </b-tabs>
+            <!-- horizontal tabs end -->
+          </transition>
+        </section>
+      </article>
+    </div>
   </b-card>
 </template>
 
@@ -86,6 +87,24 @@ export default {
 </script>
 
 <style lang="scss">
+.content {
+  position: relative;
+  &__grid {
+    position: absolute;
+    top: 10px;
+    height: calc(100vh - 65px);
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(min-content, 300px) auto;
+    overflow-y: hidden;
+  }
+}
+.main-content {
+  background: white;
+  min-height: 100%;
+  overflow-y: scroll;
+  box-shadow: -2px 0 20px rgba(12, 35, 64, 0.5);
+}
 .ov-x-hidden {
   overflow-x: hidden;
 }

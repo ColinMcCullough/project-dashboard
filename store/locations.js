@@ -1,12 +1,13 @@
 import { scrapeDetails } from './../mixins/asset-scraper'
 export const state = () => ({
   locations: [],
-  projectId: null
+  projectId: null,
+  selectedLocation: null
 })
 export const getters = {}
 
 export const actions = {
-  async set({ commit }, projectId) {
+  async init({ commit }, projectId) {
     try {
       const locations = await this.$axios
         .$get(`/api/v1/projects/${projectId}/locations`)
@@ -19,11 +20,14 @@ export const actions = {
           ...details
         }
       })
-      commit('SET', { locations: updatedLoc, projectId })
+      commit('INIT', { locations: updatedLoc, projectId })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log()
     }
+  },
+  set({ commit }, payload) {
+    commit('SET', payload)
   },
   updateScraper({ commit }, data) {
     commit('UPDATE_SCRAPER_PROP', data)
@@ -40,9 +44,15 @@ export const actions = {
 }
 
 export const mutations = {
-  SET(state, { locations, projectId }) {
+  INIT(state, { locations, projectId }) {
     state.locations = locations
+    state.selectedLocation = locations[0]
     state.projectId = projectId
+  },
+  SET (state, obj) {
+    const keys = Object.keys(obj)
+    // eslint-disable-next-line no-return-assign
+    keys.forEach(key => state[key] = obj[key])
   },
   UPDATE_LOCATION(state, { locIdx, key, val }) {
     state.locations[locIdx][key] = val
