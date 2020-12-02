@@ -14,21 +14,14 @@ async function assetScraper(data, topicName) {
   if (!assetScraperUrl) {
     throw new Error('Invalid arguement passed in')
   }
-  try {
-    const devToken = process.env.TOKEN
-    // const bearerToken = devToken || await getBearerToken(linkDiscovererUrl)
-    const postUrl = assetScraperUrl
-    const body = { ...data, topicName }
-    // const config = {
-    //   headers: { Authorization: `Bearer ${bearerToken}` }
-    // }
-    console.log('postUrl', postUrl)
-    const res = await axios.post(postUrl, body)
-    console.log(res)
-    if (res.status !== 200) { throw new Error(`Link discoverer Failed: Status ${res.status}`) }
-    return res.data
-  } catch (err) {
-    console.log(err)
-    return err
-  }
+  const devToken = process.env.TOKEN
+  // const bearerToken = devToken || await getBearerToken(linkDiscovererUrl)
+  const postUrl = assetScraperUrl
+  const body = { ...data, topicName }
+  // const config = {
+  //   headers: { Authorization: `Bearer ${bearerToken}` }
+  // }
+  const res = await axios.post(postUrl, body)
+  if (res.status !== 200) { throw new Error(`Link discoverer Failed: Status ${res.status}`) }
+  return res.data
 }

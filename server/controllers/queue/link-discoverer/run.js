@@ -9,8 +9,13 @@ module.exports = {
   hooks
 }
 
-function processor(job) {
-  return linkDiscoverer(job.data.url, null)
+async function processor(job, done, apis) {
+  try {
+    const res = await linkDiscoverer(job.data.url, null)
+    done(null, res)
+  } catch (error) {
+    done(error)
+  }
 }
 
 // async function processor(job, done) {
