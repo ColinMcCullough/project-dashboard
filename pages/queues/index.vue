@@ -15,7 +15,7 @@
         <b-row class="my-1" no-gutters>
           <b-col
             v-for="(queue, i) in queues"
-            :key="i"
+            :key="`queue-${i}`"
             cols="3"
             md="4"
             sm="6"
@@ -97,7 +97,15 @@ export default {
     TopNav
   },
   mixins: [RedisMixin],
-  data() {
+  async fetch({ store }) {
+    try {
+      await store.dispatch('queue/init')
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
+  },
+  data () {
     return {
       statuses: {
         waiting: 'clock',
@@ -107,14 +115,6 @@ export default {
         delayed: 'clock-history',
         paused: 'pause-fill'
       }
-    }
-  },
-  async fetch({ store }) {
-    try {
-      await store.dispatch('queue/init')
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e)
     }
   },
   methods: {

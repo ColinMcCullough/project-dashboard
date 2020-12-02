@@ -6,8 +6,8 @@
       class="d-flex justify-content-between w-100 mb-0 flex-wrap"
     >
       <b-form-group
-        v-for="(field, i) in fieldRow"
-        :key="`detail-${i}`"
+        v-for="(field, idx) in fieldRow"
+        :key="`detail-${idx}`"
         :label="titleCase(field)"
         label-class="text-uppercase text-gray font-weight-bold"
         class="mr-2"
@@ -34,13 +34,6 @@
           :options="getStates"
           @change="onInput($event, field)"
         />
-        <accordion-toggle
-          v-if="field === 'usps-validation'"
-          :id="accordionId"
-          :text="accordionTxt"
-          :visible="visible"
-          @visible-update="updateVisible"
-        />
         <b-form-select
           v-if="field === 'country'"
           :id="`${field}-${i}`"
@@ -48,16 +41,12 @@
           :state="form[field] !== null"
           :options="country.options"
           @change="($event) => {
-            form.state = null
-            form[field] = $event
+            onInput(null, 'state')
+            onInput($event, field)
           }"
         />
       </b-form-group>
     </div>
-    <usps-validation
-      v-if="visible"
-      :id="id"
-    />
   </div>
 </template>
 
@@ -67,26 +56,14 @@ import Locations from '~/mixins/locations'
 import GlobalFunctions from '~/mixins/global-functions'
 export default {
   mixins: [States, Locations, GlobalFunctions],
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
   data () {
     return {
       fields: [
         ['name'],
-        ['street_address_1', 'usps-validation'],
-        ['street_address_2'],
+        ['street_address_1', 'street_address_2'],
         ['city', 'state', 'postal_code', 'country'],
         ['local_phone_number', 'display_phone_number']
       ],
-      visible: false,
-      accordionTxt: 'Verify',
-      accordionId: 'usps-validation',
       phoneRegex: /^\d{3}-\d{3}-\d{4}$/,
       inputs: ['name', 'street_address_1', 'street_address_2', 'city', 'postal_code', 'local_phone_number', 'display_phone_number'],
       selects: ['state', 'country'],
@@ -101,6 +78,9 @@ export default {
     }
   },
   computed: {
+    id() {
+      return this.selectedLocation.locationId
+    },
     form() {
       return this.locationById(this.id).properties
     },
@@ -112,16 +92,13 @@ export default {
     }
   },
   methods: {
-    updateVisible(val) {
-      this.visible = val
-    },
     onInput(val, key) {
       const locIdx = this.getLocationIndex(this.id)
       if (key === 'local_phone_number' || key === 'display_phone_number') {
         const formatted = val.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
-        this.onUpdate({ locIdx, key, val: formatted })
+        this.onUpdate({ locIdx, key, val: formatted }, true)
       } else {
-        this.onUpdate({ locIdx, key, val })
+        this.onUpdate({ locIdx, key, val }, true)
       }
     },
     validate(field) {

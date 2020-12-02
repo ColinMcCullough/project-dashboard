@@ -45,15 +45,10 @@ import Locations from '~/mixins/locations'
 export default {
   name: 'location-amenities',
   mixins: [Locations],
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
   computed: {
+    id() {
+      return this.selectedLocation.locationId
+    },
     amenities() {
       return this.locationById(this.id).properties.amenities
     }

@@ -13,9 +13,9 @@
         {{ status.label }}
       </b-badge>
     </div>
-    <h4 class="text-truncate">
+    <h5 class="w-100 text-truncate">
       {{ title }}
-    </h4>
+    </h5>
   </div>
 </template>
 

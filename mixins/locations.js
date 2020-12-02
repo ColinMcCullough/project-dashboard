@@ -6,12 +6,14 @@ export default {
   computed: {
     ...mapState({
       locations: state => state.locations.locations,
-      projectId: state => state.locations.projectId
+      projectId: state => state.locations.projectId,
+      selectedLocation: state => state.locations.selectedLocation
     })
   },
   methods: {
     ...mapActions({
-      setLocations: 'locations/set',
+      updateSelectedLocations: 'locations/set',
+      setLocations: 'locations/init',
       updateLocationProp: 'locations/updateLocationProp',
       updateScraper: 'locations/updateScraper',
       updateTemplate: 'locations/updateTemplate',
@@ -26,17 +28,17 @@ export default {
       return this.locations
         .findIndex(location => location.locationId === id)
     },
-    onUpdate({ locIdx, key, val }) {
+    onUpdate({ locIdx, key, val }, edited = false) {
       this.updateLocationProp({ locIdx, key, val })
-      if (key !== 'url' || key !== 'corporate') {
+      if (edited) {
         this.updateLocation({ locIdx, key: 'edited', val: true })
       }
     },
-    async saveLocation(projectId, locationId, body) {
+    async saveLocation (projectId, locationId, body) {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations/${locationId}`, body)
     },
-    async saveLocations(projectId, locations) {
+    async saveLocations (projectId, locations) {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations`, locations)
     }

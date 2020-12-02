@@ -6,9 +6,13 @@
     >
       <p class="font-weight-bold mb-0">
         {{ project.clientName === null ? 'Client Name' : project.clientName }}
+        <b-badge variant="primary-20" class="px-2 rounded">
+          <b-icon-building />
+          {{ project.locationCount }}
+        </b-badge>
       </p>
       <p
-        v-b-popover.hover.top="project.projectName"
+        v-b-popover.hover.top="`Name: ${project.projectName} - ID: ${project.projectId}`"
         class="text-gray-60 text-truncate mb-0"
       >
         {{ project.projectName }}
@@ -19,13 +23,11 @@
     </b-card>
     <!-- START INTAKE CARD -->
     <b-card
-      :class="[{ 'is-complete': project.discoverComplete }, ...cardClass]"
+      :class="[{ 'is-complete': project.urlsSet }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 35%;"
     >
-      <div
-        class="d-flex flex-column justify-content-center"
-      >
+      <div class="d-flex flex-column justify-content-center">
         <b-badge
           v-if="!project.discoverComplete"
           variant="error"
@@ -37,7 +39,7 @@
             shift-h="-8"
             shift-v="8"
           />
-          {{ project.locationCount }}
+          {{ project.urlsMissing }}
           Locations require review.
         </b-badge>
         <b-badge
@@ -64,55 +66,54 @@
       </div>
     </b-card>
     <b-card
-      :class="[{ 'is-complete': project.scrapeComplete }, ...cardClass]"
+      :class="[{ 'is-disabled': !project.discoverComplete }, { 'is-complete': project.g5Approved }, ...cardClass]"
       body-class="d-flex flex-column justify-content-center align-items-center"
       style="flex: 0 1 35%;"
     >
-      <b-btn-group
-        v-if="!project.scrapeComplete"
-        size="sm"
-        class="w-100 px-5"
-      >
-        <status-btn :text="'Crawl'" :is-disabled="project.scrapeComplete" @click="runDiscover(project.projectId)">
-          <template v-slot:btn-icon>
-            <b-iconstack>
-              <b-icon
-                :icon="crawling ? 'arrow-clockwise' : 'minecart'"
-                :animation="crawling ? 'spin' : ''"
-                stacked
-              />
-              <b-icon
-                v-if="project.discoverComplete"
-                icon="check-circle-fill"
-                stacked
-                variant="light"
-              />
-            </b-iconstack>
-          </template>
-        </status-btn>
-        <status-btn
-          :text="'Scrape'"
-          :is-disabled="project.scrapeComplete"
-          class="ml-1"
-          @click="launchModal('scraper-modal', project.projectId)"
-        >
-          <template v-slot:btn-icon>
-            <b-iconstack>
-              <b-icon icon="minecart-loaded" stacked />
-              <b-icon
-                v-if="project.scrapeComplete"
-                icon="check-circle-fill"
-                shift-h="-12"
-                shift-v="12"
-                stacked
-                variant="success-0"
-              />
-            </b-iconstack>
-          </template>
-        </status-btn>
+      <div class="d-flex flex-column justify-content-center">
+        <div class="">
+          <b-badge
+            :variant="project.discoverComplete ? 'error' : 'gray-30'"
+            :class="{ 'text-gray-20': !project.discoverComplete }"
+            class="px-3 rounded mb-2"
+            @click="runDiscover(project.projectId)"
+          >
+            <b-icon
+              v-if="!project.discoverComplete"
+              :icon="crawling ? 'arrow-clockwise' : 'minecart'"
+              :animation="crawling ? 'spin' : ''"
+              variant="light"
+            />
+            <b-icon
+              v-else
+              icon="check-circle-fill"
+              variant="light"
+            />
+            Crawl
+          </b-badge>
+          <b-badge
+            :variant="formatBadge(project, 'scrapeComplete')"
+            :class="{ 'text-gray-20': !project.discoverComplete }"
+            class="px-3 rounded mb-2"
+            @click="launchModal('scraper-modal', project.projectId)"
+          >
+            <b-icon
+              v-if="!project.scrapeComplete"
+              icon="minecart-loaded"
+              variant="light"
+            />
+            <b-icon
+              v-else
+              icon="check-circle-fill"
+              variant="light"
+            />
+            Scrape
+          </b-badge>
+        </div>
+        <!-- REVIEW BUTTON START -->
         <status-btn
           :text="'Review'"
-          :is-disabled="project.scrapeComplete"
+          :is-disabled="!project.scrapeComplete"
           class="ml-1"
           @click="launchModal('review-modal', project.projectId)"
         >
@@ -120,20 +121,13 @@
             <b-icon icon="hammer" />
           </template>
         </status-btn>
-      </b-btn-group>
-      <b-icon-check-circle-fill
-        v-else
-        scale="5em"
-        variant="light"
-        shift-h="4"
-        class="mx-0"
-      />
+      </div>
     </b-card>
     <div class="d-flex w-20 flex-grow-0 align-items-center">
       <b-btn
-        :disabled="project.scrapeComplete === false"
+        :disabled="!project.g5Approved"
+        :variant="project.g5Approved ? 'primary' : 'gray-20'"
         class="px-5 chevron-right"
-        variant="primary"
       >
         Release!
         <b-icon-arrow-right />
@@ -176,16 +170,23 @@ export default {
     }
   },
   methods: {
-    async runDiscover(projectId) {
+    async runDiscover (projectId) {
       this.crawling = true
       await this.discover(projectId)
       setTimeout(() => { this.crawling = false }, 3000)
     },
-    async launchModal(modalName, projectId) {
+    async launchModal (modalName, projectId) {
       await this.setLocations(projectId)
       this.$bvModal.show(modalName)
     },
-    onRefetch(id) {
+    formatBadge (project, target) {
+      return project[target]
+        ? 'secondary-60'
+        : project.discoverComplete
+          ? 'error'
+          : 'gray-20'
+    },
+    onRefetch (id) {
       this.isBusy = !this.isBusy
     }
   }
@@ -220,10 +221,14 @@ $height: 115px;
   height: $height;
   &.is-alert {
     background-color: $alert;
-    background: linear-gradient(35deg, #cc4d6a, $alert);
+    // background: linear-gradient(35deg, #cc4d6a, $alert);
   }
   &.is-neutral {
     background: $disabled;
+  }
+  &.is-disabled {
+    background: $disabled;
+    opacity: 0.5;
   }
   &.is-complete {
     background: $complete;

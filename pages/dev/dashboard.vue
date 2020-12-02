@@ -31,21 +31,21 @@
               Sort By
             </b-input-group-prepend>
             <b-form-select v-model="sortBy" :options="sortBys" class="mr-2" />
-              <b-btn
-                :variant="sortDir === 'asc' ? 'secondary-70' : 'secondary'"
-                class="mr-2"
-                pill
-                @click="sortDir = 'asc'"
-              >
-                <b-icon-sort-up />
-              </b-btn>
-              <b-btn
-                :variant="sortDir === 'desc' ? 'secondary-70' : 'secondary'"
-                pill
-                @click="sortDir = 'desc'"
-              >
-                <b-icon-sort-down-alt />
-              </b-btn>
+            <b-btn
+              :variant="sortDir === 'asc' ? 'secondary-70' : 'secondary'"
+              class="mr-2"
+              pill
+              @click="sortDir = 'asc'"
+            >
+              <b-icon-sort-up />
+            </b-btn>
+            <b-btn
+              :variant="sortDir === 'desc' ? 'secondary-70' : 'secondary'"
+              pill
+              @click="sortDir = 'desc'"
+            >
+              <b-icon-sort-down-alt />
+            </b-btn>
           </b-input-group>
           <b-input-group>
             <b-input-group-prepend class="d-flex px-2 align-items-center">
@@ -97,7 +97,7 @@
       <project-review />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
-    <b-card style="overflow-x: hidden;" class="my-5" no-body>
+    <b-card style="overflow-x: hidden;" class="my-5 border-0" no-body>
       <b-table
         :fields="fields"
         :items="projects"

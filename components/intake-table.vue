@@ -42,22 +42,55 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </template>
+      <template v-slot:cell(vendor)="data">
+        <b-form-group class="mb-0" style="position: relative;">
+          <b-form-input
+            :value="data.item.properties.vendor"
+            placeholder="Location Vendor"
+            class="text-left"
+            required
+            @input="onInput($event, data.item.locationId, data.field.key)"
+          />
+        </b-form-group>
+      </template>
       <template v-slot:cell(valid)="data">
         <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
       </template>
       <template v-slot:cell(corporate)="data">
         <b-form-checkbox
           :checked="data.item.properties.corporate"
-          name="check-button"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
+          switch
+          @input="onInput($event, data.item.locationId, data.field.key)"
+        />
+      </template>
+      <template v-slot:cell(singleDomain)="data">
+        <b-form-checkbox
+          :checked="data.item.properties.singleDomain"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
           switch
           @input="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
-        <b-icon-check2-circle :animation="saving ? 'throb' : ''" />
-        {{ saving ? 'Saving Urls' : 'Save Urls' }}
+      <b-badge v-if="multipleCorpSelected" variant="error" class="px-3 rounded">
+        <b-icon-exclamation-triangle-fill />
+        Multiple Corporate Locations Selected.
+      </b-badge>
+      <b-btn
+        :disabled="disabledBtn"
+        variant="outline-secondary"
+        pill
+        style="min-width: 120px;"
+        @click="onSave"
+      >
+        <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
+        {{ isSaving ? 'Saving...' : 'Save URLs' }}
       </b-btn>
     </template>
   </b-card>
@@ -70,7 +103,7 @@ export default {
   mixins: [Locations],
   data () {
     return {
-      saving: false,
+      isSaving: false,
       fields: [
         {
           key: 'valid',
@@ -88,9 +121,19 @@ export default {
           sortable: true
         },
         {
+          key: 'vendor',
+          label: 'Vendor',
+          sortable: true
+        },
+        {
           key: 'corporate',
-          label: 'Corporate',
-          sortable: false
+          label: 'Corporate?',
+          sortable: true
+        },
+        {
+          key: 'singleDomain',
+          label: 'Single Domain?',
+          sortable: true
         }
       ],
       iconConfig: {
@@ -102,12 +145,23 @@ export default {
     }
   },
   computed: {
+    multipleCorpSelected() {
+      let count = 0
+      let val = false
+      for (let i = 0; i < this.locations.length; i++) {
+        if (count > 1) {
+          val = true
+          break
+        } else if (this.locations[i].properties.corporate === true) {
+          count++
+        }
+      }
+      return val
+    },
     disabledBtn() {
       return this.locations
         .some(location => !this.validUrl(location.properties.url))
     }
-  },
-  watch: {
   },
   methods: {
     validUrl(str) {
@@ -123,16 +177,23 @@ export default {
       const locIdx = this.getLocationIndex(locationId)
       this.onUpdate({ locIdx, key, val })
     },
-    onSave() {
-      this.saving = true
+    async onSave () {
+      this.isSaving = true
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
-          properties: { url: location.properties.url, corporate: location.properties.corporate }
+          properties: {
+            url: location.properties.url,
+            corporate: location.properties.corporate,
+            vendor: location.properties.vendor,
+            singleDomain: location.properties.singleDomain
+          }
         }
       })
-      this.saveLocations(this.projectId, locations)
-      setTimeout(() => { this.saving = false }, 3500)
+      await this.saveLocations(this.projectId, locations)
+      this.$store.dispatch('projects/update', this.projectId)
+      this.isSaving = false
+      // setTimeout(() => { this.isSaving = false }, 3500)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
