@@ -15,7 +15,7 @@
         >
           <b-icon-arrow-counterclockwise :animation="isBusy ? 'spin-reverse' : ''" scale="0.75" />
         </b-btn>
-        <b-badge variant="primary-20" class="px-2 rounded align-self-center ml-2">
+        <b-badge variant="light" class="px-2 rounded align-self-center ml-2">
           <b-icon-building />
           {{ project.locationCount }} {{ project.locationCount > 1 ? 'Locations' : 'Location' }}
         </b-badge>
