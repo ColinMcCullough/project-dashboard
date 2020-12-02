@@ -32,11 +32,11 @@ export default {
         this.updateLocation({ locIdx, key: 'edited', val: true })
       }
     },
-    async saveLocation(projectId, locationId, body) {
+    async saveLocation (projectId, locationId, body) {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations/${locationId}`, body)
     },
-    async saveLocations(projectId, locations) {
+    async saveLocations (projectId, locations) {
       await this.$axios
         .$put(`/api/v1/projects/${projectId}/locations`, locations)
     }

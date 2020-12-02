@@ -10,6 +10,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      updateProject: 'projects/update'
       // updateLocProp: 'selectedLocation/UPDATE_PROP'
     })
   }

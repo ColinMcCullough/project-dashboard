@@ -97,7 +97,7 @@
       <project-review />
     </modal-template>
     <!-- MODAL COMPONENTS END -->
-    <b-card style="overflow-x: hidden;" class="my-5" no-body>
+    <b-card style="overflow-x: hidden;" class="my-5 border-0" no-body>
       <b-table
         :fields="fields"
         :items="projects"

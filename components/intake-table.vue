@@ -55,9 +55,15 @@
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
-        <b-icon-check2-circle :animation="saving ? 'throb' : ''" />
-        {{ saving ? 'Saving Urls' : 'Save Urls' }}
+      <b-btn
+        :disabled="disabledBtn"
+        variant="outline-secondary"
+        pill
+        style="min-width: 120px;"
+        @click="onSave"
+      >
+        <b-icon-check-circle :animation="{ 'throb': isSaving }" />
+        {{ isSaving ? 'Saving...' : 'Save URLs' }}
       </b-btn>
     </template>
   </b-card>
@@ -70,7 +76,7 @@ export default {
   mixins: [Locations],
   data () {
     return {
-      saving: false,
+      isSaving: false,
       fields: [
         {
           key: 'valid',
@@ -123,16 +129,20 @@ export default {
       const locIdx = this.getLocationIndex(locationId)
       this.onUpdate({ locIdx, key, val })
     },
-    onSave() {
-      this.saving = true
+    async onSave () {
+      this.isSaving = true
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
-          properties: { url: location.properties.url, corporate: location.properties.corporate }
+          properties: {
+            url: location.properties.url,
+            corporate: location.properties.corporate
+          }
         }
       })
-      this.saveLocations(this.projectId, locations)
-      setTimeout(() => { this.saving = false }, 3500)
+      await this.saveLocations(this.projectId, locations)
+      this.$store.dispatch('projects/update', this.projectId)
+      setTimeout(() => { this.isSaving = false }, 3500)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b

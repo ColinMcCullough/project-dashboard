@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex w-100 bg-primary-70">
+  <div class="d-flex w-100 bg-primary-70 px-5">
     <b-card :class="cardClass" style="flex: 0 1 25%;" no-body>
       <span class="d-flex align-items-center h-100 justify-content-center">
         Project Details

@@ -75,7 +75,7 @@ export default {
 }
 .secondary-nav {
   position: absolute;
-  box-shadow: inset 0 5px 20px rgba(10, 10, 10, 0.3);
+  // box-shadow: inset 0 5px 20px rgba(10, 10, 10, 0.3);
   left: 0;
   right: 0;
   height: 100%;
