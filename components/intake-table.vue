@@ -78,9 +78,10 @@
       </template>
     </b-table>
     <template v-slot:footer>
-      <p v-if="multipleCorpSelected" class="text-danger">
-        Warning: Multiple Corporate Locations Selected
-      </p>
+      <b-badge v-if="multipleCorpSelected" variant="error" class="px-3 rounded">
+        <b-icon-exclamation-triangle-fill />
+        Multiple Corporate Locations Selected.
+      </b-badge>
       <b-btn
         :disabled="disabledBtn"
         variant="outline-secondary"
@@ -88,7 +89,7 @@
         style="min-width: 120px;"
         @click="onSave"
       >
-        <b-icon-check-circle :animation="{ 'throb': isSaving }" />
+        <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
         {{ isSaving ? 'Saving...' : 'Save URLs' }}
       </b-btn>
     </template>
