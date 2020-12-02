@@ -97,6 +97,14 @@ export default {
     TopNav
   },
   mixins: [RedisMixin],
+  async fetch({ store }) {
+    try {
+      await store.dispatch('queue/init')
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
+  },
   data() {
     return {
       statuses: {
@@ -107,14 +115,6 @@ export default {
         delayed: 'clock-history',
         paused: 'pause-fill'
       }
-    }
-  },
-  async fetch({ store }) {
-    try {
-      await store.dispatch('queue/init')
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e)
     }
   },
   methods: {
