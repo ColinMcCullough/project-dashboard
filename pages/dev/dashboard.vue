@@ -47,7 +47,7 @@
               <b-icon-sort-down-alt />
             </b-btn>
           </b-input-group>
-          <b-input-group>
+          <b-input-group class="flex-grow-0">
             <b-input-group-prepend class="d-flex px-2 align-items-center">
               <b-icon-search />
             </b-input-group-prepend>
@@ -71,8 +71,11 @@
             :total-rows="totalRows"
             :per-page="perPage"
             pills
-            class="mb-0 ml-2"
+            class="mb-0 mx-2"
           />
+          <b-input-group style="max-width: 75px;">
+            <b-form-select v-model="perPage" :options="perPages" />
+          </b-input-group>
         </div>
       </template>
     </top-nav>
@@ -89,6 +92,12 @@
       title="Scraper"
     >
       <scraper-review />
+    </modal-template>
+    <modal-template
+      id="crawl-review"
+      title="Review Excessive Pages Found"
+    >
+      <excessive-pages />
     </modal-template>
     <modal-template
       :id="'review-modal'"
@@ -123,12 +132,11 @@
 import Projects from '~/mixins/projects'
 export default {
   mixins: [Projects],
-  async fetch({ store }) {
+  async fetch ({ store }) {
     await store.dispatch('projects/init')
   },
-  data() {
+  data () {
     return {
-      // projectId: null,
       sortBy: 'estGoLive',
       perPage: 10,
       perPages: [10, 25, 50, 100],

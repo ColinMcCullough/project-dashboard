@@ -1,23 +1,33 @@
 <template>
   <div class="d-flex w-100 justify-content-evenly p-0 bg-gray-10">
     <b-card
-      class=" first-chevron w-25"
+      class="first-chevron py-1 px-2 w-25 d-flex justify-content-center"
       style="flex: 0 1 25%;"
+      no-body
     >
-      <p class="font-weight-bold mb-0">
-        {{ project.clientName === null ? 'Client Name' : project.clientName }}
-        <b-badge variant="primary-20" class="px-2 rounded">
+      <p class="font-weight-bold mb-0 d-flex">
+        <b-btn
+          variant="outline-gray"
+          size="sm"
+          class="align-self-center py-0 px-1 mr-1"
+          pill
+          @click="onRefetch(project.projectId)"
+        >
+          <b-icon-arrow-counterclockwise :animation="isBusy ? 'spin-reverse' : ''" scale="0.75" />
+        </b-btn>
+        <b-badge variant="primary-20" class="px-2 rounded align-self-center ml-2">
           <b-icon-building />
-          {{ project.locationCount }}
+          {{ project.locationCount }} Locations
         </b-badge>
       </p>
+      {{ project.clientName === null ? 'Client Name' : project.clientName }}
       <p
         v-b-popover.hover.top="`Name: ${project.projectName} - ID: ${project.projectId}`"
         class="text-gray-60 text-truncate mb-0"
       >
         {{ project.projectName }}
       </p>
-      <b-badge variant="primary" class="px-3 rounded">
+      <b-badge variant="gray" class="px-1 rounded d-flex">
         est. Go-live: {{ processTime(project.estGoLive) }}
       </b-badge>
     </b-card>
@@ -29,7 +39,20 @@
     >
       <div class="d-flex flex-column justify-content-center">
         <b-badge
-          v-if="!project.discoverComplete"
+          v-if="project.urlsSet"
+          variant="secondary-60"
+          class="px-3 rounded mb-2"
+        >
+          <b-icon-check-circle-fill
+            scale="2em"
+            variant="light"
+            shift-h="-8"
+            shift-v="8"
+          />
+          Locations have URLs set.
+        </b-badge>
+        <b-badge
+          v-else
           variant="error"
           class="px-3 rounded mb-2"
         >
@@ -41,19 +64,6 @@
           />
           {{ project.urlsMissing }}
           Locations require review.
-        </b-badge>
-        <b-badge
-          v-else
-          variant="secondary-60"
-          class="px-3 rounded mb-2"
-        >
-          <b-icon-check-circle-fill
-            scale="2em"
-            variant="light"
-            shift-h="-8"
-            shift-v="8"
-          />
-          Locations have URLs set.
         </b-badge>
         <status-btn
           :text="'Edit Location URLs'"
@@ -73,7 +83,7 @@
       <div class="d-flex flex-column justify-content-center">
         <div class="">
           <b-badge
-            :variant="project.discoverComplete ? 'error' : 'gray-30'"
+            :variant="formatBadge(project, 'discoverComplete')"
             :class="{ 'text-gray-20': !project.discoverComplete }"
             class="px-3 rounded mb-2"
             @click="runDiscover(project.projectId)"
@@ -112,6 +122,17 @@
         </div>
         <!-- REVIEW BUTTON START -->
         <status-btn
+          v-if="project.excessivePages"
+          :text="'Review Crawl'"
+          class="ml-1"
+          @click="launchModal('crawl-review', project.projectId)"
+        >
+          <template v-slot:btn-icon>
+            <b-icon-exclamation-triangle />
+          </template>
+        </status-btn>
+        <status-btn
+          v-else
           :text="'Review'"
           :is-disabled="!project.scrapeComplete"
           class="ml-1"
@@ -182,12 +203,14 @@ export default {
     formatBadge (project, target) {
       return project[target]
         ? 'secondary-60'
-        : project.discoverComplete
+        : project.urlsSet
           ? 'error'
-          : 'gray-20'
+          : 'gray-30'
     },
-    onRefetch (id) {
-      this.isBusy = !this.isBusy
+    async onRefetch (id) {
+      this.isBusy = true
+      await this.$store.dispatch('projects/update', id)
+      this.isBusy = false
     }
   }
 }
