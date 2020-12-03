@@ -96,11 +96,13 @@ module.exports = (app) => {
     const data = project.toJSON()
 
     const locations = data.locations.map((location) => {
+      const { id: locationId } = location
       const { linkDiscoverers } = location
       const linkDiscoverer = linkDiscoverers[0]
       const { pages, excessivePages } = linkDiscoverer
       const { name } = location.properties
       return {
+        locationId,
         name,
         pages,
         excessivePages
