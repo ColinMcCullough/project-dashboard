@@ -10,7 +10,6 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
-
   models.project.prototype.areAllScraped = function () {
     const data = this.toJSON()
     this.dataValues.scrapeComplete = true
@@ -28,10 +27,9 @@ module.exports = (models, sequelize, Sequelize) => {
     this.dataValues.urlsMissing = 0
     for (let i = 0; i < data.locations.length; i++) {
       const location = data.locations[i]
-      console.log(location.properties.url)
       if (!location.properties.url) {
-        this.dataValues.urlsSet = false
         this.dataValues.urlsMissing++
+        this.dataValues.urlsSet = false
       }
     }
   }
@@ -39,7 +37,17 @@ module.exports = (models, sequelize, Sequelize) => {
   models.project.prototype.allApproved = function () {
     const data = this.toJSON()
     this.dataValues.g5Approved = true
-    this.dataValues.urlsMissing = 0
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      if (!location.g5Approved) {
+        this.dataValues.g5Approved = false
+        break
+      }
+    }
+  }
+  models.project.prototype.hasExcessivePages = function () {
+    const data = this.toJSON()
+    this.dataValues.excessivePages = false
     for (let i = 0; i < data.locations.length; i++) {
       const location = data.locations[i]
       if (!location.g5Approved) {
@@ -67,7 +75,6 @@ module.exports = (models, sequelize, Sequelize) => {
     const { locations } = project.toJSON()
     return locations
   }
-
   models.project.displayAll = async () => {
     const projects = await models.project.findAll({
       include: [{
@@ -79,6 +86,7 @@ module.exports = (models, sequelize, Sequelize) => {
       project.areAllScraped()
       project.allUrlsSet()
       project.allApproved()
+      project.hasExcessivePages()
     })
     return projects.map((project) => {
       const {
@@ -91,8 +99,10 @@ module.exports = (models, sequelize, Sequelize) => {
         project_name: projectName,
         urlsSet,
         urlsMissing,
-        g5Approved
+        g5Approved,
+        excessivePages
       } = project.toJSON()
+
       return {
         clientName: null,
         clientId: null,
@@ -103,7 +113,7 @@ module.exports = (models, sequelize, Sequelize) => {
         locationCount: locations.length,
         discoverComplete,
         scrapeComplete,
-        excessivePages: false,
+        excessivePages,
         g5Approved,
         urlsSet,
         urlsMissing
