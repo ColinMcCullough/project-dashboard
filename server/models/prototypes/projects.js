@@ -49,9 +49,8 @@ module.exports = (models, sequelize, Sequelize) => {
     this.dataValues.excessivePages = false
     for (let i = 0; i < data.locations.length; i++) {
       const location = data.locations[i]
-      if (!location.g5Approved) {
-        this.dataValues.g5Approved = false
-        break
+      if (location.linkDiscoverers.length > 0) {
+        this.dataValues.excessivePages = location.linkDiscoverers[0].excessivePages
       }
     }
   }
@@ -77,47 +76,18 @@ module.exports = (models, sequelize, Sequelize) => {
   models.project.displayAll = async () => {
     const projects = await models.project.findAll({
       include: [{
-        model: models.location
-      }]
+        model: models.location,
+        include: [{
+          model: models.linkDiscoverer
+        }
+        ]
+      }],
+      order: [
+        [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
+      ]
     })
-    projects.forEach((project) => {
-      project.areAllCrawled()
-      project.areAllScraped()
-      project.allUrlsSet()
-      project.allApproved()
-      project.hasExcessivePages()
-    })
-    return projects.map((project) => {
-      const {
-        discoverComplete,
-        scrapeComplete,
-        locations,
-        project_status: status,
-        estimated_go_live: estGoLive,
-        salesforce_project_id: projectId,
-        project_name: projectName,
-        urlsSet,
-        urlsMissing,
-        g5Approved,
-        excessivePages
-      } = project.toJSON()
-
-      return {
-        clientName: null,
-        clientId: null,
-        projectId,
-        projectName,
-        status,
-        estGoLive,
-        locationCount: locations.length,
-        discoverComplete,
-        scrapeComplete,
-        excessivePages,
-        g5Approved,
-        urlsSet,
-        urlsMissing
-      }
-    })
+    projects.forEach(project => computeFields(project))
+    return projects.map(project => pluckData(project))
   }
   models.project.displayOne = async (projectId) => {
     const project = await models.project.findOne({
@@ -126,34 +96,56 @@ module.exports = (models, sequelize, Sequelize) => {
       },
       include: [
         {
-          model: models.location
+          model: models.location,
+          include: [
+            {
+              model: models.linkDiscoverer
+            }
+          ]
         }
       ]
     })
-    project.areAllCrawled()
-    project.areAllScraped()
-    const {
-      discoverComplete,
-      scrapeComplete,
-      locations,
-      project_status: status,
-      estimated_go_live: estGoLive,
-      project_name: projectName
-    } = project.toJSON()
-    return {
-      clientName: null,
-      clientId: null,
-      projectId,
-      projectName,
-      status,
-      estGoLive,
-      locationCount: locations.length,
-      discoverComplete,
-      scrapeComplete,
-      excessivePages: false,
-      g5Approved: false,
-      urlsSet: false,
-      urlsMissing: 2
-    }
+    computeFields(project)
+    return pluckData(project)
+  }
+}
+
+function computeFields (project) {
+  project.areAllCrawled()
+  project.areAllScraped()
+  project.allUrlsSet()
+  project.allApproved()
+  project.hasExcessivePages()
+}
+
+function pluckData (project) {
+  const {
+    discoverComplete,
+    scrapeComplete,
+    locations,
+    project_status: status,
+    estimated_go_live: estGoLive,
+    salesforce_project_id: projectId,
+    project_name: projectName,
+    urlsSet,
+    urlsMissing,
+    g5Approved,
+    excessivePages
+  } = project.toJSON()
+
+  return {
+    clientName: null,
+    clientId: null,
+    projectId,
+    projectName,
+    status,
+    estGoLive,
+    locationCount: locations.length,
+    discoverComplete,
+    scrapeComplete,
+    excessivePages,
+    g5Approved,
+    urlsSet,
+    urlsMissing
   }
 }
