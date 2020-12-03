@@ -147,6 +147,7 @@ export default {
         { text: 'Project ID', value: 'projectId' }
       ],
       sortDir: 'asc',
+      sortDirs: ['asc', 'desc'],
       filter: '',
       fields: [
         { key: 'client', sortable: true, tdClass: 'd-none' },

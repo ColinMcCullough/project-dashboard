@@ -2,14 +2,13 @@
   <b-card
     no-body
     border-variant="gray-60"
-    style="background-color: #304a69; position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
   >
     <div class="content">
       <article class="content__grid">
         <aside class="py-1">
           <location-list />
         </aside>
-        <section class="main-content py-1">
+        <section class="main-content p-4">
           <!-- horizontal tabs start -->
           <b-tabs
             active-nav-item-class="text-light bg-secondary"
@@ -130,26 +129,18 @@ export default {
   background: white;
   min-height: 100%;
   overflow-y: scroll;
-  box-shadow: -2px 0 20px rgba(12, 35, 64, 0.5);
 }
 .ov-x-hidden {
   overflow-x: hidden;
 }
 .tab-padding ul {
   padding: 0;
-  // overflow-x: scroll;
   max-width: 400px;
 }
 .nav-tabs {
   overflow: hidden;
   border-radius: 0 0 10px 0;
 }
-// .nav-tabs .nav-link {
-//   color: inherit;
-//   background-color: #cbd8e1;
-//   border-radius: 10px 10px 0 0!important;
-//   border-bottom: none;
-// }
 .nav-tabs .nav-item {
   margin-right: 5px;
 }
