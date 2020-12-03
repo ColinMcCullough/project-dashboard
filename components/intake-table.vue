@@ -222,11 +222,11 @@ export default {
   }
 }
 .abs-feedback {
-  position: absolute;
+  position: absolute !important;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  max-width: 25%;
+  max-width: 35%;
   text-align: center;
   font-weight: 700;
   // z-index: 9999;
