@@ -33,7 +33,6 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
-
   models.project.prototype.allApproved = function () {
     const data = this.toJSON()
     this.dataValues.g5Approved = true
