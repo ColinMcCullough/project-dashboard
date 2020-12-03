@@ -81,9 +81,6 @@ module.exports = (models, sequelize, Sequelize) => {
           model: models.linkDiscoverer
         }
         ]
-      },
-      {
-        model: models.salesforceAccount
       }],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
