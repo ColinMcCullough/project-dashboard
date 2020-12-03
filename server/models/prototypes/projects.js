@@ -81,14 +81,16 @@ module.exports = (models, sequelize, Sequelize) => {
           model: models.linkDiscoverer
         }
         ]
+      },
+      {
+        model: models.salesforceAccount
       }],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
       ]
     })
-    return projects
-    // projects.forEach(project => computeFields(project))
-    // return projects.map(project => pluckData(project))
+    projects.forEach(project => computeFields(project))
+    return projects.map(project => pluckData(project))
   }
   models.project.displayOne = async (projectId) => {
     const project = await models.project.findOne({
@@ -134,12 +136,15 @@ function pluckData (project) {
     urlsSet,
     urlsMissing,
     g5Approved,
-    excessivePages
+    excessivePages,
+    salesforceAccount
   } = project.toJSON()
 
+  const { name: clientName, id: clientId } = salesforceAccount
+
   return {
-    clientName: null,
-    clientId: null,
+    clientName,
+    clientId,
     projectId,
     projectName,
     status,

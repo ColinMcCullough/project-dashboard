@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
   }, { paranoid: true })
   project.associate = (models) => {
     models.project.hasMany(models.location)
+    models.project.belongsTo(models.salesforceAccount)
   }
   return project
 }
