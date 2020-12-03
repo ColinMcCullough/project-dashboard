@@ -103,6 +103,9 @@ module.exports = (models, sequelize, Sequelize) => {
             }
           ]
         }
+      ],
+      order: [
+        [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
       ]
     })
     computeFields(project)
