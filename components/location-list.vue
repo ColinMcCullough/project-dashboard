@@ -57,5 +57,6 @@ export default {
 .table.b-table > tbody > .table-active > th,
 .table.b-table > tbody > .table-active > td {
   background-color: #6989b0 !important;
+  clip-path: polygon(95% 0%, 100% 50%, 95% 100%, 0% 100%, 0% 0%);
 }
 </style>

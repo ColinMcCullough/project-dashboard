@@ -1,6 +1,6 @@
 {
   "name": "project-dashboard",
-  "version": "1.2.68",
+  "version": "1.2.69",
   "description": "A full stack app template for the G5 OpEx team.",
   "author": "David Miller & Tyler Hasenoehrl & Colin McCullough",
   "private": true,

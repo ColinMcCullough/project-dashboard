@@ -90,7 +90,7 @@
         @click="onSave"
       >
         <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
-        {{ isSaving ? 'Saving...' : 'Save URLs' }}
+        {{ isSaving ? 'Saving...' : 'Save and Start Crawl' }}
       </b-btn>
     </template>
   </b-card>
