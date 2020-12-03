@@ -47,7 +47,7 @@ async function checkForSignout(queue, sfApi) {
 
 async function findAndCreateLocationProject (salesforceProjectId, sfApi) {
   const { Master_Project__c: salesforce_project_id, Location__c: locationId } = await sfApi.findProject({ Id: salesforceProjectId }, ['Master_Project__c', 'Location__c'])
-  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
+  const { Country__c: country, Vertical__c: vertical, Project_Name__c: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Project_Name__c', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
   const { value: state } = states.US.options.find(state => state.text === stateC)
   const location = await models.location.create({ properties: { name, url, address, zip, domainType, state: state || null, vertical, country } })
   let project = await models.project.findOne({ where: { salesforce_project_id } })
