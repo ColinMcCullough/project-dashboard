@@ -1,26 +1,26 @@
 <template>
-  <b-container fluid class="my-3">
+  <b-container fluid class="my-3" style="height: 100%; overflow-y: scroll;">
     <b-row>
       <b-col class="mb-2">
         <b-btn-group size="sm">
           <b-btn
-            variant="outline-primary"
+            variant="primary-30"
             pill
-            class="mr-2"
+            class="mr-2 px-3"
           >
             <b-icon-ui-checks-grid />
             Select All
           </b-btn>
           <b-btn
-            variant="tertiary-1"
+            variant="error-30"
             pill
-            class="mr-2"
+            class="mr-2 px-3"
           >
             <b-icon-trash-fill />
             Delete all Selected
           </b-btn>
           <b-btn
-            variant="outline-primary"
+            variant="gray-30"
             pill
             class="mr-2"
             @click="getImagesByFolder('decron')"
@@ -35,7 +35,8 @@
         v-for="(img, i) in images"
         :key="`img-${i}`"
         :class="'mb-2'"
-        cols="2"
+        lg="3"
+        md="4"
       >
         <b-card
           :img-src="getUrl(img.public_id)"
@@ -45,15 +46,17 @@
           <div class="d-flex justify-content-between">
             <b-form-checkbox
               :value="true"
-              button-variant="outline-muted"
+              button-variant="outline-gray-10"
               size="sm"
+              pill
               button
             >
               <b-icon-check-circle />
             </b-form-checkbox>
             <b-btn
-              variant="tertiary-1"
+              variant="outline-error-30"
               size="sm"
+              pill
               class="btn-trash"
               @click="deleteImg(img.public_id)"
             >

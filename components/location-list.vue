@@ -7,9 +7,9 @@
       select-mode="single"
       selectable
       sticky-header
-      borderless
+      outlined
       style="max-height: 75vh;"
-      class="p-0 m-0 border-0 hide"
+      class="p-0 m-0 hide"
       @row-selected="onLocationSelect"
     >
       <template v-slot:cell(location)="{ item }">
@@ -56,7 +56,6 @@ export default {
 .table.b-table > tbody > .table-active,
 .table.b-table > tbody > .table-active > th,
 .table.b-table > tbody > .table-active > td {
-  background-color: #6989b0 !important;
-  clip-path: polygon(95% 0%, 100% 50%, 95% 100%, 0% 100%, 0% 0%);
+  background-color: #cbd8e1 !important;
 }
 </style>

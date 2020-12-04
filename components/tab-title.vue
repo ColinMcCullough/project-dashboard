@@ -1,21 +1,18 @@
 <template>
   <div>
-    <div class="d-flex mb-2">
-      <b-badge
-        v-for="(status, i) in fields"
-        :key="`location-status-group-${i}`"
-        :variant="`${status.variant}-20`"
-        class="pl-0 rounded pr-3 mr-2"
-      >
-        <span :class="`bg-${status.variant}-60`" class="font-weight-bold rounded text-light pl-1 mr-1">
-          {{ status.count }}
-        </span>
-        {{ status.label }}
-      </b-badge>
-    </div>
     <h5 class="w-100 text-truncate">
+      <b-icon-building />
       {{ title }}
     </h5>
+    <div class="d-flex mb-1 align-items-center">
+      <b-badge variant="error" class="rounded px-1 mr-1">
+        3
+      </b-badge>
+      /
+      <b-badge variant="success" class="rounded px-1 ml-1">
+        5
+      </b-badge>
+    </div>
   </div>
 </template>
 
