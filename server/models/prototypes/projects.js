@@ -139,8 +139,13 @@ function pluckData (project) {
     excessivePages,
     salesforceAccount
   } = project.toJSON()
-
-  const { name: clientName, id: clientId } = salesforceAccount
+  let clientName = null
+  let clientId = null
+  if (salesforceAccount) {
+    const { name, id } = salesforceAccount
+    clientName = name
+    clientId = id
+  }
 
   return {
     clientName,
