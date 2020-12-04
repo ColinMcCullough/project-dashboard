@@ -52,9 +52,9 @@ async function deleteJobs(jobs) {
   for (let i = 0; i < jobs.length; i++) {
     const state = await jobs[i].getState()
     if (state === 'active') {
-      await jobs[i].moveToFailed(new Error('job has been stuck for too long'))
+      await jobs[i].moveToFailed(new Error('Job Deleted'))
     }
-    await jobs[i].remove()
+    // await jobs[i].discard()
   }
 }
 

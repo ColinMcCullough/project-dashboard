@@ -72,7 +72,7 @@
             size="sm"
             class="mr-2"
           >
-            Delete Selected
+            Move to Failed
           </b-btn>
           <b-popover
             target="disabled-state"
