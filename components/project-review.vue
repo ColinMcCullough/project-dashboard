@@ -1,60 +1,44 @@
 <template>
   <b-card
     no-body
-    border-variant="gray-60"
+    class="border-0"
   >
     <div class="content">
       <article class="content__grid">
         <aside class="py-1">
           <location-list />
         </aside>
-        <section class="main-content p-4">
-          <!-- horizontal tabs start -->
-          <b-tabs
-            active-nav-item-class="text-light bg-secondary"
-          >
-            <b-tab
-              v-for="(tab, index) in tabs"
-              :key="`${tab.id}-${index}`"
-              :title="tab.title"
-            >
-              <template v-slot:title>
-                <div class="d-flex justify-content-start align-items-center m-0">
-                  <warning :color="`#ffbd00`" class="mr-2" />
-                  <!-- need to swap above line for code below when we have a value to check if data is complete -->
-                  <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
-                  <check v-else :color="`#52be99`" class="mr-2" /> -->
-                  <!-- need icon swap -->
-                  {{ tab.title }}
-                </div>
-              </template>
-              <b-row>
-                <b-col style="border: 3px solid #cbd8e1">
-                  <component :is="tab.id" v-if="selectedLocation" />
-                  <p v-else>
-                    Select a Location
-                  </p>
-                </b-col>
-              </b-row>
-            </b-tab>
-          </b-tabs>
-          <!-- horizontal tabs end -->
-          <b-row v-if="selectedLocation !== null">
-            <b-col class="text-right mr-2 mt-2">
-              <b-button
-                size="md"
+        <section class="main-content pr-4 py-1">
+          <b-card no-body header-class="border-0">
+            <b-tabs card justified>
+              <b-tab
+                v-for="(tab, index) in tabs"
+                :key="`${tab.id}-${index}`"
+                :title="tab.title"
+                title-item-class="bg-gray-10"
+                title-link-class="p-4 text-uppercase text-muted font-weight-bold"
+              >
+                <component :is="tab.id" v-if="selectedLocation" />
+                <b-badge v-else variant="error">
+                  <b-icon-exclamation-triangle-fill />
+                  Select a Location
+                </b-badge>
+              </b-tab>
+            </b-tabs>
+            <b-card-footer v-if="selectedLocation !== null" class="d-flex justify-content-end border-0">
+              <b-btn
                 :disabled="isDisabled"
-                variant="primary"
-                class="mx-3"
-                style="min-width: 152px"
+                variant="outline-primary"
+                class="px-3"
+                pill
                 @click="onSave"
               >
-                <b-icon-arrow-clockwise v-if="isSaving" animation="spin" font-scale="1" />
+                <b-icon-arrow-clockwise v-if="isSaving" animation="spin" />
                 <save-icon v-else v-bind="{ size: '1.2em' }" />
                 {{ isSaving ? 'Saving...' : 'Save Location' }}
-              </b-button>
-            </b-col>
-          </b-row>
+              </b-btn>
+            </b-card-footer>
+          </b-card>
         </section>
       </article>
     </div>
@@ -81,26 +65,26 @@ export default {
       tabs: [
         {
           id: 'location-details',
-          title: 'Location Details'
+          title: 'Details'
         },
         {
           id: 'location-amenities',
-          title: 'Location Amenities'
+          title: 'Amenities'
         },
         {
           id: 'location-assets',
-          title: 'Location Assets'
+          title: 'Assets'
         }
       ]
     }
   },
   computed: {
-    isDisabled() {
+    isDisabled () {
       return !this.selectedLocation.edited
     }
   },
   methods: {
-    async onSave() {
+    async onSave () {
       this.isSaving = true
       const { locationId, properties } = this.selectedLocation
       const locIdx = this.getLocationIndex(locationId)
@@ -118,7 +102,7 @@ export default {
   &__grid {
     position: absolute;
     top: 10px;
-    height: calc(100vh - 65px);
+    // height: calc(100vh - 65px);
     width: 100%;
     display: grid;
     grid-template-columns: minmax(min-content, 300px) auto;
@@ -127,21 +111,27 @@ export default {
 }
 .main-content {
   background: white;
-  min-height: 100%;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: hidden;
 }
 .ov-x-hidden {
   overflow-x: hidden;
 }
-.tab-padding ul {
-  padding: 0;
-  max-width: 400px;
-}
-.nav-tabs {
-  overflow: hidden;
-  border-radius: 0 0 10px 0;
-}
-.nav-tabs .nav-item {
-  margin-right: 5px;
+// .tab-padding ul {
+//   padding: 0;
+//   max-width: 400px;
+// }
+// .nav-tabs {
+//   overflow: hidden;
+//   border-radius: 0 0 10px 0;
+// }
+// .nav-tabs .nav-item {
+//   margin-right: 5px;
+// }
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  box-shadow: inset 0 -5px 0 0 #339698;
+  border-color: #fff #fff #339698;
+  background-color: white;
 }
 </style>

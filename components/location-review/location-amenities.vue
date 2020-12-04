@@ -4,10 +4,16 @@
       v-for="amenity in amenities"
       :key="amenity.id"
       class="mb-2"
+      no-gutters
     >
       <b-col>
-        <b-input-group prepend="Type">
-          <b-form-select />
+        <b-input-group>
+          <b-input-group-prepend class="d-flex align-items-center px-3 font-weight-bold text-uppercase text-secondary-60">
+            Amenity Type
+          </b-input-group-prepend>
+          <b-form-select
+            :value="amenity.type"
+          />
         </b-input-group>
       </b-col>
       <b-col>
@@ -18,7 +24,9 @@
           />
           <template v-slot:append>
             <b-btn
-              variant="tertiary-1"
+              variant="error-20"
+              pill
+              @click="onDrop(amenity.id)"
             >
               <b-icon-trash-fill />
             </b-btn>
@@ -29,10 +37,12 @@
     <b-row>
       <b-col>
         <b-btn
-          variant="outline-success-0"
+          variant="primary-30"
           pill
+          class="px-3"
+          @click="onAdd"
         >
-          <b-icon-plus-square-fill />
+          <b-icon-plus />
           Add
         </b-btn>
       </b-col>
@@ -46,11 +56,16 @@ export default {
   name: 'location-amenities',
   mixins: [Locations],
   computed: {
-    id() {
+    id () {
       return this.selectedLocation.locationId
     },
-    amenities() {
+    amenities () {
       return this.locationById(this.id).properties.amenities
+    }
+  },
+  methods: {
+    onAdd () {
+      this.$emit('on-add')
     }
   }
 }

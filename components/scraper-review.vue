@@ -92,19 +92,19 @@ export default {
 .ov-x-hidden {
   overflow-x: hidden;
 }
-.nav-tabs {
-  overflow: hidden;
-  border-bottom: none !important;
-  border-radius: 0 0 10px 0;
-}
-.nav-tabs .nav-link {
-  color: inherit;
-  background-color: #cbd8e1;
-  border-radius: 10px 10px 0 0!important;
-  border-bottom: none;
-}
+// .nav-tabs {
+//   overflow: hidden;
+//   border-bottom: none !important;
+//   border-radius: 0 0 10px 0;
+// }
+// .nav-tabs .nav-link {
+//   color: inherit;
+//   background-color: #cbd8e1;
+//   border-radius: 10px 10px 0 0 !important;
+//   border-bottom: none;
+// }
 
-.nav-tabs .nav-item {
-  margin-right: 5px;
-}
+// .nav-tabs .nav-item {
+//   margin-right: 5px;
+// }
 </style>
