@@ -7,20 +7,12 @@
       no-gutters
     >
       <b-col>
-<<<<<<< HEAD
-        <b-input-group prepend="Type">
-          <b-form-select
-            :value="amenity.type"
-            :options="types"
-            @input="amenity.type = $event"
-=======
         <b-input-group>
           <b-input-group-prepend class="d-flex align-items-center px-3 font-weight-bold text-uppercase text-secondary-60">
             Amenity Type
           </b-input-group-prepend>
           <b-form-select
             :value="amenity.type"
->>>>>>> de6ee5519dcd05bbf97714b1e0df9bfe4ece0ed5
           />
         </b-input-group>
       </b-col>
@@ -32,14 +24,9 @@
           />
           <template v-slot:append>
             <b-btn
-<<<<<<< HEAD
-              variant="tertiary-1"
-              @click="amenities.splice(index, 1)"
-=======
               variant="error-20"
               pill
               @click="onDrop(amenity.id)"
->>>>>>> de6ee5519dcd05bbf97714b1e0df9bfe4ece0ed5
             >
               <b-icon-trash-fill />
             </b-btn>
@@ -52,12 +39,8 @@
         <b-btn
           variant="primary-30"
           pill
-<<<<<<< HEAD
-          @click="amenities.push({ type: null, amenity: '' })"
-=======
           class="px-3"
           @click="onAdd"
->>>>>>> de6ee5519dcd05bbf97714b1e0df9bfe4ece0ed5
         >
           <b-icon-plus />
           Add
@@ -84,13 +67,8 @@ export default {
     id () {
       return this.selectedLocation.locationId
     },
-<<<<<<< HEAD
-    amenities() {
-      return this.selectedLocation.properties.amenities
-=======
     amenities () {
       return this.locationById(this.id).properties.amenities
->>>>>>> de6ee5519dcd05bbf97714b1e0df9bfe4ece0ed5
     }
   },
   methods: {
