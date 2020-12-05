@@ -31,7 +31,8 @@
               Sort By
             </b-input-group-prepend>
             <b-form-select v-model="sortBy" :options="sortBys" class="mr-2" />
-            <b-btn
+            <!-- TODO: THE TABLE IS NOT REORDERING ON CHANGE TO THESE FIELDS -->
+            <!-- <b-btn
               :variant="sortDir === 'asc' ? 'secondary-70' : 'secondary'"
               class="mr-2"
               pill
@@ -45,7 +46,7 @@
               @click="sortDir = 'desc'"
             >
               <b-icon-sort-down-alt />
-            </b-btn>
+            </b-btn> -->
           </b-input-group>
           <b-input-group class="flex-grow-0">
             <b-input-group-prepend class="d-flex px-2 align-items-center">
@@ -144,13 +145,14 @@ export default {
       sortBys: [
         { text: 'Client Name', value: 'client' },
         { text: 'Est. Go-Live Date', value: 'estGoLive' },
-        { text: 'Project ID', value: 'projectId' }
+        { text: 'Project Name', value: 'projectName' }
       ],
       sortDir: 'asc',
+      sortDirs: ['asc', 'desc'],
       filter: '',
       fields: [
         { key: 'client', sortable: true, tdClass: 'd-none' },
-        { key: 'projectId', sortable: true, tdClass: 'd-none' },
+        { key: 'projectName', sortable: true, tdClass: 'd-none' },
         { key: 'estGoLive', sortable: true, tdClass: 'd-none' },
         { key: 'toDisplay', tdClass: 'border-0' }
       ]

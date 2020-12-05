@@ -20,7 +20,15 @@ module.exports = (sequelize) => {
     properties: {
       type: JSONB
     },
+    crawling: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
     crawled: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
+    scraping: {
       type: BOOLEAN,
       defaultValue: false
     },

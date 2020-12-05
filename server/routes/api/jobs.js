@@ -53,6 +53,35 @@ module.exports = (app) => {
       const { 'asset-scraper': assetScraper } = queues
       const { body } = req
       for (let i = 0; i < body.length; i++) {
+        const scrapers = {
+          photos: true,
+          amenities: true,
+          address: true,
+          emails: true,
+          phoneNumber: true,
+          social: true
+        }
+        const template = {
+          address: {
+            selector: null
+          },
+          phone: {
+            selector: null
+          },
+          email: {
+            selector: null
+          },
+          amenities: {
+            selector: null,
+            slug: null
+          }
+        }
+        if (!body.template) {
+          body.template = template
+        }
+        if (!body.scrapers) {
+          body.scrapers = scrapers
+        }
         const config = { photos: { folder: `onboarding/${body[i].locationId}` } }
         await assetScraper.add('run', { ...body[i], config })
       }
