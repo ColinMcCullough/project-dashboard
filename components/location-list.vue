@@ -43,7 +43,7 @@ export default {
       if (selected.length > 0) {
         selectedLocation = selected[0]
       }
-      this.updateSelectedLocations({ selectedLocation })
+      this.setSelectedLocation({ selectedLocation })
     }
   }
 }

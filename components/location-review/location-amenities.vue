@@ -1,13 +1,17 @@
 <template>
   <b-container fluid class="p-2">
     <b-row
-      v-for="amenity in amenities"
-      :key="amenity.id"
+      v-for="(amenity, index) in amenities"
+      :key="`${amenity}-${index}`"
       class="mb-2"
     >
       <b-col>
         <b-input-group prepend="Type">
-          <b-form-select />
+          <b-form-select
+            :value="amenity.type"
+            :options="types"
+            @input="amenity.type = $event"
+          />
         </b-input-group>
       </b-col>
       <b-col>
@@ -19,6 +23,7 @@
           <template v-slot:append>
             <b-btn
               variant="tertiary-1"
+              @click="amenities.splice(index, 1)"
             >
               <b-icon-trash-fill />
             </b-btn>
@@ -31,6 +36,7 @@
         <b-btn
           variant="outline-success-0"
           pill
+          @click="amenities.push({ type: null, amenity: '' })"
         >
           <b-icon-plus-square-fill />
           Add
@@ -43,14 +49,22 @@
 <script>
 import Locations from '~/mixins/locations'
 export default {
-  name: 'location-amenities',
   mixins: [Locations],
+  data () {
+    return {
+      types: [
+        { value: null, text: 'Select Type' },
+        { value: 'apartmentAmenity', text: 'Apartment Amenity' },
+        { value: 'communityAmenity', text: 'Community Amenity' }
+      ]
+    }
+  },
   computed: {
     id() {
       return this.selectedLocation.locationId
     },
     amenities() {
-      return this.locationById(this.id).properties.amenities
+      return this.selectedLocation.properties.amenities
     }
   }
 }

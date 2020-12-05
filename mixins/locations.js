@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateSelectedLocations: 'locations/set',
+      setSelectedLocation: 'locations/set',
       setLocations: 'locations/init',
       updateLocationProp: 'locations/updateLocationProp',
       updateScraper: 'locations/updateScraper',
@@ -28,7 +28,13 @@ export default {
       return this.locations
         .findIndex(location => location.locationId === id)
     },
-    onUpdate({ locIdx, key, val }, edited = false) {
+    updateSelectedLocation({ key, val }, edited = false) {
+      this.updateLocationProp({ key, val })
+      if (edited) {
+        this.updateLocation({ key: 'edited', val: true })
+      }
+    },
+    updateOnIndex({ locIdx, key, val }, edited = false) {
       this.updateLocationProp({ locIdx, key, val })
       if (edited) {
         this.updateLocation({ locIdx, key: 'edited', val: true })

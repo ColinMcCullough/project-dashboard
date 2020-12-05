@@ -175,7 +175,7 @@ export default {
     },
     onInput(val, locationId, key) {
       const locIdx = this.getLocationIndex(locationId)
-      this.onUpdate({ locIdx, key, val })
+      this.updateOnIndex({ locIdx, key, val })
     },
     async onSave () {
       this.isSaving = true

@@ -96,9 +96,9 @@ export default {
       const locIdx = this.getLocationIndex(this.id)
       if (key === 'local_phone_number' || key === 'display_phone_number') {
         const formatted = val.replace(/(\d{3})-?(\d{3})-?(\d{4})/, '$1-$2-$3')
-        this.onUpdate({ locIdx, key, val: formatted }, true)
+        this.updateOnIndex({ locIdx, key, val: formatted }, true)
       } else {
-        this.onUpdate({ locIdx, key, val }, true)
+        this.updateOnIndex({ locIdx, key, val }, true)
       }
     },
     validate(field) {
