@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="my-3" style="height: 100%; overflow-y: scroll;">
+  <b-container fluid class="my-3 pt-2" style="height: 100%; overflow-y: scroll;">
     <b-row>
       <b-col class="mb-2">
         <b-btn-group size="sm">
