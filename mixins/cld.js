@@ -30,7 +30,7 @@ export default {
     },
     async getImagesByFolder(prefix) {
       const images = await this.$axios.$get(`api/v1/cloudinary/${prefix}`)
-      this.images = images.resources
+      this.images = images.resources.map(img => ({ ...img, selected: false }))
     }
   }
 }

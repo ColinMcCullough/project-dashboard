@@ -7,6 +7,7 @@
             variant="primary-30"
             pill
             class="mr-2 px-3"
+            @click="selectAll"
           >
             <b-icon-ui-checks-grid />
             Select All
@@ -35,8 +36,9 @@
         v-for="(img, i) in images"
         :key="`img-${i}`"
         :class="'mb-2'"
-        lg="3"
-        md="4"
+        cols="4"
+        md="3"
+        lg="2"
       >
         <b-card
           :img-src="getUrl(img.public_id)"
@@ -45,11 +47,12 @@
         >
           <div class="d-flex justify-content-between">
             <b-form-checkbox
-              :value="true"
+              v-model="img.selected"
               button-variant="outline-gray-10"
               size="sm"
               pill
               button
+              @change="toggleSelected(img.public_id)"
             >
               <b-icon-check-circle />
             </b-form-checkbox>
@@ -100,8 +103,18 @@ export default {
     }
   },
   methods: {
+    selectAll() {
+      this.images.forEach((img, i) => {
+        this.images[i].selected = !this.images[i].selected
+        this.toggleSelected(img.public_id)
+      })
+    },
     toggleSelected(id) {
-
+      if (this.selected.includes(id)) {
+        this.selected.splice(this.selected.findIndex(sId => sId === id), 1)
+      } else {
+        this.selected.push(id)
+      }
     }
   }
 }
