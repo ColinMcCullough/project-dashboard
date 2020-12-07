@@ -13,9 +13,11 @@
             Select All
           </b-btn>
           <b-btn
+            :disabled="selected.length === 0"
             variant="error-30"
             pill
             class="mr-2 px-3"
+            @click="deleteSelected"
           >
             <b-icon-trash-fill />
             Delete all Selected
@@ -32,13 +34,11 @@
       </b-col>
     </b-row>
     <b-row no-gutters>
-      <b-col
+      <div
         v-for="(img, i) in images"
         :key="`img-${i}`"
-        :class="'mb-2'"
-        cols="4"
-        md="3"
-        lg="2"
+        class="mb-2"
+        style="max-width: 200px;"
       >
         <b-card
           :img-src="getUrl(img.public_id)"
@@ -85,7 +85,7 @@
             </strong>
           </template>
         </b-card>
-      </b-col>
+      </div>
     </b-row>
     <b-row>
       {{ selected }}
@@ -103,13 +103,18 @@ export default {
     }
   },
   methods: {
-    selectAll() {
+    selectAll () {
       this.images.forEach((img, i) => {
         this.images[i].selected = !this.images[i].selected
         this.toggleSelected(img.public_id)
       })
     },
-    toggleSelected(id) {
+    async deleteSelected () {
+      for (let i = 0; i < this.selected.length; i++) {
+        await this.deleteImg(this.selected[i])
+      }
+    },
+    toggleSelected (id) {
       if (this.selected.includes(id)) {
         this.selected.splice(this.selected.findIndex(sId => sId === id), 1)
       } else {

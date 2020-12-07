@@ -14,11 +14,12 @@ export default {
     }
   },
   methods: {
-    async deleteImg(id) {
+    async deleteImg (id) {
       const msg = await this.$axios.$post('api/v1/cloudinary', { id })
-      this.$emit('delete-response', msg)
+      this.images.splice(this.images.findIndex(img => img.public_id === id), 1)
+      this.$emit('delete-res', msg)
     },
-    getUrl(path) {
+    getUrl (path) {
       return this.$cloudinary.image.url(
         path,
         {
@@ -28,7 +29,7 @@ export default {
         }
       )
     },
-    async getImagesByFolder(prefix) {
+    async getImagesByFolder (prefix) {
       const images = await this.$axios.$get(`api/v1/cloudinary/${prefix}`)
       this.images = images.resources.map(img => ({ ...img, selected: false }))
     }
