@@ -37,12 +37,13 @@
       <div
         v-for="(img, i) in images"
         :key="`img-${i}`"
-        class="mb-2"
+        class="m-1"
         style="max-width: 200px;"
       >
         <b-card
           :img-src="getUrl(img.public_id)"
           overlay
+          body-class="p-0"
           footer-class="p-1 d-flex flex-column align-items-start ov-x-hidden"
         >
           <div class="d-flex justify-content-between">
@@ -50,7 +51,6 @@
               v-model="img.selected"
               button-variant="outline-gray-10"
               size="sm"
-              pill
               button
               @change="toggleSelected(img.public_id)"
             >
@@ -59,7 +59,6 @@
             <b-btn
               variant="outline-error-30"
               size="sm"
-              pill
               class="btn-trash"
               @click="deleteImg(img.public_id)"
             >
