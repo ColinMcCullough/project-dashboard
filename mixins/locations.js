@@ -8,7 +8,11 @@ export default {
       locations: state => state.locations.locations,
       projectId: state => state.locations.projectId,
       selectedLocation: state => state.locations.selectedLocation
-    })
+    }),
+    locIdx() {
+      return this.selectedLocation
+        ? this.getLocationIndex(this.selectedLocation.locationId) : null
+    }
   },
   methods: {
     ...mapActions({
@@ -27,12 +31,6 @@ export default {
     getLocationIndex(id) {
       return this.locations
         .findIndex(location => location.locationId === id)
-    },
-    updateSelectedLocation({ key, val }, edited = false) {
-      this.updateLocationProp({ key, val })
-      if (edited) {
-        this.updateLocation({ key: 'edited', val: true })
-      }
     },
     updateOnIndex({ locIdx, key, val }, edited = false) {
       this.updateLocationProp({ locIdx, key, val })
