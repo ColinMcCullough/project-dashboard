@@ -67,7 +67,7 @@ export const mutations = {
     state.locations[locIdx].properties.amenities[index][key] = val
   },
   ADD_AMENITY(state, { locIdx }) {
-    state.locations[locIdx].properties.amenities.push({ type: null, valu: null })
+    state.locations[locIdx].properties.amenities.push({ type: null, value: null })
   },
   DELETE_AMENITY(state, { locIdx, index }) {
     state.locations[locIdx].properties.amenities.splice(index, 1)
