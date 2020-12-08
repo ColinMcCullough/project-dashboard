@@ -1,55 +1,58 @@
 <template>
-  <b-container fluid class="p-2">
-    <b-row
-      v-for="(amenity, index) in amenities"
-      :key="`${amenity}-${index}`"
-      class="mb-2"
-      no-gutters
-    >
-      <b-col>
-        <b-input-group>
-          <b-input-group-prepend class="d-flex align-items-center px-3 font-weight-bold text-uppercase text-secondary-60">
-            Amenity Type
-          </b-input-group-prepend>
-          <b-form-select
-            :value="amenity.type"
-            :options="types"
-            @change="onUpdate($event, 'type', index)"
-          />
-        </b-input-group>
-      </b-col>
-      <b-col>
-        <b-input-group>
-          <b-form-input
-            :value="amenity.value"
-            @input="onUpdate($event, 'value', index)"
-          />
-          <template v-slot:append>
-            <b-btn
-              variant="error-20"
-              pill
-              @click="onDelete(index)"
-            >
-              <b-icon-trash-fill />
-            </b-btn>
-          </template>
-        </b-input-group>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <b-btn
-          variant="primary-30"
-          pill
-          class="px-3"
-          @click="onAdd"
-        >
-          <b-icon-plus />
-          Add
-        </b-btn>
-      </b-col>
-    </b-row>
-  </b-container>
+  <to-do v-bind="{ toDoProps: listOne }" />
+  <!-- <b-container fluid class="p-2">
+    <div v-if="vertical === 'sl' || vertical === 'mf'">
+      <b-row
+        v-for="(amenity, index) in amenities"
+        :key="`${amenity}-${index}`"
+        class="mb-2"
+        no-gutters
+      >
+        <b-col>
+          <b-input-group>
+            <b-input-group-prepend class="d-flex align-items-center px-3 font-weight-bold text-uppercase text-secondary-60">
+              Amenity Type
+            </b-input-group-prepend>
+            <b-form-select
+              :value="amenity.type"
+              :options="types"
+              @change="onUpdate($event, 'type', index)"
+            />
+          </b-input-group>
+        </b-col>
+        <b-col>
+          <b-input-group>
+            <b-form-input
+              :value="amenity.value"
+              @input="onUpdate($event, 'value', index)"
+            />
+            <template v-slot:append>
+              <b-btn
+                variant="error-20"
+                pill
+                @click="onDelete(index)"
+              >
+                <b-icon-trash-fill />
+              </b-btn>
+            </template>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-btn
+            variant="primary-30"
+            pill
+            class="px-3"
+            @click="onAdd"
+          >
+            <b-icon-plus />
+            Add
+          </b-btn>
+        </b-col>
+      </b-row>
+    </div>
+  </b-container> -->
 </template>
 
 <script>
@@ -66,9 +69,35 @@ export default {
     }
   },
   computed: {
-    amenities () {
-      return this.selectedLocation.properties.amenities
+    listOne () {
+      let val
+      if (this.vertical === 'mf' || this.vertical === 'sl') {
+        val = {
+          list: this.selectedLocation.properties.amenities,
+          label: 'Amenity Type',
+          listName: 'amenities',
+          options: this.types,
+          isArrObjects: true
+        }
+      } else if (this.vertical === 'ss') {
+        val = {
+          list: this.selectedLocation.properties.features,
+          label: 'Features',
+          listName: 'features',
+          options: null,
+          isArrObjects: false
+        }
+      }
+      return val
+    },
+    listTwo () {
+      return this.vertical === 'sl'
+        ? this.selectedLocation.properties.careLevels : null
+    },
+    vertical () {
+      return this.selectedLocation.properties.vertical
     }
+
   },
   methods: {
     onUpdate(val, key, index) {

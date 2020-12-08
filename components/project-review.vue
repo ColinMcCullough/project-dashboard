@@ -61,24 +61,32 @@ export default {
   data() {
     return {
       isSaving: false,
-      location: null,
-      tabs: [
+      location: null
+    }
+  },
+  computed: {
+    tabs() {
+      const vertical = this.selectedLocation ? this.selectedLocation.properties.vertical : null
+      const title = {
+        mf: 'Amenities',
+        ss: 'Features',
+        sl: 'Amenities / Care Levels'
+      }
+      return [
         {
           id: 'location-details',
           title: 'Details'
         },
         {
           id: 'location-amenities',
-          title: 'Amenities'
+          title: title[vertical]
         },
         {
           id: 'location-assets',
           title: 'Assets'
         }
       ]
-    }
-  },
-  computed: {
+    },
     isDisabled () {
       return !this.selectedLocation.edited
     }

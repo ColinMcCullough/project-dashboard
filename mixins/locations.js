@@ -8,11 +8,7 @@ export default {
       locations: state => state.locations.locations,
       projectId: state => state.locations.projectId,
       selectedLocation: state => state.locations.selectedLocation
-    }),
-    locIdx() {
-      return this.selectedLocation
-        ? this.getLocationIndex(this.selectedLocation.locationId) : null
-    }
+    })
   },
   methods: {
     ...mapActions({

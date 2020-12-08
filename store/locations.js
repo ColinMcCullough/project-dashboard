@@ -29,14 +29,17 @@ export const actions = {
   set({ commit }, payload) {
     commit('SET', payload)
   },
-  updateAmenity({ commit }, data) {
-    commit('UPDATE_AMENITY', data)
+  updatePropArrayObject({ commit }, data) {
+    commit('UPDATE_PROP_ARR_OBJ', data)
   },
-  addAmenity({ commit }, data) {
-    commit('ADD_AMENITY', data)
+  updatePropArrayIndex({ commit }, data) {
+    commit('UPDATE_PROP_ARR_IDX', data)
   },
-  deleteAmenity({ commit }, data) {
-    commit('DELETE_AMENITY', data)
+  addItem({ commit }, data) {
+    commit('ADD_ITEM', data)
+  },
+  deletePropArrByIndex({ commit }, data) {
+    commit('DELETE_PROP_ARR_BY_INDEX', data)
   },
   updateScraper({ commit }, data) {
     commit('UPDATE_SCRAPER_PROP', data)
@@ -63,14 +66,17 @@ export const mutations = {
     // eslint-disable-next-line no-return-assign
     keys.forEach(key => state[key] = obj[key])
   },
-  UPDATE_AMENITY(state, { locIdx, index, key, val }) {
-    state.locations[locIdx].properties.amenities[index][key] = val
+  UPDATE_PROP_ARR_OBJ(state, { locIdx, prop, index, key, val }) {
+    state.locations[locIdx].properties[prop][index][key] = val
   },
-  ADD_AMENITY(state, { locIdx }) {
-    state.locations[locIdx].properties.amenities.push({ type: null, value: null })
+  UPDATE_PROP_ARR_IDX(state, { locIdx, prop, index, val }) {
+    state.locations[locIdx].properties[prop][index] = val
   },
-  DELETE_AMENITY(state, { locIdx, index }) {
-    state.locations[locIdx].properties.amenities.splice(index, 1)
+  ADD_ITEM(state, { locIdx, prop, val }) {
+    state.locations[locIdx].properties[prop].push(val)
+  },
+  DELETE_PROP_ARR_BY_INDEX(state, { locIdx, prop, index }) {
+    state.locations[locIdx].properties[prop].splice(index, 1)
   },
   UPDATE_LOCATION(state, { locIdx, key, val }) {
     state.locations[locIdx][key] = val
