@@ -1,8 +1,7 @@
-const { EXCESSIVE_PAGE_LIMIT } = process.env
-const { queues } = require('../../controllers/queue')
-const { 'asset-scraper': assetScraper } = queues
-const assetScraperVals = require('../../config/assetScraper')
 module.exports = (models, sequelize, Sequelize) => {
+  const { EXCESSIVE_PAGE_LIMIT } = process.env
+  const queues = require('../../controllers/queue')
+  const assetScraperVals = require('../../config/assetScraper')
   models.linkDiscoverer.addHook('beforeCreate', async (instance, options) => {
     const { pages } = instance.toJSON()
     if (pages.length > parseInt(EXCESSIVE_PAGE_LIMIT)) {
@@ -17,23 +16,24 @@ module.exports = (models, sequelize, Sequelize) => {
         id: locationId
       }
     })
-    return location.update({ crawled: true })
+    return location.update({ crawled: true, crawling: false })
   })
-
   models.linkDiscoverer.addHook('afterCreate', async (instance, options) => {
-    const data = instance.toJSON
+    const { 'asset-scraper': assetScraper } = queues.queues
+    const data = instance.toJSON()
+    console.log(data)
     if (!data.excessivePages) {
-      const location = models.location.findOne({
+      const location = await models.location.findOne({
         where: {
           id: data.locationId
         }
       })
-      const { properties, locationId } = location.toJSON()
+      const { properties, id: locationId } = location.toJSON()
       const { pages } = data
-      const rootDomain = properties.url.replace(/(^\w+:|^)\/\//, '')
+      const rootdomain = properties.url.replace(/(^\w+:|^)\/\//, '')
       const rootProtocol = properties.url.includes('https://') ? 'https' : 'http'
       const job = {
-        rootDomain,
+        rootdomain,
         rootProtocol,
         locationId,
         pages,
@@ -45,6 +45,7 @@ module.exports = (models, sequelize, Sequelize) => {
         }
       }
       await assetScraper.add('run', job)
+      await instance.update({ scraping: true })
     }
   })
 }

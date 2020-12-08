@@ -10,6 +10,28 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
+  models.project.prototype.isScraping = function () {
+    const data = this.toJSON()
+    this.dataValues.isScraping = false
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      if (location.scraping) {
+        this.dataValues.isScraping = true
+        break
+      }
+    }
+  }
+  models.project.prototype.isCrawling = function () {
+    const data = this.toJSON()
+    this.dataValues.isCrawling = false
+    for (let i = 0; i < data.locations.length; i++) {
+      const location = data.locations[i]
+      if (location.crawling) {
+        this.dataValues.isCrawling = true
+        break
+      }
+    }
+  }
   models.project.prototype.areAllScraped = function () {
     const data = this.toJSON()
     this.dataValues.scrapeComplete = true
@@ -119,6 +141,8 @@ module.exports = (models, sequelize, Sequelize) => {
 function computeFields (project) {
   project.areAllCrawled()
   project.areAllScraped()
+  project.isScraping()
+  project.isCrawling()
   project.allUrlsSet()
   project.allApproved()
   project.hasExcessivePages()
@@ -137,7 +161,9 @@ function pluckData (project) {
     urlsMissing,
     g5Approved,
     excessivePages,
-    salesforceAccount
+    salesforceAccount,
+    isScraping,
+    isCrawling
   } = project.toJSON()
   let clientName = null
   let clientId = null
@@ -161,7 +187,7 @@ function pluckData (project) {
     g5Approved,
     urlsSet,
     urlsMissing,
-    isScraping: true,
-    isCrawling: true
+    isScraping,
+    isCrawling
   }
 }
