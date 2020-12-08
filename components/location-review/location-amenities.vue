@@ -34,7 +34,7 @@ export default {
           },
           {
             list: this.selectedLocation.properties.careLevels,
-            label: 'Care Levels',
+            label: 'Care Level',
             propName: 'careLevels',
             options: null,
             isArrObjects: false,
@@ -42,7 +42,7 @@ export default {
           },
           {
             list: this.selectedLocation.properties.features,
-            label: 'Features',
+            label: 'Feature',
             propName: 'features',
             options: null,
             isArrObjects: false,
