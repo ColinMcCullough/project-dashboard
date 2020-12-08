@@ -1,16 +1,16 @@
-const demo = 'decron-3/my83u8uwjqujdgy4szp4.jpg'
+// const demo = 'decron-3/my83u8uwjqujdgy4szp4.jpg'
 export default {
-  data() {
+  data () {
     return {
-      images: [],
-      src: this.$cloudinary.image.url(
-        demo,
-        {
-          width: '200',
-          height: 200,
-          crop: 'fill'
-        }
-      )
+      images: []
+      // src: this.$cloudinary.image.url(
+      //   demo,
+      //   {
+      //     width: '200',
+      //     height: 200,
+      //     crop: 'fill'
+      //   }
+      // )
     }
   },
   methods: {
@@ -31,6 +31,7 @@ export default {
     },
     async getImagesByFolder (prefix) {
       const images = await this.$axios.$get(`api/v1/cloudinary/${prefix}`)
+      this.$emit('images', images, prefix)
       this.images = images.resources.map(img => ({ ...img, selected: false }))
     }
   }
