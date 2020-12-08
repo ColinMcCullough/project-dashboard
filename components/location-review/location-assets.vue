@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="my-3" style="height: 100%; overflow-y: scroll;">
+  <b-container fluid class="my-3 pt-2" style="height: 100%; overflow-y: scroll;">
     <b-row>
       <b-col class="mb-2">
         <b-btn-group size="sm">
@@ -7,14 +7,17 @@
             variant="primary-30"
             pill
             class="mr-2 px-3"
+            @click="selectAll"
           >
             <b-icon-ui-checks-grid />
             Select All
           </b-btn>
           <b-btn
+            :disabled="selected.length === 0"
             variant="error-30"
             pill
             class="mr-2 px-3"
+            @click="deleteSelected"
           >
             <b-icon-trash-fill />
             Delete all Selected
@@ -31,32 +34,31 @@
       </b-col>
     </b-row>
     <b-row no-gutters>
-      <b-col
+      <div
         v-for="(img, i) in images"
         :key="`img-${i}`"
-        :class="'mb-2'"
-        lg="3"
-        md="4"
+        class="m-1"
+        style="max-width: 200px;"
       >
         <b-card
           :img-src="getUrl(img.public_id)"
           overlay
+          body-class="p-0"
           footer-class="p-1 d-flex flex-column align-items-start ov-x-hidden"
         >
           <div class="d-flex justify-content-between">
             <b-form-checkbox
-              :value="true"
+              v-model="img.selected"
               button-variant="outline-gray-10"
               size="sm"
-              pill
               button
+              @change="toggleSelected(img.public_id)"
             >
               <b-icon-check-circle />
             </b-form-checkbox>
             <b-btn
               variant="outline-error-30"
               size="sm"
-              pill
               class="btn-trash"
               @click="deleteImg(img.public_id)"
             >
@@ -82,7 +84,7 @@
             </strong>
           </template>
         </b-card>
-      </b-col>
+      </div>
     </b-row>
     <b-row>
       {{ selected }}
@@ -100,8 +102,23 @@ export default {
     }
   },
   methods: {
-    toggleSelected(id) {
-
+    selectAll () {
+      this.images.forEach((img, i) => {
+        this.images[i].selected = !this.images[i].selected
+        this.toggleSelected(img.public_id)
+      })
+    },
+    async deleteSelected () {
+      for (let i = 0; i < this.selected.length; i++) {
+        await this.deleteImg(this.selected[i])
+      }
+    },
+    toggleSelected (id) {
+      if (this.selected.includes(id)) {
+        this.selected.splice(this.selected.findIndex(sId => sId === id), 1)
+      } else {
+        this.selected.push(id)
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
           <location-list />
         </aside>
         <section class="main-content pr-4 py-1">
-          <b-card no-body header-class="border-0">
+          <b-card no-body>
             <b-tabs card justified>
               <b-tab
                 v-for="(tab, index) in tabs"
@@ -17,6 +17,7 @@
                 :title="tab.title"
                 title-item-class="bg-gray-10"
                 title-link-class="p-4 text-uppercase text-muted font-weight-bold"
+                style="max-height: 58vh; overflow-y: scroll;"
               >
                 <component :is="tab.id" v-if="selectedLocation" />
                 <b-badge v-else variant="error">

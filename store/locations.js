@@ -29,6 +29,15 @@ export const actions = {
   set({ commit }, payload) {
     commit('SET', payload)
   },
+  updateAmenity({ commit }, data) {
+    commit('UPDATE_AMENITY', data)
+  },
+  addAmenity({ commit }, data) {
+    commit('ADD_AMENITY', data)
+  },
+  deleteAmenity({ commit }, data) {
+    commit('DELETE_AMENITY', data)
+  },
   updateScraper({ commit }, data) {
     commit('UPDATE_SCRAPER_PROP', data)
   },
@@ -53,6 +62,15 @@ export const mutations = {
     const keys = Object.keys(obj)
     // eslint-disable-next-line no-return-assign
     keys.forEach(key => state[key] = obj[key])
+  },
+  UPDATE_AMENITY(state, { locIdx, index, key, val }) {
+    state.locations[locIdx].properties.amenities[index][key] = val
+  },
+  ADD_AMENITY(state, { locIdx }) {
+    state.locations[locIdx].properties.amenities.push({ type: null, value: null })
+  },
+  DELETE_AMENITY(state, { locIdx, index }) {
+    state.locations[locIdx].properties.amenities.splice(index, 1)
   },
   UPDATE_LOCATION(state, { locIdx, key, val }) {
     state.locations[locIdx][key] = val

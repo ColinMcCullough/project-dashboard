@@ -13,6 +13,8 @@
           </b-input-group-prepend>
           <b-form-select
             :value="amenity.type"
+            :options="types"
+            @change="onUpdate($event, 'type', index)"
           />
         </b-input-group>
       </b-col>
@@ -20,13 +22,13 @@
         <b-input-group>
           <b-form-input
             :value="amenity.value"
-            @input="($event) => { amenity.value = $event }"
+            @input="onUpdate($event, 'value', index)"
           />
           <template v-slot:append>
             <b-btn
               variant="error-20"
               pill
-              @click="onDrop(amenity.id)"
+              @click="onDelete(index)"
             >
               <b-icon-trash-fill />
             </b-btn>
@@ -64,16 +66,27 @@ export default {
     }
   },
   computed: {
-    id () {
-      return this.selectedLocation.locationId
-    },
     amenities () {
-      return this.locationById(this.id).properties.amenities
+      return this.selectedLocation.properties.amenities
     }
   },
   methods: {
+    onUpdate(val, key, index) {
+      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
+      this.$store.dispatch('locations/updateAmenity',
+        { locIdx, index, key, val }
+      )
+      this.updateLocation({ locIdx, key: 'edited', val: true })
+    },
     onAdd () {
-      this.$emit('on-add')
+      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
+      this.$store.dispatch('locations/addAmenity', { locIdx: this.locIdx })
+      this.updateLocation({ locIdx, key: 'edited', val: true })
+    },
+    onDelete (index) {
+      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
+      this.$store.dispatch('locations/deleteAmenity', { locIdx, index })
+      this.updateLocation({ locIdx, key: 'edited', val: true })
     }
   }
 }

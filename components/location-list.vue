@@ -8,7 +8,7 @@
       selectable
       sticky-header
       outlined
-      style="max-height: 75vh;"
+      style="max-height: 58vh; overflow-y: scroll;"
       class="p-0 m-0 hide"
       @row-selected="onLocationSelect"
     >

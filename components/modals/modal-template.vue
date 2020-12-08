@@ -4,7 +4,7 @@
     :hide-footer="true"
     size="xl"
     modal-class="better-modal"
-    header-class="d-flex justify-content-between border-0"
+    header-class="d-flex justify-content-between border-0 pb-0"
     no-close-on-backdrop
     hide-backdrop
   >
