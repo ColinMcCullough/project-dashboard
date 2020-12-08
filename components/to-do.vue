@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="p-2">
+  <div>
     <b-row
       v-for="(item, index) in toDoProps.list"
       :key="`${item}-${index}`"
@@ -42,7 +42,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
+      <b-col class="ml-3 mb-2">
         <b-btn
           variant="primary-30"
           pill
@@ -54,7 +54,7 @@
         </b-btn>
       </b-col>
     </b-row>
-  </b-container>
+  </div>
 </template>
 <script>
 import Locations from '~/mixins/locations'
@@ -67,7 +67,7 @@ export default {
         return {
           list: [],
           label: '',
-          listName: '',
+          propName: '',
           options: null,
           isArrObjects: false
         }
@@ -89,11 +89,11 @@ export default {
       const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
       if (key) {
         this.$store.dispatch('locations/updatePropArrayObject',
-          { locIdx, prop: this.toDoProps.listName, index, key, val }
+          { locIdx, prop: this.toDoProps.propName, index, key, val }
         )
       } else {
         this.$store.dispatch('locations/updatePropArrayIndex',
-          { locIdx, prop: this.toDoProps.listName, index, val }
+          { locIdx, prop: this.toDoProps.propName, index, val }
         )
       }
       this.updateLocation({ locIdx, key: 'edited', val: true })
@@ -101,12 +101,12 @@ export default {
     onAdd () {
       const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
       const val = this.toDoProps.isArrObjects ? { type: null, value: null } : ''
-      this.$store.dispatch('locations/addItem', { locIdx, prop: this.toDoProps.listName, val })
+      this.$store.dispatch('locations/addItem', { locIdx, prop: this.toDoProps.propName, val })
       this.updateLocation({ locIdx, key: 'edited', val: true })
     },
     onDelete (index) {
       const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
-      this.$store.dispatch('locations/deletePropArrByIndex', { locIdx, prop: this.toDoProps.listName, index })
+      this.$store.dispatch('locations/deletePropArrByIndex', { locIdx, prop: this.toDoProps.propName, index })
       this.updateLocation({ locIdx, key: 'edited', val: true })
     }
   }
