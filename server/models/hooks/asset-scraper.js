@@ -8,6 +8,6 @@ module.exports = (models, sequelize, Sequelize) => {
         id: locationId
       }
     })
-    return location.update({ scraped: true })
+    return location.update({ scraped: true, scraping: false })
   })
 }
