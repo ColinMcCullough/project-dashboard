@@ -15,7 +15,7 @@ module.exports = {
         prefix
       }, (err, resources) => {
         if (!err) {
-          // console.log(resources)
+          console.log(resources)
           res(resources)
         } else {
           console.error(err)
