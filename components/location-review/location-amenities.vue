@@ -65,23 +65,6 @@ export default {
 
   },
   methods: {
-    onUpdate(val, key, index) {
-      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
-      this.$store.dispatch('locations/updateAmenity',
-        { locIdx, index, key, val }
-      )
-      this.updateLocation({ locIdx, key: 'edited', val: true })
-    },
-    onAdd () {
-      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
-      this.$store.dispatch('locations/addAmenity', { locIdx: this.locIdx })
-      this.updateLocation({ locIdx, key: 'edited', val: true })
-    },
-    onDelete (index) {
-      const locIdx = this.getLocationIndex(this.selectedLocation.locationId)
-      this.$store.dispatch('locations/deleteAmenity', { locIdx, index })
-      this.updateLocation({ locIdx, key: 'edited', val: true })
-    }
   }
 }
 </script>

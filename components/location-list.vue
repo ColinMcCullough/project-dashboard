@@ -27,7 +27,6 @@ export default {
   mixins: [Locations],
   data () {
     return {
-      filter: ''
     }
   },
   computed: {},
