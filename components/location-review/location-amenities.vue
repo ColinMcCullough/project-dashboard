@@ -28,24 +28,30 @@ export default {
             list: this.selectedLocation.properties.amenities,
             label: 'Amenity Type',
             propName: 'amenities',
+            placeholder: 'ex. Swimming Pool',
             options: this.types,
             isArrObjects: true,
+            maxItems: 20,
             verticals: ['mf', 'sl']
           },
           {
             list: this.selectedLocation.properties.careLevels,
             label: 'Care Level',
             propName: 'careLevels',
+            placeholder: 'ex. Memory Care',
             options: null,
             isArrObjects: false,
+            maxItems: 15,
             verticals: ['sl']
           },
           {
             list: this.selectedLocation.properties.features,
             label: 'Feature',
             propName: 'features',
+            placeholder: 'ex. RV Storage',
             options: null,
             isArrObjects: false,
+            maxItems: 15,
             verticals: ['ss']
           }
         ]

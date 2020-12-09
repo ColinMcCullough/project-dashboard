@@ -26,16 +26,26 @@
             variant="gray-30"
             pill
             class="mr-2"
-            @click="getImagesByFolder('decron')"
+            @click="getImagesByFolder(selectedLocation.cloudinaryFolder)"
           >
-            <b-icon-arrow-clockwise />
+            <b-icon-arrow-clockwise :animation="isLoading ? 'spin' : null" />
+            Refresh
           </b-btn>
         </b-btn-group>
+      </b-col>
+      <b-col class="text-left">
+        <b-pagination
+          v-model="currentPage"
+          pills
+          :total-rows="images.length"
+          :per-page="perPage"
+          size="sm"
+        />
       </b-col>
     </b-row>
     <b-row no-gutters>
       <div
-        v-for="(img, i) in images"
+        v-for="(img, i) in imagesPerPage"
         :key="`img-${i}`"
         class="m-1"
         style="max-width: 200px;"
@@ -70,15 +80,8 @@
               {{ img.public_id }}
             </i>
             <p class="small mb-0">
-              {{ img.bytes / 1000 }}kb
+              {{ (img.bytes / 1000).toFixed(2) }}KB
             </p>
-            <b-badge
-              v-for="tag in img.tags"
-              :key="tag"
-              variant="muted"
-            >
-              {{ tag }}
-            </b-badge>
             <strong class="text-muted small">
               {{ img.width }} x {{ img.height }}
             </strong>
@@ -86,19 +89,48 @@
         </b-card>
       </div>
     </b-row>
-    <b-row>
-      {{ selected }}
+    <b-row v-if="images.length < 1">
+      <b-badge variant="error" class="ml-3 rounded">
+        <b-icon-exclamation-triangle-fill />
+        No Images to Display
+      </b-badge>
     </b-row>
   </b-container>
 </template>
 
 <script>
 import cloudinaryMixin from '~/mixins/cld'
+import Locations from '~/mixins/locations'
 export default {
-  mixins: [cloudinaryMixin],
+  mixins: [cloudinaryMixin, Locations],
   data() {
     return {
-      selected: []
+      selected: [],
+      perPage: 12,
+      currentPage: 1
+    }
+  },
+  computed: {
+    imagesPerPage() {
+      const start = (this.currentPage - 1) * this.perPage
+      const stop = (this.currentPage - 1) * this.perPage + this.perPage
+      return this.images.slice(start, stop)
+    }
+  },
+  watch: {
+    selectedLocation(location) {
+      const path = location.cloudinaryFolder
+      if (path) {
+        this.getImagesByFolder(path)
+      } else {
+        this.images = []
+      }
+    }
+  },
+  created() {
+    const path = this.selectedLocation.cloudinaryFolder
+    if (path) {
+      this.getImagesByFolder(path)
     }
   },
   methods: {
@@ -112,6 +144,7 @@ export default {
       for (let i = 0; i < this.selected.length; i++) {
         await this.deleteImg(this.selected[i])
       }
+      this.selected = []
     },
     toggleSelected (id) {
       if (this.selected.includes(id)) {

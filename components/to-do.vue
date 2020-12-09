@@ -25,6 +25,7 @@
           </b-input-group-prepend>
           <b-form-input
             :value="toDoProps.isArrObjects ? item.value : item"
+            :placeholder="toDoProps.placeholder? toDoProps.placeholder : ''"
             @input="toDoProps.isArrObjects
               ? onUpdate($event, index, 'value')
               : onUpdate($event, index)"
@@ -45,6 +46,8 @@
       <b-col class="ml-3 mb-2">
         <b-btn
           variant="primary-30"
+          :disabled="toDoProps.maxItems
+            ?toDoProps.list.length >= toDoProps.maxItems : false"
           pill
           class="px-3"
           @click="onAdd"

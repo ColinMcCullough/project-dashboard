@@ -20,7 +20,7 @@
                 style="max-height: 58vh; overflow-y: scroll;"
               >
                 <component :is="tab.id" v-if="selectedLocation" />
-                <b-badge v-else variant="error">
+                <b-badge v-else variant="error" class="rounded">
                   <b-icon-exclamation-triangle-fill />
                   Select a Location
                 </b-badge>
@@ -80,7 +80,7 @@ export default {
         },
         {
           id: 'location-amenities',
-          title: title[vertical]
+          title: title[vertical] ? title[vertical] : 'Amenities'
         },
         {
           id: 'location-assets',

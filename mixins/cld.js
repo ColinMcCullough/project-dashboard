@@ -2,6 +2,7 @@ const demo = 'decron-3/my83u8uwjqujdgy4szp4.jpg'
 export default {
   data() {
     return {
+      isLoading: false,
       images: [],
       src: this.$cloudinary.image.url(
         demo,
@@ -18,6 +19,7 @@ export default {
       const msg = await this.$axios.$post('api/v1/cloudinary', { id })
       this.images.splice(this.images.findIndex(img => img.public_id === id), 1)
       this.$emit('delete-res', msg)
+      this.toggleSelected(id)
     },
     getUrl (path) {
       return this.$cloudinary.image.url(
@@ -30,8 +32,15 @@ export default {
       )
     },
     async getImagesByFolder (prefix) {
-      const images = await this.$axios.$get(`api/v1/cloudinary/${prefix}`)
-      this.images = images.resources.map(img => ({ ...img, selected: false }))
+      try {
+        this.isLoading = true
+        const images = await this.$axios.$get(`api/v1/cloudinary?prefix=${prefix}`)
+        this.images = images.resources.map(img => ({ ...img, selected: false }))
+      } catch (e) {
+        this.images = []
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 }

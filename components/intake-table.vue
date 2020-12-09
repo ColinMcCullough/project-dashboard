@@ -12,17 +12,31 @@
       :fields="fields"
       :sort-compare="sortCompare"
       primary-key="key"
+      select-mode="multi"
       striped
       outlined
       responsive
       head-variant="light"
       class="mb-0 rounded-table"
     >
-      <template v-slot:head(url)="data">
-        {{ data.label.toUpperCase() }}
+      <template v-slot:head(url)="{ label }">
+        {{ label.toUpperCase() }}
       </template>
-      <template v-slot:cell(name)="data">
-        {{ data.item.properties.name }}
+      <template v-slot:head(singleDomain)="data">
+        <div class="d-inline">
+          {{ data.label }}
+        </div>
+        <b-form-checkbox
+          :checked="singleDomainAllEnabled"
+          class="d-inline mb-1"
+          size="lg"
+          name="check-button"
+          switch
+          @input="updateAll($event, data.column)"
+        />
+      </template>
+      <template v-slot:cell(name)="{ item }">
+        {{ item.properties.name }}
       </template>
       <template v-slot:cell(url)="data">
         <b-form-group class="mb-0" style="position: relative;">
@@ -53,8 +67,8 @@
           />
         </b-form-group>
       </template>
-      <template v-slot:cell(valid)="data">
-        <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
+      <template v-slot:cell(valid)="{ item }">
+        <icons-swap v-bind="{ needsCheckIcon: validUrl(item.properties.url), iconConfig }" />
       </template>
       <template v-slot:cell(corporate)="data">
         <b-form-checkbox
@@ -63,7 +77,7 @@
           name="check-switch"
           size="lg"
           switch
-          @input="onInput($event, data.item.locationId, data.field.key)"
+          @change="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
       <template v-slot:cell(singleDomain)="data">
@@ -73,12 +87,12 @@
           name="check-switch"
           size="lg"
           switch
-          @input="onInput($event, data.item.locationId, data.field.key)"
+          @change="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-badge v-if="multipleCorpSelected" variant="error" class="px-3 rounded">
+      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded">
         <b-icon-exclamation-triangle-fill />
         Multiple Corporate Locations Selected.
       </b-badge>
@@ -103,6 +117,9 @@ export default {
   mixins: [Locations],
   data () {
     return {
+      corpSelected: 0,
+      corporateAllEnabled: false,
+      singleDomainAllEnabled: false,
       isSaving: false,
       fields: [
         {
@@ -145,23 +162,17 @@ export default {
     }
   },
   computed: {
-    multipleCorpSelected() {
-      let count = 0
-      let val = false
-      for (let i = 0; i < this.locations.length; i++) {
-        if (count > 1) {
-          val = true
-          break
-        } else if (this.locations[i].properties.corporate === true) {
-          count++
-        }
-      }
-      return val
-    },
     disabledBtn() {
       return this.locations
         .some(location => !this.validUrl(location.properties.url))
     }
+  },
+  mounted() {
+    this.locations.forEach((location) => {
+      if (location.properties.corporate) {
+        this.corpSelected++
+      }
+    })
   },
   methods: {
     validUrl(str) {
@@ -173,7 +184,16 @@ export default {
         '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
       return !!pattern.test(str)
     },
+    updateAll(val, key) {
+      this[`${key}AllEnabled`] = val
+      this.locations.forEach((location, locIdx) => {
+        this.updateOnIndex({ locIdx, key, val })
+      })
+    },
     onInput(val, locationId, key) {
+      if (key === 'corporate') {
+        val ? this.corpSelected++ : this.corpSelected--
+      }
       const locIdx = this.getLocationIndex(locationId)
       this.updateOnIndex({ locIdx, key, val })
     },
@@ -197,10 +217,10 @@ export default {
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
-      if (key === 'url' || key === 'name') {
+      if (key !== 'valid') {
         a = aRow.properties[key]
         b = bRow.properties[key]
-      } else if (key === 'valid') {
+      } else {
         a = this.validUrl(aRow.properties.url)
         b = this.validUrl(bRow.properties.url)
       }

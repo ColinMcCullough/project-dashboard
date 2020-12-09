@@ -21,7 +21,6 @@ module.exports = (models, sequelize, Sequelize) => {
   models.linkDiscoverer.addHook('afterCreate', async (instance, options) => {
     const { 'asset-scraper': assetScraper } = queues.queues
     const data = instance.toJSON()
-    console.log(data)
     if (!data.excessivePages) {
       const location = await models.location.findOne({
         where: {
