@@ -3,7 +3,14 @@ export default {
   data () {
     return {
       isLoading: false,
-      images: []
+      images: [],
+      src: this.$cloudinary.image.url(
+        {
+          width: '200',
+          height: 200,
+          crop: 'fill'
+        }
+      )
     }
   },
   methods: {
