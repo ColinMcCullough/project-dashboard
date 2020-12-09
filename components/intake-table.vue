@@ -12,7 +12,6 @@
       :fields="fields"
       :sort-compare="sortCompare"
       primary-key="key"
-      select-mode="multi"
       striped
       outlined
       responsive
