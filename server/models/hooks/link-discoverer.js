@@ -27,7 +27,7 @@ module.exports = (models, sequelize, Sequelize) => {
           id: data.locationId
         }
       })
-      const { properties, id: locationId } = location.toJSON()
+      const { properties, id: locationId, locationProjectId } = location.toJSON()
       const { pages } = data
       const rootdomain = properties.url.replace(/(^\w+:|^)\/\//, '')
       const rootProtocol = properties.url.includes('https://') ? 'https' : 'http'
@@ -39,7 +39,7 @@ module.exports = (models, sequelize, Sequelize) => {
         ...assetScraperVals,
         config: {
           photos: {
-            folder: `onboarding/${locationId}`
+            folder: `onboarding/${locationProjectId}`
           }
         }
       }
