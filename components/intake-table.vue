@@ -23,17 +23,19 @@
         {{ label.toUpperCase() }}
       </template>
       <template v-slot:head(singleDomain)="data">
-        <div class="d-inline">
-          {{ data.label }}
+        <div class="d-flex align-items-center">
+          <b-form-checkbox
+            :checked="singleDomainAllEnabled"
+            size="lg"
+            style="transform: translateY(-10%);"
+            name="check-button"
+            switch
+            @input="updateAll($event, data.column)"
+          />
+          <div>
+            {{ data.label }}
+          </div>
         </div>
-        <b-form-checkbox
-          :checked="singleDomainAllEnabled"
-          class="d-inline mb-1"
-          size="lg"
-          name="check-button"
-          switch
-          @input="updateAll($event, data.column)"
-        />
       </template>
       <template v-slot:cell(name)="{ item }">
         {{ item.properties.name }}
@@ -92,7 +94,7 @@
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded">
+      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
         <b-icon-exclamation-triangle-fill />
         Multiple Corporate Locations Selected.
       </b-badge>
