@@ -113,7 +113,7 @@ export default {
   computed: {
     imagesPerPage() {
       const start = (this.currentPage - 1) * this.perPage
-      const stop = (this.currentPage - 1) * this.perPage + this.perPage
+      const stop = start + this.perPage
       return this.images.slice(start, stop)
     }
   },
