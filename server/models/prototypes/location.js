@@ -1,8 +1,8 @@
 module.exports = (models, sequelize, Sequelize) => {
-  models.location.locationById = async (locationId) => {
+  models.location.locationById = async (locationProjectId) => {
     const location = await models.location.findOne({
       where: {
-        locationId
+        locationProjectId
       }
     })
     return location

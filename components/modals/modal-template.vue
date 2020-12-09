@@ -4,7 +4,7 @@
     :hide-footer="true"
     size="xl"
     modal-class="better-modal"
-    header-class="d-flex justify-content-between border-0"
+    header-class="d-flex justify-content-between border-0 pb-0"
     no-close-on-backdrop
     hide-backdrop
   >
@@ -20,19 +20,20 @@
       <b-button-group>
         <b-btn
           v-if="id === 'review-modal'"
-          variant="success"
+          variant="secondary-60"
           class="mr-1"
           style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
           @click="onSave"
         >
-          <save-icon v-bind="{ size: '2em' }" />
+          <b-icon-arrow-clockwise v-if="isSaving" animation="spin" font-scale="2" />
+          <save-icon v-else v-bind="{ size: '2em' }" />
         </b-btn>
         <b-btn
           variant="transparent"
           style="border-radius: 50%; width: 60px; height: 60px; transform: translate(0, -50%);"
           @click="cancel"
         >
-          <b-icon-x-circle-fill scale="3em" variant="tertiary-1" />
+          <b-icon-x-circle-fill scale="3em" variant="error" />
         </b-btn>
       </b-button-group>
     </template>
@@ -60,7 +61,7 @@ export default {
   },
   data () {
     return {
-      saving: false
+      isSaving: false
     }
   },
   computed: {},
@@ -69,16 +70,18 @@ export default {
       this.$bvModal.hide(this.id)
     },
     async onSave() {
-      this.saving = true
-      await this.locations.forEach(async (location) => {
+      this.isSaving = true
+      for (let i = 0; i < this.locations.length; i++) {
+        const location = this.locations[i]
         if (location.edited === true) {
           const { locationId, properties } = location
           const locIdx = this.getLocationIndex(locationId)
           await this.saveLocation(this.projectId, locationId, { properties })
           this.updateLocation({ locIdx, key: 'edited', val: false })
         }
-      })
-      this.saving = false
+      }
+      this.isSaving = false
+      this.hide()
     }
   }
 }

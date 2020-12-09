@@ -4,6 +4,7 @@ module.exports = (app) => {
     const projects = await models.project.displayAll()
     res.json(projects)
   })
+
   app.get('/api/v1/projects/:projectId', async (req, res) => {
     const { projectId } = req.params
     const project = await models.project.displayOne(projectId)
@@ -16,13 +17,14 @@ module.exports = (app) => {
       const locations = await models.project.locationsByProjectId(projectId)
       const val = locations.map((location) => {
         return {
-          locationId: location.locationId,
+          locationId: location.locationProjectId,
           crawled: location.crawled,
           scraped: location.scraped,
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
           properties: location.properties,
-          pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : []
+          pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : [],
+          cloudinaryFolder: `onboarding/${location.locationProjectId}`
         }
       })
       res.json(val)
@@ -69,5 +71,43 @@ module.exports = (app) => {
       }
     }
     res.json(200)
+  })
+
+  app.get('/api/v1/projects/:projectId/excessivePages', async (req, res) => {
+    const { projectId } = req.params
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      },
+      include: [
+        {
+          model: models.location,
+          include: [
+            {
+              model: models.linkDiscoverer
+            }
+          ]
+        }
+      ],
+      order: [
+        [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
+      ]
+    })
+    const data = project.toJSON()
+
+    const locations = data.locations.map((location) => {
+      const { id: locationId } = location
+      const { linkDiscoverers } = location
+      const linkDiscoverer = linkDiscoverers[0]
+      const { pages, excessivePages } = linkDiscoverer
+      const { name } = location.properties
+      return {
+        locationId,
+        name,
+        pages,
+        excessivePages
+      }
+    }).filter(location => location.excessivePages)
+    res.json(locations)
   })
 }

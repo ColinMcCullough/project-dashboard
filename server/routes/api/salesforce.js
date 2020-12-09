@@ -1,5 +1,6 @@
 const xmlParse = require('express-xml-bodyparser')
 const { queues } = require('../../controllers/queue')
+const { removeNestedArrays } = require('../../utilities/object')
 const { salesforce } = queues
 module.exports = (app) => {
   // app.use('/api/v1/new-project', xmlParse())
@@ -20,7 +21,8 @@ module.exports = (app) => {
           </soap:Body>
         </soap:Envelope>  
       `)
-      await salesforce.add('spinup', body)
+      const data = removeNestedArrays(body)
+      await salesforce.add('spinup', data)
     } catch (error) {
       res.sendStatus(503)
     }

@@ -125,7 +125,7 @@ export default {
         }
       })
       for (const [key, val] of Object.entries(data)) {
-        this.onUpdate({ locIdx, key, val })
+        this.updateOnIndex({ locIdx, key, val }, true)
         // this.form[key] = value
       }
     },

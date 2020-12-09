@@ -1,109 +1,146 @@
 <template>
   <b-card
     no-body
-    border-variant="success-1"
-    style="position: absolute; bottom: 10px; top: 10px; left: 10px; right: 10px; overflow: scroll;"
+    class="border-0"
   >
-    <b-tabs vertical pills card>
-      <b-tab
-        v-for="(location, i) in locations"
-        :key="`${location.locationId}-${i}`"
-      >
-        <template v-slot:title>
-          <tab-title :title="location.properties.name" />
-        </template>
-        <!-- horizontal tabs start -->
-        <b-tabs
-          active-nav-item-class="text-light bg-secondary"
-        >
-          <b-container fluid>
-            <b-tab
-              v-for="(tab, index) in tabs"
-              :key="`${tab.id}-${index}`"
-              :title="tab.title"
-            >
-              <template v-slot:title>
-                <div class="d-flex justify-content-start align-items-center m-0">
-                  <warning :color="`#ffbd00`" class="mr-2" />
-                  <!-- need to swap above line for code below when we have a value to check if data is complete -->
-                  <!-- <warning v-if="!isHubReady" :color="`#ffbd00`" class="mr-2" />
-                  <check v-else :color="`#52be99`" class="mr-2" /> -->
-                  <!-- need icon swap -->
-                  {{ tab.title }}
-                </div>
-              </template>
-              <b-row>
-                <b-col style="border: 3px solid #cbd8e1">
-                  <component :is="tab.id" :id="locations[i].locationId" />
-                </b-col>
-              </b-row>
-            </b-tab>
-          </b-container>
-        </b-tabs>
-        <!-- horizontal tabs end -->
-      </b-tab>
-    </b-tabs>
+    <div class="content">
+      <article class="content__grid">
+        <aside class="py-1">
+          <location-list />
+        </aside>
+        <section class="main-content pr-4 py-1">
+          <b-card no-body>
+            <b-tabs card justified>
+              <b-tab
+                v-for="(tab, index) in tabs"
+                :key="`${tab.id}-${index}`"
+                :title="tab.title"
+                title-item-class="bg-gray-10"
+                title-link-class="p-4 text-uppercase text-muted font-weight-bold"
+                style="max-height: 58vh; overflow-y: scroll;"
+              >
+                <component :is="tab.id" v-if="selectedLocation" />
+                <b-badge v-else variant="error" class="rounded">
+                  <b-icon-exclamation-triangle-fill />
+                  Select a Location
+                </b-badge>
+              </b-tab>
+            </b-tabs>
+            <b-card-footer v-if="selectedLocation !== null" class="d-flex justify-content-end border-0">
+              <b-btn
+                :disabled="isDisabled"
+                variant="outline-primary"
+                class="px-3"
+                pill
+                @click="onSave"
+              >
+                <b-icon-arrow-clockwise v-if="isSaving" animation="spin" />
+                <save-icon v-else v-bind="{ size: '1.2em' }" />
+                {{ isSaving ? 'Saving...' : 'Save Location' }}
+              </b-btn>
+            </b-card-footer>
+          </b-card>
+        </section>
+      </article>
+    </div>
   </b-card>
 </template>
 
 <script>
-import LocationDetails from '~/components/location-review/location-details'
 import LocationAmenities from '~/components/location-review/location-amenities'
 import LocationAssets from '~/components/location-review/location-assets'
-import GooglePlaces from '~/components/location-review/google-places'
+import LocationDetails from '~/components/location-review/location-details'
 import Locations from '~/mixins/locations'
 export default {
   components: {
-    LocationDetails,
     LocationAmenities,
     LocationAssets,
-    GooglePlaces
+    LocationDetails
   },
   mixins: [Locations],
   props: {},
   data() {
     return {
-      tabs: [
+      isSaving: false,
+      location: null
+    }
+  },
+  computed: {
+    tabs() {
+      const vertical = this.selectedLocation ? this.selectedLocation.properties.vertical : null
+      const title = {
+        mf: 'Amenities',
+        ss: 'Features',
+        sl: 'Amenities / Care Levels'
+      }
+      return [
         {
           id: 'location-details',
-          title: 'Location Details'
+          title: 'Details'
         },
         {
           id: 'location-amenities',
-          title: 'Location Amenities'
+          title: title[vertical] ? title[vertical] : 'Amenities'
         },
         {
           id: 'location-assets',
-          title: 'Location Assets'
-        },
-        {
-          id: 'google-places',
-          title: 'Google Places'
+          title: 'Assets'
         }
       ]
+    },
+    isDisabled () {
+      return !this.selectedLocation.edited
     }
   },
-  methods: {}
+  methods: {
+    async onSave () {
+      this.isSaving = true
+      const { locationId, properties } = this.selectedLocation
+      const locIdx = this.getLocationIndex(locationId)
+      await this.saveLocation(this.projectId, locationId, { properties })
+      this.updateLocation({ locIdx, key: 'edited', val: false })
+      this.isSaving = false
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.content {
+  position: relative;
+  &__grid {
+    position: absolute;
+    top: 10px;
+    // height: calc(100vh - 65px);
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(min-content, 300px) auto;
+    overflow-y: hidden;
+  }
+}
+.main-content {
+  background: white;
+  height: 100%;
+  overflow-y: hidden;
+}
 .ov-x-hidden {
   overflow-x: hidden;
 }
-.nav-tabs {
-  overflow: hidden;
-  border-bottom: none !important;
-  border-radius: 0 0 10px 0;
-}
-.nav-tabs .nav-link {
-  color: inherit;
-  background-color: #cbd8e1;
-  border-radius: 10px 10px 0 0!important;
-  border-bottom: none;
-}
-
-.nav-tabs .nav-item {
-  margin-right: 5px;
+// .tab-padding ul {
+//   padding: 0;
+//   max-width: 400px;
+// }
+// .nav-tabs {
+//   overflow: hidden;
+//   border-radius: 0 0 10px 0;
+// }
+// .nav-tabs .nav-item {
+//   margin-right: 5px;
+// }
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  box-shadow: inset 0 -5px 0 0 #339698;
+  border-color: #fff #fff #339698;
+  background-color: white;
 }
 </style>

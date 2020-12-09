@@ -7,10 +7,17 @@ const models = require('../../../models')
 module.exports = {
   processor,
   concurrency: 1,
-  hooks
+  hooks,
+  takesSfApi: false
 }
-function processor(job) {
-  return assetScraper(job.data, null)
+
+async function processor(job, done, apis) {
+  try {
+    const res = await assetScraper(job.data, null)
+    done(null, res)
+  } catch (error) {
+    done(error)
+  }
 }
 // async function processor(job, done) {
 //   try {

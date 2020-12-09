@@ -40,7 +40,7 @@ spec:
               secretKeyRef:
                 name: project-dashboard
                 key: GCP_PROJECT_ID
-          - name: LINK_DISCOVERER_URL
+          - name: ASSET_SCRAPER_URL
             value: "https://unauth-asset-enwgt7akpq-uw.a.run.app"
           - name: LINK_DISCOVERER_URL
             # value: "https://link-discoverer-enwgt7akpq-uw.a.run.app/discover"
@@ -63,6 +63,21 @@ spec:
             value: "1000"
           - name: DATABASE_SSL
             value: "true"
+          - name: SF_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_USERNAME
+          - name: SF_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_PASSWORD
+          - name: SF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: SF_TOKEN
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
@@ -88,6 +103,21 @@ spec:
               secretKeyRef:
                 name: crs
                 key: REDIS_URL
+          - name: CLOUDINARY_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: CLOUDINARY_SECRET
+          - name: CLOUDINARY_KEY
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: CLOUDINARY_KEY
+          - name: CLOUDINARY_NAME
+            valueFrom:
+              secretKeyRef:
+                name: project-dashboard
+                key: CLOUDINARY_NAME
           - name: PORT
             value : "{{ .Values.service.servicePort }}"
         {{- if .Values.image.livenessProbe }}

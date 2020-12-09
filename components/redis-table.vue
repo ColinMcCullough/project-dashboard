@@ -11,7 +11,7 @@
         style="width: unset;"
       >
         <b-input-group-prepend class="d-flex align-items-center px-3">
-          <b-icon-search variant="success-1" />
+          <b-icon-search variant="gray-70" />
         </b-input-group-prepend>
         <b-form-input
           id="filterInput"
@@ -52,13 +52,13 @@
       </div>
       <b-btn-group size="sm">
         <b-btn
-          variant="outline-success-1"
+          variant="outline-gray-60"
           @click="selectAllRows"
         >
           Select All
         </b-btn>
         <b-btn
-          variant="outline-success-1"
+          variant="outline-gray-60"
           class="mr-2"
           @click="clearSelected"
         >
@@ -68,11 +68,11 @@
           <b-btn
             v-b-modal.modal-1
             :disabled="queueData.selected.length === 0"
-            variant="danger"
+            variant="error"
             size="sm"
             class="mr-2"
           >
-            Delete Selected
+            Move to Failed
           </b-btn>
           <b-popover
             target="disabled-state"
@@ -147,10 +147,12 @@
         </b-progress>
       </template>
       <template v-slot:cell(processedOn)="data">
-        {{ processTime(data.value) }}
+        <!-- {{ processTime(data.value) }} -->
+        {{ data.value }}
       </template>
       <template v-slot:cell(finishedOn)="data">
-        {{ processTime(data.value) }}
+        <!-- {{ processTime(data.value) }} -->
+        {{ data.value }}
       </template>
       <template v-slot:cell(actions)="row">
         <b-btn-group class="w-100 d-flex">
