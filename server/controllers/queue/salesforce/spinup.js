@@ -75,7 +75,7 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
     })
     packages.push(dbPackage)
   }
-  const location = await models.location.create({ locationProjectId: salesforceProjectId, properties: { name, address, zip, domainType, state: state || null, vertical, country } })
+  const location = await models.location.create({ locationProjectId: salesforceProjectId, properties: { name, url, address, zip, domainType, state: state || null, vertical, country } })
   // Create Packages
   await location.addPackages(packages)
   let project = await models.project.findOne({ where: { salesforce_project_id } })
