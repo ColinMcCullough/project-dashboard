@@ -90,4 +90,11 @@ module.exports = (app) => {
       res.status(500).send(e.message)
     }
   })
+
+  // app.get('/api/v1/jobs/dev', async (req, res) => {
+  //   const { salesforce } = queues
+  //   const body = { 'soapenv:envelope': { $: { 'xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/', 'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance' }, 'soapenv:body': { notifications: [{ $: { xmlns: 'http://soap.sforce.com/2005/09/outbound' }, organizationid: '00Do0000000IWfaEAG', actionid: '04k3l000000PVDKAA4', sessionid: { $: { 'xsi:nil': 'true' } }, enterpriseurl: 'https://g5.my.salesforce.com/services/Soap/c/50.0/00Do0000000IWfa', partnerurl: 'https://g5.my.salesforce.com/services/Soap/u/50.0/00Do0000000IWfa', notification: { id: '04l3l00000pcMGcAAM', sobject: { $: { 'xsi:type': 'sf:Project__c', 'xmlns:sf': 'urn:sobject.enterprise.soap.sforce.com' }, 'sf:id': 'a0E3l00000KzBzIEAV', 'sf:location__c': 'a0g3l00000Ge9kdAAB', 'sf:master_project__c': 'a0E3l00000KzBz2EAF', 'sf:project_name__c': '#17239 Upsell-Acco Management-Redesign-2', 'sf:total_locations__c': '0.0' } } }] } } }
+  //   await salesforce.add('spinup', body)
+  //   res.sendStatus(200)
+  // })
 }

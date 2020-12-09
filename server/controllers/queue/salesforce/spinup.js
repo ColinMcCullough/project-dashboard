@@ -7,6 +7,7 @@ module.exports = {
 }
 
 async function processor(job, done, { sfApi }) {
+  console.log('here')
   try {
     if (!sfApi.isLoggedIn) {
       console.log('Signing In')
@@ -44,12 +45,39 @@ async function checkForSignout(queue, sfApi) {
     await sfApi.signOut()
   }
 }
-
+async function findLocationPackages (inspireProjectId, Location__c, sfApi) {
+  const { Opportunity__c } = await sfApi.findInspireProject({ id: inspireProjectId }, ['Opportunity__c'])
+  console.log({ Opportunity__c, Location__c })
+  return sfApi.findLocationProduct({ Opportunity__c, Location__c }, ['Location__c', 'Package__c'])
+}
 async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
-  const { Master_Project__c: salesforce_project_id, Location__c: locationId } = await sfApi.findProject({ Id: salesforceProjectId }, ['Master_Project__c', 'Location__c'])
-  const { Country__c: country, Vertical__c: vertical, Project_Name__c: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Project_Name__c', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
+  const { Master_Project__c: salesforce_project_id, Location__c: locationId, Inspire_Project__c: inspireProjectId } = await sfApi.findProject({ Id: salesforceProjectId }, ['Master_Project__c', 'Location__c', 'Inspire_Project__c'])
+  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
   const { value: state } = states.US.options.find(state => state.text === stateC)
-  const location = await models.location.create({ properties: { name, url, address, zip, domainType, state: state || null, vertical, country } })
+  const locationPackages = await findLocationPackages(inspireProjectId, locationId, sfApi)
+  console.log({locationPackages})
+  const locationPackagesIds = locationPackages.filter(l => l.Package__c).map(l => l.Package__c)
+  const sfPackageMap = await sfApi.findPackagesByid(locationPackagesIds, ['Id', 'Name'])
+    .then(packages => packages.map((p) => {
+      const { Id, Name } = p
+      return { salesforceId: Id, name: Name }
+    }))
+  const packages = []
+  for (let i = 0; i < sfPackageMap.length; i++) {
+    const p = sfPackageMap[i]
+    const { salesforceId, name } = p
+    const [dbPackage] = await models.package.findOrCreate({
+      where: { salesforceId },
+      defaults: {
+        name,
+        salesforceId
+      }
+    })
+    packages.push(dbPackage)
+  }
+  const location = await models.location.create({ locationProjectId: salesforceProjectId, properties: { name, url, address, zip, domainType, state: state || null, vertical, country } })
+  // Create Packages
+  await location.addPackages(packages)
   let project = await models.project.findOne({ where: { salesforce_project_id } })
   if (!project) {
     project = await findAndCreateMasterProject(salesforce_project_id, sfApi)
@@ -59,7 +87,7 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
 
 async function findAndCreateMasterProject(salesforceProjectId, sfApi) {
   let dbAccount = { id: null }
-  const sfProject = await sfApi.findProject({ Id: salesforceProjectId }, ['Name', 'Inspire_Project__c', 'Property_Management_Company__c'])
+  const sfProject = await sfApi.findProject({ Id: salesforceProjectId }, ['Project_Name__c', 'Inspire_Project__c', 'Property_Management_Company__c'])
   if (sfProject.Property_Management_Company__c) {
     dbAccount = models.salesforceAccount.findOne({
       where: {
@@ -80,7 +108,7 @@ async function findAndCreateMasterProject(salesforceProjectId, sfApi) {
       salesforceAccountId: dbAccount.id,
       salesforce_project_id: salesforceProjectId,
       project_type: inspireProject.Project_Revenue_Type__c,
-      project_name: sfProject.Name,
+      project_name: sfProject.Project_Name__c,
       project_manager: inspireProject.inspire1__Owner_Name__c
     })
   }

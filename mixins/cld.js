@@ -1,6 +1,6 @@
-const demo = 'decron-3/my83u8uwjqujdgy4szp4.jpg'
+// const demo = 'decron-3/my83u8uwjqujdgy4szp4.jpg'
 export default {
-  data() {
+  data () {
     return {
       isLoading: false,
       images: [],
