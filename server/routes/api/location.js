@@ -17,14 +17,14 @@ module.exports = (app) => {
       const locations = await models.project.locationsByProjectId(projectId)
       const val = locations.map((location) => {
         return {
-          locationId: location.locationId,
+          locationId: location.locationProjectId,
           crawled: location.crawled,
           scraped: location.scraped,
           g5Approved: location.g5Approved,
           clientApproved: location.clientApproved,
           properties: location.properties,
           pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : [],
-          cloudinaryFolder: `onboarding/${location.locationId}`
+          cloudinaryFolder: `onboarding/${location.locationProjectId}`
         }
       })
       res.json(val)
