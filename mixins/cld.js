@@ -5,7 +5,6 @@ export default {
       isLoading: false,
       images: [],
       src: this.$cloudinary.image.url(
-        demo,
         {
           width: '200',
           height: 200,
