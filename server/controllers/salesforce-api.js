@@ -123,6 +123,52 @@ class SfApi extends jsforce.Connection {
   }
 
   /**
+   * find Opportunity
+   *
+   * @param {*} where
+   * @param {*} attributes
+   * @returns
+   * @memberof SfApi
+   */
+  findOpportunity(where, attributes) {
+    return this.sobject('Opportunity').find(where, attributes)
+      .then(sObjects => (sObjects.length > 0) ? sObjects.map(sObject => util.pick(sObject, attributes)) : [])
+  }
+
+  /**
+   *
+   *
+   * @param {*} ids
+   * @param {*} attributes
+   * @returns
+   * @memberof SfApi
+   */
+  findPackagesByid(ids, attributes) {
+    return this.sobject('Package__c').retrieve(ids)
+      .then(sObjects => (sObjects.length > 0) ? sObjects.map(sObject => util.pick(sObject, attributes)) : [])
+  }
+
+  /**
+   * find location_product__c
+   *
+   * @param {*} where
+   * @param {*} attributes
+   * @returns
+   * @memberof SfApi
+   */
+  findLocationProduct(where, attributes) {
+    return this.sobject('location_product__c').find(where, attributes)
+      .then((sObjects) => {
+        console.log(sObjects)
+        if (sObjects.length > 0) {
+          return sObjects.map(s => util.pick(s, attributes))
+        } else {
+          return []
+        }
+      })
+  }
+
+  /**
    * find Location__c
    *
    * @param {*} where

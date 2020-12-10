@@ -18,11 +18,26 @@
       head-variant="light"
       class="mb-0 rounded-table"
     >
-      <template v-slot:head(url)="data">
-        {{ data.label.toUpperCase() }}
+      <template v-slot:head(url)="{ label }">
+        {{ label.toUpperCase() }}
       </template>
-      <template v-slot:cell(name)="data">
-        {{ data.item.properties.name }}
+      <template v-slot:head(singleDomain)="data">
+        <div class="d-flex align-items-center">
+          <b-form-checkbox
+            :checked="singleDomainAllEnabled"
+            size="lg"
+            style="transform: translateY(-10%);"
+            name="check-button"
+            switch
+            @input="updateAll($event, data.column)"
+          />
+          <div>
+            {{ data.label }}
+          </div>
+        </div>
+      </template>
+      <template v-slot:cell(name)="{ item }">
+        {{ item.properties.name }}
       </template>
       <template v-slot:cell(url)="data">
         <b-form-group class="mb-0" style="position: relative;">
@@ -42,14 +57,55 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </template>
-      <template v-slot:cell(valid)="data">
-        <icons-swap v-bind="{ needsCheckIcon: validUrl(data.item.properties.url), iconConfig }" />
+      <template v-slot:cell(vendor)="data">
+        <b-form-group class="mb-0" style="position: relative;">
+          <b-form-input
+            :value="data.item.properties.vendor"
+            placeholder="Location Vendor"
+            class="text-left"
+            required
+            @input="onInput($event, data.item.locationId, data.field.key)"
+          />
+        </b-form-group>
+      </template>
+      <template v-slot:cell(valid)="{ item }">
+        <icons-swap v-bind="{ needsCheckIcon: validUrl(item.properties.url), iconConfig }" />
+      </template>
+      <template v-slot:cell(corporate)="data">
+        <b-form-checkbox
+          :checked="data.item.properties.corporate"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
+          switch
+          @change="onInput($event, data.item.locationId, data.field.key)"
+        />
+      </template>
+      <template v-slot:cell(singleDomain)="data">
+        <b-form-checkbox
+          :checked="data.item.properties.singleDomain"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
+          switch
+          @change="onInput($event, data.item.locationId, data.field.key)"
+        />
       </template>
     </b-table>
     <template v-slot:footer>
-      <b-btn variant="outline-secondary" :disabled="disabledBtn" pill style="min-width: 120px;" @click="onSave">
-        <b-icon-check2-circle :animation="saving ? 'throb' : ''" />
-        {{ saving ? 'Saving Urls' : 'Save Urls' }}
+      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
+        <b-icon-exclamation-triangle-fill />
+        Multiple Corporate Locations Selected.
+      </b-badge>
+      <b-btn
+        :disabled="disabledBtn"
+        variant="outline-secondary"
+        pill
+        style="min-width: 120px;"
+        @click="onSave"
+      >
+        <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
+        {{ isSaving ? 'Saving...' : 'Save and Start Crawl' }}
       </b-btn>
     </template>
   </b-card>
@@ -62,7 +118,10 @@ export default {
   mixins: [Locations],
   data () {
     return {
-      saving: false,
+      corpSelected: 0,
+      corporateAllEnabled: false,
+      singleDomainAllEnabled: false,
+      isSaving: false,
       fields: [
         {
           key: 'valid',
@@ -77,6 +136,21 @@ export default {
         {
           key: 'url',
           label: 'URL',
+          sortable: true
+        },
+        {
+          key: 'vendor',
+          label: 'Vendor',
+          sortable: true
+        },
+        {
+          key: 'corporate',
+          label: 'Corporate?',
+          sortable: true
+        },
+        {
+          key: 'singleDomain',
+          label: 'Single Domain?',
           sortable: true
         }
       ],
@@ -94,7 +168,12 @@ export default {
         .some(location => !this.validUrl(location.properties.url))
     }
   },
-  watch: {
+  mounted() {
+    this.locations.forEach((location) => {
+      if (location.properties.corporate) {
+        this.corpSelected++
+      }
+    })
   },
   methods: {
     validUrl(str) {
@@ -106,27 +185,43 @@ export default {
         '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
       return !!pattern.test(str)
     },
-    onInput(val, locationId, key) {
-      const locIdx = this.getLocationIndex(locationId)
-      this.onUpdate({ locIdx, key, val })
+    updateAll(val, key) {
+      this[`${key}AllEnabled`] = val
+      this.locations.forEach((location, locIdx) => {
+        this.updateOnIndex({ locIdx, key, val })
+      })
     },
-    onSave() {
-      this.saving = true
+    onInput(val, locationId, key) {
+      if (key === 'corporate') {
+        val ? this.corpSelected++ : this.corpSelected--
+      }
+      const locIdx = this.getLocationIndex(locationId)
+      this.updateOnIndex({ locIdx, key, val })
+    },
+    async onSave () {
+      this.isSaving = true
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
-          properties: { url: location.properties.url }
+          properties: {
+            url: location.properties.url,
+            corporate: location.properties.corporate,
+            vendor: location.properties.vendor,
+            singleDomain: location.properties.singleDomain
+          }
         }
       })
-      this.saveLocations(this.projectId, locations)
-      setTimeout(() => { this.saving = false }, 3500)
+      await this.saveLocations(this.projectId, locations)
+      this.$store.dispatch('projects/update', this.projectId)
+      this.isSaving = false
+      // setTimeout(() => { this.isSaving = false }, 3500)
     },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
-      if (key === 'url' || key === 'name') {
+      if (key !== 'valid') {
         a = aRow.properties[key]
         b = bRow.properties[key]
-      } else if (key === 'valid') {
+      } else {
         a = this.validUrl(aRow.properties.url)
         b = this.validUrl(bRow.properties.url)
       }
@@ -148,11 +243,11 @@ export default {
   }
 }
 .abs-feedback {
-  position: absolute;
+  position: absolute !important;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  max-width: 25%;
+  max-width: 35%;
   text-align: center;
   font-weight: 700;
   // z-index: 9999;

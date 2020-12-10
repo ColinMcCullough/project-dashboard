@@ -1,18 +1,50 @@
 
 $theme-colors: (
-  'primary': #0b233f,
-  'primary-0': #0a2240,
-  'secondary': #7898ad,
-  'tertiary': #e8513e,
-  'tertiary-0': #e37f72,
-  'tertiary-1': #e00033,
-  'tertiary-2': #8c0020,
-  'quaternary': #eee23e,
-  'success': #339698,
-  'success-0': #8dc7cb,
-  'success-1': #1d5774,
-  'success-2': #017a68,
-  'muted': #e6e9ec
+  'primary': #2f4a6a,
+  'primary-10': #8aa3c2,
+  'primary-20': #6989b0,
+  'primary-30': #4e6f96,
+  'primary-60': #283e58,
+  'primary-70': #0f2240,
+  'primary-80': #030b15,
+  'gray': #ababab,
+  'gray-10': #f5f5f5,
+  'gray-20': #e3e3e3,
+  'gray-30': #c1c1c1,
+  'muted': #c1c1c1,
+  'gray-60': #666666,
+  'secondary': #2c8081,
+  'secondary-10': #e2eeef,
+  'secondary-20': #82c9c9,
+  'secondary-30': #339698,
+  'secondary-60': #256a6a,
+  'secondary-70': #1e5354,
+  'secondary-80': #113a38,
+  'tertiary': #7e97ab,
+  'tertiary-10': #fafafb,
+  'tertiary-20': #dfe7ed,
+  'tertiary-30': #91adc1,
+  'tertiary-60': #63798a,
+  'tertiary-70': #4b5b66,
+  'tertiary-80': #323d45,
+  'success': #05b248,
+  'success-10': #e6f8ed,
+  'success-20': #80d9a3,
+  'success-30': #34c16c,
+  'success-60': #008e3a,
+  'success-70': #006b2a,
+  'warning': #e2b632,
+  'warning-10': #f8f0d5,
+  'warning-20': #edd384,
+  'warning-30': #e7c55b,
+  'warning-60': #cba42d,
+  'warning-70': #b49328,
+  'error': #be2350,
+  'error-10': #f6dfe3,
+  'error-20': #db7f8f,
+  'error-30': #cc4d6a,
+  'error-60': #991c3f,
+  'error-70': #7b1433
 );
 
 $font-family-base: 'Noto Sans', sans-serif;
@@ -28,7 +60,8 @@ $bv-enable-table-stacked: true;
 @import 'bootstrap-vue/src/index.scss';
 
 // OVERRIDES BELOW
-.form-control {
-  border-width: 2px;
-  border-color: #8dc7cb;
+.form-control,
+.custom-select {
+  border-width: 2px !important;
+  border-radius: 10px;
 }

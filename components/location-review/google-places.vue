@@ -36,14 +36,6 @@ import GlobalFunctions from '~/mixins/global-functions'
 import Locations from '~/mixins/locations'
 export default {
   mixins: [GlobalFunctions, Locations],
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
   data () {
     return {
       loading: '',
@@ -66,6 +58,9 @@ export default {
     }
   },
   computed: {
+    id() {
+      return this.selectedLocation.locationId
+    },
     location() {
       return this.locationById(this.id)
     },

@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
-    locationId: {
+    locationProjectId: {
       type: STRING
     },
     clientUrn: {
@@ -20,7 +20,15 @@ module.exports = (sequelize) => {
     properties: {
       type: JSONB
     },
+    crawling: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
     crawled: {
+      type: BOOLEAN,
+      defaultValue: false
+    },
+    scraping: {
       type: BOOLEAN,
       defaultValue: false
     },
@@ -46,6 +54,7 @@ module.exports = (sequelize) => {
   location.associate = (models) => {
     models.location.hasMany(models.linkDiscoverer)
     models.location.hasMany(models.assetScraper)
+    models.location.belongsToMany(models.package, { through: 'locationPackage' })
   }
   return location
 }

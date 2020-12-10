@@ -1,42 +1,8 @@
 <template>
   <b-container fluid class="p-2">
-    <b-row
-      v-for="amenity in amenities"
-      :key="amenity.id"
-      class="mb-2"
-    >
-      <b-col>
-        <b-input-group prepend="Type">
-          <b-form-select />
-        </b-input-group>
-      </b-col>
-      <b-col>
-        <b-input-group>
-          <b-form-input
-            :value="amenity.value"
-            @input="($event) => { amenity.value = $event }"
-          />
-          <template v-slot:append>
-            <b-btn
-              variant="tertiary-1"
-            >
-              <b-icon-trash-fill />
-            </b-btn>
-          </template>
-        </b-input-group>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <b-btn
-          variant="outline-success-0"
-          pill
-        >
-          <b-icon-plus-square-fill />
-          Add
-        </b-btn>
-      </b-col>
-    </b-row>
+    <div v-for="(list, index) in toDoLists" :key="`${list.listName}-${index}`">
+      <to-do v-bind="{ toDoProps: list }" />
+    </div>
   </b-container>
 </template>
 
@@ -44,18 +10,61 @@
 import Locations from '~/mixins/locations'
 export default {
   mixins: [Locations],
-  props: {
-    id: {
-      type: String,
-      default() {
-        return ''
-      }
+  data () {
+    return {
+      types: [
+        { value: null, text: 'Select Type' },
+        { value: 'apartmentAmenity', text: 'Apartment Amenity' },
+        { value: 'communityAmenity', text: 'Community Amenity' }
+      ]
     }
   },
   computed: {
-    amenities() {
-      return this.locationById(this.id).properties.amenities
+    toDoLists() {
+      let lists = []
+      if (this.selectedLocation) {
+        const arr = [
+          {
+            list: this.selectedLocation.properties.amenities,
+            label: 'Amenity Type',
+            propName: 'amenities',
+            placeholder: 'ex. Swimming Pool',
+            options: this.types,
+            isArrObjects: true,
+            maxItems: 20,
+            verticals: ['mf', 'sl']
+          },
+          {
+            list: this.selectedLocation.properties.careLevels,
+            label: 'Care Level',
+            propName: 'careLevels',
+            placeholder: 'ex. Memory Care',
+            options: null,
+            isArrObjects: false,
+            maxItems: 15,
+            verticals: ['sl']
+          },
+          {
+            list: this.selectedLocation.properties.features,
+            label: 'Feature',
+            propName: 'features',
+            placeholder: 'ex. RV Storage',
+            options: null,
+            isArrObjects: false,
+            maxItems: 15,
+            verticals: ['ss']
+          }
+        ]
+        lists = arr.filter(list => list.verticals.includes(this.vertical))
+      }
+      return lists
+    },
+    vertical () {
+      return this.selectedLocation.properties.vertical
     }
+
+  },
+  methods: {
   }
 }
 </script>

@@ -1,46 +1,18 @@
 <template>
   <div>
-    <div class="d-flex">
-      <b-card-group deck>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-        <b-card
-          no-body
-          bg-variant="transparent"
-          text-variant="success-0"
-          class="rounded small border-0"
-        >
-          <b-badge pill variant="success-0">
-            4
-          </b-badge>
-          Label
-        </b-card>
-      </b-card-group>
-    </div>
-    <h4>
+    <h5 class="w-100 text-truncate">
+      <b-icon-building />
       {{ title }}
-    </h4>
-    Status stuff
+    </h5>
+    <div class="d-flex mb-1 align-items-center">
+      <b-badge variant="error" class="rounded px-1 mr-1">
+        3
+      </b-badge>
+      /
+      <b-badge variant="success" class="rounded px-1 ml-1">
+        5
+      </b-badge>
+    </div>
   </div>
 </template>
 
@@ -51,6 +23,28 @@ export default {
       type: String,
       default() {
         return ''
+      }
+    },
+    fields: {
+      type: Array,
+      default () {
+        return [
+          {
+            label: 'Completed',
+            count: 14,
+            variant: 'success'
+          },
+          {
+            label: 'Suggested',
+            count: 35,
+            variant: 'warning'
+          },
+          {
+            label: 'Required',
+            count: 4,
+            variant: 'error'
+          }
+        ]
       }
     }
   }

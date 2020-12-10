@@ -137,11 +137,6 @@ export default {
         this.validURL(this.location.properties.url)
     }
   },
-  watch: {
-    stepComplete(val) {
-      this.updateLocation({ locIdx: this.locIdx, key: 'validUrls', val })
-    }
-  },
   created() {
     const val = this.validatePages() &&
       this.validURL(this.location.properties.url)
