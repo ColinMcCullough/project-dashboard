@@ -55,7 +55,7 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
   const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
   const { value: state } = states.US.options.find(state => state.text === stateC)
   const locationPackages = await findLocationPackages(inspireProjectId, locationId, sfApi)
-  console.log({locationPackages})
+  console.log({ locationPackages })
   const locationPackagesIds = locationPackages.filter(l => l.Package__c).map(l => l.Package__c)
   const sfPackageMap = await sfApi.findPackagesByid(locationPackagesIds, ['Id', 'Name'])
     .then(packages => packages.map((p) => {
@@ -82,7 +82,7 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
   if (!project) {
     project = await findAndCreateMasterProject(salesforce_project_id, sfApi)
   }
-  return location.update({ projectId: project.dataValues.id })
+  return location.update({ projectId: project.dataValues.id, hooks: false })
 }
 
 async function findAndCreateMasterProject(salesforceProjectId, sfApi) {
