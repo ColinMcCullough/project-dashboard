@@ -38,7 +38,10 @@ export default {
     try {
       const res = await this.$axios
         .$get('api/hub/clients')
-      this.existingClients = res
+      // eslint-disable-next-line camelcase
+      const keyMappedClients = res.map(({ brandedName: branded_name, ...rest }) =>
+        ({ branded_name, ...rest }))
+      this.existingClients = keyMappedClients
     } catch (e) {
       this.err = e
     }

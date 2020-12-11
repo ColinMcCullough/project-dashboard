@@ -32,32 +32,26 @@
             </b-form-group>
             <!-- new client form -->
             <div v-if="client.clientType === 'new'">
-              <b-row v-for="(field, i) in fields" :key="`${field.id}-${i}`">
-                <b-col>
-                  <b-form-group
-                    :label="showLabel(client, field) ? field.label : ''"
-                    label-class="text-uppercase text-gray font-weight-bold"
-                    class="mr-2"
-                    style="flex: 1 1 auto;"
-                  >
-                    <b-form-input
-                      v-if="field.type === 'input' && !field.dependentOn"
-                      v-model="client[field.id]"
-                      :placeholder="field.placeholder"
-                    />
-                    <b-form-select
-                      v-if="field.type === 'select' && !field.dependentOn"
-                      v-model="client[field.id]"
-                      :options="field.options"
-                    />
-                    <b-form-select
-                      v-if="field.dependentOn && dependencyMet(client, field)"
-                      v-model="client[field.id]"
-                      :options="field.options"
-                    />
-                  </b-form-group>
-                </b-col>
-              </b-row>
+              <div v-for="(field, i) in fields" :key="`${field.id}-${i}`">
+                <b-row v-if="dependencyMet(client, field)">
+                  <b-col>
+                    <b-form-group
+                      :label="showLabel(client, field) ? field.label : ''"
+                      label-class="text-uppercase text-gray font-weight-bold"
+                      class="mr-2"
+                      style="flex: 1 1 auto;"
+                    >
+                      <component
+                        :is="field.type"
+                        :value="client[field.id]"
+                        :options="typeof field.options === 'function' ? field.options(client, index) : field.options"
+                        :placeholder="field.placeholder"
+                        @change="onUpdate($event, field, index)"
+                      />
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+              </div>
             </div>
             <!-- new client form -->
             <!-- esisting client form -->
@@ -100,9 +94,10 @@
 
 <script>
 import VueMultiselect from 'vue-multiselect'
+import States from '~/mixins/states'
 export default {
   components: { VueMultiselect },
-  mixins: [],
+  mixins: [States],
   props: {
     existingClients: {
       type: Array,
@@ -121,56 +116,67 @@ export default {
       ],
       fields: [
         {
-          type: 'select',
+          type: 'b-form-select',
           id: 'domain_type',
-          options: ['SingleDomainClient', 'MultiDomainClient'],
+          options: [
+            { value: null, text: 'Select Domain Strategy' },
+            { value: 'SingleDomainClient', text: 'Single Domain' },
+            { value: 'MultiDomainClient', text: 'Multi Domain' }
+          ],
           label: 'Domain Type'
         },
         {
-          type: 'select',
-          options: ['Self-Storage', 'Apartments', 'Senior-Living'],
+          type: 'b-form-select',
+          options: [
+            { value: null, text: 'Select Vertical' },
+            { value: 'Self-Storage', text: 'Self Storage' },
+            { value: 'Apartments', text: 'Multi Family' },
+            { value: 'Senior-Living', text: 'Senior Living' }
+          ],
           id: 'vertical',
           label: 'Vertical'
         },
         {
-          type: 'input',
-          options: ['US', 'CA'],
+          type: 'b-form-input',
           label: 'Naked Domain',
           id: 'naked_domain',
+          placeholder: 'ex. mydomain.com',
           dependentOn: 'domain_type',
           showIf: val => val === 'SingleDomainClient'
         },
         {
-          type: 'input',
+          type: 'b-form-input',
           label: 'Client Name',
           id: 'name',
           placeholder: 'ex. My Community'
         },
         {
-          type: 'input',
+          type: 'b-form-input',
           label: 'Branded Name',
           id: 'branded_name',
           placeholder: 'ex. My Community 1'
         },
         {
-          type: 'input',
+          type: 'b-form-input',
           label: 'City',
           id: 'city',
           placeholder: 'ex. Portland'
         },
         {
-          type: 'select',
-          options: ['US', 'CA'],
+          type: 'b-form-select',
+          options: [
+            { value: null, text: 'Select Country' },
+            { value: 'US', text: 'United States' },
+            { value: 'CA', text: 'Canada' }
+          ],
           label: 'Country',
           id: 'country'
         },
         {
-          type: 'select',
+          type: 'b-form-select',
           label: 'State',
-          options: ['OK', 'SK', 'OR'],
-          id: 'state',
-          dependentOn: 'country',
-          showIf: val => val
+          options: (client, index) => this.getStates(client, index),
+          id: 'state'
         }
       ]
     }
@@ -178,6 +184,15 @@ export default {
   computed: {
   },
   methods: {
+    getStates(client, index) {
+      const country = this.clients[index].country
+      return country === 'US' || country === 'CA'
+        ? this[country].options
+        : [{ value: null, text: 'Select Country for States' }]
+    },
+    onUpdate(value, field, index) {
+      this.clients[index][field.id] = value
+    },
     showLabel(client, field) {
       let val = true
       if (field.dependentOn && !this.dependencyMet(client, field)) {
@@ -187,14 +202,19 @@ export default {
     },
     dependencyMet(client, field) {
       let val = false
-      const dependentValue = client[field.dependentOn]
-      console.log(dependentValue)
-      if (field.showIf(dependentValue)) {
+      if (!field.dependentOn) {
         val = true
+      } else {
+        const dependentValue = client[field.dependentOn]
+        const dependencyMet = field.showIf(dependentValue)
+        if (dependencyMet) {
+          val = true
+        }
       }
       return val
     },
     resetClient(value, index) {
+      console.log('fired')
       const entries = Object.entries(this.newClient())
       for (const [key, val] of entries) {
         if (key === 'clientType') {
@@ -209,11 +229,11 @@ export default {
         name: '',
         branded_name: '',
         city: '',
-        state: '',
-        country: '',
+        state: null,
+        country: null,
         naked_domain: '',
-        domain_type: '',
-        vertical: ''
+        domain_type: null,
+        vertical: null
       }
     },
     onAdd() {
@@ -221,14 +241,10 @@ export default {
       this.clients.push(client)
     },
     onClientSelect(client, index) {
-      const { urn, name, brandedName } = client
-      this.clients[index].urn = urn
-      this.clients[index].name = name
-      this.clients[index].branded_name = brandedName
-      // cons t entries = client.entries
-      // entries.forEach(([key, val]) => {
-      //   console.log(key, val)
-      // })
+      const entries = Object.entries(client)
+      for (const [key, val] of entries) {
+        this.clients[index][key] = val
+      }
     },
     onDelete(index) {
       this.clients.splice(index, 1)
