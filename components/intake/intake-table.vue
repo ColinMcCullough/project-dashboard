@@ -85,14 +85,12 @@
         @change="onInput($event, data.item.locationId, data.field.key)"
       />
     </template>
-    <!-- <template v-slot:custom-foot>
-      <div>
-        <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
-          <b-icon-exclamation-triangle-fill />
-          Multiple Corporate Locations Selected.
-        </b-badge>
-      </div>
-    </template> -->
+    <template v-slot:custom-foot>
+      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
+        <b-icon-exclamation-triangle-fill />
+        Multiple Corporate Locations Selected.
+      </b-badge>
+    </template>
   </b-table>
 </template>
 
@@ -199,16 +197,6 @@ export default {
     vertical-align: middle;
     padding: .45rem .5rem !important;
   }
-}
-.abs-feedback {
-  position: absolute !important;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  max-width: 35%;
-  text-align: center;
-  font-weight: 700;
-  // z-index: 9999;
 }
 
 </style>
