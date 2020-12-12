@@ -1,14 +1,24 @@
 <template>
-  <b-btn
-    :disabled="disabledBtn"
-    variant="outline-secondary"
-    pill
-    style="min-width: 120px;"
-    @click="onSave"
-  >
-    <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
-    {{ isSaving ? 'Saving...' : 'Save and Start Crawl' }}
-  </b-btn>
+  <div>
+    <b-row class="p-3">
+      <div class="px-2 d-flex justify-content-between">
+        <b-button class="rounded" variant="warning" @click="$emit('previous-step')">
+          <b-icon-arrow-left-circle />
+          Previous
+        </b-button>
+      </div>
+    </b-row>
+    <b-btn
+      :disabled="disabledBtn"
+      variant="outline-secondary"
+      pill
+      style="min-width: 120px;"
+      @click="onSave"
+    >
+      <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
+      {{ isSaving ? 'Saving...' : 'Save and Start Crawl' }}
+    </b-btn>
+  </div>
 </template>
 
 <script>

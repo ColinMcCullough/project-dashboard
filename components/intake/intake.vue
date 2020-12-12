@@ -5,30 +5,62 @@
     footer-bg-variant="white"
     no-body
     class="border-0"
+    style="overflow-y: scroll; max-height: 80vh"
   >
-    <accordion-wrapper v-bind="{ isOpen: true, title: 'Client Information', section: 'client'}">
-      <client-intake v-bind="{ existingClients }" />
-    </accordion-wrapper>
-    <accordion-wrapper v-bind="{ isOpen: false, title: 'Location Information', section: 'locations'}">
-      <intake-table />
-    </accordion-wrapper>
-    <template v-slot:footer>
-      <save-intake />
-    </template>
+    <div v-for="(card, index) in cards" :key="`${card.id}-${index}`">
+      <b-card v-if="card.visible" header-tag="header" class="soft-shadow mb-3" style="height: 78vh">
+        <template #header>
+          <h4 class="mb-0 text-uppercase font-weight-bold text-gray-60">
+            {{ card.title }}
+          </h4>
+        </template>
+        <component
+          :is="card.component"
+          v-bind="{ existingClients, clients }"
+          @next-step="nextStep(index)"
+          @previous-step="previousStep(index)"
+        />
+      </b-card>
+    </div>
   </b-card>
 </template>
 
 <script>
-
+import ClientIntake from '~/components/intake/client-intake'
+import LocationIntake from '~/components/intake/location-intake'
+import SaveIntake from '~/components/intake/save-intake'
 import GlobalFunctions from '~/mixins/global-functions'
 import Locations from '~/mixins/locations'
 export default {
-  components: {},
+  components: { ClientIntake, LocationIntake, SaveIntake },
   mixins: [Locations, GlobalFunctions],
   data () {
     return {
       existingClients: [],
-      err: ''
+      clients: [],
+      err: '',
+      showClient: true,
+      showLocation: false,
+      cards: [
+        {
+          id: 'clientInformation',
+          title: 'Client Information',
+          component: 'client-intake',
+          visible: true
+        },
+        {
+          id: 'locationInformation',
+          title: 'Location Information',
+          component: 'location-intake',
+          visible: false
+        },
+        {
+          id: 'save',
+          title: 'Save, Crawl & Scrape ',
+          component: 'save-intake',
+          visible: false
+        }
+      ]
     }
   },
   computed: {
@@ -38,15 +70,22 @@ export default {
     try {
       const res = await this.$axios
         .$get('api/hub/clients')
-      // eslint-disable-next-line camelcase
-      const keyMappedClients = res.map(({ brandedName: branded_name, ...rest }) =>
-        ({ branded_name, ...rest }))
-      this.existingClients = keyMappedClients
+      this.existingClients = res
     } catch (e) {
       this.err = e
     }
   },
   methods: {
+    nextStep(currentIndex) {
+      const nextIndex = currentIndex + 1
+      this.cards[currentIndex].visible = !this.cards[currentIndex].visible
+      this.cards[nextIndex].visible = !this.cards[nextIndex].visible
+    },
+    previousStep(currentIndex) {
+      const prevIndex = currentIndex - 1
+      this.cards[currentIndex].visible = !this.cards[currentIndex].visible
+      this.cards[prevIndex].visible = !this.cards[prevIndex].visible
+    }
   }
 }
 </script>
