@@ -2,7 +2,11 @@
   <div>
     <b-row class="px-3 pb-2 pt-2">
       <div class="px-2 justify-content-between">
-        <b-button class="rounded" :disabled="clients.length >= maxClients" @click="onAdd">
+        <b-button
+          :disabled="clients.length >= maxClients"
+          class="rounded"
+          @click="onAdd"
+        >
           Add Client
           <b-icon-plus />
         </b-button>
@@ -33,33 +37,44 @@
               </h6>
             </template>
             <template #footer>
-              <b-button v-if="client.urn === null" class="rounded" size="sm" variant="danger" @click="onDelete(index)">
+              <b-button v-if="client.urn === null" class="rounded" size="sm" variant="error" @click="onDelete(index)">
                 Remove Client
                 <b-icon-dash />
               </b-button>
             </template>
-            <b-row>
-              <!-- client type select start-->
-              <div class="px-3 d-flex justify-content-between">
-                <b-form-group label="Select client type" class="pick-client text-uppercase font-weight-bold text-gray-60">
-                  <b-form-radio-group
-                    id="client-type"
-                    v-model="selected"
-                    :options="getOptions(client)"
-                    buttons
-                    button-variant="outline-primary"
-                    size="md"
-                    name="radio-btn-outline"
-                    @change="resetClient($event, index)"
-                  />
-                </b-form-group>
-              </div>
-              <!-- client type select end-->
-              <div v-if="selected === 'existing'" class="px-2 d-flex justify-content-between">
-                <client-select v-bind="{ client, index }" />
-              </div>
-            </b-row>
-            <div v-if="!(selected === 'existing' && !client.urn)" class="px-3">
+            <b-form-group
+              label="Select client type"
+              class="pick-client text-uppercase font-weight-bold text-gray-60"
+            >
+              <b-btn
+                :variant="client.isExisting ? 'outline-primary' : 'primary'"
+                class="px-3 text-uppercase"
+                @click="$store.dispatch('clients/update', {index, key: 'isExisting', val: false })"
+              >
+                New Client
+              </b-btn>
+              <b-btn
+                :variant="client.isExisting ? 'primary' : 'outline-primary'"
+                class="px-3 text-uppercase"
+                @click="$store.dispatch('clients/update', {index, key: 'isExisting', val: true })"
+              >
+                Existing Client
+              </b-btn>
+              <!-- <b-form-radio-group
+                id="client-type"
+                :checked="client.isExisting"
+                :options="getOptions(client)"
+                buttons
+                button-variant="outline-primary"
+                size="md"
+                name="radio-btn-outline"
+                @change="resetClient($event, index)"
+              /> -->
+            </b-form-group>
+            <div v-if="client.isExisting" class="px-2 d-flex justify-content-between">
+              <client-select v-bind="{ client, index }" />
+            </div>
+            <div v-if="!(client.isExisting && !client.urn)" class="px-3">
               <client-form v-bind="{ client, index }" />
             </div>
           </b-card>
@@ -75,7 +90,6 @@ import Locations from '~/mixins/locations'
 import Clients from '~/mixins/clients'
 export default {
   mixins: [Locations, Clients],
-
   data () {
     return {
       maxClients: 6,
@@ -88,7 +102,7 @@ export default {
     }
   },
   computed: {
-    validForm() {
+    validForm () {
       let val = true
       if (this.clients.length === 0) {
         val = false
@@ -117,13 +131,21 @@ export default {
     }
   },
   methods: {
-    getOptions(client) {
+    getOptions (client) {
       return [
-        { text: 'New Client', value: 'new', disabled: client.urn !== null && client.isAssoicated },
-        { text: 'Existing Client', value: 'existing', disabled: client.urn === null && client.id !== null }
+        {
+          text: 'New Client',
+          value: 'new',
+          disabled: client.urn !== null && client.isAssoicated
+        },
+        {
+          text: 'Existing Client',
+          value: 'existing',
+          disabled: client.urn === null && client.id !== null
+        }
       ]
     },
-    async nextStep() {
+    async nextStep () {
       if (this.validForm) {
         this.$emit('next-step')
         const clientIds = []
@@ -140,16 +162,16 @@ export default {
         await this.$axios.$post(`/api/v1/projects/${this.projectId}/clients`, { clientIds })
       }
     },
-    async addNewClient(client, index) {
+    async addNewClient (client, index) {
       const res = await this.$axios.$post('/api/v1/hub/clients', client)
       this.onUpdate({ index, key: 'id', value: res.id })
       return res
     },
-    async updateClient(client) {
+    async updateClient (client) {
       const payload = this.structureClient(client)
       await this.$axios.$put(`/api/v1/hub/clients/${client.id}`, payload)
     },
-    structureClient(client) {
+    structureClient (client) {
       return {
         name: client.name,
         properties: {
@@ -163,7 +185,7 @@ export default {
         }
       }
     },
-    newClient() {
+    newClient () {
       return {
         urn: null,
         name: '',
@@ -174,7 +196,8 @@ export default {
         domain: '',
         domain_type: null,
         vertical: null,
-        id: null
+        id: null,
+        isExisting: false
       }
     },
     onAdd() {
