@@ -13,7 +13,6 @@ module.exports = (app) => {
     const { g5_updatable_clients } = clients
     const filteredClients = g5_updatable_clients.map((property) => {
       return {
-        clientType: 'existing',
         urn: property.urn,
         name: property.name,
         branded_name: property.properties.branded_name,
@@ -23,7 +22,8 @@ module.exports = (app) => {
         domain: property.properties.domain,
         domain_type: property.properties.domain_type,
         vertical: property.properties.vertical,
-        id: property.id
+        id: property.id,
+        isAssociated: true
       }
     })
     res.json(filteredClients)

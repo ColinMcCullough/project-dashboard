@@ -1,5 +1,6 @@
 export const state = () => ({
-  clients: []
+  clients: [],
+  existingClients: []
 })
 
 export const getters = {}
@@ -8,7 +9,9 @@ export const actions = {
   async init({ commit }, projectId) {
     const clients = await this.$axios
       .$get(`/api/v1/projects/${projectId}/clients`)
-    commit('SET', clients)
+    const existingClients = await this.$axios
+      .$get('api/v1/hub/clients')
+    commit('SET', { clients, existingClients })
   },
   add({ commit }, client) {
     commit('ADD', client)
@@ -22,8 +25,9 @@ export const actions = {
 }
 
 export const mutations = {
-  SET (state, clients) {
+  SET (state, { clients, existingClients }) {
     state.clients = clients
+    state.existingClients = existingClients
   },
   ADD (state, client) {
     state.clients.push(client)

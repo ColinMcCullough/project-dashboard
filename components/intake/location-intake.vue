@@ -28,6 +28,7 @@
       outlined
       responsive
       head-variant="light"
+      table-variant="light"
       class="mb-0 rounded-table pl-2"
     >
       <template v-slot:head(url)="{ label }">

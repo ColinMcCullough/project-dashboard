@@ -5,7 +5,8 @@ export default {
   },
   computed: {
     ...mapState({
-      clients: state => state.clients.clients
+      clients: state => state.clients.clients,
+      existingClients: state => state.clients.existingClients
     })
   },
   methods: {
@@ -14,6 +15,14 @@ export default {
       addClient: 'clients/add',
       onUpdate: 'clients/update',
       onDelete: 'clients/delete'
-    })
+    }),
+    resetClient(value, index) {
+      const entries = Object.entries(this.newClient())
+      for (const [key, val] of entries) {
+        if (key === 'clientType') {
+          if (typeof value !== 'object') { this.onUpdate({ index, key, val: value }) }
+        } else { this.onUpdate({ index, key, val }) }
+      }
+    }
   }
 }

@@ -3,6 +3,7 @@ module.exports = (models, sequelize, Sequelize) => {
     attributes: [
       'urn',
       'name',
+      'id',
       [Sequelize.json('properties.branded_name'), 'branded_name'],
       [Sequelize.json('properties.city'), 'city'],
       [Sequelize.json('properties.state'), 'state'],
