@@ -16,7 +16,7 @@
         </template>
         <component
           :is="card.component"
-          v-bind="{ existingClients, clients }"
+          v-bind="{ existingClients }"
           @next-step="nextStep(index)"
           @previous-step="previousStep(index)"
         />
@@ -31,13 +31,27 @@ import LocationIntake from '~/components/intake/location-intake'
 import SaveIntake from '~/components/intake/save-intake'
 import GlobalFunctions from '~/mixins/global-functions'
 import Locations from '~/mixins/locations'
+import Clients from '~/mixins/clients'
+
 export default {
   components: { ClientIntake, LocationIntake, SaveIntake },
-  mixins: [Locations, GlobalFunctions],
+  mixins: [Locations, Clients, GlobalFunctions],
   data () {
     return {
       existingClients: [],
-      clients: [],
+      // clients: [{
+      //   clientType: 'new',
+      //   urn: null,
+      //   name: '',
+      //   branded_name: '',
+      //   city: '',
+      //   state: null,
+      //   country: null,
+      //   domain: '',
+      //   domain_type: null,
+      //   vertical: null,
+      //   id: null
+      // }],
       err: '',
       showClient: true,
       showLocation: false,
@@ -69,7 +83,7 @@ export default {
   async mounted() {
     try {
       const res = await this.$axios
-        .$get('api/hub/clients')
+        .$get('api/v1/hub/clients')
       this.existingClients = res
     } catch (e) {
       this.err = e

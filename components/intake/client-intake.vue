@@ -1,35 +1,38 @@
 <template>
   <div>
     <b-row class="p-3">
-      <div class="px-2 d-flex justify-content-between">
-        <b-button class="rounded" :disabled="clients.length >=6" @click="onAdd">
+      <div class="px-2 justify-content-between">
+        <b-button class="rounded" :disabled="clients.length >= maxClients" @click="onAdd">
           Add Client
           <b-icon-plus />
         </b-button>
       </div>
-      <div class="px-2 d-flex justify-content-between">
-        <b-button class="rounded" variant="success" @click="$emit('next-step')">
-          Next Step
-          <b-icon-arrow-right-circle />
+      <div class="px-2 justify-content-between">
+        <b-button class="px-4 rounded" variant="primary" @click="nextStep">
+          Next
+          <b-icon-arrow-right />
         </b-button>
       </div>
+      <b-form-invalid-feedback :state="validForm" class="pl-2">
+        {{ instructions }}
+      </b-form-invalid-feedback>
     </b-row>
-    <b-row class="p-3">
-      <b-col>
+    <b-row class="px-3">
+      <b-col class="px-2">
         <b-card-group deck class="client-group">
           <b-card v-for="(client, index) in clients" :key="`client-${index}`" header-tag="header" footer-tag="footer">
             <template #header>
-              <h6 class="mb-0">
+              <h6 class="mb-0 text-uppercase font-weight-bold text-gray-60">
                 New Client
               </h6>
             </template>
             <b-row>
               <!-- client type select start-->
-              <div class="px-2 d-flex justify-content-between">
-                <b-form-group label="Choose a client type">
+              <div class="px-3 d-flex justify-content-between">
+                <b-form-group label="Select client type" class="pick-client text-uppercase font-weight-bold text-gray-60">
                   <b-form-radio-group
                     id="client-type"
-                    :value="client.clientType"
+                    :checked="client.clientType"
                     :options="options"
                     buttons
                     button-variant="outline-primary"
@@ -42,7 +45,9 @@
               <!-- client type select end-->
               <!-- select esisting client start -->
               <div v-if="client.clientType === 'existing'" class="px-2 d-flex justify-content-between">
-                <b-form-group label="Choose a client">
+                <b-form-group label="Choose a client" class="text-uppercase font-weight-bold text-gray-60">
+                  <!-- @select="onClientSelect($event, index)"
+                  @remove="resetClient($event, index)" -->
                   <vue-multiselect
                     :value="client"
                     :options="existingClients"
@@ -50,12 +55,10 @@
                     track-by="urn"
                     label="name"
                     style="min-width: 260px"
-                    @select="onClientSelect($event, index)"
-                    @remove="resetClient($event, index)"
                   >
                     <template v-slot:option="{ option }">
                       <b>
-                        {{ option.name }}]
+                        {{ option.name }}
                       </b>
                       <p class="text-muted small mb-0">
                         {{ option.brandedName }}
@@ -84,10 +87,11 @@
                       <component
                         :is="field.type"
                         :value="client[field.id]"
+                        :disabled="client.id"
                         :options="typeof field.options === 'function' ? field.options(client, index) : field.options"
                         :placeholder="field.placeholder"
                         :state="field.validator(client[field.id])"
-                        @input="onUpdate($event, field, index)"
+                        @input="onUpdate({ index, key: field.id, val: $event })"
                       />
                     </b-form-group>
                   </b-col>
@@ -97,7 +101,7 @@
             <!-- new client form -->
             <!-- esisting client form -->
             <div v-if="client.clientType === 'existing'">
-              <div v-if="client.urn">
+              <div v-if="client.id">
                 <div v-for="(fieldArr, i) in fields" :key="`arr-${i}`">
                   <b-row>
                     <b-col v-for="(field, idx) in fieldArr" :key="`${field.id}-${idx}`">
@@ -135,17 +139,13 @@
 
 <script>
 import VueMultiselect from 'vue-multiselect'
+import Locations from '~/mixins/locations'
 import States from '~/mixins/states'
+import Clients from '~/mixins/clients'
 export default {
   components: { VueMultiselect },
-  mixins: [States],
+  mixins: [Locations, Clients, States],
   props: {
-    clients: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
     existingClients: {
       type: Array,
       default() {
@@ -155,7 +155,8 @@ export default {
   },
   data () {
     return {
-      selected: null,
+      maxClients: 6,
+      instructions: 'Complete all client fields to continue',
       options: [
         { text: 'New Client', value: 'new' },
         { text: 'Existing Client', value: 'existing' }
@@ -236,22 +237,49 @@ export default {
     }
   },
   computed: {
-    invalidFields() {
-      let val
-      if (this.clients.lenght === 0) {
-        val = true
+    validForm() {
+      let val = true
+      if (this.clients.length === 0) {
+        val = false
       } else {
-        for (let i = 0; i < this.clients.length; i++) {
-          const clientKeys = Object.keys(this.clients[i])
-          console.log(clientKeys)
-          val = clientKeys.some(key => !this.clients[i][key])
-          if (val) { break }
+        let i = 0
+        while (val && i < this.clients.length) {
+          const client = this.clients[i]
+          const clientKeys = Object.keys(client)
+          for (let k = 0; k < clientKeys.length; k++) {
+            const key = clientKeys[k]
+            const value = client[key]
+            if (key === 'domain') {
+              if (client.domain_type === 'SingleDomainClient' && !value) {
+                val = false
+                break
+              }
+            } else if (!value && key !== 'urn' && key !== 'id') {
+              val = false
+              break
+            }
+          }
+          i++
         }
       }
       return val
     }
   },
   methods: {
+    async nextStep() {
+      if (this.validForm) {
+        this.$emit('next-step')
+        const clientIds = []
+        for (let i = 0; i < this.clients.length; i++) {
+          if (!this.clients[i].id) {
+            const client = await this.$axios.$post('/api/v1/hub/clients', this.clients[i])
+            this.onUpdate({ index: i, key: 'id', value: client.id })
+            clientIds.push(client.id)
+          }
+        }
+        await this.$axios.$post(`/api/v1/projects/${this.projectId}/clients`, { clientIds })
+      }
+    },
     validNakedDomain(str) {
       const regex = /^(?!:\/\/)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/ig
       return regex.test(str)
@@ -261,9 +289,6 @@ export default {
       return country === 'US' || country === 'CA'
         ? this[country].options
         : [{ value: null, text: 'Select Country for States' }]
-    },
-    onUpdate(value, field, index) {
-      this.clients[index][field.id] = value
     },
     showLabel(client, field) {
       let val = true
@@ -289,13 +314,13 @@ export default {
       const entries = Object.entries(this.newClient())
       for (const [key, val] of entries) {
         if (key === 'clientType') {
-          if (typeof value !== 'object') { this.clients[index][key] = value }
-        } else { this.clients[index][key] = val }
+          if (typeof value !== 'object') { this.onUpdate({ index, key, val: value }) }
+        } else { this.onUpdate({ index, key, val }) }
       }
     },
     newClient() {
       return {
-        clientType: null,
+        clientType: 'new',
         urn: null,
         name: '',
         branded_name: '',
@@ -304,22 +329,21 @@ export default {
         country: null,
         domain: '',
         domain_type: null,
-        vertical: null
+        vertical: null,
+        id: null
       }
     },
     onAdd() {
       const client = this.newClient()
-      this.clients.push(client)
-    },
-    onClientSelect(client, index) {
-      const entries = Object.entries(client)
-      for (const [key, val] of entries) {
-        this.clients[index][key] = val
-      }
-    },
-    onDelete(index) {
-      this.clients.splice(index, 1)
+      this.addClient(client)
     }
+    // onClientSelect(client, index) {
+    //   console.log(client)
+    //   const entries = Object.entries(client)
+    //   for (const [key, val] of entries) {
+    //     this.onUpdate({ index, key, val })
+    //   }
+    // }
   }
 }
 </script>
@@ -328,5 +352,9 @@ export default {
     & .card-body {
       min-height: 458px;
     }
+  }
+  .pick-client label {
+    border-radius: 5px;
+    margin-right: 1em;
   }
 </style>

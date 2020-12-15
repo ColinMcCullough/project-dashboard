@@ -1,18 +1,21 @@
 <template>
   <div>
     <b-row class="p-3">
-      <div class="px-2 d-flex justify-content-between">
-        <b-button class="rounded" variant="warning" @click="$emit('previous-step')">
-          <b-icon-arrow-left-circle />
+      <div class="px-2 justify-content-between">
+        <b-button class="px-4 rounded" variant="secondary" @click="$emit('previous-step')">
+          <b-icon-arrow-left />
           Previous
         </b-button>
       </div>
-      <div class="px-2 d-flex justify-content-between">
-        <b-button class="rounded" variant="success" @click="$emit('next-step')">
-          Next Step
-          <b-icon-arrow-right-circle />
+      <div class="px-2 justify-content-between">
+        <b-button class="rounded px-4" variant="primary" @click="nextStep">
+          Next
+          <b-icon-arrow-right />
         </b-button>
       </div>
+      <b-form-invalid-feedback :state="validForm" class="pl-2">
+        {{ instructions }}
+      </b-form-invalid-feedback>
     </b-row>
     <b-table
       id="intakeTbl"
@@ -25,7 +28,7 @@
       outlined
       responsive
       head-variant="light"
-      class="mb-0 rounded-table"
+      class="mb-0 rounded-table pl-2"
     >
       <template v-slot:head(url)="{ label }">
         {{ label.toUpperCase() }}
@@ -78,12 +81,13 @@
       <template v-slot:cell(client)="">
         <b-form-select
           :options="clients"
+          text-field="name"
         />
       </template>
     </b-table>
     <b-row>
       <b-col class="text-right pt-1">
-        <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
+        <b-badge v-if="corpSelected > 1" variant="error" class="px-2 py-2 rounded" style="padding-top: 1em !important;">
           <b-icon-exclamation-triangle-fill />
           Multiple Corporate Locations Selected.
         </b-badge>
@@ -108,6 +112,7 @@ export default {
   },
   data () {
     return {
+      instructions: 'Complete all client associatons and urls to continue',
       corpSelected: 0,
       corporateAllEnabled: false,
       singleDomainAllEnabled: false,
@@ -155,6 +160,17 @@ export default {
     disabledBtn() {
       return this.locations
         .some(location => !this.validURL(location.properties.url))
+    },
+    validForm() {
+      let valid = true
+      for (let i = 0; i < this.locations.length; i++) {
+        const location = this.locations[i]
+        if (!this.validURL(location.properties.url) || !location.client) {
+          valid = false
+          break
+        }
+      }
+      return valid
     }
   },
   mounted() {
@@ -165,6 +181,13 @@ export default {
     })
   },
   methods: {
+    nextStep() {
+      this.$emit('next-step')
+      // use code below when location.client is being set by drop down
+      // if (this.validForm) {
+      //   this.$emit('next-step')
+      // }
+    },
     updateAll(val, key) {
       this[`${key}AllEnabled`] = val
       this.locations.forEach((location, locIdx) => {
@@ -172,6 +195,7 @@ export default {
       })
     },
     onInput(val, locationId, key) {
+      console.log(val)
       if (key === 'corporate') {
         val ? this.corpSelected++ : this.corpSelected--
       }
