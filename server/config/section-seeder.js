@@ -89,9 +89,9 @@ module.exports = [
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000006oUcOAAU', 'a1b3l000007cMedAAE'],
     name: {
-      mf: 'Property Contact Information',
-      sl: 'Community Contact Information',
-      ss: 'Facility Contact Information',
+      MF: 'Property Contact Information',
+      SL: 'Community Contact Information',
+      SS: 'Facility Contact Information',
       corp: 'Company Contact Information',
       default: 'Property Contact Information'
     },
@@ -105,7 +105,7 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { sl: 'Name of Community', ss: 'Name of Facility', mf: 'Name of Property', corp: 'Name of Corporate', default: 'Branded Name of Property' },
+      label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Branded Name of Property' },
       settings: null,
       placeholder: null
     },
@@ -196,7 +196,7 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { sl: 'Community Phone Number', ss: 'Facility Phone Number', mf: 'Property Phone Number', corp: 'Corporate Phone Number', default: 'Phone Number' },
+      label: { SL: 'Community Phone Number', SS: 'Facility Phone Number', MF: 'Property Phone Number', corp: 'Corporate Phone Number', default: 'Phone Number' },
       settings: null,
       placeholder: null
     },
@@ -222,7 +222,7 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { sl: 'Community Email Address', ss: 'Facility Email Address', mf: 'Property Email Address', corp: 'Corporate Email Address', default: 'Property Email Address' },
+      label: { SL: 'Community Email Address', SS: 'Facility Email Address', MF: 'Property Email Address', corp: 'Corporate Email Address', default: 'Property Email Address' },
       settings: null,
       placeholder: null
     },
@@ -367,9 +367,9 @@ module.exports = [
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU'],
     name: {
-      mf: 'Property Type & General Information',
-      sl: 'Community Type & General Information',
-      ss: 'Facility Type & General Information',
+      MF: 'Property Type & General Information',
+      SL: 'Community Type & General Information',
+      SS: 'Facility Type & General Information',
       corp: 'Company Type & General Information',
       default: 'Property Type & General Information'
     },
@@ -396,8 +396,8 @@ module.exports = [
       bulkEditable: true,
       isHub: false,
       displayVertical: ['MF', 'SS'],
-      label: { ss: 'Facility Class Type', default: 'Property Class Type' },
-      settings: { options: { mf: ['Class A', ' Class B', ' Class C'], ss: ['High-end', ' Mid-range'] } },
+      label: { SS: 'Facility Class Type', default: 'Property Class Type' },
+      settings: { options: { MF: ['Class A', ' Class B', ' Class C'], SS: ['High-end', ' Mid-range'] } },
       placeholder: null
     },
     {
@@ -1040,7 +1040,7 @@ module.exports = [
     priority: 5,
     fields: [{
       dataKey: 'apartment_amenity_1',
-      inputType: 'text',
+      inputType: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1053,7 +1053,7 @@ module.exports = [
     },
     {
       dataKey: 'apartment_amenity_2',
-      inputType: 'text',
+      inputType: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1066,7 +1066,7 @@ module.exports = [
     },
     {
       dataKey: 'apartment_amenity_3',
-      inputType: 'text',
+      inputType: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1079,7 +1079,7 @@ module.exports = [
     },
     {
       dataKey: 'additional_amenities',
-      inputType: 'text',
+      inputType: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1125,8 +1125,8 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SL'],
-      label: { mf: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
-      settings: { options: { mf: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], sl: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+      label: { MF: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
+      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
       placeholder: null
     },
     {
@@ -1138,8 +1138,8 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SL'],
-      label: { mf: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
-      settings: { options: { mf: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], sl: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+      label: { MF: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
+      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
       placeholder: null
     },
     {
@@ -1151,8 +1151,8 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SL'],
-      label: { mf: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
-      settings: { options: { mf: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], sl: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+      label: { MF: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
+      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
       placeholder: null
     },
     {
@@ -1165,7 +1165,7 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Additional Community Amenities& Services' },
-      settings: { options: { mf: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], sl: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
       placeholder: null
     }]
   },
@@ -2424,7 +2424,7 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { sl: 'Name of Community', ss: 'Name of Facility', mf: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
+      label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
       placeholder: null
     },
@@ -2726,7 +2726,7 @@ module.exports = [
       bulkEditable: false,
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { sl: 'Name of Community', ss: 'Name of Facility', mf: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
+      label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
       placeholder: null
     },
