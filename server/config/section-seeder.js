@@ -1273,8 +1273,9 @@ module.exports = [
       default: 'Integration & Leads'
     },
     priority: 7,
-    fields: [{
-      dataKey: 'lead_vendor_name',
+    subsections: [
+    {name: {default: 'If you use a Lead Management System (LMS) please provide the following:'}, fields:[{ 
+      dataKey: 'lms_vendor',
       inputType: 'text',
       required: false,
       displayOnlyOnCorp: false,
@@ -1282,11 +1283,46 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'What is your Lead Management System (LMS)?' },
+      label: { default: 'LMS Vendor' },
       settings: null,
       placeholder: null
-    },
-    {
+    }, {
+      dataKey: 'lms_product',
+      inputType: 'text',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'LMS Name' },
+      settings: null,
+      placeholder: null
+    }, {  
+      dataKey: 'lms_company_key',
+      inputType: 'text',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'LMS Company Key' },
+      settings: null,
+      placeholder: null
+    }, {
+      dataKey: 'lms_location_code',
+      inputType: 'text',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'LMS Location/Property Code' },
+      settings: null,
+      placeholder: null
+    }, {  
       dataKey: 'auto_response',
       inputType: 'select',
       required: false,
@@ -1298,8 +1334,7 @@ module.exports = [
       label: { default: 'Does your lead tracking email provide an auto response customer email?' },
       settings: { options: { default: ['Yes', ' No', ' N/A'] } },
       placeholder: null
-    },
-    {
+    }, {  
       dataKey: 'suppress_auto_response',
       inputType: 'select',
       required: false,
@@ -1311,9 +1346,8 @@ module.exports = [
       label: { default: 'If yes to the above, would you like G5 to suppress the G5 auto response customer email?' },
       settings: { options: { default: ['Yes', ' No', ' N/A'] } },
       placeholder: null
-    },
-    {
-      dataKey: 'pms_name',
+    } ]}, {name: {default: 'If you use a Property Management System (PMS) please provide the following:'}, fields:[{  
+      dataKey: 'pms_vendor',
       inputType: 'text',
       required: false,
       displayOnlyOnCorp: false,
@@ -1321,11 +1355,22 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'Do you use a Property Management System (PMS)? If so, please provide the Vendor & Product name.' },
+      label: { default: 'PMS Vendor' },
       settings: null,
       placeholder: null
-    },
-    {
+    },  
+      dataKey: 'pms_product',
+      inputType: 'text',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'PMS Product' },
+      settings: null,
+      placeholder: null
+    }, {
       dataKey: 'pms_credentials',
       inputType: 'text',
       required: false,
@@ -1334,11 +1379,10 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'PMS Integration Credentials' },
+      label: { default: 'PMS Credentials' },
       settings: null,
       placeholder: null
-    },
-    {
+    }, {
       dataKey: 'pms_property_code',
       inputType: 'text',
       required: false,
@@ -1350,10 +1394,9 @@ module.exports = [
       label: { default: 'PMS Property Code' },
       settings: null,
       placeholder: null
-    },
+  } ]}, {name: {default: 'If you use a Revenue Management System (RMS) please provide the following:'}, fields:[{      
     {
-
-      dataKey: 'rms',
+      dataKey: 'rms_vendor',
       inputType: 'text',
       required: false,
       displayOnlyOnCorp: false,
@@ -1361,12 +1404,24 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'Do you use a Revenue Management System (RMS)? If so, please provide the Vendor & Product name.' },
+      label: { default: 'RMS Vendor' },
       settings: null,
       placeholder: null
     },
     {
-
+      dataKey: 'rms_product',
+      inputType: 'text',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'RMS Product' },
+      settings: null,
+      placeholder: null
+    },
+    {
       dataKey: 'rms_credentials',
       inputType: 'text',
       required: false,
@@ -1375,12 +1430,11 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'RMS Integration Credentials' },
+      label: { default: 'RMS Credentials' },
       settings: null,
       placeholder: null
     },
     {
-
       dataKey: 'rms_property_code',
       inputType: 'text',
       required: false,
@@ -1389,12 +1443,11 @@ module.exports = [
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'RMS Integration Property Code' },
+      label: { default: 'RMS Property Code' },
       settings: null,
       placeholder: null
-    },
+ } ]}, {name: {default: 'If you use a Unit Inventory Vendor please provide the following:'}, fields:[{      
     {
-
       dataKey: 'unit_inventory_vendor',
       inputType: 'text',
       required: false,
@@ -1408,7 +1461,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'corporate_code',
       inputType: 'text',
       required: false,
@@ -1422,7 +1474,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'faciliy_id',
       inputType: 'text',
       required: false,
@@ -1436,7 +1487,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'integration_api_username',
       inputType: 'text',
       required: false,
@@ -1450,7 +1500,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'integration_api_password',
       inputType: 'text',
       required: false,
@@ -1464,7 +1513,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'integration_endpoint',
       inputType: 'text',
       required: false,
@@ -1478,48 +1526,6 @@ module.exports = [
       placeholder: null
     },
     {
-
-      dataKey: 'lead_vendor_name',
-      inputType: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SL'],
-      label: { default: 'Do you use a Lead Management System (LMS)? If so, please provide the Product name.' },
-      settings: null,
-      placeholder: null
-    },
-    {
-
-      dataKey: 'integration_company_key',
-      inputType: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SL'],
-      label: { default: 'Company Key' },
-      settings: null,
-      placeholder: null
-    },
-    {
-
-      dataKey: 'integration_location_code',
-      inputType: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SL'],
-      label: { default: 'Location/Property Code' },
-      settings: null,
-      placeholder: null
-    }]
-  },
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000006oUcOAAU', 'a1b3l000007cMedAAE'],
     name: {
@@ -1695,7 +1701,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'employment_portal',
       inputType: 'url',
       required: false,
@@ -1709,7 +1714,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'investor_portal',
       inputType: 'url',
       required: false,
@@ -1723,7 +1727,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'careers_portal',
       inputType: 'url',
       required: false,
@@ -1744,7 +1747,6 @@ module.exports = [
     },
     priority: 9,
     fields: [{
-
       dataKey: 'tagline',
       inputType: 'text',
       required: true,
@@ -1758,7 +1760,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'communicate_audience',
       inputType: 'text',
       required: false,
@@ -1772,7 +1773,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'best_solution',
       inputType: 'text',
       required: false,
@@ -1786,7 +1786,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'apart_competitors',
       inputType: 'text',
       required: false,
@@ -1800,7 +1799,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'awards',
       inputType: 'text',
       required: false,
@@ -1814,7 +1812,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'highest_rated_asset',
       inputType: 'text',
       required: false,
@@ -1828,7 +1825,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'buzzwords',
       inputType: 'text',
       required: false,
@@ -1842,7 +1838,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'existing_collateral',
       inputType: 'text',
       required: false,
@@ -1856,7 +1851,6 @@ module.exports = [
       placeholder: null
     },
     {
-
       dataKey: 'include_in_content',
       inputType: 'text',
       required: false,
