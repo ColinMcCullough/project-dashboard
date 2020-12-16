@@ -48,15 +48,15 @@
             >
               <b-btn
                 :variant="client.isExisting ? 'outline-primary' : 'primary'"
-                class="px-3 text-uppercase"
-                @click="$store.dispatch('clients/update', {index, key: 'isExisting', val: false })"
+                class="px-3 text-uppercase rounded"
+                @click="resetClient(client, index)"
               >
                 New Client
               </b-btn>
               <b-btn
                 :variant="client.isExisting ? 'primary' : 'outline-primary'"
-                class="px-3 text-uppercase"
-                @click="$store.dispatch('clients/update', {index, key: 'isExisting', val: true })"
+                class="px-3 text-uppercase rounded"
+                @click="$store.dispatch('clients/update', { index, key: 'isExisting', val: true })"
               >
                 Existing Client
               </b-btn>
@@ -119,7 +119,7 @@ export default {
                 val = false
                 break
               }
-            } else if (!value && key !== 'urn' && key !== 'id') {
+            } else if (!value && key !== 'urn' && key !== 'id' && key !== 'isExisting') {
               val = false
               break
             }
