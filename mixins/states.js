@@ -284,10 +284,6 @@ export default {
             value: 'ON'
           },
           {
-            text: 'Delaware',
-            value: 'DE'
-          },
-          {
             text: 'Prince Edward Island',
             value: 'PE'
           },

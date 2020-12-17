@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
   project.associate = (models) => {
     models.project.hasMany(models.location)
     models.project.belongsTo(models.salesforceAccount)
+    models.project.belongsToMany(models.g5_updatable_client, { through: 'projectClients' })
   }
   return project
 }

@@ -55,6 +55,8 @@ module.exports = (sequelize) => {
     models.location.hasMany(models.linkDiscoverer)
     models.location.hasMany(models.assetScraper)
     models.location.belongsToMany(models.package, { through: 'locationPackage' })
+    // to associate client to many locations
+    models.g5_updatable_client.hasMany(models.location)
   }
   return location
 }
