@@ -80,11 +80,11 @@
         />
       </template>
       <template v-slot:cell(g5UpdatableClientId)="data">
+        <!-- value-field="id"
+          text-field="branded_name" -->
         <b-form-select
-          :value="test(data.item.g5UpdatableClientId)"
-          :options="clients"
-          value-field="id"
-          text-field="branded_name"
+          :value="data.item.g5UpdatableClientId"
+          :options="getOptions"
           @change="updateLocation({ locIdx: getLocationIndex(data.item.locationId), key: data.field.key, val: $event })"
         />
       </template>
@@ -154,6 +154,11 @@ export default {
     }
   },
   computed: {
+    getOptions() {
+      const options = [{ text: 'Select a Client', g5UpdatableClientId: null }]
+      this.clients.forEach(client => options.push({ text: client.branded_name, value: client.id }))
+      return options
+    },
     disabledBtn() {
       return this.locations
         .some(location => !this.validURL(location.properties.url))
