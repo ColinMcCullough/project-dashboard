@@ -16,8 +16,23 @@ export default {
       onUpdate: 'clients/update',
       onDelete: 'clients/delete'
     }),
+    newClient () {
+      return {
+        urn: null,
+        name: '',
+        branded_name: '',
+        city: '',
+        state: null,
+        country: null,
+        domain: '',
+        domain_type: null,
+        vertical: null,
+        id: null,
+        isAssociated: false,
+        clientType: 'new'
+      }
+    },
     resetClient (value, index) {
-      // this.$emit('reset-client', { value, index })
       const entries = Object.entries(this.newClient())
       for (const [key, val] of entries) {
         if (key === 'clientType') {

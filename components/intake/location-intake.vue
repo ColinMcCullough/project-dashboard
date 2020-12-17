@@ -79,10 +79,13 @@
           @change="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
-      <template v-slot:cell(client)="">
+      <template v-slot:cell(g5UpdatableClientId)="data">
         <b-form-select
+          :value="test(data.item.g5UpdatableClientId)"
           :options="clients"
-          text-field="name"
+          value-field="id"
+          text-field="branded_name"
+          @change="updateLocation({ locIdx: getLocationIndex(data.item.locationId), key: data.field.key, val: $event })"
         />
       </template>
     </b-table>
@@ -100,17 +103,10 @@
 <script>
 import GlobalFunctions from '~/mixins/global-functions'
 import Locations from '~/mixins/locations'
+import Clients from '~/mixins/clients'
 export default {
   components: {},
-  mixins: [Locations, GlobalFunctions],
-  props: {
-    clients: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
+  mixins: [Locations, GlobalFunctions, Clients],
   data () {
     return {
       instructions: 'Complete all client associatons and urls to continue',
@@ -139,7 +135,7 @@ export default {
           sortable: true
         },
         {
-          key: 'client',
+          key: 'g5UpdatableClientId',
           label: 'Client Association',
           sortable: true
         },
@@ -166,7 +162,7 @@ export default {
       let valid = true
       for (let i = 0; i < this.locations.length; i++) {
         const location = this.locations[i]
-        if (!this.validURL(location.properties.url) || !location.client) {
+        if (!this.validURL(location.properties.url) || !location.g5UpdatableClientId) {
           valid = false
           break
         }
@@ -182,6 +178,15 @@ export default {
     })
   },
   methods: {
+    test(id) {
+      console.log(id)
+      const x = this.clients.find(client => client.id === id)
+      if (x) {
+        return x.branded_name
+      } else {
+        return ''
+      }
+    },
     nextStep() {
       this.$emit('next-step')
       // use code below when location.client is being set by drop down
@@ -196,7 +201,6 @@ export default {
       })
     },
     onInput(val, locationId, key) {
-      console.log(val)
       if (key === 'corporate') {
         val ? this.corpSelected++ : this.corpSelected--
       }

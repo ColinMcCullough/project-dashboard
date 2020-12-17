@@ -23,10 +23,27 @@ module.exports = (app) => {
         domain_type: property.properties.domain_type,
         vertical: property.properties.vertical,
         id: property.id,
-        isAssociated: true
+        isAssociated: true,
+        clientType: property.urn ? 'existing' : 'new'
       }
     })
     res.json(filteredClients)
+  })
+  // removes association of client to project
+  app.delete('/api/v1/projects/:projectId/clients/:clientId', async (req, res) => {
+    const { projectId, clientId } = req.params
+    const client = await models.g5_updatable_client.findOne({
+      where: {
+        id: clientId
+      }
+    })
+    const project = await models.project.findOne({
+      where: {
+        salesforce_project_id: projectId
+      }
+    })
+    await project.removeG5_updatable_client(client)
+    res.sendStatus(200)
   })
 
   app.post('/api/v1/projects/:projectId/clients', async (req, res) => {
@@ -39,6 +56,7 @@ module.exports = (app) => {
         }
       }
     })
+    console.log(projectId)
     const project = await models.project.findOne({
       where: {
         salesforce_project_id: projectId
@@ -66,6 +84,7 @@ module.exports = (app) => {
       const val = locations.map((location) => {
         return {
           locationId: location.locationProjectId,
+          g5UpdatableClientId: location.g5UpdatableClientId,
           crawled: location.crawled,
           scraped: location.scraped,
           g5Approved: location.g5Approved,

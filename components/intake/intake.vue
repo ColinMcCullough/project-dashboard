@@ -26,13 +26,9 @@
 import ClientIntake from '~/components/intake/client-intake'
 import LocationIntake from '~/components/intake/location-intake'
 import SaveIntake from '~/components/intake/save-intake'
-import GlobalFunctions from '~/mixins/global-functions'
-import Locations from '~/mixins/locations'
-import Clients from '~/mixins/clients'
 
 export default {
   components: { ClientIntake, LocationIntake, SaveIntake },
-  mixins: [Locations, Clients, GlobalFunctions],
   data () {
     return {
       err: '',

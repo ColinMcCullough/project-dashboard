@@ -46,8 +46,8 @@ export default {
     }
   },
   methods: {
+    // populates client state with existing client info
     onClientSelect(client, index) {
-      console.log(client)
       const entries = Object.entries(client)
       for (const [key, val] of entries) {
         this.onUpdate({ index, key, val })
