@@ -81,13 +81,15 @@ export default {
       err: '',
       excludedKeys: ['urn', 'id', 'isAssociated', 'clientType'],
       maxClients: 4,
-      instructions: 'Complete all client fields to continue'
+      instructions: 'Complete all client fields to continue.'
     }
   },
   computed: {
     validForm () {
       let val = true
       if (this.clients.length === 0) {
+        val = false
+      } else if (this.hasDuplicates(this.clients.map(client => client.name))) {
         val = false
       } else {
         let i = 0
@@ -114,6 +116,9 @@ export default {
     }
   },
   methods: {
+    hasDuplicates(arr) {
+      return (new Set(arr)).size !== arr.length
+    },
     getClientTypeLabel(client) {
       return client.isAssociated ? 'Selected Client Type' : 'Pick a  Client Type'
     },

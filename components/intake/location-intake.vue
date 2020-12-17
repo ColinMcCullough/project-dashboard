@@ -111,8 +111,6 @@ export default {
     return {
       instructions: 'Complete all client associatons and urls to continue',
       corpSelected: 0,
-      corporateAllEnabled: false,
-      singleDomainAllEnabled: false,
       fields: [
         {
           key: 'valid',
@@ -183,21 +181,11 @@ export default {
     })
   },
   methods: {
-    test(id) {
-      console.log(id)
-      const x = this.clients.find(client => client.id === id)
-      if (x) {
-        return x.branded_name
-      } else {
-        return ''
-      }
-    },
     nextStep() {
-      this.$emit('next-step')
-      // use code below when location.client is being set by drop down
-      // if (this.validForm) {
-      //   this.$emit('next-step')
-      // }
+      if (this.validForm) {
+        this.$emit('next-step')
+        // need to update location props
+      }
     },
     updateAll(val, key) {
       this[`${key}AllEnabled`] = val

@@ -214,7 +214,6 @@ export default {
       setTimeout(() => { this.crawling = false }, 3000)
     },
     async launchModal (modalName, projectId) {
-      console.log(modalName)
       await this.setLocations(projectId)
       if (modalName === 'intake-modal') {
         await this.setClients(projectId)
@@ -231,10 +230,7 @@ export default {
     async onRefetch (id) {
       this.isBusy = true
       await this.updateProject(id)
-      await this.setClients(id)
-      // await this.$store.dispatch('projects/update', id)
       setTimeout(() => { this.isBusy = false }, 2000)
-      // this.isBusy = false
     }
   }
 }

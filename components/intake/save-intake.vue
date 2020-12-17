@@ -22,7 +22,6 @@
     </b-row>
     <b-row class="px-3">
       <b-btn
-        :disabled="disabledBtn"
         variant="outline-secondary"
         pill
         style="min-width: 120px;"
@@ -47,10 +46,6 @@ export default {
     }
   },
   computed: {
-    disabledBtn() {
-      return this.locations
-        .some(location => !this.validURL(location.properties.url))
-    }
   },
   methods: {
     async onSave () {
@@ -58,17 +53,17 @@ export default {
       const locations = this.locations.map((location) => {
         return {
           locationId: location.locationId,
+          g5UpdatableClientId: location.g5UpdatableClientId,
           properties: {
             url: location.properties.url,
             corporate: location.properties.corporate,
-            vendor: location.properties.vendor,
-            singleDomain: location.properties.singleDomain
+            vendor: location.properties.vendor
           }
         }
       })
       await this.saveLocations(this.projectId, locations)
-      this.$store.dispatch('projects/update', this.projectId)
       this.isSaving = false
+      this.$bvModal.hide('intake-modal')
     }
   }
 }

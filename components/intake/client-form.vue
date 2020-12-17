@@ -17,9 +17,12 @@
               :options="typeof field.options === 'function'
                 ? field.options(client, index) : field.options"
               :placeholder="field.placeholder"
-              :state="field.validator(client[field.id])"
+              :state="field.validator(client[field.id], client)"
               @input="onUpdate({ index, key: field.id, val: $event })"
             />
+            <b-form-invalid-feedback :state="field.validator(client[field.id], client)">
+              {{ field.feedback }}
+            </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -57,7 +60,8 @@ export default {
             { value: 'MultiDomainClient', text: 'Multi Domain' }
           ],
           label: 'Domain Type',
-          validator: val => val !== null
+          validator: val => val !== null,
+          feedback: ''
         },
         {
           type: 'b-form-input',
@@ -66,7 +70,8 @@ export default {
           placeholder: 'ex. mydomain.com',
           dependentOn: 'domain_type',
           validator: val => this.validNakedDomain(val),
-          showIf: val => val === 'SingleDomainClient'
+          showIf: val => val === 'SingleDomainClient',
+          feedback: 'Must be formatted as naked domain'
         }],
         [{
           type: 'b-form-select',
@@ -78,28 +83,32 @@ export default {
           ],
           id: 'vertical',
           label: 'Vertical',
-          validator: val => val !== null
+          validator: val => val !== null,
+          feedback: ''
         }],
         [{
           type: 'b-form-input',
           label: 'Client Name',
           id: 'name',
           placeholder: 'ex. My Community',
-          validator: val => val !== ''
+          validator: (val, client) => this.validateName(val, client),
+          feedback: 'Enter unique client name'
         },
         {
           type: 'b-form-input',
           label: 'Branded Name',
           id: 'branded_name',
           placeholder: 'ex. My Community 1',
-          validator: val => val !== ''
+          validator: val => val !== '',
+          feedback: ''
         }],
         [{
           type: 'b-form-input',
           label: 'City',
           id: 'city',
           placeholder: 'ex. Portland',
-          validator: val => val !== ''
+          validator: val => val !== '',
+          feedback: ''
         },
         {
           type: 'b-form-select',
@@ -110,19 +119,36 @@ export default {
           ],
           label: 'Country',
           id: 'country',
-          validator: val => val !== null
+          validator: val => val !== null,
+          feedback: ''
         },
         {
           type: 'b-form-select',
           label: 'State',
           options: (client, index) => this.getStates(client, index),
           id: 'state',
-          validator: val => val !== null
+          validator: val => val !== null,
+          feedback: ''
         }]
       ]
     }
   },
   methods: {
+    validateName(val, client) {
+      console.log('hi')
+      let valid = true
+      if (client.clientType === 'new') {
+        const names = this.clients.map(client => client.name)
+        console.log(names)
+        if (this.hasDuplicates(names) || !val) {
+          valid = false
+        }
+      }
+      return valid
+    },
+    hasDuplicates(arr) {
+      return (new Set(arr)).size !== arr.length
+    },
     validNakedDomain(str) {
       const regex = /^(?!:\/\/)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/ig
       return regex.test(str)
@@ -156,3 +182,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.form-control:disabled {
+  opacity: .7;
+}
+</style>
