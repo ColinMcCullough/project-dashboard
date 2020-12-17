@@ -8,35 +8,25 @@ module.exports = {
 }
 
 function dynamicFilter(query, userRoles) {
-  const query = {
-    where: [{ col: 'clientUrn', data: 'clientUrns' }],
-    include: [{
-      model: models.location,
-      where: [{ col: 'clientUrn', data: 'clientUrns' }],
-      include: [{
-        model: models.linkDiscoverer
+// create client and location URN arrays
+  return replaceWhere(query, userRoles)
+}
+
+function replaceWhere(obj, userPerms) {
+  for (const k in obj) {
+    // calls itself with next depth of object
+    if (typeof obj[k] === 'object') {
+      if (k === 'where' && !Array.isArray(obj[k]) && obj[k].replace) {
+        obj[k].replace.forEach((r) => {
+          obj[k][r.col] = userPerms[r.data]
+        })
+        delete obj[k].replace
+      } else if (Array.isArray(obj[k]) && k === 'include') {
+        for (let i = 0; i < obj[k].length; i++) {
+          obj[k][i] = replaceWhere(obj[k][i], userPerms)
+        }
       }
-      ]
-    },
-    {
-      model: models.salesforceAccount,
-      where: [{ col: 'locationurn', data: 'locationUrns' }]
-    }],
-    order: [
-      [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
-    ]
+    }
   }
-  const keys = Object.keys(query)
-  keys.forEach((k) => {
-    if (k === 'where') {
-      // replace where key
-    }
-    if (k === 'include') {
-      // loop through each include and look for where key
-    }
-  })
-
-  keys.map((k) => {
-
-  })
+  return obj
 }
