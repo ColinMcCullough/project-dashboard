@@ -1,3 +1,4 @@
+const { dynamicFilter } = require('../../controllers/userQueryFilter')
 module.exports = (models, sequelize, Sequelize) => {
   models.project.prototype.areAllCrawled = function () {
     const data = this.toJSON()
@@ -95,30 +96,37 @@ module.exports = (models, sequelize, Sequelize) => {
     const { locations } = project.toJSON()
     return locations
   }
-  models.project.displayAll = async () => {
-    const projects = await models.project.findAll({
+  models.project.displayAll = async (userRoles) => {
+    const q = {
       include: [{
         model: models.location,
+        where: [{ col: 'clientUrn', data: 'clientUrns' }],
         include: [{
           model: models.linkDiscoverer
         }
         ]
       },
       {
-        model: models.salesforceAccount
+        model: models.salesforceAccount,
+        where: [{ col: 'locationurn', data: 'locationUrns' }]
       }],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
       ]
-    })
+    }
+    const query = dynamicFilter(q, userRoles)
+    const projects = await models.project.findAll(query)
     projects.forEach(project => computeFields(project))
     return projects.map(project => pluckData(project))
   }
-  models.project.displayOne = async (projectId) => {
+  models.project.displayOne = async ({ projectId, userRoles }) => {
+    const rootWhere = { salesforce_project_id: projectId }
+    console.log(userRoles)
+    if (userRoles) {
+
+    }
     const project = await models.project.findOne({
-      where: {
-        salesforce_project_id: projectId
-      },
+      where: rootWhere,
       include: [
         {
           model: models.location,

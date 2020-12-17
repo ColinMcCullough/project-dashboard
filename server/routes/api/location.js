@@ -2,7 +2,7 @@ const models = require('../../models')
 module.exports = (app) => {
   app.get('/api/v1/projects', async (req, res) => {
     const { userRoles } = req
-    const projects = await models.project.displayAll({ userRoles })
+    const projects = await models.project.displayAll(userRoles)
     res.json(projects)
   })
 
