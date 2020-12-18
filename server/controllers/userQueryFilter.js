@@ -8,7 +8,13 @@ module.exports = {
 }
 
 function dynamicFilter(query, userRoles) {
-// create client and location URN arrays
+  const userPerms = {}
+  if (userRoles) {
+    for (let i = 0; i < userRoles.length; i++) {
+      
+    }
+  }
+  // create client and location URN arrays
   return replaceWhere(query, userRoles)
 }
 
