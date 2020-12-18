@@ -86,7 +86,7 @@
       title="Intake"
     >
       <!-- <intake-table /> -->
-      <intake-table />
+      <intake />
     </modal-template>
     <modal-template
       :id="'scraper-modal'"

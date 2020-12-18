@@ -1,10 +1,22 @@
 <template>
-  <b-card
-    footer-class="d-flex justify-content-end border-0"
-    footer-bg-variant="white"
-    no-body
-    class="border-0"
-  >
+  <div>
+    <b-row class="p-3">
+      <div class="px-2 justify-content-between">
+        <b-button class="px-4 rounded" variant="secondary" @click="$emit('previous-step')">
+          <b-icon-arrow-left />
+          Previous
+        </b-button>
+      </div>
+      <div class="px-2 justify-content-between">
+        <b-button class="rounded px-4" variant="primary" @click="nextStep">
+          Next
+          <b-icon-arrow-right />
+        </b-button>
+      </div>
+      <b-form-invalid-feedback :state="validForm" class="pl-2">
+        {{ instructions }}
+      </b-form-invalid-feedback>
+    </b-row>
     <b-table
       id="intakeTbl"
       ref="intakeTbl"
@@ -16,25 +28,11 @@
       outlined
       responsive
       head-variant="light"
-      class="mb-0 rounded-table"
+      table-variant="light"
+      class="mb-0 rounded-table pl-2"
     >
       <template v-slot:head(url)="{ label }">
         {{ label.toUpperCase() }}
-      </template>
-      <template v-slot:head(singleDomain)="data">
-        <div class="d-flex align-items-center">
-          <b-form-checkbox
-            :checked="singleDomainAllEnabled"
-            size="lg"
-            style="transform: translateY(-10%);"
-            name="check-button"
-            switch
-            @input="updateAll($event, data.column)"
-          />
-          <div>
-            {{ data.label }}
-          </div>
-        </div>
       </template>
       <template v-slot:cell(name)="{ item }">
         {{ item.properties.name }}
@@ -42,7 +40,7 @@
       <template v-slot:cell(url)="data">
         <b-form-group class="mb-0" style="position: relative;">
           <b-form-input
-            :state="validUrl(data.item.properties.url)"
+            :state="validURL(data.item.properties.url)"
             :value="data.item.properties.url"
             placeholder="Paste your url"
             class="text-left"
@@ -50,7 +48,7 @@
             @input="onInput($event, data.item.locationId, data.field.key)"
           />
           <b-form-invalid-feedback
-            :state="validUrl(data.item.properties.url)"
+            :state="validURL(data.item.properties.url)"
             class="m-0 abs-feedback"
           >
             Invalid Url
@@ -69,7 +67,7 @@
         </b-form-group>
       </template>
       <template v-slot:cell(valid)="{ item }">
-        <icons-swap v-bind="{ needsCheckIcon: validUrl(item.properties.url), iconConfig }" />
+        <icons-swap v-bind="{ needsCheckIcon: validURL(item.properties.url), iconConfig }" />
       </template>
       <template v-slot:cell(corporate)="data">
         <b-form-checkbox
@@ -81,47 +79,38 @@
           @change="onInput($event, data.item.locationId, data.field.key)"
         />
       </template>
-      <template v-slot:cell(singleDomain)="data">
-        <b-form-checkbox
-          :checked="data.item.properties.singleDomain"
-          button-variant="secondary"
-          name="check-switch"
-          size="lg"
-          switch
-          @change="onInput($event, data.item.locationId, data.field.key)"
+      <template v-slot:cell(g5UpdatableClientId)="data">
+        <!-- value-field="id"
+          text-field="branded_name" -->
+        <b-form-select
+          :value="data.item.g5UpdatableClientId"
+          :options="getOptions"
+          @change="updateLocation({ locIdx: getLocationIndex(data.item.locationId), key: data.field.key, val: $event })"
         />
       </template>
     </b-table>
-    <template v-slot:footer>
-      <b-badge v-if="corpSelected > 1" variant="error" class="px-3 rounded" style="padding-top: 1em !important;">
-        <b-icon-exclamation-triangle-fill />
-        Multiple Corporate Locations Selected.
-      </b-badge>
-      <b-btn
-        :disabled="disabledBtn"
-        variant="outline-secondary"
-        pill
-        style="min-width: 120px;"
-        @click="onSave"
-      >
-        <b-icon-check-circle :animation="isSaving ? 'throb' : ''" />
-        {{ isSaving ? 'Saving...' : 'Save and Start Crawl' }}
-      </b-btn>
-    </template>
-  </b-card>
+    <b-row>
+      <b-col class="text-right pt-1">
+        <b-badge v-if="corpSelected > 1" variant="error" class="px-2 py-2 rounded" style="padding-top: 1em !important;">
+          <b-icon-exclamation-triangle-fill />
+          Multiple Corporate Locations Selected.
+        </b-badge>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
+import GlobalFunctions from '~/mixins/global-functions'
 import Locations from '~/mixins/locations'
+import Clients from '~/mixins/clients'
 export default {
   components: {},
-  mixins: [Locations],
+  mixins: [Locations, GlobalFunctions, Clients],
   data () {
     return {
+      instructions: 'Complete all client associatons and urls to continue',
       corpSelected: 0,
-      corporateAllEnabled: false,
-      singleDomainAllEnabled: false,
-      isSaving: false,
       fields: [
         {
           key: 'valid',
@@ -144,13 +133,13 @@ export default {
           sortable: true
         },
         {
-          key: 'corporate',
-          label: 'Corporate?',
+          key: 'g5UpdatableClientId',
+          label: 'Client Association',
           sortable: true
         },
         {
-          key: 'singleDomain',
-          label: 'Single Domain?',
+          key: 'corporate',
+          label: 'Corporate?',
           sortable: true
         }
       ],
@@ -163,9 +152,25 @@ export default {
     }
   },
   computed: {
+    getOptions() {
+      const options = [{ text: 'Select a Client', g5UpdatableClientId: null }]
+      this.clients.forEach(client => options.push({ text: client.branded_name, value: client.id }))
+      return options
+    },
     disabledBtn() {
       return this.locations
-        .some(location => !this.validUrl(location.properties.url))
+        .some(location => !this.validURL(location.properties.url))
+    },
+    validForm() {
+      let valid = true
+      for (let i = 0; i < this.locations.length; i++) {
+        const location = this.locations[i]
+        if (!this.validURL(location.properties.url) || !location.g5UpdatableClientId) {
+          valid = false
+          break
+        }
+      }
+      return valid
     }
   },
   mounted() {
@@ -176,14 +181,11 @@ export default {
     })
   },
   methods: {
-    validUrl(str) {
-      const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
-      return !!pattern.test(str)
+    nextStep() {
+      if (this.validForm) {
+        this.$emit('next-step')
+        // need to update location props
+      }
     },
     updateAll(val, key) {
       this[`${key}AllEnabled`] = val
@@ -198,32 +200,14 @@ export default {
       const locIdx = this.getLocationIndex(locationId)
       this.updateOnIndex({ locIdx, key, val })
     },
-    async onSave () {
-      this.isSaving = true
-      const locations = this.locations.map((location) => {
-        return {
-          locationId: location.locationId,
-          properties: {
-            url: location.properties.url,
-            corporate: location.properties.corporate,
-            vendor: location.properties.vendor,
-            singleDomain: location.properties.singleDomain
-          }
-        }
-      })
-      await this.saveLocations(this.projectId, locations)
-      this.$store.dispatch('projects/update', this.projectId)
-      this.isSaving = false
-      // setTimeout(() => { this.isSaving = false }, 3500)
-    },
     sortCompare(aRow, bRow, key, sortDesc) {
       let a, b
       if (key !== 'valid') {
         a = aRow.properties[key]
         b = bRow.properties[key]
       } else {
-        a = this.validUrl(aRow.properties.url)
-        b = this.validUrl(bRow.properties.url)
+        a = this.validURL(aRow.properties.url)
+        b = this.validURL(bRow.properties.url)
       }
       return a < b ? -1 : a > b ? 1 : 0
     }
@@ -241,16 +225,6 @@ export default {
     vertical-align: middle;
     padding: .45rem .5rem !important;
   }
-}
-.abs-feedback {
-  position: absolute !important;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  max-width: 35%;
-  text-align: center;
-  font-weight: 700;
-  // z-index: 9999;
 }
 
 </style>
