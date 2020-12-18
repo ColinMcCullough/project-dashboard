@@ -1,6 +1,6 @@
 {
   "name": "project-dashboard",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A full stack app template for the G5 OpEx team.",
   "author": "David Miller & Tyler Hasenoehrl & Colin McCullough",
   "private": true,
@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "dev:token": "cross-env TOKEN=$TOKEN NODE_ENV=development nodemon server/index.js --watch server",
-    "docker:build": "cross-env docker build -t $npm_package_config_imageName . --build-arg NPM_TOKEN=$NPM_TOKEN",
+    "docker:build": "cross-env docker build -t $npm_package_config_imageName . --build-arg NPM_TOKEN=$NPM_TOKEN --build-arg CLOUDINARY_NAME=$CLOUDINARY_NAME --build-arg CLOUDINARY_SECRET=$CLOUDINARY_SECRET --build-arg CLOUDINARY_KEY=$CLOUDINARY_KEY",
     "docker:tag": "cross-env docker tag $npm_package_config_imageName $npm_package_config_imageRepo:$npm_package_version",
     "docker:push": "cross-env docker push $npm_package_config_imageRepo:$npm_package_version",
     "helm:upgrade": "helm upgrade project-dashboard ./chart/nuxt",
