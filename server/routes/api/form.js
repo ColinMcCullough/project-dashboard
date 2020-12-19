@@ -30,12 +30,27 @@ module.exports = (app) => {
       packageMap.push(dbPackage)
     }
     for (let i = 0; i < sectionSeeder.length; i++) {
-      const { packageIds, name, priority, fields } = sectionSeeder[i]
+      const { packageIds, name, priority, fields, subsections } = sectionSeeder[i]
+      console.log(sectionSeeder[i])
       const packs = packageMap.filter(p => packageIds.includes(p.dataValues.salesforceId))
       const section = await models.section.create({ name, priority })
+      if (subsections) {
+        for (let j = 0; j < subsections.length; j++) {
+          const { fields: subFields } = subsections[j]
+          const subsection = await models.subsection.create({
+            name: subsections[j].name,
+            priority: subsections[j].priority
+          })
+          for (let k = 0; k < subFields.length; k++) {
+            const subField = await models.field.create(subFields[k])
+            await subsection.addField(subField)
+          }
+          await section.addSubsection(subsection)
+        }
+      }
       await section.addPackages(packs)
-      for (let j = 0; j < fields.length; j++) {
-        const field = await models.field.create(fields[j])
+      for (let l = 0; l < fields.length; l++) {
+        const field = await models.field.create(fields[l])
         await section.addField(field)
       }
     }

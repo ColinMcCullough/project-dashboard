@@ -39,7 +39,7 @@ class LocationOnboardingForm {
           }
         },
         {
-          model: models.subSection,
+          model: models.subsection,
           include: [
             {
               model: models.field
@@ -54,7 +54,7 @@ class LocationOnboardingForm {
   }
 
   filterEmptySections() {
-    this.form = this.form.filter(s => s.fields.length !== 0)
+    this.form = this.form.filter(s => (s.fields.length !== 0 || s.subsections.length !== 0))
   }
 
   filterFields(fields) {
@@ -82,14 +82,26 @@ class LocationOnboardingForm {
 
   mapSections() {
     this.form = this.sections.map((section) => {
-      const { name, priority, subSections, fields: f } = section
+      const { name, priority, subsections: s, fields: f, id } = section
       // console.log({ fields })
       // return section
       const fields = this.filterMapFields(f)
+      const subsections = s.map((s) => {
+        const { name, priority, fields: f, id } = s
+        const fields = this.filterMapFields(f)
+        return {
+          name: name[this.vertical] || name.default,
+          priority,
+          fields,
+          id
+        }
+      })
       return {
         name: name[this.vertical] || name.default,
         priority,
-        fields
+        fields,
+        subsections,
+        id
       }
     })
   }
@@ -114,7 +126,7 @@ class LocationOnboardingForm {
     this.locationSettings()
     await this.loadSections()
     this.mapSections()
-    this.filterEmptySections()
+    // this.filterEmptySections()
   }
 
   display () {

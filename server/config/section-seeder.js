@@ -1552,7 +1552,8 @@ module.exports = [
             placeholder: null
           }
         ]
-      }]
+      }],
+    fields: []
   },
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000006oUcOAAU', 'a1b3l000007cMedAAE'],
