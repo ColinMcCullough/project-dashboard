@@ -39,7 +39,7 @@ class LocationOnboardingForm {
           }
         },
         {
-          model: models.subSection,
+          model: models.subsection,
           include: [
             {
               model: models.field
@@ -82,7 +82,7 @@ class LocationOnboardingForm {
 
   mapSections() {
     this.form = this.sections.map((section) => {
-      const { name, priority, subSections, fields: f } = section
+      const { name, priority, subsections, fields: f } = section
       // console.log({ fields })
       // return section
       const fields = this.filterMapFields(f)

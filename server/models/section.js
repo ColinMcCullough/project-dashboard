@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
   })
   section.associate = (models) => {
     section.hasMany(models.field)
-    section.hasMany(models.subSection)
+    section.hasMany(models.subsection)
     section.belongsToMany(models.package, { through: 'sectionPackage' })
   }
   return section
