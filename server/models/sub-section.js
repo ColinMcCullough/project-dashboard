@@ -1,7 +1,7 @@
-const { INTEGER, STRING, JSONB, BOOLEAN } = require('sequelize')
+const { INTEGER, STRING } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const subSection = sequelize.define('subSection', {
+  const subsection = sequelize.define('subsection', {
     id: {
       type: INTEGER,
       autoIncrement: true,
@@ -15,8 +15,8 @@ module.exports = (sequelize) => {
       type: INTEGER
     }
   })
-  subSection.associate = (models) => {
-    subSection.hasMany(models.field)
+  subsection.associate = (models) => {
+    subsection.hasMany(models.field)
   }
-  return subSection
+  return subsection
 }
