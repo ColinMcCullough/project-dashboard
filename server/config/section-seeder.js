@@ -1,3 +1,4 @@
+const states = require('./states')
 module.exports = [
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000006oUcOAAU', 'a1b3l000007cMedAAE'],
@@ -8,7 +9,8 @@ module.exports = [
     fields: [
       {
         dataKey: 'current_website',
-        inputType: 'url',
+        component: 'input',
+        type: 'url',
         required: true,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -17,11 +19,14 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Current Website' },
         settings: null,
-        placeholder: null
+        description: null,
+        validation: null,
+        placeholder: 'ex. www.domain.com'
       },
       {
         dataKey: 'naked_domain',
-        inputType: 'url',
+        component: 'input',
+        type: 'url',
         required: true,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -30,11 +35,14 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain for G5 to Build on' },
         settings: null,
-        placeholder: null
+        description: 'A domain is the address (URL) of a website that can be typed in the browser to visit your website. For example, www.getg5.com is G5\'s domain name. Enter the domain that you want your new site built on (you should have already purchased the domain name).',
+        validation: null,
+        placeholder: 'ex. domain.com'
       },
       {
         dataKey: 'registrar',
-        inputType: 'text',
+        component: 'input',
+        type: 'text',
         required: true,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -43,11 +51,14 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Registrar' },
         settings: null,
-        placeholder: null
+        description: null,
+        validation: null,
+        placeholder: 'GoDaddy'
       },
       {
         dataKey: 'domain_manager_contact',
-        inputType: 'email',
+        component: 'input',
+        type: 'email',
         required: false,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -56,11 +67,14 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Manager Contact' },
         settings: null,
+        description: null,
+        validation: null,
         placeholder: null
       },
       {
-        dataKey: 'domain_credentials',
-        inputType: 'text',
+        dataKey: 'domain_username',
+        component: 'input',
+        type: 'email',
         required: false,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -69,11 +83,30 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Credentials' },
         settings: null,
-        placeholder: null
+        description: null,
+        validation: null,
+        placeholder: 'user@godaddy.com'
+      },
+      {
+        dataKey: 'domain_password',
+        component: 'input',
+        type: 'password',
+        required: false,
+        displayOnlyOnCorp: false,
+        displayOnCorp: true,
+        bulkEditable: true,
+        isHub: false,
+        displayVertical: ['MF', 'SS', 'SL'],
+        label: { default: 'Domain Credentials' },
+        settings: null,
+        description: null,
+        validation: null,
+        placeholder: '**********'
       },
       {
         dataKey: 'other_domains',
-        inputType: 'url',
+        component: 'todo-list',
+        type: 'url',
         required: true,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
@@ -82,6 +115,8 @@ module.exports = [
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Other Domains to Reference' },
         settings: null,
+        description: null,
+        validation: null,
         placeholder: null
       }
     ]
@@ -98,7 +133,8 @@ module.exports = [
     priority: 2,
     fields: [{
       dataKey: 'name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -107,11 +143,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Branded Name of Property' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'G5 Search Marketing, Inc'
     },
     {
       dataKey: 'street_address_1',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -120,11 +159,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address 1' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '550 Franklin Ave'
     },
     {
       dataKey: 'street_address_2',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -133,11 +175,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address 2' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'Suite 200'
     },
     {
       dataKey: 'city',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -146,11 +191,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'Bend'
     },
     {
       dataKey: 'state',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -158,12 +206,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
-      settings: null,
-      placeholder: null
+      settings: { options: { default: { null: [{ text: 'Select Country', value: null }], ...states } } },
+      description: null,
+      validation: null,
+      placeholder: null,
+      dependentOn: 'country'
     },
     {
       dataKey: 'postal_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -172,11 +224,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zip Code' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '97702'
     },
     {
       dataKey: 'country',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -184,12 +239,15 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Country' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Select Country', value: null }, { text: 'United States', value: 'US' }, { text: 'Canada', value: 'CA' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'display_phone_number',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -198,11 +256,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Community Phone Number', SS: 'Facility Phone Number', MF: 'Property Phone Number', corp: 'Corporate Phone Number', default: 'Phone Number' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '555-555-5555'
     },
     {
       dataKey: 'local_phone_number',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -211,11 +272,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '555-555-5555'
     },
     {
       dataKey: 'email',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -224,11 +288,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Community Email Address', SS: 'Facility Email Address', MF: 'Property Email Address', corp: 'Corporate Email Address', default: 'Property Email Address' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'client@client.com'
     },
     {
       dataKey: 'fax',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -237,11 +304,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Fax Number' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '555-555-5555'
     },
     {
       dataKey: 'lead_vendor_name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -250,11 +320,14 @@ module.exports = [
       displayVertical: ['MF', 'SS'],
       label: { default: 'Vendor & Product Name of Lead Management System' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'auto_response',
-      inputType: 'select',
+      component: 'radio-group',
+      type: null,
       required: false,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -262,12 +335,15 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS'],
       label: { default: 'Does your lead tracking email provide an auto response customer email?' },
-      settings: { options: { default: ['Yes', ' No', ' N/A'] } },
+      settings: { options: { default: [{ text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }, { text: 'N/A', value: 'na' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'suppress_auto_response',
-      inputType: 'select',
+      component: 'radio-group',
+      type: null,
       required: false,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -275,12 +351,15 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS'],
       label: { default: 'If yes to the above, would you like G5 to suppress the G5 auto response customer email?' },
-      settings: { options: { default: ['Yes', ' No', ' N/A'] } },
+      settings: { options: { default: [{ text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }, { text: 'N/A', value: 'na' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'lead_email',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: true,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -289,11 +368,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Leads Email Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'office_hours',
-      inputType: 'text',
+      component: 'text-area',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -302,11 +384,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Office Hours' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'Monday-Saturday 9am-5pm'
     },
     {
       dataKey: 'access_hours',
-      inputType: 'text',
+      component: 'text-area',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -315,11 +400,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Access Hours' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: '24/7'
     },
     {
-      dataKey: 'access_hours',
-      inputType: 'text',
+      dataKey: 'desk_hours',
+      component: 'text-area',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -328,7 +416,9 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Desk Hours' },
       settings: null,
-      placeholder: null
+      description: null,
+      validation: null,
+      placeholder: 'Monday-Friday 8am-12pm'
     }]
   },
   {
@@ -339,7 +429,8 @@ module.exports = [
     priority: 2,
     fields: [{
       dataKey: 'desired_launch_date',
-      inputType: 'date',
+      component: 'input',
+      type: 'date',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -348,11 +439,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Desired Launch Date' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'location_clone',
-      inputType: 'text',
+      component: 'input',
+      type: 'url',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -361,6 +455,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Location to Clone' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -376,7 +472,8 @@ module.exports = [
     priority: 3,
     fields: [{
       dataKey: 'geographic_type',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -384,12 +481,15 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Property Geographic Type' },
-      settings: { options: { default: ['Suburban', ' Urban'] } },
+      settings: { options: { default: [{ text: 'Select Type', value: null }, { text: 'Suburban', value: 'US' }, { text: 'suburban', value: 'urban' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'class_type',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -397,12 +497,15 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS'],
       label: { SS: 'Facility Class Type', default: 'Property Class Type' },
-      settings: { options: { MF: ['Class A', ' Class B', ' Class C'], SS: ['High-end', ' Mid-range'] } },
+      settings: { options: { MF: [{ text: 'Select Class', value: null }, { text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }], SS: [{ text: 'Select Class', value: null }, { text: 'High-end', value: 'highEnd' }, { text: 'Mid-range', value: 'midRange' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'target_lifestyle',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -410,12 +513,15 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Primary Target Lifestyle' },
-      settings: { options: { default: ['On the Go', ' Happy at Home'] } },
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'On the Go', value: 'go' }, { text: 'Happy at Home', value: 'home' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_1',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -423,12 +529,15 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Feature 1' },
-      settings: { options: { default: ['Luxury', ' Affordable', ' Modern', ' Gated', ' Furnished', ' Garden Style', ' High-Rise', ' New', ' Upgraded'] } },
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_2',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -436,12 +545,15 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Feature 2' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
-      dataKey: 'property_feature_4',
-      inputType: 'select',
+      dataKey: 'property_feature_3',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -449,12 +561,15 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Feature 3' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_4',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -462,12 +577,15 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Feature 4' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_status',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -476,11 +594,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
       settings: { options: { default: ['Development', ' Pre-Leasing', ' Lease-Up', ' Low Occupancy', ' Mid Occupancy', ' High Occupancy'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'senior_student_demographics',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -489,11 +610,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Is your location specifically designed for Senior or Student demographics?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'primary_unit_type',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -502,11 +626,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Primary Property & Unit Type' },
       settings: { options: { default: ['Apartments & Townhomes', ' Condos', ' Apartments', ' Townhomes'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'floor_plans',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -515,11 +642,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans' },
       settings: { options: { default: ['Studio', ' 1', ' 2', ' 3', ' Other'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'most_need_floorplans',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -528,11 +658,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: { options: { default: ['Studio', ' 1', ' 2', ' 3', ' Other'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'neighborhood',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -541,11 +674,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Neighborhood' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'neighborhood_2',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -554,11 +690,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Neighborhood 2' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'no_target_neighborhood',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -567,11 +706,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Nearby neighborhoods to NOT TARGET' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'landmark_1_name',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -580,11 +722,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Landmark' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'landmark_1_type',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -593,11 +738,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Lankmark Type' },
       settings: { options: { default: ['One of Hospital', ' Lake', ' Recreation Area', ' Military Base', ' Employer', ' University'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'landmark_2_name',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -606,11 +754,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Landmark 2' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'landmark_2_type',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -619,11 +770,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Landmark 2 Type' },
       settings: { options: { default: ['One of Hospital', ' Lake', ' Recreation Area', ' Military Base', ' Employer', ' University'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_employers',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -632,11 +786,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_employer_1',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -645,11 +802,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_employer_2',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -658,11 +818,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_employer_3',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -671,11 +834,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_schools',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -684,11 +850,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby School' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_school_1',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -697,11 +866,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby School' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_school_2',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -710,11 +882,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby School' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_restaurants',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -723,11 +898,14 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Restaurants' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_shopping',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -736,11 +914,14 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Shopping Centers & Grocery Stores' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_recreation',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -749,11 +930,14 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Recreation & Entertainment' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'pet_friendly',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -762,11 +946,14 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Pet Friendly' },
       settings: { options: { default: ['Yes', ' No'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'pet_policy',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -775,11 +962,14 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Pet Policy' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'value_proposition',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -788,11 +978,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Unique Value Proposition' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'convenience_category',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -801,11 +994,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Convenience Category' },
       settings: { options: { default: ['Neighborhood', ' Freeway Access', ' Willing to Travel'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_1',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -814,11 +1010,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Feature Class' },
       settings: { options: { default: ['Basic', ' Premium', ' Boat and RV'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_2',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -827,11 +1026,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Secondary Feature Class' },
       settings: { options: { default: ['Basic', ' Premium', ' Boat and RV'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_roadway_1',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -840,11 +1042,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Nearby Location/Street (1)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_roadway_2',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -853,11 +1058,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Nearby Location/Street (2)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_gasoline',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -866,11 +1074,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Nearby Gas Station' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'gmb_login',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -879,11 +1090,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Google My Business (GMB) Login Email & Password' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'ga_login',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -892,6 +1106,8 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Google Analytics (GA) Login Email & Password' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -903,7 +1119,8 @@ module.exports = [
     priority: 4,
     fields: [{
       dataKey: 'care_level_1',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -912,11 +1129,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: { options: { default: ['Independent Living', ' Assisted Living', ' Hospice Care', ' Memory Care', ' Alzheimers Care', ' Dementia Care', ' Respite Care', ' Skilled Nursing', ' Personal Care', ' At Home Care', ' Adult Day Care'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_2',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -925,11 +1145,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_3',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -938,11 +1161,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_4',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -951,11 +1177,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_5',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -964,11 +1193,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_6',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -977,11 +1209,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'care_level_verbiage',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -990,11 +1225,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Please Indicate if you would like to update specific Care Levels verbiage from the selected names' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'accepts_medicare_medicade',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1003,11 +1241,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Accepts Medicare or Medicaid?' },
       settings: { options: { default: ['Yes', ' No'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'legal_restrictions',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1016,11 +1257,14 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Is there any terminology we can not use? Legal restrictions within the state, etc.?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'nearby_healthcare_1',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1029,6 +1273,8 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Nearby Healthcare Facilities' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -1038,136 +1284,251 @@ module.exports = [
       default: 'Apartment & Community Amenities & Services'
     },
     priority: 5,
-    fields: [{
-      dataKey: 'apartment_amenity_1',
-      inputType: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Primary Apartment Amenity 1' },
-      settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'apartment_amenity_2',
-      inputType: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Primary Apartment Amenity 2' },
-      settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'apartment_amenity_3',
-      inputType: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Primary Apartment Amenity 3' },
-      settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'additional_amenities',
-      inputType: 'select',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Additional Apartment Amenities' },
-      settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'apartment_styles',
-      inputType: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SL'],
-      label: { default: 'Apartment Styles and room (e.g., townhome/apartment/suite, 1-2 bedoom)' },
-      settings: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'in_unit_features',
-      inputType: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SL'],
-      label: { default: 'In-Home/In-Unit Features' },
-      settings: { options: { default: ['Move-In Assistance', ' LEED Certified', ' Other Green Initiatives', ' Air Conditioning', ' Cable Included', ' WiFi Available', ' Ceiling Fans', ' Custom Lighting', ' Full Kitchen', ' Kitchenette', ' Kitchen Island or Bar', ' Granite Counters', ' Custom Cabinetry', ' Energy-Efficient Appliances', ' Stainless-Steel Appliances', ' Refrigerator', ' Dishwasher', ' Microwave', ' Garbage Disposal', ' Utilities Included', ' Weekly Housekeeping', ' Washer/Dryer Connections', ' In-Home Washer/Dryer', ' Trash Service', ' Laundry Service', ' Walk-In Closets', ' Fireplace', ' Curtains or Blinds Included', ' Hardwood Floors', ' Hardwood-Style Floors', ' HighCeilings', ' Vaulted Ceilings', ' Cathedral Ceilings', ' Private Balcony', ' Private Patio', ' Smoke Free', ' Addtional Storage'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'community_amenity_1',
-      inputType: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SL'],
-      label: { MF: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
-      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'community_amenity_2',
-      inputType: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SL'],
-      label: { MF: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
-      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'community_amenity_3',
-      inputType: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SL'],
-      label: { MF: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
-      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-      placeholder: null
-    },
-    {
-      dataKey: 'additional_community_amenities',
-      inputType: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['MF', 'SL'],
-      label: { default: 'Additional Community Amenities& Services' },
-      settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-      placeholder: null
-    }]
+    fields: [
+      {
+        dataKey: 'apartment_amenities',
+        component: 'dual-listbox',
+        mappedFields: ['apartment_amenity_1', 'apartment_amenity_2', 'apartment_amenity_3'],
+        type: null,
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF'],
+        label: { default: 'Apartment Amenities' },
+        settings: {
+          options: {
+            default: [
+              { text: 'Air Conditioning', value: 'airConditioning' },
+              { text: 'Cable Included', value: 'cableIncluded' },
+              { text: 'Custom Cabinetry', value: 'customCabinetry' },
+              { text: 'Dishwasher', value: 'dishwasher' },
+              { text: 'Energy-Efficient Appliances', value: 'energyEfficientAppliances' },
+              { text: 'Fireplace', value: 'fireplace' },
+              { text: 'Garages Available', value: 'garagesAvailable' },
+              { text: 'Granite Counters', value: 'graniteCounters' },
+              { text: 'Hardwood Flooring', value: 'hardwoodFlooring' },
+              { text: 'High Ceilings', value: 'highCeilings' },
+              { text: 'High Speed Internet Access', value: 'highSpeedInternet' },
+              { text: 'Private Balcony', value: 'privateBalcony' },
+              { text: 'Private Patio', value: 'privatePatio' },
+              { text: 'Soundproof Walls', value: 'soundproofWalls' },
+              { text: 'Stainless-Steel Appliances', value: 'stainlessSteelAppliances' },
+              { text: 'Vaulted Ceilings', value: 'valutedCeilings' },
+              { text: 'Walk-In Closets', value: 'walkInClosets' },
+              { text: 'Washer/Dryer Connections', value: 'washerDryerConnections' },
+              { text: 'Washer/Dryer Included', value: 'washerDryerIncluded' },
+              { text: 'Wood-Style Flooring', value: 'woodStyleFlooring' }
+            ]
+          }
+        },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'apartment_amenity_1',
+        component: '',
+        type: 'select',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF'],
+        label: { default: 'Primary Apartment Amenity 1' },
+        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'apartment_amenity_2',
+        component: '',
+        type: 'select',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF'],
+        label: { default: 'Primary Apartment Amenity 2' },
+        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'apartment_amenity_3',
+        component: '',
+        type: 'select',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF'],
+        label: { default: 'Primary Apartment Amenity 3' },
+        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'apartment_styles',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['SL'],
+        label: { default: 'Apartment Styles and room (e.g., townhome/apartment/suite, 1-2 bedroom)' },
+        settings: null,
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'in_unit_features',
+        component: 'checkbox-group',
+        type: null,
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['SL'],
+        label: { default: 'In-Home/In-Unit Features' },
+        settings: { options: { default: ['Move-In Assistance', ' LEED Certified', ' Other Green Initiatives', ' Air Conditioning', ' Cable Included', ' WiFi Available', ' Ceiling Fans', ' Custom Lighting', ' Full Kitchen', ' Kitchenette', ' Kitchen Island or Bar', ' Granite Counters', ' Custom Cabinetry', ' Energy-Efficient Appliances', ' Stainless-Steel Appliances', ' Refrigerator', ' Dishwasher', ' Microwave', ' Garbage Disposal', ' Utilities Included', ' Weekly Housekeeping', ' Washer/Dryer Connections', ' In-Home Washer/Dryer', ' Trash Service', ' Laundry Service', ' Walk-In Closets', ' Fireplace', ' Curtains or Blinds Included', ' Hardwood Floors', ' Hardwood-Style Floors', ' HighCeilings', ' Vaulted Ceilings', ' Cathedral Ceilings', ' Private Balcony', ' Private Patio', ' Smoke Free', ' Addtional Storage'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'community_amenities',
+        component: 'dual-listbox',
+        mappedFields: ['community_amenity_1', 'community_amenity_2', 'community_amenity_3'],
+        type: null,
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF'],
+        label: { default: 'Community Amenities' },
+        settings: {
+          options: {
+            MF: [
+              { text: 'Basketball Court', value: '' },
+              { text: 'Business Center', value: '' },
+              { text: 'Carport Parking Available', value: '' },
+              { text: 'Close to Dog Park', value: '' },
+              { text: 'Close to Park', value: '' },
+              { text: 'Clubhouse', value: '' },
+              { text: 'Fitness Center', value: '' },
+              { text: 'Furnished Apartments Available', value: '' },
+              { text: 'Gated Electronic Entrance', value: '' },
+              { text: 'Laundry Facility', value: '' },
+              { text: 'On-Site Dog Park', value: '' },
+              { text: 'Online Rental Payments', value: '' },
+              { text: 'Onsite Management', value: '' },
+              { text: 'Playground', value: '' },
+              { text: 'Recycling Center', value: '' },
+              { text: 'Spa/Hot Tub', value: '' },
+              { text: 'Swimming Pool', value: '' },
+              { text: 'Tennis Court', value: '' },
+              { text: 'Volleyball Court', value: '' },
+              { text: 'WiFi Available', value: '' }
+            ]
+          },
+          SL: [
+            { text: 'Gated Electronic Entrance', value: '' },
+            { text: 'Parking Garage', value: '' },
+            { text: 'Covered Parking', value: '' },
+            { text: 'Private Garages Available', value: '' },
+            { text: 'Transportation Services', value: '' },
+            { text: 'Restaurant-Style Dining', value: '' },
+            { text: 'In-Room Dining', value: '' },
+            { text: 'Personal Care', value: '' },
+            { text: 'Clubhouse', value: '' },
+            { text: 'Fitness Center', value: '' },
+            { text: 'Yoga/ Pilates Studio', value: '' },
+            { text: 'Swimming Pool', value: '' },
+            { text: 'Spa/Hot Tub', value: '' },
+            { text: 'Cabanas', value: '' },
+            { text: 'Fitness Classes', value: '' },
+            { text: 'Outdoor Grilling/BBQ Stations', value: '' },
+            { text: 'Playground', value: '' },
+            { text: 'Basketball', value: '' },
+            { text: 'Volleyball', value: '' },
+            { text: 'Tennis Courts', value: '' },
+            { text: 'Recycling Center', value: '' },
+            { text: '24-Hour Emergency Maintenance', value: '' },
+            { text: 'Walking Trails on or near Property', value: '' },
+            { text: 'Close to Parks', value: '' },
+            { text: 'Close to Dog Park', value: '' },
+            { text: 'On-Site Dog Park', value: '' },
+            { text: 'Pet Friendly', value: '' },
+            { text: 'Cat Friendly', value: '' },
+            { text: 'Dog Friendly', value: '' },
+            { text: 'Organized Activities', value: '' }
+          ]
+        },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'community_amenity_1',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF', 'SL'],
+        label: { MF: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
+        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'community_amenity_2',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF', 'SL'],
+        label: { MF: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
+        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      },
+      {
+        dataKey: 'community_amenity_3',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        isHub: true,
+        displayVertical: ['MF', 'SL'],
+        label: { MF: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
+        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
+        description: null,
+        validation: null,
+        placeholder: null
+      }]
   },
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU'],
@@ -1177,7 +1538,8 @@ module.exports = [
     priority: 6,
     fields: [{
       dataKey: 'property_feature_1',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1186,11 +1548,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 1\n' },
       settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_2',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1199,11 +1564,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 2' },
       settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_3',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1212,11 +1580,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 3' },
       settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'property_feature_4',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1225,11 +1596,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 4' },
       settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'storage_type',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1238,11 +1612,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Storage Types' },
       settings: { options: { default: ['Automobile Storage', ' Boat Storage', ' Business and/or Commercial Storage (files', ' etc)', ' Climate-Controlled Storage Units', ' Cold Storage Facility', ' Ground-Level Units', ' Indoor Storage', ' Motorcycle Storage', ' Outdoor Storage', ' Pod Storage', ' Records Storage Facility (Documents', ' etc)', ' RV Storage', ' Storage Locker Rental', ' Temperature Controlled Storage (only temperature controlled)', ' Warehouse', ' Wine Storage'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'rentals_services',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1251,11 +1628,14 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Rentals & Services' },
       settings: { options: { default: ['Business Suite Rentals', ' Conference Room Rentals', ' Deliveries Accepted', ' Mailbox Rental Service', ' Month-to-Month Rentals', ' Moving Service', ' Paper Shredding Service', ' Piano Moving Service', ' Removal Service', ' Tenant Insurance Available', ' Trailer Rental Service', ' Truck Rental - FREE Use', ' Truck', ' Van or Car Rentals - PAID', ' U-Haul Truck Rentals', ' 24 Hour Access Storage', ' 24-Hour Security Monitoring (video recording', ' live monitoring', ' security guard - please specify)', ' Access 7 Days a Week', ' Business Center', ' Covered Drive-Thru Access', ' Covered Loading / Unloading', ' Digital Surveillance System', ' Dollies and Carts Available', ' Drive-Up Access Storage', ' Electrical Outlets in Units', ' Electronic Gate Access', ' Fully Fenced', ' High Ceilings', ' Individually Alarmed Units', ' Major Credit Cards Accepted', ' Online Bill Payment', ' On-Site Management', ' Packing and Moving Supplies Sold at Location', ' RV Charging Station', ' RV Sewage Depository', ' Well Lit/ Motion Detecting Lights', ' Wide Driveways'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'discounts_fees',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1264,6 +1644,8 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Discounts & Fees' },
       settings: { options: { default: ['Military Discounts', ' No Administration Fee', ' No Deposits', ' No Late Fees', ' Regularly Offered Specials', ' Senior Discounts', ' Student Discounts'] } },
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -1279,7 +1661,8 @@ module.exports = [
         fields: [
           {
             dataKey: 'lms_vendor',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1288,11 +1671,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'LMS Vendor' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'lms_product',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1301,11 +1687,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'LMS Name' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'lms_company_key',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1314,11 +1703,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'LMS Company Key' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'lms_location_code',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1327,11 +1719,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'LMS Location/Property Code' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'auto_response',
-            inputType: 'select',
+            component: '',
+            type: 'select',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1340,11 +1735,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'Does your lead tracking email provide an auto response customer email?' },
             settings: { options: { default: ['Yes', ' No', ' N/A'] } },
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'suppress_auto_response',
-            inputType: 'select',
+            component: '',
+            type: 'select',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1353,6 +1751,8 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'If yes to the above, would you like G5 to suppress the G5 auto response customer email?' },
             settings: { options: { default: ['Yes', ' No', ' N/A'] } },
+            description: null,
+            validation: null,
             placeholder: null
           }]
       },
@@ -1363,7 +1763,8 @@ module.exports = [
         fields: [
           {
             dataKey: 'pms_vendor',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1372,11 +1773,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'PMS Vendor' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'pms_product',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1385,10 +1789,13 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'PMS Product' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           }, {
             dataKey: 'pms_credentials',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1397,10 +1804,13 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'PMS Credentials' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           }, {
             dataKey: 'pms_property_code',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1409,6 +1819,8 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'PMS Property Code' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           }
         ]
@@ -1418,7 +1830,8 @@ module.exports = [
         fields: [
           {
             dataKey: 'rms_vendor',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1427,11 +1840,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'RMS Vendor' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'rms_product',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1440,11 +1856,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'RMS Product' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'rms_credentials',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1453,11 +1872,14 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'RMS Credentials' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'rms_property_code',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1466,6 +1888,8 @@ module.exports = [
             displayVertical: ['MF'],
             label: { default: 'RMS Property Code' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           }
         ]
@@ -1475,7 +1899,8 @@ module.exports = [
         fields: [
           {
             dataKey: 'unit_inventory_vendor',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1484,11 +1909,14 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'Unit Inventory Vendor' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'corporate_code',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1497,11 +1925,14 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'Corporate Code' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'faciliy_id',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1510,11 +1941,14 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'Facility ID' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'integration_api_username',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1523,11 +1957,14 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'API User Name' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'integration_api_password',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1536,11 +1973,14 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'API Password' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           },
           {
             dataKey: 'integration_endpoint',
-            inputType: 'text',
+            component: '',
+            type: 'text',
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
@@ -1549,6 +1989,8 @@ module.exports = [
             displayVertical: ['SS'],
             label: { default: 'Endpoint (not needed for Sitelink)' },
             settings: null,
+            description: null,
+            validation: null,
             placeholder: null
           }
         ]
@@ -1563,7 +2005,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'yelp_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1572,12 +2015,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Yelp Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'facebook_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1586,12 +2032,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'twitter_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1600,12 +2049,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Twitter Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'pinterest_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1614,12 +2066,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Pinterest Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'instagram_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1628,12 +2083,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'youtube_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1642,12 +2100,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'YouTube Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'linkedin_username',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: true,
@@ -1656,12 +2117,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'LinkedIn Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'pay_online_url',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1670,12 +2134,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Pay Online Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'online_leasing_application',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1684,12 +2151,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Online Leasing Application' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'online_leasing_availability',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1698,12 +2168,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Online Leasing Floor Plan Availability' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'resident_portal',
-      inputType: 'url',
+      component: '',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1712,12 +2185,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Resident Portal' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'maintenance_request',
-      inputType: 'url',
+      component: '',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1726,11 +2202,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Maintenance Request' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'employment_portal',
-      inputType: 'url',
+      component: '',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -1739,11 +2218,14 @@ module.exports = [
       displayVertical: ['MF', 'SS'],
       label: { default: 'Employment Portal' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'investor_portal',
-      inputType: 'url',
+      component: '',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -1752,11 +2234,14 @@ module.exports = [
       displayVertical: ['MF', 'SS'],
       label: { default: 'Investor Portal' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'careers_portal',
-      inputType: 'url',
+      component: '',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: true,
       displayOnCorp: true,
@@ -1765,6 +2250,8 @@ module.exports = [
       displayVertical: ['MF', 'SS'],
       label: { default: 'Careers Portal' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -1776,7 +2263,8 @@ module.exports = [
     priority: 9,
     fields: [{
       dataKey: 'tagline',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1785,11 +2273,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have a slogan, tagline, or mission statement?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'communicate_audience',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1798,11 +2289,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important thing you want to communicate to your audience?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'best_solution',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1811,11 +2305,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What kind of “pain” is your customer in? How are your services the best solution for them?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'apart_competitors',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1824,11 +2321,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you feel sets you apart from your competitors?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'awards',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1837,11 +2337,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any awards, affiliations, or case studies you’d like to mention?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'highest_rated_asset',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1850,11 +2353,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you consider to be your highest-rated asset?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'buzzwords',
-      inputType: 'text',
+      component: 'todo-list',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1863,11 +2369,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that best describes your organization. Are there any words that we should avoid?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'existing_collateral',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1876,11 +2385,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: "Do you have existing collateral (brochures, press releases, sales slicks) or content that you would like us to review while creating your content? Tell us what you like/don't like about it." },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'include_in_content',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1889,6 +2401,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: "Is there anything else that you want us to include in your content? Don't be shy here; this is your story and we want to tell it right." },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -1901,7 +2415,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'copy_tone',
-      inputType: 'select',
+      component: '',
+      type: 'select',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1910,12 +2425,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'How do you want your copy to sound? Choose 3 to 5 from the list or come up with your own words.' },
       settings: { options: { default: ['Trendy', ' traditional', ' warm', ' inviting', ' playful', ' edgy', ' authoritative', ' polished', ' irreverent', ' upbeat', ' straightforward', ' casual', ' other (HTML FOR THEM TO FILL OUT)'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_differentiators',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1924,12 +2442,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Any Unique Differentiators about the property?\n(ex: amenities, price within the market, etc.)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'tagline',
-      inputType: 'text',
+      component: '',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1938,12 +2459,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Key Message/Tagline\n(if applicable)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
-      dataKey: 'buzzwords',
-      inputType: 'text',
+      dataKey: 'buzzwords_community',
+      component: '',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1952,12 +2476,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community. (ex. boutique, homey, resort-style, etc)' },
       settings: { options: { default: ['Classic', ' charming', ' cozy', ' hip', ' boutique', ' high-end', ' resort-style', ' industrial', ' Craftsman', ' high-tech', ' eco-friendly', ' Other (HTML FOR THEM TO FILL OUT)'] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'communicate_audience',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1966,12 +2493,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important thing you want to communicate to your audience?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apart_competitors',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1980,12 +2510,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sets you apart from your competitors?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'no_use_terms',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -1994,12 +2527,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any terminology we CANNOT use? Or legal restrictions within the state? If so, please clarify.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'copy_likes_dislikes',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2008,12 +2544,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you like about your current copy? What could be improved upon?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'tagline',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2022,12 +2561,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have an established tagline/slogan? \nIf so, what is it?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'buzzwords',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2036,12 +2578,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us 3 to 5 buzzwords that describe your interior and exterior spaces.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_differentiators',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2050,12 +2595,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the main reason a prospect would choose to rent at this community as opposed to a comparable competitor?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'no_use_terms',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2064,12 +2612,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Due to state, other regulations, or your preferences, is there any terminology we CANNOT or SHOULD NOT use? If so, please clarify.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'income_restrictions',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2078,6 +2629,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Are any or all of your units income-restricted? Specify whether it is all or some units and which type.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2090,7 +2643,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'copy_wants',
-      inputType: 'select',
+      component: 'checkbox-group',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2098,13 +2652,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
-      settings: { options: { default: ['Trendy', ' traditional', ' warm', ' inviting', ' playful', ' edgy', ' authoritative', ' polished', ' irreverent', ' upbeat', ' straightforward', ' casual', ' other (HTML FOR THEM TO FILL OUT)'] } },
+      settings: { options: { default: [{ text: 'Trendy', value: 'trendy' }, { text: 'Traditional', value: 'traditional' }, { text: 'Warm', value: 'warm' }, { text: 'Inviting', value: 'inviting' }, { text: 'Playful', value: 'playful' }, { text: 'Edgy', value: 'edgy' }, { text: 'Authoritative', value: 'authoritative' }, { text: 'Polished', value: 'polished' }, { text: 'Irreverent', value: 'irreverent' }, { text: 'Upbeat', value: 'upbeat' }, { text: 'Straightforward', value: 'straightforward' }, { text: 'Casual', value: 'casual' }, { text: 'Other', value: 'other' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'location_consistencies',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2113,12 +2670,15 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'What are the consistencies across your locations (ex. pools, pet friendly, W/D hook ups etc.)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'taglie',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2127,12 +2687,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have a key message or tagline?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'communicate_audience',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2141,12 +2704,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important quality you want users to know about your properties?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_differentiators',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2155,12 +2721,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Broadly, what sets your properties apart from your competitors?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'no_use_terms',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2169,6 +2738,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any terminology we CANNOT use or legal restrictions within the state(s)? If so, please clarify.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2181,7 +2752,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'blog_audience',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2190,12 +2762,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Who is the primary target audience for your blog?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'blog_topics',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2204,12 +2779,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sort of topics would you like your blog to address? Do you have any blog posts in mind?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'blog_imagery',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2218,12 +2796,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sort of imagery would you like us to use for your blog posts?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'language_avoid',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2232,12 +2813,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any specific language you would like us to avoid?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'blog_publish_preferences',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2246,6 +2830,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any preference about when your blogs will be published?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2258,7 +2844,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'refresh_goal',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2267,12 +2854,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is your main goal with this refresh?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'buzzwords',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2281,12 +2871,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community.' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'new_features',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2295,12 +2888,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any new features, amenities, or neighborhood destinations you would like to include?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'copy_wants',
-      inputType: 'text',
+      component: 'checkbox-group-expanded',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2308,13 +2904,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Trendy', value: 'trendy' }, { text: 'Traditional', value: 'traditional' }, { text: 'Warm', value: 'warm' }, { text: 'Inviting', value: 'inviting' }, { text: 'Playful', value: 'playful' }, { text: 'Edgy', value: 'edgy' }, { text: 'Authoritative', value: 'authoritative' }, { text: 'Polished', value: 'polished' }, { text: 'Irreverent', value: 'irreverent' }, { text: 'Upbeat', value: 'upbeat' }, { text: 'Straightforward', value: 'straightforward' }, { text: 'Casual', value: 'casual' }, { text: 'Other', value: 'other' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'extra_knowledge',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2323,6 +2922,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there anything else you would like us to know about this project?' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2335,7 +2936,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'focus_location',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2343,13 +2945,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Location of Focus' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'competitive_landscape',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2358,12 +2963,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Competitive Landscape' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'untilities_included',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2371,13 +2979,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Untilities Included' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'single_family_homes',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2385,13 +2996,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Single Family Homes' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'competitors',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2400,6 +3014,8 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Competitors' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2412,7 +3028,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'off_platform_link',
-      inputType: 'url',
+      component: 'input',
+      type: 'url',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2421,11 +3038,14 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Current Website URL' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
       dataKey: 'website_provider',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2434,12 +3054,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Provider' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2448,12 +3071,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'street_address_1',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2462,12 +3088,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'street_address_2',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2476,12 +3105,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'city',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2490,12 +3122,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'state',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2504,12 +3139,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'postal_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2518,12 +3156,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zipcode' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'listing_phone',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2532,12 +3173,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'local_phone_number',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2546,12 +3190,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Local Phone Number' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_class',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2559,13 +3206,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Class Type' },
-      settings: { options: { default: ['Class A', ' Class B', ' Class C'] } },
+      settings: { options: { default: [{ text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_status',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2573,13 +3223,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
-      settings: { options: { default: ['Development', ' Pre-Leasing', ' Lease-Up', ' Low Occupancy', ' Mid Occupancy', ' High Occupancy'] } },
+      settings: { options: { default: [{ text: 'Development', value: 'development' }, { text: 'Pre-Leasing', value: 'preLeasing' }, { text: 'Lease-Up', value: 'leaseUp' }, { text: 'Low Occupancy', value: 'lowOccupancy' }, { text: 'Mid Occupancy', value: 'midOccupancy' }, { text: 'High Occupancy', value: 'highOccupancy' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'most_need_floorplans',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2588,6 +3241,8 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }
     ]
@@ -2601,7 +3256,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'facebook_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2610,12 +3266,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'instagram_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2624,6 +3283,8 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2636,7 +3297,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'pms_name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2645,26 +3307,49 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'PMS Vendor & Product name' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
-      dataKey: 'integration_credentials',
-      inputType: 'text',
+      dataKey: 'integration_username',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'Integration Credentials' },
+      label: { default: 'Integration Username' },
       settings: null,
+      description: null,
+      validation: null,
+      placeholder: null
+    },
+    {
+
+      dataKey: 'integration_password',
+      component: 'input',
+      type: 'password',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'Integration Password' },
+      settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'pms_property_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2673,12 +3358,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'PMS Property Code' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartment_days_available',
-      inputType: 'text',
+      component: 'input',
+      type: 'number',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2687,12 +3375,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Display Apartments Available Up To X Days Out' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'max_apartments_available',
-      inputType: 'text',
+      component: 'input',
+      type: 'number',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2701,6 +3392,8 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Max Number of Apartments per Floor Plan to Display' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -2713,7 +3406,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'off_platform_link',
-      inputType: 'url',
+      component: 'input',
+      type: 'url',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2722,12 +3416,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Current Website URL' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'website_provider',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2736,12 +3433,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Provider' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2750,12 +3450,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'street_address_1',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2764,12 +3467,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'street_address_2',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2778,12 +3484,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'city',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2792,12 +3501,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'state',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2806,12 +3518,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'postal_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2820,12 +3535,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zipcode' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'listing_phone',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2834,12 +3552,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'local_phone_number',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2848,12 +3569,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Local Phone Number' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_class',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2861,13 +3585,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Class Type' },
-      settings: { options: { default: ['Class A', ' Class B', ' Class C'] } },
+      settings: { options: { default: [{ text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'property_status',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2875,13 +3602,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
-      settings: { options: { default: ['Development', ' Pre-Leasing', ' Lease-Up', ' Low Occupancy', ' Mid Occupancy', ' High Occupancy'] } },
+      settings: { options: { default: [{ text: 'Development', value: 'development' }, { text: 'Pre-Leasing', value: 'preLeasing' }, { text: 'Lease-Up', value: 'leaseUp' }, { text: 'Low Occupancy', value: 'lowOccupancy' }, { text: 'Mid Occupancy', value: 'midOccupancy' }, { text: 'High Occupancy', value: 'highOccupancy' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'most_need_floorplans',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2890,12 +3620,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'facebook_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2904,12 +3637,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'instagram_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2918,12 +3654,15 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'pms_name',
-      inputType: 'text',
+      component: 'Input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2932,26 +3671,49 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'PMS Vendor & Product name' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
-      dataKey: 'integration_credentials',
-      inputType: 'text',
+      dataKey: 'integration_username',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
       isHub: false,
       displayVertical: ['MF'],
-      label: { default: 'Integration Credentials' },
+      label: { default: 'Integration Username' },
       settings: null,
+      description: null,
+      validation: null,
+      placeholder: null
+    },
+    {
+
+      dataKey: 'integration_password',
+      component: 'input',
+      type: 'password',
+      required: false,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      isHub: false,
+      displayVertical: ['MF'],
+      label: { default: 'Integration Password' },
+      settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'pms_property_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2960,12 +3722,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'PMS Property Code' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartment_days_available',
-      inputType: 'text',
+      component: 'input',
+      type: 'number',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2974,12 +3739,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Display Apartments Available Up To X Days Out' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'max_apartment_available',
-      inputType: 'text',
+      component: 'input',
+      type: 'number',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -2988,12 +3756,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Max Number of Apartments per Floor Plan to Display' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'off_platform_link',
-      inputType: 'text',
+      component: 'input',
+      type: 'url',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3002,12 +3773,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Website URL' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'website_provider',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3016,12 +3790,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Website Provider (if off platform)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'city',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3030,12 +3807,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'City' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'state',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3044,12 +3824,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'State' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'postal_code',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3058,12 +3841,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Zip' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'timezone',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3071,13 +3857,16 @@ module.exports = [
       isHub: true,
       displayVertical: ['MF'],
       label: { default: 'Time Zone' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Pick a Time Zone', value: null }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'local_phone_number',
-      inputType: 'phone',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3086,12 +3875,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Property Phone Number (non-tracking number)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'email',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3100,12 +3892,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Property Email Address' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'email_recipients',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3114,12 +3909,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Lead Email Address(es)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'lead_crm',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3128,6 +3926,8 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Lead CRM (if applicable)' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -3140,7 +3940,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'icon_selection',
-      inputType: 'text',
+      component: 'radio-group',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3148,27 +3949,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Icon Selection' },
-      settings: null,
-      placeholder: null
-    },
-    {
-
-      dataKey: 'color_selectino',
-      inputType: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['MF'],
-      label: { default: 'Color Selection' },
-      settings: null,
+      settings: { options: { default: [{ text: '/bot/bot-brown.png', value: 'Brown' }, { text: '/bot/bot-default-blue.png', value: 'Blue' }, { text: '/bot/bot-green.png', value: 'Green' }, { text: '/bot/bot-grey.png', value: 'Grey' }, { text: '/bot/bot-orange.png', value: 'Orange' }, { text: '/bot/bot-purple.png', value: 'Purple' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'prospect_sms',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3176,13 +3966,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Does property allow for contacting prospects via SMS Text?' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'virtual_tours',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3190,13 +3983,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF'],
       label: { default: 'Virtual Tours?' },
-      settings: null,
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'virtual_tour',
-      inputType: 'url',
+      component: 'input',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3205,12 +4001,16 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Virtual Tour 1' },
       settings: null,
+      dependentOn: 'virtual_tours',
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'virtual_tour2',
-      inputType: 'url',
+      component: 'input',
+      type: 'url',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3219,6 +4019,9 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Virtual Tour 2' },
       settings: null,
+      dependentOn: 'virtual_tours',
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -3231,7 +4034,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'primary_response_contact_name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3240,12 +4044,15 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Name for Reviewing Responses' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'primary_response_contact_email',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3254,12 +4061,15 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Email for Reviewing Responses' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'primary_response_contact_phone',
-      inputType: 'text',
+      component: 'input',
+      type: 'tel',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3268,12 +4078,15 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Phone Number for Reviewing Responses' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'below_three_start_draft',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3281,7 +4094,9 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Typically, we respond directly to 3+ star reviews on your behalf. We escalate a drafted response to 1 & 2 star reviews for your approval before posting.' },
-      settings: { options: { default: ['Yes - use the standard strategy', ' No - I want to review every response before posting'] } },
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Yes - use the standard strategy', value: 'yes' }, { text: 'No - I want to review every response before posting', value: 'no' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -3294,7 +4109,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'escalate_response_options',
-      inputType: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3302,13 +4118,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Escalate Response Options' },
-      settings: { options: { default: ['Escalate All Responses w/ 24 Hour Delay', ' Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', ' Escalate All 1 and 2 Star Responses w/ unlimited Delay', ' Escalate All Responses w/ unlimited Delay'] } },
+      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Escalate All Responses w/ 24 Hour Delay', value: 'dayDelay' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'lowStarUnlimited' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'allUnlimited' }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'daily_alert',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3316,13 +4135,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Daily Alert For All 1 and 2 Star Reviews' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'no_default_reports',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3330,13 +4152,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Turn Off Default Reports' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'escalate_revised_response',
-      inputType: 'select',
+      component: 'checkbox',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3344,13 +4169,16 @@ module.exports = [
       isHub: false,
       displayVertical: ['MF', 'SL'],
       label: { default: 'Escalate Revised Response' },
-      settings: { options: { default: ['Yes', ' No'] } },
+      settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'location_escalation_contact_name',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3359,12 +4187,15 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Location Escalation Contact Name' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'location_escalation_contact_email',
-      inputType: 'email',
+      component: 'input',
+      type: 'email',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3373,6 +4204,8 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Location Escalation Contact Email' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   },
@@ -3385,7 +4218,8 @@ module.exports = [
     fields: [{
 
       dataKey: 'apartments.com_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3394,12 +4228,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartments.com\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartments.com_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3408,12 +4245,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartments.com\nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartment_guide_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3422,12 +4262,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartment Guide\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartment_guide_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3436,12 +4279,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartment Guide \nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartmentRating_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3450,12 +4296,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'ApartmentRatings\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'apartmentRating_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3464,12 +4313,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'ApartmentRatings\nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'yelp_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3478,12 +4330,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Yelp\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'yelp_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3492,12 +4347,15 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Yelp\nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'caring.com_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3506,12 +4364,15 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Caring.com\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'caring.com_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3520,12 +4381,15 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Caring.com\nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'seniorAdvisor_username',
-      inputType: 'text',
+      component: 'input',
+      type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3534,12 +4398,15 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'SeniorAdvisor\nUsername' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     },
     {
 
       dataKey: 'seniorAdvisor_password',
-      inputType: 'text',
+      component: 'input',
+      type: 'password',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
@@ -3548,6 +4415,8 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'SeniorAdvisor\nPassword' },
       settings: null,
+      description: null,
+      validation: null,
       placeholder: null
     }]
   }
