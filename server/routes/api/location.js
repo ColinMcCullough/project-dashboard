@@ -117,7 +117,7 @@ module.exports = (app) => {
   app.put('/api/v1/projects/:projectId/locations/:locationId', async (req, res) => {
     const { body, params } = req
     const { locationId } = params
-    const location = await models.location.findOne({ where: { locationId } })
+    const location = await models.location.findOne({ where: { locationProjectId: locationId } })
     await location.update(body)
     res.json(200)
   })

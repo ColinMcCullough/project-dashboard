@@ -15,7 +15,7 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: false,
-        isHub: false,
+        recordLocation: 'hub',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Current Website' },
         settings: null,
