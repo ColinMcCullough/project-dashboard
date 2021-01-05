@@ -1,4 +1,4 @@
-const { INTEGER, STRING } = require('sequelize')
+const { INTEGER, STRING, JSONB } = require('sequelize')
 
 module.exports = (sequelize) => {
   const subsection = sequelize.define('subsection', {
@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     name: {
-      type: STRING
+      type: JSONB
     },
     priority: {
       type: INTEGER

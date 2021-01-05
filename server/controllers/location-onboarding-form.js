@@ -89,19 +89,19 @@ class LocationOnboardingForm {
 
       const fields = this.filterMapFields(f)
       const subsections = s.map((s) => {
-        const { name, priority, fields: f, id } = s
-        // const fields = this.filterMapFields(f)
+        const { name, priority, fields: sf, id } = s
+        const subFields = this.filterMapFields(sf)
         return {
           name: name[this.vertical] || name.default,
           priority,
-          fields,
+          fields: subFields,
           id
         }
       })
       return {
         name: name[this.vertical] || name.default,
         priority,
-        fields: f,
+        fields,
         subsections,
         id
       }
