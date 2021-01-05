@@ -31,12 +31,22 @@ module.exports = (app) => {
     }
     for (let i = 0; i < sectionSeeder.length; i++) {
       const { packageIds, name, priority, fields } = sectionSeeder[i]
+      console.log(fields)
       const packs = packageMap.filter(p => packageIds.includes(p.dataValues.salesforceId))
       const section = await models.section.create({ name, priority })
       await section.addPackages(packs)
-      for (let j = 0; j < fields.length; j++) {
-        const field = await models.field.create(fields[j])
-        await section.addField(field)
+      if (fields) {
+        for (let j = 0; j < fields.length; j++) {
+          const { recordLocation } = fields[j]
+          const [recLoc] = await models.recordLocation.findOrCreate({
+            where: { name: recordLocation },
+            defaults: {
+              name: recordLocation
+            }
+          })
+          const field = await models.field.create({ recordLocationId: recLoc.dataValues.id, ...fields[j] })
+          await section.addField(field)
+        }
       }
     }
     res.json(sectionSeeder)
