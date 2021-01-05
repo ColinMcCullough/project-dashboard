@@ -57,9 +57,9 @@
       </template>
       <template v-slot:cell(vendor)="data">
         <b-form-group class="mb-0" style="position: relative;">
-          <b-form-input
+          <b-form-select
             :value="data.item.properties.vendor"
-            placeholder="Location Vendor"
+            :options="vendors"
             class="text-left"
             required
             @input="onInput($event, data.item.locationId, data.field.key)"
@@ -111,6 +111,13 @@ export default {
     return {
       instructions: 'Complete all client associatons and urls to continue',
       corpSelected: 0,
+      vendors: [
+        'LeaseLabs',
+        'Yardi/RentCafe',
+        'WordPress',
+        'Wix',
+        'SquareSpace'
+      ],
       fields: [
         {
           key: 'valid',
