@@ -55,7 +55,7 @@ class LocationOnboardingForm {
   }
 
   filterEmptySections () {
-    this.form = this.form.filter(s => (s.fields.length !== 0 || s.subsections.length !== 0))
+    this.form = this.form.filter(s => !(s.fields.length === 0 && s.subsections.length === 0))
   }
 
   filterFields (fields) {
@@ -98,11 +98,12 @@ class LocationOnboardingForm {
           id
         }
       })
+        .filter(s => s.fields.length > 0)
       return {
         name: name[this.vertical] || name.default,
         priority,
         fields,
-        subsections,
+        subsections: subsections || [],
         id
       }
     })
@@ -131,7 +132,7 @@ class LocationOnboardingForm {
     this.locationSettings()
     await this.loadSections()
     this.mapSections()
-    // this.filterEmptySections()
+    this.filterEmptySections()
   }
 
   display () {
