@@ -18,10 +18,10 @@ module.exports = [
         recordLocation: 'hub',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Current Website' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: 'ex. www.domain.com'
+        settings: { initialValue: null },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: 'ex. www.domain.com' }
       },
       {
         dataKey: 'naked_domain',
@@ -31,13 +31,13 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: false,
-        isHub: true,
+        recordLocation: 'hub',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain for G5 to Build on' },
-        settings: null,
-        description: 'A domain is the address (URL) of a website that can be typed in the browser to visit your website. For example, www.getg5.com is G5\'s domain name. Enter the domain that you want your new site built on (you should have already purchased the domain name).',
-        validation: null,
-        placeholder: 'ex. domain.com'
+        settings: { initialValue: null },
+        description: { default: 'A domain is the address (URL) of a website that can be typed in the browser to visit your website. For example, www.getg5.com is G5\'s domain name. Enter the domain that you want your new site built on (you should have already purchased the domain name).' },
+        validation: {},
+        placeholder: { default: 'ex. domain.com' }
       },
       {
         dataKey: 'registrar',
@@ -47,13 +47,13 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: true,
-        isHub: false,
+        recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Registrar' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: 'GoDaddy'
+        settings: { initialValue: null },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: 'GoDaddy' }
       },
       {
         dataKey: 'domain_manager_contact',
@@ -63,29 +63,29 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: true,
-        isHub: false,
+        recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Manager Contact' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: null
+        settings: { initialValue: null },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
       },
       {
         dataKey: 'domain_username',
         component: 'input',
-        type: 'email',
+        type: 'text',
         required: false,
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: true,
-        isHub: false,
+        recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Credentials' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: 'user@godaddy.com'
+        settings: { initialValue: null },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: 'user@godaddy.com' }
       },
       {
         dataKey: 'domain_password',
@@ -95,13 +95,13 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: true,
-        isHub: false,
+        recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Domain Credentials' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: '**********'
+        settings: { initialValue: null },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '**********' }
       },
       {
         dataKey: 'other_domains',
@@ -111,13 +111,13 @@ module.exports = [
         displayOnlyOnCorp: false,
         displayOnCorp: true,
         bulkEditable: false,
-        isHub: false,
+        recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Other Domains to Reference' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: null
+        settings: { initialValue: [] },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
       }
     ]
   },
@@ -139,13 +139,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Branded Name of Property' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'G5 Search Marketing, Inc'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'G5 Search Marketing, Inc' }
     },
     {
       dataKey: 'street_address_1',
@@ -155,13 +155,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address 1' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: '550 Franklin Ave'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '550 Franklin Ave' }
     },
     {
       dataKey: 'street_address_2',
@@ -171,13 +171,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address 2' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'Suite 200'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'Suite 200' }
     },
     {
       dataKey: 'city',
@@ -187,13 +187,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'Bend'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'Bend' }
     },
     {
       dataKey: 'state',
@@ -203,14 +203,17 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
-      settings: { options: { default: { null: [{ text: 'Select Country', value: null }], ...states } } },
-      description: null,
-      validation: null,
-      placeholder: null,
-      dependentOn: 'country'
+      settings: {
+        settings: { initialValue: null },
+        dependentOn: 'country',
+        options: { default: { null: [{ text: 'Select Country', value: null }], ...states } }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'postal_code',
@@ -220,12 +223,12 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zip Code' },
-      settings: null,
-      description: null,
-      validation: null,
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
       placeholder: '97702'
     },
     {
@@ -236,13 +239,21 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Country' },
-      settings: { options: { default: [{ text: 'Select Country', value: null }, { text: 'United States', value: 'US' }, { text: 'Canada', value: 'CA' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Select Country', value: null },
+            { text: 'United States', value: 'US' },
+            { text: 'Canada', value: 'CA' }]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'display_phone_number',
@@ -252,13 +263,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Community Phone Number', SS: 'Facility Phone Number', MF: 'Property Phone Number', corp: 'Corporate Phone Number', default: 'Phone Number' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: '555-555-5555'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '555-555-5555' }
     },
     {
       dataKey: 'local_phone_number',
@@ -268,13 +279,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: '555-555-5555'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '555-555-5555' }
     },
     {
       dataKey: 'email',
@@ -284,13 +295,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Community Email Address', SS: 'Facility Email Address', MF: 'Property Email Address', corp: 'Corporate Email Address', default: 'Property Email Address' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'client@client.com'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'client@client.com' }
     },
     {
       dataKey: 'fax',
@@ -300,13 +311,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Fax Number' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: '555-555-5555'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '555-555-5555' }
     },
     {
       dataKey: 'lead_vendor_name',
@@ -316,13 +327,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS'],
       label: { default: 'Vendor & Product Name of Lead Management System' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'auto_response',
@@ -332,13 +343,22 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS'],
       label: { default: 'Does your lead tracking email provide an auto response customer email?' },
-      settings: { options: { default: [{ text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }, { text: 'N/A', value: 'na' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Yes', value: 'yes' },
+            { text: 'No', value: 'no' },
+            { text: 'N/A', value: 'na' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'suppress_auto_response',
@@ -348,13 +368,22 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS'],
       label: { default: 'If yes to the above, would you like G5 to suppress the G5 auto response customer email?' },
-      settings: { options: { default: [{ text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }, { text: 'N/A', value: 'na' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Yes', value: 'yes' },
+            { text: 'No', value: 'no' },
+            { text: 'N/A', value: 'na' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'lead_email',
@@ -364,13 +393,13 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Leads Email Address' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'office_hours',
@@ -380,13 +409,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Office Hours' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'Monday-Saturday 9am-5pm'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'Monday-Saturday 9am-5pm' }
     },
     {
       dataKey: 'access_hours',
@@ -396,13 +425,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Access Hours' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: '24/7'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '24/7' }
     },
     {
       dataKey: 'desk_hours',
@@ -412,13 +441,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Desk Hours' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: 'Monday-Friday 8am-12pm'
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: 'Monday-Friday 8am-12pm' }
     }]
   },
   {
@@ -435,13 +464,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Desired Launch Date' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'location_clone',
@@ -451,13 +480,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Location to Clone' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: null },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -478,13 +507,22 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Geographic Type' },
-      settings: { options: { default: [{ text: 'Select Type', value: null }, { text: 'Suburban', value: 'US' }, { text: 'suburban', value: 'urban' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Select Type', value: null },
+            { text: 'Suburban', value: 'suburban' },
+            { text: 'Urban', value: 'urban' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'class_type',
@@ -494,461 +532,485 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS'],
       label: { SS: 'Facility Class Type', default: 'Property Class Type' },
-      settings: { options: { MF: [{ text: 'Select Class', value: null }, { text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }], SS: [{ text: 'Select Class', value: null }, { text: 'High-end', value: 'highEnd' }, { text: 'Mid-range', value: 'midRange' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          MF: [
+            { text: 'Select Class', value: null },
+            { text: 'Class A', value: 'a' },
+            { text: 'Class B', value: 'c' },
+            { text: 'Class C', value: 'c' }
+          ],
+          SS: [
+            { text: 'Select Class', value: null },
+            { text: 'High-end', value: 'highEnd' },
+            { text: 'Mid-range', value: 'midRange' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'target_lifestyle',
-      component: '',
-      type: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF'],
       label: { default: 'Primary Target Lifestyle' },
-      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'On the Go', value: 'go' }, { text: 'Happy at Home', value: 'home' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Select Option', value: null },
+            { text: 'On the Go', value: 'go' },
+            { text: 'Happy at Home', value: 'home' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
-      dataKey: 'property_feature_1',
-      component: 'select',
-      type: null,
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: true,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Property Feature 1' },
-      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_2',
-      component: 'select',
+      dataKey: 'property_features',
+      component: 'dual-listbox',
       type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Property Feature 2' },
-      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_3',
-      component: 'select',
-      type: null,
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Property Feature 3' },
-      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_4',
-      component: 'select',
-      type: null,
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Property Feature 4' },
-      settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Luxury', value: 'luxury' }, { text: 'Affordable', value: 'affordable' }, { text: 'Modern', value: '' }, { text: 'Gated', value: 'gated' }, { text: 'Furnished', value: 'furnished' }, { text: 'Garden Style', value: 'gardenStyle' }, { text: 'High-Rise', value: 'highRise' }, { text: 'New', value: 'new' }, { text: 'Upgraded', value: 'upgraded' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      recordLocation: 'hub',
+      displayVertical: ['SS'],
+      label: { default: 'Primary Facility Feature 1\n' },
+      settings: {
+        initialValue: [],
+        mappedFields: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4'],
+        options: {
+          default: [
+            { text: 'Luxury', value: 'luxury' },
+            { text: 'Affordable', value: 'affordable' },
+            { text: 'Modern', value: '' },
+            { text: 'Gated', value: 'gated' },
+            { text: 'Furnished', value: 'furnished' },
+            { text: 'Garden Style', value: 'gardenStyle' },
+            { text: 'High-Rise', value: 'highRise' },
+            { text: 'New', value: 'new' },
+            { text: 'Upgraded', value: 'upgraded' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'property_status',
-      component: '',
-      type: 'select',
+      component: 'select',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
-      settings: { options: { default: ['Development', ' Pre-Leasing', ' Lease-Up', ' Low Occupancy', ' Mid Occupancy', ' High Occupancy'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Select Option', value: null },
+            { text: 'Development', value: 'development' },
+            { text: 'Pre-Leasing', value: 'preLeasing' },
+            { text: 'Lease-Up', value: 'leaseUp' },
+            { text: 'Low Occupancy', value: 'lowOccupancy' },
+            { text: 'Mid Occupancy', value: 'midOccupancy' },
+            { text: 'High Occupancy', value: 'highOccupancy' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'senior_student_demographics',
-      component: '',
-      type: 'select',
+      component: 'checkbox',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Is your location specifically designed for Senior or Student demographics?' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Yes', value: true },
+            { text: 'No', value: false }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'primary_unit_type',
-      component: '',
-      type: 'select',
+      component: 'select',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Primary Property & Unit Type' },
-      settings: { options: { default: ['Apartments & Townhomes', ' Condos', ' Apartments', ' Townhomes'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      label: { default: 'Is your location specifically designed for Senior or Student demographics?' },
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Select Option', value: null },
+            { text: 'Apartments', value: 'apartments' },
+            { text: 'Apartments & Townhomes', value: 'apartmentsTownhomes' },
+            { text: 'Condos', value: 'condos' },
+            { text: 'Townhomes', value: 'townhomes' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'floor_plans',
-      component: '',
+      component: 'checkbox-group-expanded',
       type: 'text',
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Floor Plans' },
-      settings: { options: { default: ['Studio', ' 1', ' 2', ' 3', ' Other'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: [],
+        options: {
+          default: [
+            { text: 'Studio', value: 'sudio' },
+            { text: '1', value: 'one' },
+            { text: '2', value: 'two' },
+            { text: '3', value: 'three' },
+            { text: '4', value: 'four' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'most_need_floorplans',
-      component: '',
-      type: 'text',
+      component: 'checkbox-group-expanded',
+      type: null,
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
-      settings: { options: { default: ['Studio', ' 1', ' 2', ' 3', ' Other'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: [],
+        options: {
+          default: [
+            { text: 'Studio', value: 'sudio' },
+            { text: '1', value: 'one' },
+            { text: '2', value: 'two' },
+            { text: '3', value: 'three' },
+            { text: '4', value: 'four' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
-      dataKey: 'neighborhood',
-      component: '',
+      dataKey: 'neighborhoods',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Neighborhood' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        mappedFields: ['neighborhood', 'neighborhood_2'],
+        initialValue:
+        []
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
-    {
-      dataKey: 'neighborhood_2',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Neighborhood 2' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
+    // {
+    //   dataKey: 'neighborhood',
+    //   component: 'todo-list',
+    //   type: 'text',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Neighborhood' },
+    //   settings: { initialValue: [] },
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
+    // {
+    //   dataKey: 'neighborhood_2',
+    //   component: '',
+    //   type: 'text',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Neighborhood 2' },
+    //   settings: null,
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
     {
       dataKey: 'no_target_neighborhood',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Nearby neighborhoods to NOT TARGET' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: [] },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
-      dataKey: 'landmark_1_name',
-      component: '',
+      dataKey: 'landmarks',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Landmark' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      label: { default: 'Neighborhood' },
+      settings: {
+        mappedFields: ['landmark_1_name', 'landmark_2_name'],
+        initialValue: []
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
-    {
-      dataKey: 'landmark_1_type',
-      component: '',
-      type: 'select',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Lankmark Type' },
-      settings: { options: { default: ['One of Hospital', ' Lake', ' Recreation Area', ' Military Base', ' Employer', ' University'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'landmark_2_name',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Landmark 2' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'landmark_2_type',
-      component: '',
-      type: 'select',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Landmark 2 Type' },
-      settings: { options: { default: ['One of Hospital', ' Lake', ' Recreation Area', ' Military Base', ' Employer', ' University'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
+    // {
+    //   dataKey: 'landmark_1_name',
+    //   component: 'input',
+    //   type: 'text',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Landmark' },
+    //   settings: { initialValue: null },
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
+    // {
+    //   dataKey: 'landmark_1_type',
+    //   component: '',
+    //   type: 'select',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Lankmark Type' },
+    //   settings: { options: { default: ['One of Hospital', 'Lake', 'Recreation Area', 'Military Base', 'Employer', 'University'] } },
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
+    // {
+    //   dataKey: 'landmark_2_name',
+    //   component: 'input',
+    //   type: 'text',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Landmark 2' },
+    //   settings: { initialValue: null },
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
+    // {
+    //   dataKey: 'landmark_2_type',
+    //   component: '',
+    //   type: 'select',
+    //   required: false,
+    //   displayOnlyOnCorp: false,
+    //   displayOnCorp: false,
+    //   bulkEditable: false,
+    //   recordLocation: 'hub',
+    //   displayVertical: ['MF', 'SS', 'SL'],
+    //   label: { default: 'Landmark 2 Type' },
+    //   settings: { options: { default: ['One of Hospital', 'Lake', 'Recreation Area', 'Military Base', 'Employer', 'University'] } },
+    //   description: { default: '' },
+    //   validation: {},
+    //   placeholder: { default: '' }
+    // },
     {
       dataKey: 'nearby_employers',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'nearby_employer_1',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Nearby Employer' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'nearby_employer_2',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Nearby Employer' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'nearby_employer_3',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Nearby Employer' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        mappedFields: ['nearby_employer_1', 'nearby_employer_2', 'nearby_employer_3'],
+        initialValue: []
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_schools',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Nearby School' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'nearby_school_1',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Nearby School' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'nearby_school_2',
-      component: '',
-      type: 'text',
-      required: false,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['MF'],
-      label: { default: 'Nearby School' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        mappedFields: {
+          default: ['nearby_school_1', 'nearby_school_2']
+        },
+        initialValue: []
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_restaurants',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Restaurants' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: [] },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_shopping',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Shopping Centers & Grocery Stores' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: [] },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_recreation',
-      component: '',
+      component: 'todo-list',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Recreation & Entertainment' },
-      settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { initialValue: [] },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'pet_friendly',
-      component: '',
-      type: 'select',
+      component: 'checkbox',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Pet Friendly' },
-      settings: { options: { default: ['Yes', ' No'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: null,
+        options: {
+          default: [
+            { text: 'Yes', value: true },
+            { text: 'No', value: false }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'pet_policy',
@@ -958,13 +1020,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'content-library',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Pet Policy' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'value_proposition',
@@ -974,13 +1036,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SS'],
       label: { default: 'Unique Value Proposition' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'convenience_category',
@@ -990,45 +1052,45 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['SS'],
       label: { default: 'Convenience Category' },
-      settings: { options: { default: ['Neighborhood', ' Freeway Access', ' Willing to Travel'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Neighborhood', 'Freeway Access', 'Willing to Travel'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
-      dataKey: 'property_feature_1',
-      component: '',
-      type: 'select',
+      dataKey: 'property_class_1',
+      component: 'radio-group',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Primary Feature Class' },
-      settings: { options: { default: ['Basic', ' Premium', ' Boat and RV'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Basic', 'Premium', 'Boat and RV'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
-      dataKey: 'property_feature_2',
-      component: '',
-      type: 'select',
+      dataKey: 'property_class_2',
+      component: 'radio-group',
+      type: null,
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Secondary Feature Class' },
-      settings: { options: { default: ['Basic', ' Premium', ' Boat and RV'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Basic', 'Premium', 'Boat and RV'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_roadway_1',
@@ -1038,13 +1100,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Nearby Location/Street (1)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_roadway_2',
@@ -1054,13 +1116,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Nearby Location/Street (2)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_gasoline',
@@ -1070,13 +1132,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SS'],
       label: { default: 'Nearby Gas Station' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'gmb_login',
@@ -1086,13 +1148,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SS'],
       label: { default: 'Google My Business (GMB) Login Email & Password' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'ga_login',
@@ -1102,13 +1164,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SS'],
       label: { default: 'Google Analytics (GA) Login Email & Password' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -1125,13 +1187,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
-      settings: { options: { default: ['Independent Living', ' Assisted Living', ' Hospice Care', ' Memory Care', ' Alzheimers Care', ' Dementia Care', ' Respite Care', ' Skilled Nursing', ' Personal Care', ' At Home Care', ' Adult Day Care'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Independent Living', 'Assisted Living', 'Hospice Care', 'Memory Care', 'Alzheimers Care', 'Dementia Care', 'Respite Care', 'Skilled Nursing', 'Personal Care', 'At Home Care', 'Adult Day Care'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_2',
@@ -1141,13 +1203,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_3',
@@ -1157,13 +1219,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_4',
@@ -1173,13 +1235,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_5',
@@ -1189,13 +1251,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_6',
@@ -1205,13 +1267,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'care_level_verbiage',
@@ -1221,13 +1283,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['SL'],
-      label: { default: 'Please Indicate if you would like to update specific Care Levels verbiage from the selected names' },
+      label: { default: 'Please indicate if you would like to update specific Care Levels verbiage from the selected names' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'accepts_medicare_medicade',
@@ -1237,13 +1299,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: true,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'Accepts Medicare or Medicaid?' },
-      settings: { options: { default: ['Yes', ' No'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Yes', 'No'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'legal_restrictions',
@@ -1253,13 +1315,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['SL'],
       label: { default: 'Is there any terminology we can not use? Legal restrictions within the state, etc.?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'nearby_healthcare_1',
@@ -1269,13 +1331,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['SL'],
       label: { default: 'Nearby Healthcare Facilities' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -1284,251 +1346,256 @@ module.exports = [
       default: 'Apartment & Community Amenities & Services'
     },
     priority: 5,
-    fields: [
-      {
-        dataKey: 'apartment_amenities',
-        component: 'dual-listbox',
-        mappedFields: ['apartment_amenity_1', 'apartment_amenity_2', 'apartment_amenity_3'],
-        type: null,
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF'],
-        label: { default: 'Apartment Amenities' },
-        settings: {
-          options: {
-            default: [
-              { text: 'Air Conditioning', value: 'airConditioning' },
-              { text: 'Cable Included', value: 'cableIncluded' },
-              { text: 'Custom Cabinetry', value: 'customCabinetry' },
-              { text: 'Dishwasher', value: 'dishwasher' },
-              { text: 'Energy-Efficient Appliances', value: 'energyEfficientAppliances' },
-              { text: 'Fireplace', value: 'fireplace' },
-              { text: 'Garages Available', value: 'garagesAvailable' },
-              { text: 'Granite Counters', value: 'graniteCounters' },
-              { text: 'Hardwood Flooring', value: 'hardwoodFlooring' },
-              { text: 'High Ceilings', value: 'highCeilings' },
-              { text: 'High Speed Internet Access', value: 'highSpeedInternet' },
-              { text: 'Private Balcony', value: 'privateBalcony' },
-              { text: 'Private Patio', value: 'privatePatio' },
-              { text: 'Soundproof Walls', value: 'soundproofWalls' },
-              { text: 'Stainless-Steel Appliances', value: 'stainlessSteelAppliances' },
-              { text: 'Vaulted Ceilings', value: 'valutedCeilings' },
-              { text: 'Walk-In Closets', value: 'walkInClosets' },
-              { text: 'Washer/Dryer Connections', value: 'washerDryerConnections' },
-              { text: 'Washer/Dryer Included', value: 'washerDryerIncluded' },
-              { text: 'Wood-Style Flooring', value: 'woodStyleFlooring' }
-            ]
-          }
+    fields: [{
+      dataKey: 'apartment_amenities',
+      component: 'dual-listbox',
+      type: null,
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF'],
+      label: { default: 'Apartment Amenities' },
+      settings: {
+        initialValue: [],
+        mappedFields: {
+          default: ['apartment_amenity_1', 'apartment_amenity_2', 'apartment_amenity_3']
         },
-        description: null,
-        validation: null,
-        placeholder: null
+        options: {
+          default: [
+            { text: 'Air Conditioning', value: 'airConditioning' },
+            { text: 'Cable Included', value: 'cableIncluded' },
+            { text: 'Custom Cabinetry', value: 'customCabinetry' },
+            { text: 'Dishwasher', value: 'dishwasher' },
+            { text: 'Energy-Efficient Appliances', value: 'energyEfficientAppliances' },
+            { text: 'Fireplace', value: 'fireplace' },
+            { text: 'Garages Available', value: 'garagesAvailable' },
+            { text: 'Granite Counters', value: 'graniteCounters' },
+            { text: 'Hardwood Flooring', value: 'hardwoodFlooring' },
+            { text: 'High Ceilings', value: 'highCeilings' },
+            { text: 'High Speed Internet Access', value: 'highSpeedInternet' },
+            { text: 'Private Balcony', value: 'privateBalcony' },
+            { text: 'Private Patio', value: 'privatePatio' },
+            { text: 'Soundproof Walls', value: 'soundproofWalls' },
+            { text: 'Stainless-Steel Appliances', value: 'stainlessSteelAppliances' },
+            { text: 'Vaulted Ceilings', value: 'valutedCeilings' },
+            { text: 'Walk-In Closets', value: 'walkInClosets' },
+            { text: 'Washer/Dryer Connections', value: 'washerDryerConnections' },
+            { text: 'Washer/Dryer Included', value: 'washerDryerIncluded' },
+            { text: 'Wood-Style Flooring', value: 'woodStyleFlooring' }
+          ]
+        }
       },
-      {
-        dataKey: 'apartment_amenity_1',
-        component: '',
-        type: 'select',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF'],
-        label: { default: 'Primary Apartment Amenity 1' },
-        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'apartment_amenity_2',
-        component: '',
-        type: 'select',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF'],
-        label: { default: 'Primary Apartment Amenity 2' },
-        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'apartment_amenity_3',
-        component: '',
-        type: 'select',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF'],
-        label: { default: 'Primary Apartment Amenity 3' },
-        settings: { options: { default: ['Air Conditioning', ' Cable Included', ' Custom Cabinetry', ' Dishwasher', ' Energy-Efficient Appliances', ' Fireplace', ' Garages Available', ' Granite Counters', ' Hardwood Flooring', ' High Ceilings', ' High Speed Internet Access', ' Private Balcony', ' Private Patio', ' Soundproof Walls', ' Stainless-Steel Appliances', ' Vaulted Ceilings', ' Walk-In Closets', ' Washer/Dryer Connections', ' Washer/Dryer Included', ' Wood-Style Flooring'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'apartment_styles',
-        component: '',
-        type: 'text',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['SL'],
-        label: { default: 'Apartment Styles and room (e.g., townhome/apartment/suite, 1-2 bedroom)' },
-        settings: null,
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'in_unit_features',
-        component: 'checkbox-group',
-        type: null,
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['SL'],
-        label: { default: 'In-Home/In-Unit Features' },
-        settings: { options: { default: ['Move-In Assistance', ' LEED Certified', ' Other Green Initiatives', ' Air Conditioning', ' Cable Included', ' WiFi Available', ' Ceiling Fans', ' Custom Lighting', ' Full Kitchen', ' Kitchenette', ' Kitchen Island or Bar', ' Granite Counters', ' Custom Cabinetry', ' Energy-Efficient Appliances', ' Stainless-Steel Appliances', ' Refrigerator', ' Dishwasher', ' Microwave', ' Garbage Disposal', ' Utilities Included', ' Weekly Housekeeping', ' Washer/Dryer Connections', ' In-Home Washer/Dryer', ' Trash Service', ' Laundry Service', ' Walk-In Closets', ' Fireplace', ' Curtains or Blinds Included', ' Hardwood Floors', ' Hardwood-Style Floors', ' HighCeilings', ' Vaulted Ceilings', ' Cathedral Ceilings', ' Private Balcony', ' Private Patio', ' Smoke Free', ' Addtional Storage'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'community_amenities',
-        component: 'dual-listbox',
-        mappedFields: ['community_amenity_1', 'community_amenity_2', 'community_amenity_3'],
-        type: null,
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF'],
-        label: { default: 'Community Amenities' },
-        settings: {
-          options: {
-            MF: [
-              { text: 'Basketball Court', value: '' },
-              { text: 'Business Center', value: '' },
-              { text: 'Carport Parking Available', value: '' },
-              { text: 'Close to Dog Park', value: '' },
-              { text: 'Close to Park', value: '' },
-              { text: 'Clubhouse', value: '' },
-              { text: 'Fitness Center', value: '' },
-              { text: 'Furnished Apartments Available', value: '' },
-              { text: 'Gated Electronic Entrance', value: '' },
-              { text: 'Laundry Facility', value: '' },
-              { text: 'On-Site Dog Park', value: '' },
-              { text: 'Online Rental Payments', value: '' },
-              { text: 'Onsite Management', value: '' },
-              { text: 'Playground', value: '' },
-              { text: 'Recycling Center', value: '' },
-              { text: 'Spa/Hot Tub', value: '' },
-              { text: 'Swimming Pool', value: '' },
-              { text: 'Tennis Court', value: '' },
-              { text: 'Volleyball Court', value: '' },
-              { text: 'WiFi Available', value: '' }
-            ]
-          },
-          SL: [
-            { text: 'Gated Electronic Entrance', value: '' },
-            { text: 'Parking Garage', value: '' },
-            { text: 'Covered Parking', value: '' },
-            { text: 'Private Garages Available', value: '' },
-            { text: 'Transportation Services', value: '' },
-            { text: 'Restaurant-Style Dining', value: '' },
-            { text: 'In-Room Dining', value: '' },
-            { text: 'Personal Care', value: '' },
-            { text: 'Clubhouse', value: '' },
-            { text: 'Fitness Center', value: '' },
-            { text: 'Yoga/ Pilates Studio', value: '' },
-            { text: 'Swimming Pool', value: '' },
-            { text: 'Spa/Hot Tub', value: '' },
-            { text: 'Cabanas', value: '' },
-            { text: 'Fitness Classes', value: '' },
-            { text: 'Outdoor Grilling/BBQ Stations', value: '' },
-            { text: 'Playground', value: '' },
-            { text: 'Basketball', value: '' },
-            { text: 'Volleyball', value: '' },
-            { text: 'Tennis Courts', value: '' },
-            { text: 'Recycling Center', value: '' },
-            { text: '24-Hour Emergency Maintenance', value: '' },
-            { text: 'Walking Trails on or near Property', value: '' },
-            { text: 'Close to Parks', value: '' },
-            { text: 'Close to Dog Park', value: '' },
-            { text: 'On-Site Dog Park', value: '' },
-            { text: 'Pet Friendly', value: '' },
-            { text: 'Cat Friendly', value: '' },
-            { text: 'Dog Friendly', value: '' },
-            { text: 'Organized Activities', value: '' }
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'apartment_amenity_1',
+      component: '',
+      type: 'select',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF'],
+      label: { default: 'Primary Apartment Amenity 1' },
+      settings: { options: { default: ['Air Conditioning', 'Cable Included', 'Custom Cabinetry', 'Dishwasher', 'Energy-Efficient Appliances', 'Fireplace', 'Garages Available', 'Granite Counters', 'Hardwood Flooring', 'High Ceilings', 'High Speed Internet Access', 'Private Balcony', 'Private Patio', 'Soundproof Walls', 'Stainless-Steel Appliances', 'Vaulted Ceilings', 'Walk-In Closets', 'Washer/Dryer Connections', 'Washer/Dryer Included', 'Wood-Style Flooring'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'apartment_amenity_2',
+      component: '',
+      type: 'select',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF'],
+      label: { default: 'Primary Apartment Amenity 2' },
+      settings: { options: { default: ['Air Conditioning', 'Cable Included', 'Custom Cabinetry', 'Dishwasher', 'Energy-Efficient Appliances', 'Fireplace', 'Garages Available', 'Granite Counters', 'Hardwood Flooring', 'High Ceilings', 'High Speed Internet Access', 'Private Balcony', 'Private Patio', 'Soundproof Walls', 'Stainless-Steel Appliances', 'Vaulted Ceilings', 'Walk-In Closets', 'Washer/Dryer Connections', 'Washer/Dryer Included', 'Wood-Style Flooring'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'apartment_amenity_3',
+      component: '',
+      type: 'select',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF'],
+      label: { default: 'Primary Apartment Amenity 3' },
+      settings: { options: { default: ['Air Conditioning', 'Cable Included', 'Custom Cabinetry', 'Dishwasher', 'Energy-Efficient Appliances', 'Fireplace', 'Garages Available', 'Granite Counters', 'Hardwood Flooring', 'High Ceilings', 'High Speed Internet Access', 'Private Balcony', 'Private Patio', 'Soundproof Walls', 'Stainless-Steel Appliances', 'Vaulted Ceilings', 'Walk-In Closets', 'Washer/Dryer Connections', 'Washer/Dryer Included', 'Wood-Style Flooring'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'apartment_styles',
+      component: '',
+      type: 'text',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['SL'],
+      label: { default: 'Apartment Styles and room (e.g., townhome/apartment/suite, 1-2 bedroom)' },
+      settings: null,
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'in_unit_features',
+      component: 'checkbox-group',
+      type: null,
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['SL'],
+      label: { default: 'In-Home/In-Unit Features' },
+      settings: { options: { default: ['Move-In Assistance', 'LEED Certified', 'Other Green Initiatives', 'Air Conditioning', 'Cable Included', 'WiFi Available', 'Ceiling Fans', 'Custom Lighting', 'Full Kitchen', 'Kitchenette', 'Kitchen Island or Bar', 'Granite Counters', 'Custom Cabinetry', 'Energy-Efficient Appliances', 'Stainless-Steel Appliances', 'Refrigerator', 'Dishwasher', 'Microwave', 'Garbage Disposal', 'Utilities Included', 'Weekly Housekeeping', 'Washer/Dryer Connections', 'In-Home Washer/Dryer', 'Trash Service', 'Laundry Service', 'Walk-In Closets', 'Fireplace', 'Curtains or Blinds Included', 'Hardwood Floors', 'Hardwood-Style Floors', 'HighCeilings', 'Vaulted Ceilings', 'Cathedral Ceilings', 'Private Balcony', 'Private Patio', 'Smoke Free', 'Addtional Storage'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'community_amenities',
+      component: 'dual-listbox',
+      type: null,
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF'],
+      label: { default: 'Community Amenities' },
+      settings: {
+        initialValue: [],
+        mappedFields: {
+          default: ['community_amenity_1', 'community_amenity_2', 'community_amenity_3']
+        },
+        options: {
+          MF: [
+            { text: 'Basketball Court', value: 'basketballCourt' },
+            { text: 'Business Center', value: 'businessCenter' },
+            { text: 'Carport Parking Available', value: 'carportParking' },
+            { text: 'Close to Dog Park', value: 'closeToDogPark' },
+            { text: 'Close to Park', value: 'closeToPark' },
+            { text: 'Clubhouse', value: 'clubhouse' },
+            { text: 'Fitness Center', value: 'fitnessCenter' },
+            { text: 'Furnished Apartments Available', value: 'furnishedApartments' },
+            { text: 'Gated Electronic Entrance', value: 'gatedElectronicEntrance' },
+            { text: 'Laundry Facility', value: 'laundryFacility' },
+            { text: 'On-Site Dog Park', value: 'onSiteDogPark' },
+            { text: 'Online Rental Payments', value: 'onlineRentalPayments' },
+            { text: 'Onsite Management', value: 'onsiteManagement' },
+            { text: 'Playground', value: 'playground' },
+            { text: 'Recycling Center', value: 'recyclingCenter' },
+            { text: 'Spa/Hot Tub', value: 'spaHottub' },
+            { text: 'Swimming Pool', value: 'swimmingPool' },
+            { text: 'Tennis Court', value: 'tennisCourt' },
+            { text: 'Volleyball Court', value: 'volleyballCourt' },
+            { text: 'WiFi Available', value: 'wifiAvailable' }
           ]
         },
-        description: null,
-        validation: null,
-        placeholder: null
+        SL: [
+          { text: 'Gated Electronic Entrance', value: 'gatedElectronicEntrance' },
+          { text: 'Parking Garage', value: 'parkingGarage' },
+          { text: 'Covered Parking', value: 'coveredParking' },
+          { text: 'Private Garages Available', value: 'privateGarages' },
+          { text: 'Transportation Services', value: 'transportationServices' },
+          { text: 'Restaurant-Style Dining', value: 'restaurantStyleDining' },
+          { text: 'In-Room Dining', value: 'inRoomDining' },
+          { text: 'Personal Care', value: 'personalCare' },
+          { text: 'Clubhouse', value: 'clubhouse' },
+          { text: 'Fitness Center', value: 'fitnessCenter' },
+          { text: 'Yoga/Pilates Studio', value: 'yogaPilatesStudio' },
+          { text: 'Swimming Pool', value: 'swimmingPool' },
+          { text: 'Spa/Hot Tub', value: 'spaHottub' },
+          { text: 'Cabanas', value: 'cabanas' },
+          { text: 'Fitness Classes', value: 'fitnessClasses' },
+          { text: 'Outdoor Grilling/BBQ Stations', value: 'outdoorGrilling' },
+          { text: 'Playground', value: 'playground' },
+          { text: 'Basketball', value: 'basketball' },
+          { text: 'Volleyball', value: 'volleyball' },
+          { text: 'Tennis Courts', value: 'tennisCourts' },
+          { text: 'Recycling Center', value: 'recyclingCenter' },
+          { text: '24-Hour Emergency Maintenance', value: '24hrEmergencyMaintenance' },
+          { text: 'Walking Trails on or near Property', value: 'walkingTrails' },
+          { text: 'Close to Parks', value: 'closeToParks' },
+          { text: 'Close to Dog Park', value: 'closeToDogPark' },
+          { text: 'On-Site Dog Park', value: 'onSiteDogPark' },
+          { text: 'Pet Friendly', value: 'petFriendly' },
+          { text: 'Cat Friendly', value: 'catFriendly' },
+          { text: 'Dog Friendly', value: 'dogFriendly' },
+          { text: 'Organized Activities', value: 'organizedActivities' }
+        ]
       },
-      {
-        dataKey: 'community_amenity_1',
-        component: '',
-        type: 'text',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF', 'SL'],
-        label: { MF: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
-        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'community_amenity_2',
-        component: '',
-        type: 'text',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF', 'SL'],
-        label: { MF: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
-        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      },
-      {
-        dataKey: 'community_amenity_3',
-        component: '',
-        type: 'text',
-        required: true,
-        displayOnlyOnCorp: false,
-        displayOnCorp: false,
-        bulkEditable: false,
-        isHub: true,
-        displayVertical: ['MF', 'SL'],
-        label: { MF: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
-        settings: { options: { MF: ['Basketball Court', ' Business Center', ' Carport Parking Available', ' Close to Dog Park', ' Close to Park', ' Clubhouse', ' Fitness Center', ' Furnished Apartments Available', ' Gated Electronic Entrance', ' Laundry Facility', ' On-Site Dog Park', ' Online Rental Payments', ' Onsite Management', ' Playground', ' Recycling Center', ' Spa/Hot Tub', ' Swimming Pool', ' Tennis Court', ' Volleyball Court', ' WiFi Available', ' Other'], SL: ['Gated Electronic Entrance', ' Parking Garage', ' Covered Parking', ' Private Garages Available', ' Transportation Services', ' Restaurant-Style Dining', ' In-Room Dining', ' Personal Care', ' Clubhouse', ' Fitness Center', ' Yoga/ Pilates Studio', ' Swimming Pool', ' Spa/Hot Tub', ' Cabanas', ' Fitness Classes', ' Outdoor Grilling/BBQ Stations', ' Playground', ' Basketball', ' Volleyball', ' Tennis Courts', ' Laundry Facilities On-Site', ' Recycling Center', ' 24-Hour Emergency Maintenance', ' Walking Trails on or near Property', ' Close to Parks', ' Close to Dog Park', ' On-Site Dog Park', ' Pet Friendly', ' Cat Friendly', ' Dog Friendly', ' Organized Activities'] } },
-        description: null,
-        validation: null,
-        placeholder: null
-      }]
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'community_amenity_1',
+      component: '',
+      type: 'text',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF', 'SL'],
+      label: { MF: 'Primary Property Amenity 1', default: 'Primary Community Amenity 1' },
+      settings: { options: { MF: ['Basketball Court', 'Business Center', 'Carport Parking Available', 'Close to Dog Park', 'Close to Park', 'Clubhouse', 'Fitness Center', 'Furnished Apartments Available', 'Gated Electronic Entrance', 'Laundry Facility', 'On-Site Dog Park', 'Online Rental Payments', 'Onsite Management', 'Playground', 'Recycling Center', 'Spa/Hot Tub', 'Swimming Pool', 'Tennis Court', 'Volleyball Court', 'WiFi Available', 'Other'], SL: ['Gated Electronic Entrance', 'Parking Garage', 'Covered Parking', 'Private Garages Available', 'Transportation Services', 'Restaurant-Style Dining', 'In-Room Dining', 'Personal Care', 'Clubhouse', 'Fitness Center', 'Yoga/ Pilates Studio', 'Swimming Pool', 'Spa/Hot Tub', 'Cabanas', 'Fitness Classes', 'Outdoor Grilling/BBQ Stations', 'Playground', 'Basketball', 'Volleyball', 'Tennis Courts', 'Laundry Facilities On-Site', 'Recycling Center', '24-Hour Emergency Maintenance', 'Walking Trails on or near Property', 'Close to Parks', 'Close to Dog Park', 'On-Site Dog Park', 'Pet Friendly', 'Cat Friendly', 'Dog Friendly', 'Organized Activities'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'community_amenity_2',
+      component: '',
+      type: 'text',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF', 'SL'],
+      label: { MF: 'Primary Property Amenity 2', default: 'Primary Community Amenity 2' },
+      settings: { options: { MF: ['Basketball Court', 'Business Center', 'Carport Parking Available', 'Close to Dog Park', 'Close to Park', 'Clubhouse', 'Fitness Center', 'Furnished Apartments Available', 'Gated Electronic Entrance', 'Laundry Facility', 'On-Site Dog Park', 'Online Rental Payments', 'Onsite Management', 'Playground', 'Recycling Center', 'Spa/Hot Tub', 'Swimming Pool', 'Tennis Court', 'Volleyball Court', 'WiFi Available', 'Other'], SL: ['Gated Electronic Entrance', 'Parking Garage', 'Covered Parking', 'Private Garages Available', 'Transportation Services', 'Restaurant-Style Dining', 'In-Room Dining', 'Personal Care', 'Clubhouse', 'Fitness Center', 'Yoga/ Pilates Studio', 'Swimming Pool', 'Spa/Hot Tub', 'Cabanas', 'Fitness Classes', 'Outdoor Grilling/BBQ Stations', 'Playground', 'Basketball', 'Volleyball', 'Tennis Courts', 'Laundry Facilities On-Site', 'Recycling Center', '24-Hour Emergency Maintenance', 'Walking Trails on or near Property', 'Close to Parks', 'Close to Dog Park', 'On-Site Dog Park', 'Pet Friendly', 'Cat Friendly', 'Dog Friendly', 'Organized Activities'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    },
+    {
+      dataKey: 'community_amenity_3',
+      component: '',
+      type: 'text',
+      required: true,
+      displayOnlyOnCorp: false,
+      displayOnCorp: false,
+      bulkEditable: false,
+      recordLocation: 'hub',
+      displayVertical: ['MF', 'SL'],
+      label: { MF: 'Primary Property Amenity 3', default: 'Primary Community Amenity 3' },
+      settings: { options: { MF: ['Basketball Court', 'Business Center', 'Carport Parking Available', 'Close to Dog Park', 'Close to Park', 'Clubhouse', 'Fitness Center', 'Furnished Apartments Available', 'Gated Electronic Entrance', 'Laundry Facility', 'On-Site Dog Park', 'Online Rental Payments', 'Onsite Management', 'Playground', 'Recycling Center', 'Spa/Hot Tub', 'Swimming Pool', 'Tennis Court', 'Volleyball Court', 'WiFi Available', 'Other'], SL: ['Gated Electronic Entrance', 'Parking Garage', 'Covered Parking', 'Private Garages Available', 'Transportation Services', 'Restaurant-Style Dining', 'In-Room Dining', 'Personal Care', 'Clubhouse', 'Fitness Center', 'Yoga/ Pilates Studio', 'Swimming Pool', 'Spa/Hot Tub', 'Cabanas', 'Fitness Classes', 'Outdoor Grilling/BBQ Stations', 'Playground', 'Basketball', 'Volleyball', 'Tennis Courts', 'Laundry Facilities On-Site', 'Recycling Center', '24-Hour Emergency Maintenance', 'Walking Trails on or near Property', 'Close to Parks', 'Close to Dog Park', 'On-Site Dog Park', 'Pet Friendly', 'Cat Friendly', 'Dog Friendly', 'Organized Activities'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
+    }]
   },
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU'],
@@ -1536,118 +1603,92 @@ module.exports = [
       default: 'Facility Features & Storage Types'
     },
     priority: 6,
-    fields: [{
-      dataKey: 'property_feature_1',
-      component: '',
-      type: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SS'],
-      label: { default: 'Primary Facility Feature 1\n' },
-      settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_2',
-      component: '',
-      type: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SS'],
-      label: { default: 'Primary Facility Feature 2' },
-      settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_3',
-      component: '',
-      type: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SS'],
-      label: { default: 'Primary Facility Feature 3' },
-      settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'property_feature_4',
-      component: '',
-      type: 'select',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: true,
-      displayVertical: ['SS'],
-      label: { default: 'Primary Facility Feature 4' },
-      settings: { options: { default: ['Climate Controlled', 'Free Moving Truck', 'Movign Truck Available to Rent', 'Ground Floor Units', 'RV & Car Storage', 'Package Delivery', 'Online Bill Payment', 'Month to Month', 'Military Discounts', 'Free Truck Use', 'Onsite Manager', 'Free Dolly & Cart Use'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'storage_type',
-      component: '',
-      type: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SS'],
-      label: { default: 'Storage Types' },
-      settings: { options: { default: ['Automobile Storage', ' Boat Storage', ' Business and/or Commercial Storage (files', ' etc)', ' Climate-Controlled Storage Units', ' Cold Storage Facility', ' Ground-Level Units', ' Indoor Storage', ' Motorcycle Storage', ' Outdoor Storage', ' Pod Storage', ' Records Storage Facility (Documents', ' etc)', ' RV Storage', ' Storage Locker Rental', ' Temperature Controlled Storage (only temperature controlled)', ' Warehouse', ' Wine Storage'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'rentals_services',
-      component: '',
-      type: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SS'],
-      label: { default: 'Rentals & Services' },
-      settings: { options: { default: ['Business Suite Rentals', ' Conference Room Rentals', ' Deliveries Accepted', ' Mailbox Rental Service', ' Month-to-Month Rentals', ' Moving Service', ' Paper Shredding Service', ' Piano Moving Service', ' Removal Service', ' Tenant Insurance Available', ' Trailer Rental Service', ' Truck Rental - FREE Use', ' Truck', ' Van or Car Rentals - PAID', ' U-Haul Truck Rentals', ' 24 Hour Access Storage', ' 24-Hour Security Monitoring (video recording', ' live monitoring', ' security guard - please specify)', ' Access 7 Days a Week', ' Business Center', ' Covered Drive-Thru Access', ' Covered Loading / Unloading', ' Digital Surveillance System', ' Dollies and Carts Available', ' Drive-Up Access Storage', ' Electrical Outlets in Units', ' Electronic Gate Access', ' Fully Fenced', ' High Ceilings', ' Individually Alarmed Units', ' Major Credit Cards Accepted', ' Online Bill Payment', ' On-Site Management', ' Packing and Moving Supplies Sold at Location', ' RV Charging Station', ' RV Sewage Depository', ' Well Lit/ Motion Detecting Lights', ' Wide Driveways'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    },
-    {
-      dataKey: 'discounts_fees',
-      component: '',
-      type: 'text',
-      required: true,
-      displayOnlyOnCorp: false,
-      displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
-      displayVertical: ['SS'],
-      label: { default: 'Discounts & Fees' },
-      settings: { options: { default: ['Military Discounts', ' No Administration Fee', ' No Deposits', ' No Late Fees', ' Regularly Offered Specials', ' Senior Discounts', ' Student Discounts'] } },
-      description: null,
-      validation: null,
-      placeholder: null
-    }]
+    fields: [
+      {
+        dataKey: 'property_features',
+        component: 'dual-listbox',
+        type: null,
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        recordLocation: 'hub',
+        displayVertical: ['SS'],
+        label: { default: 'Primary Facility Feature 1\n' },
+        settings: {
+          initialValue: null,
+          mappedFields: {
+            default: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4'],
+          },
+          options: {
+            default: [
+              { text: 'Climate Controlled', value: 'climateControlled' },
+              { text: 'Free Moving Truck', value: 'freeMovingTruck' },
+              { text: 'Movign Truck Available to Rent', value: 'movingTruckAvalable' },
+              { text: 'Ground Floor Units', value: 'groundFloorUnits' },
+              { text: 'RV & Car Storage', value: 'rvAndCarStorage' },
+              { text: 'Package Delivery', value: 'packageDelivery' },
+              { text: 'Online Bill Payment', value: 'onlineBillPayment' },
+              { text: 'Month to Month', value: 'monthToMonth' },
+              { text: 'Military Discounts', value: 'militaryDiscounts' },
+              { text: 'Free Truck Use', value: 'freeTuck' },
+              { text: 'Onsite Manager', value: 'onsiteManager' },
+              { text: 'Free Dolly & Cart Use', value: 'freeDolly' }
+            ]
+          }
+        },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
+      },
+      {
+        dataKey: 'storage_type',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        recordLocation: 'hub',
+        displayVertical: ['SS'],
+        label: { default: 'Storage Types' },
+        settings: { options: { default: ['Automobile Storage', 'Boat Storage', 'Business and/or Commercial Storage (files', 'etc)', 'Climate-Controlled Storage Units', 'Cold Storage Facility', 'Ground-Level Units', 'Indoor Storage', 'Motorcycle Storage', 'Outdoor Storage', 'Pod Storage', 'Records Storage Facility (Documents', 'etc)', 'RV Storage', 'Storage Locker Rental', 'Temperature Controlled Storage (only temperature controlled)', 'Warehouse', 'Wine Storage'] } },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
+      },
+      {
+        dataKey: 'rentals_services',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        recordLocation: 'salesforce',
+        displayVertical: ['SS'],
+        label: { default: 'Rentals & Services' },
+        settings: { options: { default: ['Business Suite Rentals', 'Conference Room Rentals', 'Deliveries Accepted', 'Mailbox Rental Service', 'Month-to-Month Rentals', 'Moving Service', 'Paper Shredding Service', 'Piano Moving Service', 'Removal Service', 'Tenant Insurance Available', 'Trailer Rental Service', 'Truck Rental - FREE Use', 'Truck', 'Van or Car Rentals - PAID', 'U-Haul Truck Rentals', '24 Hour Access Storage', '24-Hour Security Monitoring (video recording', 'live monitoring', 'security guard - please specify)', 'Access 7 Days a Week', 'Business Center', 'Covered Drive-Thru Access', 'Covered Loading / Unloading', 'Digital Surveillance System', 'Dollies and Carts Available', 'Drive-Up Access Storage', 'Electrical Outlets in Units', 'Electronic Gate Access', 'Fully Fenced', 'High Ceilings', 'Individually Alarmed Units', 'Major Credit Cards Accepted', 'Online Bill Payment', 'On-Site Management', 'Packing and Moving Supplies Sold at Location', 'RV Charging Station', 'RV Sewage Depository', 'Well Lit/ Motion Detecting Lights', 'Wide Driveways'] } },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
+      },
+      {
+        dataKey: 'discounts_fees',
+        component: '',
+        type: 'text',
+        required: true,
+        displayOnlyOnCorp: false,
+        displayOnCorp: false,
+        bulkEditable: false,
+        recordLocation: 'salesforce',
+        displayVertical: ['SS'],
+        label: { default: 'Discounts & Fees' },
+        settings: { options: { default: ['Military Discounts', 'No Administration Fee', 'No Deposits', 'No Late Fees', 'Regularly Offered Specials', 'Senior Discounts', 'Student Discounts'] } },
+        description: { default: '' },
+        validation: {},
+        placeholder: { default: '' }
+      }]
   },
   {
     packageIds: ['a1b3l000006oUU2AAM', 'a1b3l000006oUduAAE', 'a1b3l000006oUTUAA2', 'a1b3l000006oUTZAA2', 'a1b3l000006oUbzAAE', 'a1b3l000006oUbuAAE', 'a1b3l000006oUc0AAE', 'a1b3l000006oUTTAA2', 'a1b3l000007cMchAAE', 'a1b3l000007cMcmAAE', 'a1b3l000007cMciAAE', 'a1b3l000007cMgFAAU', 'a1b3l000007cMg5AAE', 'a1b3l000007cMgAAAU', 'a1b3l000007cMkmAAE', 'a1b3l000006oUcOAAU', 'a1b3l000007cMWUAA2', 'a1b3l000007cMlQAAU', 'a1b3l000007cMWPAA2', 'a1b3l000007cMUeAAM', 'a1b3l000007cMeiAAE', 'a1b3l000007cMenAAE', 'a1b3l000007cMedAAE', 'a1b3l000007cMaWAAU', 'a1b3l000007cMaRAAU', 'a1b3l000006oUTLAA2', 'a1b3l000006oUTKAA2', 'a1b3l000007cMbeAAE', 'a1b3l000006oUacAAE', 'a1b3l000007cMbZAAU'],
@@ -1667,13 +1708,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'LMS Vendor' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'lms_product',
@@ -1683,13 +1724,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'LMS Name' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'lms_company_key',
@@ -1699,13 +1740,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'LMS Company Key' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'lms_location_code',
@@ -1714,14 +1755,13 @@ module.exports = [
             required: false,
             displayOnlyOnCorp: false,
             displayOnCorp: false,
-            bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'LMS Location/Property Code' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'auto_response',
@@ -1731,13 +1771,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'Does your lead tracking email provide an auto response customer email?' },
-            settings: { options: { default: ['Yes', ' No', ' N/A'] } },
-            description: null,
-            validation: null,
-            placeholder: null
+            settings: { options: { default: ['Yes', 'No', 'N/A'] } },
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'suppress_auto_response',
@@ -1747,13 +1787,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'If yes to the above, would you like G5 to suppress the G5 auto response customer email?' },
-            settings: { options: { default: ['Yes', ' No', ' N/A'] } },
-            description: null,
-            validation: null,
-            placeholder: null
+            settings: { options: { default: ['Yes', 'No', 'N/A'] } },
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }]
       },
       {
@@ -1769,13 +1809,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'PMS Vendor' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'pms_product',
@@ -1785,13 +1825,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'PMS Product' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }, {
             dataKey: 'pms_credentials',
             component: '',
@@ -1800,13 +1840,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'PMS Credentials' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }, {
             dataKey: 'pms_property_code',
             component: '',
@@ -1815,13 +1855,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            irecordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'PMS Property Code' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }
         ]
       },
@@ -1836,13 +1876,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'RMS Vendor' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'rms_product',
@@ -1852,13 +1892,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'RMS Product' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'rms_credentials',
@@ -1868,13 +1908,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'RMS Credentials' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'rms_property_code',
@@ -1884,13 +1924,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['MF'],
             label: { default: 'RMS Property Code' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }
         ]
       },
@@ -1905,13 +1945,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'Unit Inventory Vendor' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'corporate_code',
@@ -1921,13 +1961,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'Corporate Code' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'faciliy_id',
@@ -1937,13 +1977,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'Facility ID' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'integration_api_username',
@@ -1953,13 +1993,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'API User Name' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'integration_api_password',
@@ -1969,13 +2009,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'API Password' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           },
           {
             dataKey: 'integration_endpoint',
@@ -1985,13 +2025,13 @@ module.exports = [
             displayOnlyOnCorp: false,
             displayOnCorp: false,
             bulkEditable: false,
-            isHub: false,
+            recordLocation: 'salesforce',
             displayVertical: ['SS'],
             label: { default: 'Endpoint (not needed for Sitelink)' },
             settings: null,
-            description: null,
-            validation: null,
-            placeholder: null
+            description: { default: '' },
+            validation: {},
+            placeholder: { default: '' }
           }
         ]
       }]
@@ -2011,13 +2051,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Yelp Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2028,13 +2068,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2045,13 +2085,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Twitter Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2062,13 +2102,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Pinterest Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2079,13 +2119,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2096,13 +2136,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'YouTube Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2113,13 +2153,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'LinkedIn Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2130,13 +2170,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Pay Online Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2147,13 +2187,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Online Leasing Application' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2164,13 +2204,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Online Leasing Floor Plan Availability' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2181,13 +2221,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Resident Portal' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2198,13 +2238,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Maintenance Request' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'employment_portal',
@@ -2214,13 +2254,13 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS'],
       label: { default: 'Employment Portal' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'investor_portal',
@@ -2230,13 +2270,13 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS'],
       label: { default: 'Investor Portal' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'careers_portal',
@@ -2246,13 +2286,13 @@ module.exports = [
       displayOnlyOnCorp: true,
       displayOnCorp: true,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS'],
       label: { default: 'Careers Portal' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2269,13 +2309,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'content-library',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have a slogan, tagline, or mission statement?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'communicate_audience',
@@ -2285,13 +2325,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important thing you want to communicate to your audience?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'best_solution',
@@ -2301,13 +2341,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What kind of “pain” is your customer in? How are your services the best solution for them?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'apart_competitors',
@@ -2317,13 +2357,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you feel sets you apart from your competitors?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'awards',
@@ -2333,13 +2373,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any awards, affiliations, or case studies you’d like to mention?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'highest_rated_asset',
@@ -2349,13 +2389,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you consider to be your highest-rated asset?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'buzzwords',
@@ -2365,13 +2405,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that best describes your organization. Are there any words that we should avoid?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'existing_collateral',
@@ -2381,13 +2421,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: "Do you have existing collateral (brochures, press releases, sales slicks) or content that you would like us to review while creating your content? Tell us what you like/don't like about it." },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'include_in_content',
@@ -2397,13 +2437,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: "Is there anything else that you want us to include in your content? Don't be shy here; this is your story and we want to tell it right." },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2421,13 +2461,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'How do you want your copy to sound? Choose 3 to 5 from the list or come up with your own words.' },
-      settings: { options: { default: ['Trendy', ' traditional', ' warm', ' inviting', ' playful', ' edgy', ' authoritative', ' polished', ' irreverent', ' upbeat', ' straightforward', ' casual', ' other (HTML FOR THEM TO FILL OUT)'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Trendy', 'traditional', 'warm', 'inviting', 'playful', 'edgy', 'authoritative', 'polished', 'irreverent', 'upbeat', 'straightforward', 'casual', 'other (HTML FOR THEM TO FILL OUT)'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2438,13 +2478,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Any Unique Differentiators about the property?\n(ex: amenities, price within the market, etc.)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2455,13 +2495,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'content-library',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Key Message/Tagline\n(if applicable)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2472,13 +2512,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community. (ex. boutique, homey, resort-style, etc)' },
-      settings: { options: { default: ['Classic', ' charming', ' cozy', ' hip', ' boutique', ' high-end', ' resort-style', ' industrial', ' Craftsman', ' high-tech', ' eco-friendly', ' Other (HTML FOR THEM TO FILL OUT)'] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: { options: { default: ['Classic', 'charming', 'cozy', 'hip', 'boutique', 'high-end', 'resort-style', 'industrial', 'Craftsman', 'high-tech', 'eco-friendly', 'Other (HTML FOR THEM TO FILL OUT)'] } },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2489,13 +2529,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important thing you want to communicate to your audience?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2506,13 +2546,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sets you apart from your competitors?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2523,13 +2563,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any terminology we CANNOT use? Or legal restrictions within the state? If so, please clarify.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2540,13 +2580,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What do you like about your current copy? What could be improved upon?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2557,13 +2597,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'content-library',
       displayVertical: ['MF', 'SS', 'SL'],
-      label: { default: 'Do you have an established tagline/slogan? \nIf so, what is it?' },
+      label: { default: 'Key Message/Tagline\n(if applicable)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2574,13 +2614,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us 3 to 5 buzzwords that describe your interior and exterior spaces.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2591,13 +2631,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the main reason a prospect would choose to rent at this community as opposed to a comparable competitor?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2608,13 +2648,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Due to state, other regulations, or your preferences, is there any terminology we CANNOT or SHOULD NOT use? If so, please clarify.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2625,13 +2665,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Are any or all of your units income-restricted? Specify whether it is all or some units and which type.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2649,13 +2689,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
       settings: { options: { default: [{ text: 'Trendy', value: 'trendy' }, { text: 'Traditional', value: 'traditional' }, { text: 'Warm', value: 'warm' }, { text: 'Inviting', value: 'inviting' }, { text: 'Playful', value: 'playful' }, { text: 'Edgy', value: 'edgy' }, { text: 'Authoritative', value: 'authoritative' }, { text: 'Polished', value: 'polished' }, { text: 'Irreverent', value: 'irreverent' }, { text: 'Upbeat', value: 'upbeat' }, { text: 'Straightforward', value: 'straightforward' }, { text: 'Casual', value: 'casual' }, { text: 'Other', value: 'other' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2666,30 +2706,30 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SL'],
       label: { default: 'What are the consistencies across your locations (ex. pools, pet friendly, W/D hook ups etc.)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
-      dataKey: 'taglie',
+      dataKey: 'tagline',
       component: 'input',
       type: 'text',
       required: false,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'content-library',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have a key message or tagline?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2700,13 +2740,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is the most important quality you want users to know about your properties?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2717,13 +2757,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Broadly, what sets your properties apart from your competitors?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2734,13 +2774,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any terminology we CANNOT use or legal restrictions within the state(s)? If so, please clarify.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2758,13 +2798,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Who is the primary target audience for your blog?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2775,13 +2815,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sort of topics would you like your blog to address? Do you have any blog posts in mind?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2792,13 +2832,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What sort of imagery would you like us to use for your blog posts?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2809,13 +2849,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there any specific language you would like us to avoid?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2826,13 +2866,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any preference about when your blogs will be published?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2850,13 +2890,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What is your main goal with this refresh?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2867,13 +2907,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community.' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2884,13 +2924,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Do you have any new features, amenities, or neighborhood destinations you would like to include?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2901,13 +2941,32 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
-      settings: { options: { default: [{ text: 'Trendy', value: 'trendy' }, { text: 'Traditional', value: 'traditional' }, { text: 'Warm', value: 'warm' }, { text: 'Inviting', value: 'inviting' }, { text: 'Playful', value: 'playful' }, { text: 'Edgy', value: 'edgy' }, { text: 'Authoritative', value: 'authoritative' }, { text: 'Polished', value: 'polished' }, { text: 'Irreverent', value: 'irreverent' }, { text: 'Upbeat', value: 'upbeat' }, { text: 'Straightforward', value: 'straightforward' }, { text: 'Casual', value: 'casual' }, { text: 'Other', value: 'other' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      settings: {
+        initialValue: [],
+        options: {
+          default: [
+            { text: 'Trendy', value: 'trendy' },
+            { text: 'Traditional', value: 'traditional' },
+            { text: 'Warm', value: 'warm' },
+            { text: 'Inviting', value: 'inviting' },
+            { text: 'Playful', value: 'playful' },
+            { text: 'Edgy', value: 'edgy' },
+            { text: 'Authoritative', value: 'authoritative' },
+            { text: 'Polished', value: 'polished' },
+            { text: 'Irreverent', value: 'irreverent' },
+            { text: 'Upbeat', value: 'upbeat' },
+            { text: 'Straightforward', value: 'straightforward' },
+            { text: 'Casual', value: 'casual' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
+      },
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2918,13 +2977,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Is there anything else you would like us to know about this project?' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -2942,13 +3001,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Location of Focus' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2959,13 +3018,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Competitive Landscape' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2976,13 +3035,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Untilities Included' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -2993,13 +3052,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Single Family Homes' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3010,13 +3069,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'Competitors' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -3034,13 +3093,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Current Website URL' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
       dataKey: 'website_provider',
@@ -3050,13 +3109,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Provider' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3067,13 +3126,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3084,13 +3143,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3101,13 +3160,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3118,13 +3177,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3135,13 +3194,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3152,13 +3211,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zipcode' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3169,13 +3228,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3186,13 +3245,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Local Phone Number' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3203,13 +3262,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Class Type' },
       settings: { options: { default: [{ text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3220,13 +3279,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
       settings: { options: { default: [{ text: 'Development', value: 'development' }, { text: 'Pre-Leasing', value: 'preLeasing' }, { text: 'Lease-Up', value: 'leaseUp' }, { text: 'Low Occupancy', value: 'lowOccupancy' }, { text: 'Mid Occupancy', value: 'midOccupancy' }, { text: 'High Occupancy', value: 'highOccupancy' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3237,13 +3296,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }
     ]
   },
@@ -3262,13 +3321,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3279,13 +3338,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -3303,13 +3362,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'PMS Vendor & Product name' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3320,13 +3379,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Integration Username' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3337,13 +3396,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Integration Password' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3354,13 +3413,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'PMS Property Code' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3371,13 +3430,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Display Apartments Available Up To X Days Out' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3388,13 +3447,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Max Number of Apartments per Floor Plan to Display' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -3412,13 +3471,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Current Website URL' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3429,13 +3488,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Website Provider' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3446,13 +3505,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { SL: 'Name of Community', SS: 'Name of Facility', MF: 'Name of Property', corp: 'Name of Corporate', default: 'Name of Property' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3463,13 +3522,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3480,13 +3539,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3497,13 +3556,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'City' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3514,13 +3573,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3531,13 +3590,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Zipcode' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3548,13 +3607,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Forward to/Lead Tracking Phone Number' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3565,13 +3624,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Local Phone Number' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3582,13 +3641,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Class Type' },
       settings: { options: { default: [{ text: 'Class A', value: 'a' }, { text: 'Class B', value: 'c' }, { text: 'Class C', value: 'c' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3599,13 +3658,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Status' },
       settings: { options: { default: [{ text: 'Development', value: 'development' }, { text: 'Pre-Leasing', value: 'preLeasing' }, { text: 'Lease-Up', value: 'leaseUp' }, { text: 'Low Occupancy', value: 'lowOccupancy' }, { text: 'Mid Occupancy', value: 'midOccupancy' }, { text: 'High Occupancy', value: 'highOccupancy' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3616,13 +3675,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3633,13 +3692,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Facebook Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3650,13 +3709,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Instagram Link' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3667,13 +3726,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'PMS Vendor & Product name' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3684,13 +3743,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Integration Username' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3701,13 +3760,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Integration Password' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3718,13 +3777,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'PMS Property Code' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3735,13 +3794,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Display Apartments Available Up To X Days Out' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3752,13 +3811,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Max Number of Apartments per Floor Plan to Display' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3769,13 +3828,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Website URL' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3786,13 +3845,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Website Provider (if off platform)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3803,13 +3862,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'City' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3820,13 +3879,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'State' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3837,13 +3896,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Zip' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3854,13 +3913,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Time Zone' },
       settings: { options: { default: [{ text: 'Pick a Time Zone', value: null }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3871,13 +3930,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Phone Number (non-tracking number)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3888,13 +3947,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'hub',
       displayVertical: ['MF'],
       label: { default: 'Property Email Address' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3905,13 +3964,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: true,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Lead Email Address(es)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3922,13 +3981,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Lead CRM (if applicable)' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -3946,13 +4005,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Icon Selection' },
       settings: { options: { default: [{ text: '/bot/bot-brown.png', value: 'Brown' }, { text: '/bot/bot-default-blue.png', value: 'Blue' }, { text: '/bot/bot-green.png', value: 'Green' }, { text: '/bot/bot-grey.png', value: 'Grey' }, { text: '/bot/bot-orange.png', value: 'Orange' }, { text: '/bot/bot-purple.png', value: 'Purple' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3963,13 +4022,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Does property allow for contacting prospects via SMS Text?' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3980,13 +4039,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Virtual Tours?' },
       settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -3997,14 +4056,14 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Virtual Tour 1' },
       settings: null,
       dependentOn: 'virtual_tours',
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4015,14 +4074,14 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Virtual Tour 2' },
       settings: null,
       dependentOn: 'virtual_tours',
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -4040,13 +4099,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Name for Reviewing Responses' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4057,13 +4116,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Email for Reviewing Responses' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4074,13 +4133,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Primary Contact Phone Number for Reviewing Responses' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4091,13 +4150,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Typically, we respond directly to 3+ star reviews on your behalf. We escalate a drafted response to 1 & 2 star reviews for your approval before posting.' },
       settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Yes - use the standard strategy', value: 'yes' }, { text: 'No - I want to review every response before posting', value: 'no' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -4115,13 +4174,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Escalate Response Options' },
       settings: { options: { default: [{ text: 'Select Option', value: null }, { text: 'Escalate All Responses w/ 24 Hour Delay', value: 'dayDelay' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'lowStarUnlimited' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'allUnlimited' }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4132,13 +4191,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Daily Alert For All 1 and 2 Star Reviews' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4149,13 +4208,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Turn Off Default Reports' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4166,13 +4225,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Escalate Revised Response' },
       settings: { options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] } },
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4183,13 +4242,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Location Escalation Contact Name' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4200,13 +4259,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Location Escalation Contact Email' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   },
   {
@@ -4224,13 +4283,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Apartments.com\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4241,13 +4300,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Apartments.com\nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4258,13 +4317,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Apartment Guide\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4275,13 +4334,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Apartment Guide \nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4292,13 +4351,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'ApartmentRatings\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4309,13 +4368,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'ApartmentRatings\nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4325,14 +4384,13 @@ module.exports = [
       required: true,
       displayOnlyOnCorp: false,
       displayOnCorp: false,
-      bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Yelp\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4343,13 +4401,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['MF'],
       label: { default: 'Yelp\nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4360,13 +4418,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'Caring.com\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4377,13 +4435,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'Caring.com\nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4394,13 +4452,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'SeniorAdvisor\nUsername' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     },
     {
 
@@ -4411,13 +4469,13 @@ module.exports = [
       displayOnlyOnCorp: false,
       displayOnCorp: false,
       bulkEditable: false,
-      isHub: false,
+      recordLocation: 'salesforce',
       displayVertical: ['SL'],
       label: { default: 'SeniorAdvisor\nPassword' },
       settings: null,
-      description: null,
-      validation: null,
-      placeholder: null
+      description: { default: '' },
+      validation: {},
+      placeholder: { default: '' }
     }]
   }
 ]
