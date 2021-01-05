@@ -1,5 +1,6 @@
 const models = require('../../../models')
 const states = require('../../../config/states')
+const LocationPropertiesSeeder = require('../../location-properties-seeder')
 module.exports = {
   processor,
   concurrency: 1,
@@ -50,30 +51,9 @@ async function findLocationPackages (inspireProjectId, Location__c, sfApi) {
   return sfApi.findLocationProduct({ Opportunity__c, Location__c }, ['Location__c', 'Package__c'])
 }
 
-async function getDefaultLocProps() {
-  const dataKeys = await models.field.findAll({
-    attributes: ['dataKey']
-  })
-  return dataKeys.reduce((acc, obj) => {
-    acc[obj.dataKey] = null
-    return acc
-  }, {})
-}
-
-async function createLocationProps(props) {
-  const countryMap = { 'United States': 'US', Canada: 'CA' }
-  const properties = await getDefaultLocProps()
-  for (const prop in props) {
-    prop === 'country'
-      ? properties[prop] = countryMap[props[prop]]
-      : properties[prop] = props[prop]
-  }
-  return properties
-}
-
 async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
   const { Master_Project__c: salesforce_project_id, Location__c: locationId, Inspire_Project__c: inspireProjectId } = await sfApi.findProject({ Id: salesforceProjectId }, ['Master_Project__c', 'Location__c', 'Inspire_Project__c'])
-  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
+  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: street_address_1, Zip__c: postal_code, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
   const { value: state } = states.US.options.find(state => state.text === stateC)
   const locationPackages = await findLocationPackages(inspireProjectId, locationId, sfApi)
   console.log({ locationPackages })
@@ -96,7 +76,8 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
     })
     packages.push(dbPackage)
   }
-  const properties = await createLocationProps({ name, url, street_address_1: address, postal_code: zip, domainType, state: state || null, vertical, country })
+  const locationSeeder = new LocationPropertiesSeeder({ name, url, street_address_1, postal_code, domainType, state, vertical, country })
+  const properties = await locationSeeder.createLocationProps()
   const location = await models.location.create({
     locationProjectId: salesforceProjectId,
     properties
