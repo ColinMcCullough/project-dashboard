@@ -593,7 +593,9 @@ module.exports = [
       label: { default: 'Primary Facility Feature 1\n' },
       settings: {
         initialValue: [],
-        mappedFields: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4'],
+        mappedFields: {
+          default: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4']
+        },
         options: {
           default: [
             { text: 'Luxury', value: 'luxury' },
@@ -761,7 +763,9 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Neighborhood' },
       settings: {
-        mappedFields: ['neighborhood', 'neighborhood_2'],
+        mappedFields: {
+          default: ['neighborhood', 'neighborhood_2']
+        },
         initialValue:
         []
       },
@@ -829,7 +833,9 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Neighborhood' },
       settings: {
-        mappedFields: ['landmark_1_name', 'landmark_2_name'],
+        mappedFields: {
+          default: ['landmark_1_name', 'landmark_2_name']
+        },
         initialValue: []
       },
       description: { default: '' },
@@ -912,7 +918,9 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Nearby Employer' },
       settings: {
-        mappedFields: ['nearby_employer_1', 'nearby_employer_2', 'nearby_employer_3'],
+        mappedFields: {
+          default: ['nearby_employer_1', 'nearby_employer_2', 'nearby_employer_3']
+        },
         initialValue: []
       },
       description: { default: '' },
