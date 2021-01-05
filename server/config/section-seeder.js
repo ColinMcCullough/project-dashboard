@@ -3807,7 +3807,7 @@ module.exports = [
       recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Street Address' },
-      ssettings: { initialValue: null },
+      settings: { initialValue: null },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
