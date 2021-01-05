@@ -14,9 +14,6 @@ module.exports = (sequelize) => {
     placeholder: {
       type: JSONB
     },
-    inputType: {
-      type: STRING
-    },
     required: {
       type: BOOLEAN
     },
@@ -54,4 +51,5 @@ module.exports = (sequelize) => {
   field.associate = (models) => {
     models.field.belongsTo(models.recordLocation)
   }
+  return field
 }
