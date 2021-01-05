@@ -1,4 +1,5 @@
 const models = require('../models')
+
 class LocationOnboardingForm {
   constructor(location) {
     this.location = location
@@ -14,7 +15,9 @@ class LocationOnboardingForm {
   }
 
   findPackageIds() {
-    if (this.location.dataValues.packages.length === 0) { throw new Error('this location is not associated with any packages') }
+    if (this.location.dataValues.packages.length === 0) {
+      throw new Error('This location is not associated with any packages.')
+    }
     this.packageIds = this.location.dataValues.packages.map(p => p.salesforceId)
   }
 
@@ -27,7 +30,9 @@ class LocationOnboardingForm {
   }
 
   async loadSections() {
-    if (!this.packageIds) { throw new Error('packageIds must be set') }
+    if (!this.packageIds) {
+      throw new Error('<packageIds> must be set.')
+    }
     this.sections = await models.section.findAll({
       include: [
         {

@@ -1,4 +1,4 @@
-const { INTEGER, STRING, JSONB, BOOLEAN } = require('sequelize')
+const { INTEGER, STRING } = require('sequelize')
 
 module.exports = (sequelize) => {
   const subsection = sequelize.define('subsection', {
