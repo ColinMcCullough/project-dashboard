@@ -6,9 +6,9 @@ class LocationPropertiesSeeder {
     this.mappedValues = {
       country: { 'United States': 'US', Canada: 'CA' },
       vertical: {
-        'Multifamily Housing': 'mf',
-        'Senior Living': 'sl',
-        'Self Storage': 'ss'
+        'Multifamily Housing': 'MF',
+        'Senior Living': 'SL',
+        'Self Storage': 'SS'
       }
     }
   }
