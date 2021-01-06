@@ -2773,7 +2773,23 @@ module.exports = [
       label: { default: 'How do you want your copy to sound? Choose 3 to 5 from the list or come up with your own words.' },
       settings: {
         initialValue: [],
-        options: { default: ['Trendy', 'traditional', 'warm', 'inviting', 'playful', 'edgy', 'authoritative', 'polished', 'irreverent', 'upbeat', 'straightforward', 'casual', 'Other'] }
+        options: {
+          default: [
+            { text: 'Trendy', value: 'trendy' },
+            { text: 'traditional', value: 'traditional' },
+            { text: 'warm', value: 'warm' },
+            { text: 'inviting', value: 'inviting' },
+            { text: 'playful', value: 'playful' },
+            { text: 'edgy', value: 'edgy' },
+            { text: 'authoritative', value: 'authoritative' },
+            { text: 'polished', value: 'polished' },
+            { text: 'irreverent', value: 'irreverent' },
+            { text: 'upbeat', value: 'upbeat' },
+            { text: 'straightforward', value: 'straightforward' },
+            { text: 'casual', value: 'casual' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
       },
       description: { default: '' },
       validation: {},
@@ -2824,7 +2840,22 @@ module.exports = [
       label: { default: 'Give us a list of buzzwords or phrases that describe your community. (ex. boutique, homey, resort-style, etc)' },
       settings: {
         initialValue: [],
-        options: { default: ['Classic', 'charming', 'cozy', 'hip', 'boutique', 'high-end', 'resort-style', 'industrial', 'Craftsman', 'high-tech', 'eco-friendly', 'Other'] }
+        options: {
+          default: [
+            { text: 'Classic', value: 'classic' },
+            { text: 'charming', value: 'charming' },
+            { text: 'cozy', value: 'cozy' },
+            { text: 'hip', value: 'hip' },
+            { text: 'boutique', value: 'boutique' },
+            { text: 'high-end', value: 'highEnd' },
+            { text: 'resort-style', value: 'resortStyle' },
+            { text: 'industrial', value: 'industrial' },
+            { text: 'Craftsman', value: 'craftsman' },
+            { text: 'high-tech', value: 'highTech' },
+            { text: 'eco-friendly', value: 'ecoFriendly' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
       },
       description: { default: '' },
       validation: {},
@@ -4471,7 +4502,8 @@ module.exports = [
       label: { default: 'Escalate Response Options' },
       settings: {
         initialValue: null,
-        options: { default: [{ text: 'Select Option', value: null }, { text: 'Escalate All Responses w/ 24 Hour Delay', value: 'dayDelay' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'lowStarUnlimited' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'allUnlimited' }] } },
+        options: { default: [{ text: 'Select Option', value: null }, { text: 'Escalate All Responses w/ 24 Hour Delay', value: 'dayDelay' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'lowStarUnlimited' }, { text: 'Escalate All 1 and 2 Star Responses w/ 24 Hour Delay', value: 'allUnlimited' }] }
+      },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
