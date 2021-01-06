@@ -10,8 +10,12 @@ class LocationPropertiesSeeder {
       attributes: ['dataKey', 'settings']
     })
     return dataKeys.reduce((acc, obj) => {
-      console.log(obj)
       acc[obj.dataValues.dataKey] = obj.dataValues.settings.initialValue
+      if (obj.dataValues.settings.mappedFields) {
+        obj.dataValues.settings.mappedFields.forEach((key) => {
+          acc[key] = null
+        })
+      }
       return acc
     }, {})
   }
