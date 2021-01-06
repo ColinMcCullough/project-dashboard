@@ -7,14 +7,14 @@
       <b-row>
         <b-col>
           <b-input-group prepend="Homepage Url" class="mb-2">
+            <!-- needs input handler -->
             <b-form-input
-              :value="location.properties.url"
-              :state="validURL(location.properties.url)"
+              :value="location.properties.current_website"
+              :state="validURL(location.properties.current_website)"
               aria-label="Homepage Url"
               placeholder="ex: https://www.m2apartments.com"
-              @input="onInput($event, 'url')"
             />
-            <b-form-invalid-feedback :state="validURL(location.properties.url)" class="pt-1 pl-2 abs-feedback" style="top: 14px;">
+            <b-form-invalid-feedback :state="validURL(location.properties.current_website)" class="pt-1 pl-2 abs-feedback" style="top: 14px;">
               Invalid Url
             </b-form-invalid-feedback>
           </b-input-group>
@@ -134,12 +134,12 @@ export default {
     },
     stepComplete() {
       return this.validatePages() &&
-        this.validURL(this.location.properties.url)
+        this.validURL(this.location.curr)
     }
   },
   created() {
     const val = this.validatePages() &&
-      this.validURL(this.location.properties.url)
+      this.validURL(this.location.properties.current_website)
     this.updateLocation({ locIdx: this.locIdx, key: 'validUrls', val })
   },
   methods: {
