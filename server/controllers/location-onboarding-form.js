@@ -3,11 +3,6 @@ const { reject } = require('../utilities/object')
 class LocationOnboardingForm {
   constructor (location) {
     this.location = location
-    this.verticalMap = {
-      'Self Storage': 'SS',
-      'Multifamily Housing': 'MF',
-      'Senior Living': 'SL'
-    }
     this.sections = null
     this.form = null
     this.packageIds = null
@@ -20,7 +15,7 @@ class LocationOnboardingForm {
   }
 
   findVertical () {
-    this.vertical = this.verticalMap[this.location.dataValues.properties.vertical]
+    this.vertical = this.location.dataValues.properties
   }
 
   corpStatus () {
