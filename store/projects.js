@@ -22,6 +22,7 @@ export const mutations = {
     state.projects = val.projects
   },
   UPDATE (state, payload) {
+    console.log(payload)
     const i = state.projects.findIndex(project => project.id === payload.id)
     state.projects[i] = payload
   }

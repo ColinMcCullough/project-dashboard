@@ -1,5 +1,6 @@
 const models = require('../../../models')
 const states = require('../../../config/states')
+const LocationPropertiesSeeder = require('../../location-properties-seeder')
 module.exports = {
   processor,
   concurrency: 1,
@@ -7,7 +8,6 @@ module.exports = {
 }
 
 async function processor(job, done, { sfApi }) {
-  console.log('here')
   try {
     if (!sfApi.isLoggedIn) {
       console.log('Signing In')
@@ -50,12 +50,13 @@ async function findLocationPackages (inspireProjectId, Location__c, sfApi) {
   console.log({ Opportunity__c, Location__c })
   return sfApi.findLocationProduct({ Opportunity__c, Location__c }, ['Location__c', 'Package__c'])
 }
+
 async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
   const { Master_Project__c: salesforce_project_id, Location__c: locationId, Inspire_Project__c: inspireProjectId } = await sfApi.findProject({ Id: salesforceProjectId }, ['Master_Project__c', 'Location__c', 'Inspire_Project__c'])
-  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: address, Zip__c: zip, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
+  const { Country__c: country, Vertical__c: vertical, Name: name, Website_URL__c: url, Address__c: street_address_1, Zip__c: postal_code, Domain_Type__c: domainType, State__c: stateC } = await sfApi.findLocation({ Id: locationId }, ['Name', 'Website_URL__c', 'Domain_Type__c', 'Address__c', 'Zip__c', 'State__c', 'Vertical__c', 'Country__c'])
   const { value: state } = states.US.options.find(state => state.text === stateC)
   const locationPackages = await findLocationPackages(inspireProjectId, locationId, sfApi)
-  console.log({locationPackages})
+  console.log({ locationPackages })
   const locationPackagesIds = locationPackages.filter(l => l.Package__c).map(l => l.Package__c)
   const sfPackageMap = await sfApi.findPackagesByid(locationPackagesIds, ['Id', 'Name'])
     .then(packages => packages.map((p) => {
@@ -75,14 +76,20 @@ async function findAndCreateLocationProject(salesforceProjectId, sfApi) {
     })
     packages.push(dbPackage)
   }
-  const location = await models.location.create({ locationProjectId: salesforceProjectId, properties: { name, url, address, zip, domainType, state: state || null, vertical, country } })
+  const locationSeeder = new LocationPropertiesSeeder({ name, url, street_address_1, postal_code, domainType, state, vertical, country })
+  const properties = await locationSeeder.createLocationProps()
+  const location = await models.location.create({
+    locationProjectId: salesforceProjectId,
+    properties
+    // properties: { name, url, street_address_1: address, postal_code: zip, domainType, state: state || null, vertical, country }
+  })
   // Create Packages
   await location.addPackages(packages)
   let project = await models.project.findOne({ where: { salesforce_project_id } })
   if (!project) {
     project = await findAndCreateMasterProject(salesforce_project_id, sfApi)
   }
-  return location.update({ projectId: project.dataValues.id })
+  return location.update({ projectId: project.dataValues.id, hooks: false })
 }
 
 async function findAndCreateMasterProject(salesforceProjectId, sfApi) {

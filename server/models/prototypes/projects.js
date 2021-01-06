@@ -50,7 +50,7 @@ module.exports = (models, sequelize, Sequelize) => {
     this.dataValues.urlsMissing = 0
     for (let i = 0; i < data.locations.length; i++) {
       const location = data.locations[i]
-      if (!location.properties.url) {
+      if (!location.properties.current_website) {
         this.dataValues.urlsMissing++
         this.dataValues.urlsSet = false
       }

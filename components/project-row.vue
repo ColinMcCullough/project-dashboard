@@ -123,7 +123,7 @@
               Scraping
             </span> -->
             <span v-if="project.scrapeComplete">
-            <!-- <span v-else-if="project.scrapeComplete"> -->
+              <!-- <span v-else-if="project.scrapeComplete"> -->
               <b-icon
                 icon="check-circle-fill"
                 scale="1.8em"
@@ -182,9 +182,11 @@
 <script>
 import LinkDiscoverer from '~/mixins/link-discoverer'
 import Locations from '~/mixins/locations'
+import Projects from '~/mixins/projects'
 import GlobalFunctions from '~/mixins/global-functions'
+import Clients from '~/mixins/clients'
 export default {
-  mixins: [Locations, GlobalFunctions, LinkDiscoverer],
+  mixins: [Locations, Clients, Projects, GlobalFunctions, LinkDiscoverer],
   props: {
     project: {
       type: Object,
@@ -213,6 +215,9 @@ export default {
     },
     async launchModal (modalName, projectId) {
       await this.setLocations(projectId)
+      if (modalName === 'intake-modal') {
+        await this.setClients(projectId)
+      }
       this.$bvModal.show(modalName)
     },
     formatBadge (project, status) {
@@ -224,9 +229,8 @@ export default {
     },
     async onRefetch (id) {
       this.isBusy = true
-      await this.$store.dispatch('projects/update', id)
+      await this.updateProject(id)
       setTimeout(() => { this.isBusy = false }, 2000)
-      // this.isBusy = false
     }
   }
 }

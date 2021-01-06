@@ -3,8 +3,6 @@ const path = require('path')
 const Sequelize = require('sequelize')
 
 const {
-  INCLUDE_G5_AUTH: includeAuth,
-  INCLUDE_G5_UPDATABLES: includeUpdatables,
   DATABASE_URL: dbUrl,
   DATABASE_MAX_CONNECTIONS: max,
   DATABASE_MIN_CONNECTIONS: min,
@@ -37,11 +35,10 @@ const sequelize = new Sequelize(dbUrl, {
   },
   logging: (logging === 'true')
 })
-const authModels = require('../../../g5-auth-js').models(sequelize)
-// NOT SURE THIS WILL WORK, BUT IT SEEMS LIKE WE WOULD WANT TO OPTIONALIZE THESE
+
+const updatableModels = require('@getg5/g5-updatable').models(sequelize)
 const db = {
-  ...authModels
-  // ...includeUpdatables ? require('@getg5/g5-updatable').models(sequelize) : {}
+  ...updatableModels
 }
 
 // db.user.associate = (models) => {
@@ -68,7 +65,6 @@ Object.keys(db)
       db[modelName].associate(db)
     }
   })
-
 require('./prototypes')(db, sequelize, Sequelize)
 require('./hooks')(db, sequelize, Sequelize)
 

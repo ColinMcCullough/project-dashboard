@@ -52,7 +52,7 @@ export default {
     },
     description: {
       type: String,
-      default: 'An explanation about the state of things.'
+      default: ''
     },
     id: {
       type: String,

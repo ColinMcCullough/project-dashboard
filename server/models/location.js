@@ -1,4 +1,4 @@
-const { INTEGER, STRING, JSONB, BOOLEAN } = require('sequelize')
+const { INTEGER, STRING, JSONB, BOOLEAN, DATE } = require('sequelize')
 
 module.exports = (sequelize) => {
   const location = sequelize.define('location', {
@@ -43,18 +43,34 @@ module.exports = (sequelize) => {
     g5ApprovedBy: {
       type: STRING
     },
+    g5ApprovedOn: {
+      type: DATE
+    },
     clientApproved: {
       type: BOOLEAN,
       defaultValue: false
     },
     clientApprovedBy: {
       type: STRING
+    },
+    crawlSite: {
+      type: BOOLEAN,
+      defaultValue: true
+    },
+    vendor: {
+      type: STRING
+    },
+    isCorporate: {
+      type: BOOLEAN,
+      defaultValue: false
     }
   }, { paranoid: true })
   location.associate = (models) => {
     models.location.hasMany(models.linkDiscoverer)
     models.location.hasMany(models.assetScraper)
     models.location.belongsToMany(models.package, { through: 'locationPackage' })
+    // to associate client to many locations
+    models.g5_updatable_client.hasMany(models.location)
   }
   return location
 }
