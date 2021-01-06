@@ -49,6 +49,20 @@ module.exports = (sequelize) => {
     clientApproved: {
       type: BOOLEAN,
       defaultValue: false
+    },
+    clientApprovedBy: {
+      type: STRING
+    },
+    crawlSite: {
+      type: BOOLEAN,
+      defaultValue: true
+    },
+    vendor: {
+      type: STRING
+    },
+    isCorporate: {
+      type: BOOLEAN,
+      defaultValue: false
     }
   }, { paranoid: true })
   location.associate = (models) => {

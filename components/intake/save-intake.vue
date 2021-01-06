@@ -54,10 +54,11 @@ export default {
         return {
           locationId: location.locationId,
           g5UpdatableClientId: location.g5UpdatableClientId,
+          vendor: location.vendor,
+          isCorporate: location.isCorporate,
+          crawlSite: location.crawlSite,
           properties: {
-            url: location.properties.url,
-            corporate: location.properties.corporate,
-            vendor: location.properties.vendor
+            current_website: location.properties.current_website
           }
         }
       })
