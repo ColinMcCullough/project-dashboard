@@ -15,7 +15,7 @@ class LocationOnboardingForm {
   }
 
   findVertical () {
-    this.vertical = this.location.dataValues.properties
+    this.vertical = this.location.dataValues.properties.vertical
   }
 
   corpStatus () {
