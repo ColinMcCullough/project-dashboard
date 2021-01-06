@@ -14,10 +14,9 @@ async function assetScraper(data, topicName) {
   if (!assetScraperUrl) {
     throw new Error('Invalid arguement passed in')
   }
-  const devToken = process.env.TOKEN
   // const bearerToken = devToken || await getBearerToken(linkDiscovererUrl)
   const postUrl = assetScraperUrl
-  const body = { ...data, topicName }
+  const body = data
   // const config = {
   //   headers: { Authorization: `Bearer ${bearerToken}` }
   // }

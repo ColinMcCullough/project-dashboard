@@ -29,8 +29,8 @@ module.exports = (models, sequelize, Sequelize) => {
       })
       const { properties, id: locationId, locationProjectId } = location.toJSON()
       const { pages } = data
-      const rootdomain = properties.url.replace(/(^\w+:|^)\/\//, '')
-      const rootProtocol = properties.url.includes('https://') ? 'https' : 'http'
+      const rootdomain = properties.current_website.replace(/(^\w+:|^)\/\//, '')
+      const rootProtocol = properties.current_website.includes('https://') ? 'https' : 'http'
       const job = {
         rootdomain,
         rootProtocol,
