@@ -1,8 +1,16 @@
+const { map } = require('../config/section-seeder')
 const models = require('../models')
 class LocationPropertiesSeeder {
   constructor (props) {
     this.sfProps = props
-    this.countryMap = { 'United States': 'US', Canada: 'CA' }
+    this.mappedValues = {
+      country: { 'United States': 'US', Canada: 'CA' },
+      vertical: {
+        'Multifamily Housing': 'mf',
+        'Senior Living': 'sl',
+        'Self Storage': 'ss'
+      }
+    }
   }
 
   async getDefaultLocProps() {
@@ -22,10 +30,13 @@ class LocationPropertiesSeeder {
 
   async createLocationProps() {
     const properties = await this.getDefaultLocProps()
+    const mapKeys = Object.keys(this.mappedValues)
     for (const prop in this.sfProps) {
-      prop === 'country'
-        ? properties[prop] = this.countryMap[this.sfProps[prop]]
-        : properties[prop] = this.sfProps[prop] ? this.sfProps[prop] : null
+      if (mapKeys.includes(prop)) {
+        properties[prop] = this.mappedValues[prop][this.sfProps[prop]]
+      } else {
+        properties[prop] = this.sfProps[prop] ? this.sfProps[prop] : null
+      }
     }
     return properties
   }
