@@ -91,7 +91,10 @@ module.exports = (app) => {
           clientApproved: location.clientApproved,
           properties: location.properties,
           pages: location.crawled ? location.linkDiscoverers[location.linkDiscoverers.length - 1].pages : [],
-          cloudinaryFolder: `onboarding/${location.locationProjectId}`
+          cloudinaryFolder: `onboarding/${location.locationProjectId}`,
+          crawlSite: location.crawlSite,
+          isCorporate: location.isCorporate,
+          vendor: location.vendor
         }
       })
       res.json(val)
