@@ -594,7 +594,7 @@ module.exports = [
       settings: {
         initialValue: [],
         mappedFields: {
-          default: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4']
+          default: ['property_feature_1', 'property_feature_2', 'property_feature_3', 'property_feature_4']
         },
         options: {
           default: [
