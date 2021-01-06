@@ -21,8 +21,8 @@ module.exports = (app) => {
           </soap:Body>
         </soap:Envelope>  
       `)
-      const data = removeNestedArrays(body)
-      await salesforce.add('spinup', data)
+      // const data = removeNestedArrays(body)
+      await salesforce.add('spinup', body)
     } catch (error) {
       res.sendStatus(503)
     }

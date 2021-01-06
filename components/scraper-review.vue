@@ -72,7 +72,7 @@ export default {
     getBody() {
       const payload = []
       this.locations.forEach((location) => {
-        const url = new URL(location.properties.url)
+        const url = new URL(location.properties.current_website)
         payload.push({
           locationId: location.locationId,
           rootProtocol: url.protocol.replace(':', ''),
