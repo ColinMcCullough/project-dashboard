@@ -20,7 +20,7 @@ class LocationPropertiesSeeder {
     const properties = await this.getDefaultLocProps()
     for (const prop in this.sfProps) {
       prop === 'country'
-        ? properties[prop] = this.countryMap[this.sfProps[prop]]
+        ? properties[prop] = this.sfProps[prop] ? this.countryMap[this.sfProps[prop]] : 'US'
         : properties[prop] = this.sfProps[prop] ? this.sfProps[prop] : null
     }
     return properties
