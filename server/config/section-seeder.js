@@ -114,7 +114,7 @@ module.exports = [
         recordLocation: 'salesforce',
         displayVertical: ['MF', 'SS', 'SL'],
         label: { default: 'Other Domains to Reference' },
-        settings: { initialValue: [] },
+        settings: { initialValue: [''] },
         description: { default: '' },
         validation: {},
         placeholder: { default: '' }
@@ -592,7 +592,7 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 1\n' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         mappedFields: {
           default: ['property_feature_1', 'property_feature_2', 'property_feature_3', 'property_feature_4']
         },
@@ -707,10 +707,10 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
-            { text: 'Studio', value: 'sudio' },
+            { text: 'Studio', value: 'studio' },
             { text: '1', value: 'one' },
             { text: '2', value: 'two' },
             { text: '3', value: 'three' },
@@ -735,10 +735,10 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
-            { text: 'Studio', value: 'sudio' },
+            { text: 'Studio', value: 'studio' },
             { text: '1', value: 'one' },
             { text: '2', value: 'two' },
             { text: '3', value: 'three' },
@@ -766,8 +766,7 @@ module.exports = [
         mappedFields: {
           default: ['neighborhood', 'neighborhood_2']
         },
-        initialValue:
-        []
+        initialValue: ['']
       },
       description: { default: '' },
       validation: {},
@@ -816,7 +815,7 @@ module.exports = [
       recordLocation: null,
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Nearby neighborhoods to NOT TARGET' },
-      settings: { initialValue: [] },
+      settings: { initialValue: [''] },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
@@ -836,7 +835,7 @@ module.exports = [
         mappedFields: {
           default: ['landmark_1_name', 'landmark_2_name']
         },
-        initialValue: []
+        initialValue: ['']
       },
       description: { default: '' },
       validation: {},
@@ -921,7 +920,7 @@ module.exports = [
         mappedFields: {
           default: ['nearby_employer_1', 'nearby_employer_2', 'nearby_employer_3']
         },
-        initialValue: []
+        initialValue: ['']
       },
       description: { default: '' },
       validation: {},
@@ -942,7 +941,7 @@ module.exports = [
         mappedFields: {
           default: ['nearby_school_1', 'nearby_school_2']
         },
-        initialValue: []
+        initialValue: ['']
       },
       description: { default: '' },
       validation: {},
@@ -959,7 +958,7 @@ module.exports = [
       recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Restaurants' },
-      settings: { initialValue: [] },
+      settings: { initialValue: [''] },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
@@ -975,7 +974,7 @@ module.exports = [
       recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Shopping Centers & Grocery Stores' },
-      settings: { initialValue: [] },
+      settings: { initialValue: [''] },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
@@ -991,7 +990,7 @@ module.exports = [
       recordLocation: 'hub',
       displayVertical: ['MF', 'SL'],
       label: { default: 'Nearby Recreation & Entertainment' },
-      settings: { initialValue: [] },
+      settings: { initialValue: [''] },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
@@ -1139,7 +1138,7 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Nearby Roads / Streets' },
       settings: {
-        initialValue: [],
+        initialValue: [''],
         mappedFields: {
           default: ['nearby_roadway_1', 'nearby_roadway_2']
         }
@@ -1232,7 +1231,7 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         mappedFields: {
           default: ['care_level_1', 'care_level_2', 'care_level_3', 'care_level_4', 'care_level_5', 'care_level_6']
         },
@@ -1443,7 +1442,7 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartment Amenities' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         mappedFields: {
           default: ['apartment_amenity_1', 'apartment_amenity_2', 'apartment_amenity_3']
         },
@@ -1552,7 +1551,7 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'In-Home/In-Unit Features' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
             { text: 'Move-In Assistance', value: 'moveInAssistance' },
@@ -1611,7 +1610,7 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Community Amenities' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         mappedFields: {
           default: ['community_amenity_1', 'community_amenity_2', 'community_amenity_3']
         },
@@ -1745,7 +1744,7 @@ module.exports = [
         displayVertical: ['SS'],
         label: { default: 'Primary Facility Feature 1\n' },
         settings: {
-          initialValue: [],
+          initialValue: {},
           mappedFields: {
             default: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4']
           },
@@ -2772,8 +2771,24 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'How do you want your copy to sound? Choose 3 to 5 from the list or come up with your own words.' },
       settings: {
-        initialValue: [],
-        options: { default: ['Trendy', 'traditional', 'warm', 'inviting', 'playful', 'edgy', 'authoritative', 'polished', 'irreverent', 'upbeat', 'straightforward', 'casual', 'Other'] }
+        initialValue: {},
+        options: {
+          default: [
+            { text: 'Trendy', value: 'trendy' },
+            { text: 'traditional', value: 'traditional' },
+            { text: 'warm', value: 'warm' },
+            { text: 'inviting', value: 'inviting' },
+            { text: 'playful', value: 'playful' },
+            { text: 'edgy', value: 'edgy' },
+            { text: 'authoritative', value: 'authoritative' },
+            { text: 'polished', value: 'polished' },
+            { text: 'irreverent', value: 'irreverent' },
+            { text: 'upbeat', value: 'upbeat' },
+            { text: 'straightforward', value: 'straightforward' },
+            { text: 'casual', value: 'casual' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
       },
       description: { default: '' },
       validation: {},
@@ -2823,8 +2838,23 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community. (ex. boutique, homey, resort-style, etc)' },
       settings: {
-        initialValue: [],
-        options: { default: ['Classic', 'charming', 'cozy', 'hip', 'boutique', 'high-end', 'resort-style', 'industrial', 'Craftsman', 'high-tech', 'eco-friendly', 'Other'] }
+        initialValue: {},
+        options: {
+          default: [
+            { text: 'Classic', value: 'classic' },
+            { text: 'charming', value: 'charming' },
+            { text: 'cozy', value: 'cozy' },
+            { text: 'hip', value: 'hip' },
+            { text: 'boutique', value: 'boutique' },
+            { text: 'high-end', value: 'highEnd' },
+            { text: 'resort-style', value: 'resortStyle' },
+            { text: 'industrial', value: 'industrial' },
+            { text: 'Craftsman', value: 'craftsman' },
+            { text: 'high-tech', value: 'highTech' },
+            { text: 'eco-friendly', value: 'ecoFriendly' },
+            { text: 'Other', value: 'other' }
+          ]
+        }
       },
       description: { default: '' },
       validation: {},
@@ -3234,7 +3264,7 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
             { text: 'Trendy', value: 'trendy' },
@@ -3589,10 +3619,10 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
-            { text: 'Studio', value: 'sudio' },
+            { text: 'Studio', value: 'studio' },
             { text: '1', value: 'one' },
             { text: '2', value: 'two' },
             { text: '3', value: 'three' },
@@ -3959,10 +3989,10 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: [],
+        initialValue: {},
         options: {
           default: [
-            { text: 'Studio', value: 'sudio' },
+            { text: 'Studio', value: 'studio' },
             { text: '1', value: 'one' },
             { text: '2', value: 'two' },
             { text: '3', value: 'three' },
