@@ -17,7 +17,7 @@ class UserPermissionFilter {
   modifyQuery() {
     if (this.query.userRoles) {
       this.getAllowedUrns()
-      // this.query.where = this.addUserPermFilter()
+      this.query = this.addUserPermFilter(this.rootModel.name, this.query)
       if (!this.isGlobalUser) {
         this.query = this.traverseAndReplace(this.query)
       }
@@ -37,7 +37,7 @@ class UserPermissionFilter {
 
   addUserPermFilter(modelName = this.rootModel.name, query) {
     if (this.userFilterModelNames.includes(modelName)) {
-      query.where = this.addClientLocationFilter(this.query.where)
+      query.where = this.addClientLocationFilter(query.where)
     }
     return query
   }
