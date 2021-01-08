@@ -707,7 +707,9 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          studio: false, one: false, two: false, three: false, four: false, other: false
+        },
         options: {
           default: [
             { text: 'Studio', value: 'studio' },
@@ -735,7 +737,9 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          studio: false, one: false, two: false, three: false, four: false, other: false
+        },
         options: {
           default: [
             { text: 'Studio', value: 'studio' },
@@ -2771,7 +2775,21 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'How do you want your copy to sound? Choose 3 to 5 from the list or come up with your own words.' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          trendy: false,
+          traditional: false,
+          warm: false,
+          inviting: false,
+          playful: false,
+          edgy: false,
+          authoritative: false,
+          polished: false,
+          irreverent: false,
+          upbeat: false,
+          straightforward: false,
+          casual: false,
+          other: false
+        },
         options: {
           default: [
             { text: 'Trendy', value: 'trendy' },
@@ -2838,7 +2856,20 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'Give us a list of buzzwords or phrases that describe your community. (ex. boutique, homey, resort-style, etc)' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          classic: false,
+          charming: false,
+          cozy: false,
+          hip: false,
+          boutique: false,
+          highEnd: false,
+          resortStyle: false,
+          industrial: false,
+          craftsman: false,
+          highTech: false,
+          ecoFriendly: false,
+          other: false
+        },
         options: {
           default: [
             { text: 'Classic', value: 'classic' },
@@ -3264,7 +3295,21 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'What feel do you want your copy to have?' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          trendy: false,
+          traditional: false,
+          warm: false,
+          inviting: false,
+          playful: false,
+          edgy: false,
+          authoritative: false,
+          polished: false,
+          irreverent: false,
+          upbeat: false,
+          straightforward: false,
+          casual: false,
+          other: false
+        },
         options: {
           default: [
             { text: 'Trendy', value: 'trendy' },
@@ -3619,7 +3664,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          studio: false,
+          one: false,
+          two: false,
+          three: false,
+          four: false,
+          other: false
+        },
         options: {
           default: [
             { text: 'Studio', value: 'studio' },
@@ -3989,7 +4041,14 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Floor Plans most in need of new residents' },
       settings: {
-        initialValue: {},
+        initialValue: {
+          studio: false,
+          one: false,
+          two: false,
+          three: false,
+          four: false,
+          other: false
+        },
         options: {
           default: [
             { text: 'Studio', value: 'studio' },
