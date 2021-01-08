@@ -75,7 +75,7 @@ module.exports = (app) => {
   app.get('/api/v1/projects/:projectId', async (req, res) => {
     const { projectId } = req.params
     const { userRoles } = req
-    const project = await models.project.displayOne({ projectId, userRoles })
+    const project = await models.project.displayOne(projectId, userRoles)
     res.json(project)
   })
   // returns array of locations matching project id each location is object containng object
@@ -83,7 +83,7 @@ module.exports = (app) => {
     try {
       const { projectId } = req.params
       const { userRoles } = req
-      const locations = await models.project.locationsByProjectId({ projectId, userRoles })
+      const locations = await models.project.locationsByProjectId(projectId, userRoles)
       const val = locations.map((location) => {
         return {
           locationId: location.locationProjectId,

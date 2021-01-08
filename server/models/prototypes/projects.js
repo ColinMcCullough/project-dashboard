@@ -1,4 +1,3 @@
-const { dynamicFilter } = require('../../controllers/userQueryFilter')
 module.exports = (models, sequelize, Sequelize) => {
   models.project.prototype.areAllCrawled = function () {
     const data = this.toJSON()
@@ -77,7 +76,7 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
-  models.project.locationsByProjectId = async (projectId) => {
+  models.project.locationsByProjectId = async (projectId, userRoles) => {
     const project = await models.project.findOne({
       where: {
         salesforce_project_id: projectId
@@ -92,39 +91,32 @@ module.exports = (models, sequelize, Sequelize) => {
           ]
         }
       ]
-    })
+    }, userRoles)
     const { locations } = project.toJSON()
     return locations
   }
   models.project.displayAll = async (userRoles) => {
-    const q = {
+    const query = {
       include: [{
         model: models.location,
-        where: [{ col: 'clientUrn', data: 'clientUrns' }],
         include: [{
           model: models.linkDiscoverer
         }
         ]
       },
       {
-        model: models.salesforceAccount,
-        where: [{ col: 'locationurn', data: 'locationUrns' }]
+        model: models.salesforceAccount
       }],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
       ]
     }
-    const query = dynamicFilter(q, userRoles)
-    const projects = await models.project.findAll(query)
+    const projects = await models.project.findAll({ ...query, userRoles })
     projects.forEach(project => computeFields(project))
     return projects.map(project => pluckData(project))
   }
-  models.project.displayOne = async ({ projectId, userRoles }) => {
+  models.project.displayOne = async (projectId, userRoles) => {
     const rootWhere = { salesforce_project_id: projectId }
-    console.log(userRoles)
-    if (userRoles) {
-
-    }
     const project = await models.project.findOne({
       where: rootWhere,
       include: [
@@ -139,7 +131,8 @@ module.exports = (models, sequelize, Sequelize) => {
       ],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
-      ]
+      ],
+      userRoles
     })
     computeFields(project)
     return pluckData(project)

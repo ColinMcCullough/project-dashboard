@@ -1,38 +1,78 @@
-const mapUpdatables = {
-  'G5Updatable::Client': 'clientUrn',
-  'G5Updatable::Location': 'locationUrn'
-}
-
-module.exports = {
-  dynamicFilter
-}
-
-function dynamicFilter(query, userRoles) {
-  const userPerms = {}
-  if (userRoles) {
-    for (let i = 0; i < userRoles.length; i++) {
-      
+class UserPermissionFilter {
+  constructor(query, rootModel, sequelize, Sequelize) {
+    this.query = query
+    this.rootModel = rootModel
+    this.sequelize = sequelize
+    this.Sequelize = Sequelize
+    this.Op = Sequelize.Op
+    this.isGlobalUser = false
+    this.userPerms = { clientUrn: [], locationUrn: [] }
+    this.userFilterModelNames = ['location']
+    this.mapUpdatables = {
+      'G5Updatable::Client': 'clientUrn',
+      'G5Updatable::Location': 'locationUrn'
     }
   }
-  // create client and location URN arrays
-  return replaceWhere(query, userRoles)
-}
 
-function replaceWhere(obj, userPerms) {
-  for (const k in obj) {
-    // calls itself with next depth of object
-    if (typeof obj[k] === 'object') {
-      if (k === 'where' && !Array.isArray(obj[k]) && obj[k].replace) {
-        obj[k].replace.forEach((r) => {
-          obj[k][r.col] = userPerms[r.data]
+  modifyQuery() {
+    if (this.query.userRoles) {
+      this.getAllowedUrns()
+      // this.query.where = this.addUserPermFilter()
+      if (!this.isGlobalUser) {
+        this.query = this.traverseAndReplace(this.query)
+      }
+    }
+    return this.query
+  }
+
+  getAllowedUrns() {
+    this.query.userRoles.forEach((r) => {
+      if (r.type === 'GLOBAL') {
+        this.isGlobalUser = true
+      } else {
+        this.userPerms[this.mapUpdatables[r.type]].push(r.urn)
+      }
+    })
+  }
+
+  addUserPermFilter(modelName = this.rootModel.name, query) {
+    if (this.userFilterModelNames.includes(modelName)) {
+      query.where = this.addClientLocationFilter(this.query.where)
+    }
+    return query
+  }
+
+  addClientLocationFilter(where) {
+    if (!where) {
+      where = {}
+    }
+    where[this.Op.or] = []
+    Object.keys(this.userPerms).forEach((k) => {
+      if (this.userPerms[k].length > 0) {
+        where[this.Op.or].push({
+          [k]: {
+            [this.Op.in]: this.userPerms[k]
+          }
         })
-        delete obj[k].replace
-      } else if (Array.isArray(obj[k]) && k === 'include') {
-        for (let i = 0; i < obj[k].length; i++) {
-          obj[k][i] = replaceWhere(obj[k][i], userPerms)
+      }
+    })
+
+    return where
+  }
+
+  traverseAndReplace(query) {
+    for (const k in query) {
+      if (k === 'model') {
+        const modelName = query[k].name
+        query = this.addUserPermFilter(modelName, query)
+      } else if (Array.isArray(query[k]) && k === 'include') {
+        for (let i = 0; i < query[k].length; i++) {
+          query[k][i] = this.traverseAndReplace(query[k][i])
         }
       }
     }
+    return query
   }
-  return obj
 }
+
+module.exports = UserPermissionFilter
