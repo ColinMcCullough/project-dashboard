@@ -7,7 +7,7 @@ class UserPermissionFilter {
     this.Op = Sequelize.Op
     this.isGlobalUser = false
     this.userPerms = { clientUrn: [], locationUrn: [] }
-    this.userFilterModelNames = ['location']
+    this.userFilterModelNames = ['location', 'g5_updatable_client', 'g5_updatable_location']
     this.mapUpdatables = {
       'G5Updatable::Client': 'clientUrn',
       'G5Updatable::Location': 'locationUrn'
