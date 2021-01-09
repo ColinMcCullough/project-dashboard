@@ -662,7 +662,7 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Is your location specifically designed for Senior or Student demographics?' },
       settings: {
-        initialValue: null,
+        initialValue: false,
         options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
@@ -1013,7 +1013,7 @@ module.exports = [
       displayVertical: ['MF', 'SL'],
       label: { default: 'Pet Friendly' },
       settings: {
-        initialValue: null,
+        initialValue: false,
         options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
@@ -1380,7 +1380,7 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Accepts Medicare or Medicaid?' },
       settings: {
-        initialValue: null,
+        initialValue: false,
         options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
