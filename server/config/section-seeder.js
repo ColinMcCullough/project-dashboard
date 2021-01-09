@@ -207,9 +207,16 @@ module.exports = [
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
       settings: {
-        settings: { initialValue: null },
+        initialValue: null,
         dependentOn: { default: 'country' },
-        options: { default: { null: [{ text: 'Select Country', value: null }], ...states } }
+        options: {
+          default: {
+            null: {
+              options: [{ text: 'Select Country', value: null }]
+            },
+            ...states
+          }
+        }
       },
       description: { default: '' },
       validation: {},
@@ -592,7 +599,7 @@ module.exports = [
       displayVertical: ['SS'],
       label: { default: 'Primary Facility Feature 1\n' },
       settings: {
-        initialValue: {},
+        initialValue: [],
         mappedFields: {
           default: ['property_feature_1', 'property_feature_2', 'property_feature_3', 'property_feature_4']
         },
@@ -656,12 +663,7 @@ module.exports = [
       label: { default: 'Is your location specifically designed for Senior or Student demographics?' },
       settings: {
         initialValue: null,
-        options: {
-          default: [
-            { text: 'Yes', value: true },
-            { text: 'No', value: false }
-          ]
-        }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -1012,12 +1014,7 @@ module.exports = [
       label: { default: 'Pet Friendly' },
       settings: {
         initialValue: null,
-        options: {
-          default: [
-            { text: 'Yes', value: true },
-            { text: 'No', value: false }
-          ]
-        }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -1235,7 +1232,7 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'Community Care Levels' },
       settings: {
-        initialValue: {},
+        initialValue: [],
         mappedFields: {
           default: ['care_level_1', 'care_level_2', 'care_level_3', 'care_level_4', 'care_level_5', 'care_level_6']
         },
@@ -1384,12 +1381,7 @@ module.exports = [
       label: { default: 'Accepts Medicare or Medicaid?' },
       settings: {
         initialValue: null,
-        options: {
-          default: [
-            { text: 'Yes', value: true },
-            { text: 'No', value: false }
-          ]
-        }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -1446,7 +1438,7 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Apartment Amenities' },
       settings: {
-        initialValue: {},
+        initialValue: [],
         mappedFields: {
           default: ['apartment_amenity_1', 'apartment_amenity_2', 'apartment_amenity_3']
         },
@@ -1555,7 +1547,7 @@ module.exports = [
       displayVertical: ['SL'],
       label: { default: 'In-Home/In-Unit Features' },
       settings: {
-        initialValue: {},
+        initialValue: [],
         options: {
           default: [
             { text: 'Move-In Assistance', value: 'moveInAssistance' },
@@ -1614,7 +1606,7 @@ module.exports = [
       displayVertical: ['MF'],
       label: { default: 'Community Amenities' },
       settings: {
-        initialValue: {},
+        initialValue: [],
         mappedFields: {
           default: ['community_amenity_1', 'community_amenity_2', 'community_amenity_3']
         },
@@ -1748,7 +1740,7 @@ module.exports = [
         displayVertical: ['SS'],
         label: { default: 'Primary Facility Feature 1\n' },
         settings: {
-          initialValue: {},
+          initialValue: [],
           mappedFields: {
             default: ['property_feature_1', 'property_feature_2', 'property_feature_3, property_feature_4']
           },
@@ -3368,7 +3360,7 @@ module.exports = [
       label: { default: 'Location of Focus' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -3403,7 +3395,7 @@ module.exports = [
       label: { default: 'Untilities Included' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -3422,7 +3414,7 @@ module.exports = [
       label: { default: 'Single Family Homes' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -3558,7 +3550,15 @@ module.exports = [
       label: { default: 'State' },
       settings: {
         initialValue: null,
-        dependentOn: { default: 'country' }
+        dependentOn: { default: 'country' },
+        options: {
+          default: {
+            null: {
+              options: [{ text: 'Select Country', value: null }]
+            },
+            ...states
+          }
+        }
       },
       description: { default: '' },
       validation: {},
@@ -3937,7 +3937,18 @@ module.exports = [
       recordLocation: 'hub',
       displayVertical: ['MF', 'SS', 'SL'],
       label: { default: 'State' },
-      settings: { initialValue: null, dependentOn: { default: 'country' } },
+      settings: {
+        initialValue: null,
+        dependentOn: { default: 'country' },
+        options: {
+          default: {
+            null: {
+              options: [{ text: 'Select Country', value: null }]
+            },
+            ...states
+          }
+        }
+      },
       description: { default: '' },
       validation: {},
       placeholder: { default: '' }
@@ -4253,7 +4264,15 @@ module.exports = [
       label: { default: 'State' },
       settings: {
         initialValue: null,
-        dependentOn: { default: 'country' }
+        dependentOn: { default: 'country' },
+        options: {
+          default: {
+            null: {
+              options: [{ text: 'Select Country', value: null }]
+            },
+            ...states
+          }
+        }
       },
       description: { default: '' },
       validation: {},
@@ -4402,7 +4421,7 @@ module.exports = [
       label: { default: 'Does property allow for contacting prospects via SMS Text?' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -4579,7 +4598,7 @@ module.exports = [
       label: { default: 'Daily Alert For All 1 and 2 Star Reviews' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -4599,7 +4618,7 @@ module.exports = [
       label: { default: 'Turn Off Default Reports' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
@@ -4619,7 +4638,7 @@ module.exports = [
       label: { default: 'Escalate Revised Response' },
       settings: {
         initialValue: false,
-        options: { default: [{ text: 'Yes', value: true }, { text: 'No', value: false }] }
+        options: { default: { true: 'Yes', false: 'No' } }
       },
       description: { default: '' },
       validation: {},
