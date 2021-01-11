@@ -37,7 +37,7 @@ const sequelize = new Sequelize(dbUrl, {
 })
 
 const updatableModels = require('@getg5/g5-updatable').models(sequelize)
-const authModels = require('../../../g5-auth-js').models(sequelize)
+const authModels = require('@getg5/g5-auth').models(sequelize)
 const db = {
   ...updatableModels,
   ...authModels
