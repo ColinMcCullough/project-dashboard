@@ -1,5 +1,6 @@
 const { nanoid } = require('nanoid')
 const { queues } = require('../../controllers/queue')
+const UserPermissionFilter = require('../../controllers/userQueryFilter')
 module.exports = (models, sequelize, Sequelize) => {
   models.location.addHook('beforeCreate', async (instance, opts) => {
     instance.dataValues.locationId = nanoid()
@@ -16,5 +17,10 @@ module.exports = (models, sequelize, Sequelize) => {
     } else if (!instance.dataValues.crawlSite && !instance.dataValues.crawled && !instance.dataValues.crawling && instance.dataValues.properties.current_website) {
       await instance.update({ crawled: true, scraped: true })
     }
+  })
+  // before the query is ran check and see if userRoles are passed in and if so filter the query to clients/ location they have access to
+  models.location.addHook('beforeFind', (param1) => {
+    const userPermissionFilter = new UserPermissionFilter(param1, models.location, sequelize, Sequelize)
+    return userPermissionFilter.modifyQuery()
   })
 }
