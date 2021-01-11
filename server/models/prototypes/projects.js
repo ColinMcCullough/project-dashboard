@@ -49,7 +49,7 @@ module.exports = (models, sequelize, Sequelize) => {
     this.dataValues.urlsMissing = 0
     for (let i = 0; i < data.locations.length; i++) {
       const location = data.locations[i]
-      if (!location.properties.url) {
+      if (!location.properties.current_website) {
         this.dataValues.urlsMissing++
         this.dataValues.urlsSet = false
       }
@@ -76,7 +76,7 @@ module.exports = (models, sequelize, Sequelize) => {
       }
     }
   }
-  models.project.locationsByProjectId = async (projectId) => {
+  models.project.locationsByProjectId = async (projectId, userRoles) => {
     const project = await models.project.findOne({
       where: {
         salesforce_project_id: projectId
@@ -91,12 +91,12 @@ module.exports = (models, sequelize, Sequelize) => {
           ]
         }
       ]
-    })
+    }, userRoles)
     const { locations } = project.toJSON()
     return locations
   }
-  models.project.displayAll = async () => {
-    const projects = await models.project.findAll({
+  models.project.displayAll = async (userRoles) => {
+    const query = {
       include: [{
         model: models.location,
         include: [{
@@ -110,15 +110,15 @@ module.exports = (models, sequelize, Sequelize) => {
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
       ]
-    })
+    }
+    const projects = await models.project.findAll({ ...query, userRoles })
     projects.forEach(project => computeFields(project))
     return projects.map(project => pluckData(project))
   }
-  models.project.displayOne = async (projectId) => {
+  models.project.displayOne = async (projectId, userRoles) => {
+    const rootWhere = { salesforce_project_id: projectId }
     const project = await models.project.findOne({
-      where: {
-        salesforce_project_id: projectId
-      },
+      where: rootWhere,
       include: [
         {
           model: models.location,
@@ -131,7 +131,8 @@ module.exports = (models, sequelize, Sequelize) => {
       ],
       order: [
         [models.location, models.linkDiscoverer, 'createdAt', 'DESC']
-      ]
+      ],
+      userRoles
     })
     computeFields(project)
     return pluckData(project)

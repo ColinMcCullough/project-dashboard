@@ -1,5 +1,5 @@
 module.exports = (models, sequelize, Sequelize) => {
-  models.g5_updatable_client.getAllExternal = () => models.g5_updatable_client.findAll({
+  models.g5_updatable_client.getAllExternal = userRoles => models.g5_updatable_client.findAll({
     attributes: [
       'urn',
       'name',
@@ -14,6 +14,7 @@ module.exports = (models, sequelize, Sequelize) => {
     ],
     order: [
       ['name', 'asc']
-    ]
+    ],
+    userRoles
   })
 }

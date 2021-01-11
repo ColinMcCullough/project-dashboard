@@ -2,19 +2,21 @@ const models = require('../../models')
 
 module.exports = (app) => {
   app.get('/api/v1/hub/clients', async (req, res) => {
-    const clients = await models.g5_updatable_client.getAllExternal({})
+    const { userRoles } = req
+    const clients = await models.g5_updatable_client.getAllExternal(userRoles)
     res.json(clients)
   })
 
   // need to pass in same object as post route
   app.put('/api/v1/hub/clients/:clientId', async (req, res) => {
     try {
-      const { body } = req
+      const { body, userRoles } = req
       const { clientId } = req.params
       const client = await models.g5_updatable_client.findOne({
         where: {
           id: clientId
-        }
+        },
+        userRoles
       })
       await client.update(body)
       res.sendStatus(200)
@@ -25,11 +27,13 @@ module.exports = (app) => {
 
   app.delete('/api/v1/hub/clients/:clientId', async (req, res) => {
     try {
+      const { userRoles } = req
       const { clientId } = req.params
       const client = await models.g5_updatable_client.findOne({
         where: {
           id: clientId
-        }
+        },
+        userRoles
       })
       if (client.dataValues.urn === null) {
         await client.destroy()

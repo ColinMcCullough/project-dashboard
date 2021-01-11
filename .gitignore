@@ -92,3 +92,4 @@ sw.*
 *.swp
 crawler-service-account-creds.json
 dump.rdb
+.vscode/launch.json

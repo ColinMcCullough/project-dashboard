@@ -135,11 +135,9 @@ export default {
   },
   methods: {
     validateName(val, client) {
-      console.log('hi')
       let valid = true
       if (client.clientType === 'new') {
         const names = this.clients.map(client => client.name)
-        console.log(names)
         if (this.hasDuplicates(names) || !val) {
           valid = false
         }

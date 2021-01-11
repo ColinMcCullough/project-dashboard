@@ -31,52 +31,62 @@
       table-variant="light"
       class="mb-0 rounded-table pl-2"
     >
-      <template v-slot:head(url)="{ label }">
+      <template v-slot:head(current_website)="{ label }">
         {{ label.toUpperCase() }}
       </template>
       <template v-slot:cell(name)="{ item }">
         {{ item.properties.name }}
       </template>
-      <template v-slot:cell(url)="data">
+      <template v-slot:cell(current_website)="data">
         <b-form-group class="mb-0" style="position: relative;">
           <b-form-input
-            :state="validURL(data.item.properties.url)"
-            :value="data.item.properties.url"
+            :state="validURL(data.item.properties.current_website)"
+            :value="data.item.properties.current_website"
             placeholder="Paste your url"
             class="text-left"
             required
             @input="onInput($event, data.item.locationId, data.field.key)"
           />
           <b-form-invalid-feedback
-            :state="validURL(data.item.properties.url)"
+            :state="validURL(data.item.properties.current_website)"
             class="m-0 abs-feedback"
           >
             Invalid Url
           </b-form-invalid-feedback>
         </b-form-group>
       </template>
-      <template v-slot:cell(vendor)="data">
-        <b-form-group class="mb-0" style="position: relative;">
-          <b-form-input
-            :value="data.item.properties.vendor"
-            placeholder="Location Vendor"
-            class="text-left"
-            required
-            @input="onInput($event, data.item.locationId, data.field.key)"
-          />
-        </b-form-group>
-      </template>
-      <template v-slot:cell(valid)="{ item }">
-        <icons-swap v-bind="{ needsCheckIcon: validURL(item.properties.url), iconConfig }" />
-      </template>
-      <template v-slot:cell(corporate)="data">
+      <template v-slot:cell(crawlSite)="data">
         <b-form-checkbox
-          :checked="data.item.properties.corporate"
+          :checked="data.item.crawlSite"
           button-variant="secondary"
           name="check-switch"
           size="lg"
           switch
-          @change="onInput($event, data.item.locationId, data.field.key)"
+          @change="onAttributeInput($event, data.item.locationId, data.field.key)"
+        />
+      </template>
+      <template v-slot:cell(vendor)="data">
+        <b-form-group class="mb-0" style="position: relative;">
+          <b-form-select
+            :value="data.item.vendor"
+            :options="vendors"
+            class="text-left"
+            required
+            @input="onAttributeInput($event, data.item.locationId, data.field.key)"
+          />
+        </b-form-group>
+      </template>
+      <template v-slot:cell(valid)="{ item }">
+        <icons-swap v-bind="{ needsCheckIcon: validURL(item.properties.current_website), iconConfig }" />
+      </template>
+      <template v-slot:cell(isCorporate)="data">
+        <b-form-checkbox
+          :checked="data.item.isCorporate"
+          button-variant="secondary"
+          name="check-switch"
+          size="lg"
+          switch
+          @change="onAttributeInput($event, data.item.locationId, data.field.key)"
         />
       </template>
       <template v-slot:cell(g5UpdatableClientId)="data">
@@ -85,7 +95,7 @@
         <b-form-select
           :value="data.item.g5UpdatableClientId"
           :options="getOptions"
-          @change="updateLocation({ locIdx: getLocationIndex(data.item.locationId), key: data.field.key, val: $event })"
+          @change="onAttributeInput($event, data.item.locationId, data.field.key)"
         />
       </template>
     </b-table>
@@ -111,6 +121,14 @@ export default {
     return {
       instructions: 'Complete all client associatons and urls to continue',
       corpSelected: 0,
+      vendors: [
+        'LeaseLabs',
+        'Yardi/RentCafe',
+        'WordPress',
+        'Wix',
+        'SquareSpace',
+        'Other'
+      ],
       fields: [
         {
           key: 'valid',
@@ -123,10 +141,15 @@ export default {
           sortable: true
         },
         {
-          key: 'url',
+          key: 'current_website',
           label: 'URL',
           sortable: true
         },
+        {
+          key: 'crawlSite',
+          label: 'Crawl Site?'
+        },
+
         {
           key: 'vendor',
           label: 'Vendor',
@@ -138,7 +161,7 @@ export default {
           sortable: true
         },
         {
-          key: 'corporate',
+          key: 'isCorporate',
           label: 'Corporate?',
           sortable: true
         }
@@ -159,13 +182,13 @@ export default {
     },
     disabledBtn() {
       return this.locations
-        .some(location => !this.validURL(location.properties.url))
+        .some(location => !this.validURL(location.properties.current_website))
     },
     validForm() {
       let valid = true
       for (let i = 0; i < this.locations.length; i++) {
         const location = this.locations[i]
-        if (!this.validURL(location.properties.url) || !location.g5UpdatableClientId) {
+        if (!this.validURL(location.properties.current_website) || !location.g5UpdatableClientId) {
           valid = false
           break
         }
@@ -175,7 +198,7 @@ export default {
   },
   mounted() {
     this.locations.forEach((location) => {
-      if (location.properties.corporate) {
+      if (location.isCorporate) {
         this.corpSelected++
       }
     })
@@ -193,10 +216,14 @@ export default {
         this.updateOnIndex({ locIdx, key, val })
       })
     },
-    onInput(val, locationId, key) {
-      if (key === 'corporate') {
+    onAttributeInput(val, locationId, key) {
+      if (key === 'isCorporate') {
         val ? this.corpSelected++ : this.corpSelected--
       }
+      const locIdx = this.getLocationIndex(locationId)
+      this.updateLocation({ locIdx, key, val })
+    },
+    onInput(val, locationId, key) {
       const locIdx = this.getLocationIndex(locationId)
       this.updateOnIndex({ locIdx, key, val })
     },
@@ -206,8 +233,8 @@ export default {
         a = aRow.properties[key]
         b = bRow.properties[key]
       } else {
-        a = this.validURL(aRow.properties.url)
-        b = this.validURL(bRow.properties.url)
+        a = this.validURL(aRow.properties.current_website)
+        b = this.validURL(bRow.properties.current_website)
       }
       return a < b ? -1 : a > b ? 1 : 0
     }
